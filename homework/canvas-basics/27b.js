@@ -11,6 +11,7 @@
         renderingContext = canvas.getContext("2d");
 
     renderingContext.globalAlpha = 0.5;
+    renderingContext.strokeStyle = "red";
     //Back Side
     renderingContext.fillStyle = "blue";
     renderingContext.beginPath();
@@ -20,6 +21,7 @@
     renderingContext.lineTo(461, 361);
     renderingContext.lineTo(361, 361);
     renderingContext.fill();
+    renderingContext.stroke();
     //Front side
     renderingContext.fillStyle = "green";
     renderingContext.beginPath();
@@ -29,8 +31,8 @@
     renderingContext.lineTo(411, 511);
     renderingContext.lineTo(511, 511);
     renderingContext.fill();
+    renderingContext.stroke();
     //Right Line to connect
-    renderingContext.fillStyle = "red";
     renderingContext.beginPath();
     renderingContext.moveTo(511,511);
     renderingContext.lineTo(461,461);
@@ -44,6 +46,7 @@
     renderingContext.lineTo(461,361);
     renderingContext.lineTo(361,361);
     renderingContext.fill();
+    renderingContext.stroke();
     //Left Side
     renderingContext.fillStyle = "purple";
     renderingContext.beginPath();
