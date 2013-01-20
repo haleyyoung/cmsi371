@@ -1,7 +1,6 @@
 /*
- * This javaScript file is a canvas-based web page which generates two overlapping
- * rectangles which are 50% transparent. One red and one blue rectangle creating
- * purple in the overlapped area, per request of problem 25c. Note the colors 
+ * This javaScript file is a canvas-based web page which generates a 3d cube wire
+ * frame with sides of different shades, per request of problem 27b. Note the colors 
  * have been changed from the ones requested.
  */
 
@@ -11,7 +10,6 @@
         renderingContext = canvas.getContext("2d");
     //Make the outline blue
     renderingContext.strokeStyle = "blue";
-    renderingContext.globalAlpha = 0.5;
     //Back Side
     renderingContext.beginPath();
     renderingContext.moveTo(180, 0);
