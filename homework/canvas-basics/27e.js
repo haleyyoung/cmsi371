@@ -8,11 +8,11 @@
     // Using jQuery here.
     var canvas = document.getElementById("canvas"),
         renderingContext = canvas.getContext("2d"),
-        radialGradient = renderingContext.createRadialGradient(160, 160, 1, 180, 180, 320);
+        radialGradient = renderingContext.createRadialGradient(160, 220, 1, 180, 180, 320);
 
     // Put your canvas drawing code (and any other code) here.
-    radialGradient.addColorStop(0, "white");
-    radialGradient.addColorStop(1, "blue");
+    radialGradient.addColorStop(0, "#FFE6F0");
+    radialGradient.addColorStop(1, "#FF0066");
 
     // The solid planet
     renderingContext.fillStyle = radialGradient;
