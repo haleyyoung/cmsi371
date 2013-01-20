@@ -23,8 +23,8 @@
     renderingContext.moveTo(511, 511);
     renderingContext.lineTo(511, 411);
     renderingContext.lineTo(411, 411);
-    renderingContext.lineTo(411, 411);
     renderingContext.lineTo(411, 511);
+    renderingContext.lineTo(511, 511);
     //Top Side
     renderingContext.moveTo(361,361);
     renderingContext.lineTo(411,411);
