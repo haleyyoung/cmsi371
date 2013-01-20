@@ -9,16 +9,16 @@
 (function () {
     // Ditto on using jQuery here.
     var canvas = document.getElementById("canvas"),
-        renderingContext = canvas.getContext("2d"),
+        renderingContext = canvas.getContext("2d");
 
         // Declare other variables here.
-        radialGradient = renderingContext.createRadialGradient(160, 160, 1, 180, 180, 320);
+/*        radialGradient = renderingContext.createRadialGradient(160, 160, 1, 180, 180, 320);
 
     // Put your canvas drawing code (and any other code) here.
-    radialGradient.addColorStop(0, "white");
-    radialGradient.addColorStop(1, "blue");
+    radialGradient.addColorStop(0, "green");
+    radialGradient.addColorStop(1, "blue");*/
 
-    renderingContext.fillStyle = radialGradient;
+    renderingContext.fillStyle = "green";
     renderingContext.beginPath();
     renderingContext.moveTo(56,256);
     renderingContext.lineTo(156,56);
