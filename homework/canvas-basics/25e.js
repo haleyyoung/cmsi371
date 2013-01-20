@@ -1,24 +1,16 @@
 /*
- * This template file is meant to be a template for canvas-based
- * web page code.  Nothing here is set in stone; it is mainly
- * intended to save you some typing.
+ * This javaScript file is a canvas-based web page which generates a purpleish
+ * hexagon, per request of problem 25e. Note the colors have been changed from
+ * the ones requested.
  */
-// Yes, we can use jQuery here, but avoid it just in case you
-// really don't want to use it.  We do still keep things away
-// from the global namespace.
+
 (function () {
-    // Ditto on using jQuery here.
+    // Using jQuery here.
     var canvas = document.getElementById("canvas"),
         renderingContext = canvas.getContext("2d");
 
-        // Declare other variables here.
-/*        radialGradient = renderingContext.createRadialGradient(160, 160, 1, 180, 180, 320);
-
-    // Put your canvas drawing code (and any other code) here.
-    radialGradient.addColorStop(0, "green");
-    radialGradient.addColorStop(1, "blue");*/
-
-    renderingContext.fillStyle = "green";
+    //Creating the hexagon
+    renderingContext.fillStyle = "#CC00FF";
     renderingContext.beginPath();
     renderingContext.moveTo(56,256);
     renderingContext.lineTo(156,56);
