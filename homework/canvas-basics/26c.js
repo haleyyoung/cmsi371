@@ -1,7 +1,7 @@
 /*
- * This javaScript file is a canvas-based web page which generates a purpleish
- * hexagon, per request of problem 25e. Note the colors have been changed from
- * the ones requested.
+ * This javaScript file is a canvas-based web page which generates a grid of yellow
+ * hexagons like a honeycomb, per request of problem 25e. Note the colors have
+ * been changed from the ones requested.
  */
 
 (function () {
@@ -15,8 +15,8 @@
             j = 22;
         }
         for(j; j < 256; j += 42){
-            //Creating the hexagon
-            renderingContext.fillStyle = "#CC00FF";
+            //Creating one hexagon
+            renderingContext.fillStyle = "yellow";
             renderingContext.beginPath();
             renderingContext.moveTo(j,i + 20);
             renderingContext.lineTo(j + 10, i);
