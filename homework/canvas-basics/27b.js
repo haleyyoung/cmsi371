@@ -31,6 +31,15 @@
     renderingContext.lineTo(511,411);
     renderingContext.lineTo(461,361);
     renderingContext.lineTo(361,361);
+    //Left Side
+    renderingContext.moveTo(361,461);
+    renderingContext.lineTo(411,511);
+    renderingContext.lineTo(411,411);
+    renderingContext.lineTo(361,361);
+    renderingContext.lineTo(361,461);
+    //Right Line to finish
+    renderingContext.moveTo(511,511);
+    renderingContext.lineTo(461,461);
     renderingContext.fill();
 /*    renderingContext.moveTo(362,462);
     renderingContext.lineTo(412,512);
