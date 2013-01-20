@@ -10,9 +10,10 @@
         renderingContext = canvas.getContext("2d");
 
     //Creating the hexagon
-    renderingContext.fillStyle = "#CC00FF";
+    renderingContext.globalAlpha = 0.5;
+    renderingContext.fillStyle = "#FF0000";
     renderingContext.fillRect(25,25,200,300);
-    renderingContext.fillStyle = "green";
+    renderingContext.fillStyle = "#4747FF";
     renderingContext.fillRect(100,100,200,300);
     renderingContext.fill();
 }());
