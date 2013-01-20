@@ -11,25 +11,26 @@
         renderingContext = canvas.getContext("2d");
 
     //Creating two overlapping squares
-    renderingContext.fillStyle = "green";
+    renderingContext.fillStyle = "white";
     renderingContext.beginPath();
     //Back Side
-    renderingContext.moveTo(362, 362);
-    renderingContext.lineTo(362, 462);
-    renderingContext.lineTo(462, 462);
-    renderingContext.lineTo(462, 362);
-    renderingContext.lineTo(362, 362);
+    renderingContext.moveTo(361, 361);
+    renderingContext.lineTo(361, 461);
+    renderingContext.lineTo(461, 461);
+    renderingContext.lineTo(461, 361);
+    renderingContext.lineTo(361, 361);
     //Front side
-    renderingContext.moveTo(512, 412);
-    renderingContext.lineTo(412, 412);
-    renderingContext.lineTo(412, 412);
-    renderingContext.lineTo(412, 512);
+    renderingContext.moveTo(511, 511);
+    renderingContext.lineTo(511, 411);
+    renderingContext.lineTo(411, 411);
+    renderingContext.lineTo(411, 411);
+    renderingContext.lineTo(411, 511);
     //Top Side
-    renderingContext.moveTo(362,362);
-    renderingContext.lineTo(412,412);
-    renderingContext.lineTo(512,412);
-    renderingContext.lineTo(462,362);
-    renderingContext.lineTo(362,362);
+    renderingContext.moveTo(361,361);
+    renderingContext.lineTo(411,411);
+    renderingContext.lineTo(511,411);
+    renderingContext.lineTo(461,361);
+    renderingContext.lineTo(361,361);
     renderingContext.fill();
 /*    renderingContext.moveTo(362,462);
     renderingContext.lineTo(412,512);
