@@ -8,15 +8,13 @@
     // Using jQuery here.
     var canvas = document.getElementById("canvas"),
         renderingContext = canvas.getContext("2d");
-    var i = 0,
-    j = 0;
     //Generating multiple hexagons in an offset grid
-    for(var i = 0; i < 256; i += 45){
+    for(var i = 0; i < 256; i += 42){
         var j = 0;
-        if(i%90 === 0){
-            j = 19;
+        if(i%84 === 0){
+            j = 22;
         }
-        for(j; j < 256; j += 45){
+        for(j; j < 256; j += 42){
             //Creating the hexagon
             renderingContext.fillStyle = "#CC00FF";
             renderingContext.beginPath();
