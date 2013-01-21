@@ -30,15 +30,15 @@
         renderingContext.fillStyle = "black";
         renderingContext.fillRect(xPlacement,511-height,width,height);
         renderingContext.fill();
-        xPlacement += width + 10;
 
         // Windows
         var numberOfWindows = Math.ceil(7*Math.random());
         for(var i = 0; i <= numberOfWindows; i++){
             renderingContext.fillStyle = "yellow";
-            renderingContext.fillRect(xPlacement + 5, width - 10, (height-50)/numberOfWindows);
+            renderingContext.fillRect(xPlacement + 5, 511-height + (25*i), 20, 20);
             renderingContext.fill();
         }
+        xPlacement += width + 10;
     }
     
     
