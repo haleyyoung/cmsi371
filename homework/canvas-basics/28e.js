@@ -1,6 +1,6 @@
 /*
  * This javaScript file is a canvas-based web page which generates a skyline scene
- * where buildings are in silhouette, per request of problem 27b. Note the colors 
+ * where buildings are in silhouette, per request of problem 28e. Note the colors 
  * have been changed from the ones requested.
  */
 
