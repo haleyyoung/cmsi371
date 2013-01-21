@@ -11,7 +11,7 @@
         linearGradient = renderingContext.createLinearGradient(0,50,0,95);
 
     //Colors for the sky
-/**    linearGradient.addColorStop(0.2, "#FFFF66");
+    linearGradient.addColorStop(0.2, "#FFFF66");
     linearGradient.addColorStop(0.5, "#FF4719");
     linearGradient.addColorStop(0.7, "#FF1975");
     linearGradient.addColorStop(1, "#660066");
@@ -19,17 +19,17 @@
     //Sky
     renderingContext.fillStyle = linearGradient;
     renderingContext.fillRect(0,0,511,511);
-    renderingContext.fill();*/
+    renderingContext.fill();
     
     //Buildings
     var xPlacement = 0;
-    while(xPlacement < 251){
-        var height = 200*Math.random() + 50;
+    while(xPlacement < 511){
+        var height = 200*Math.random() + 200;
         var width = 50*Math.random() + 25;
         renderingContext.fillStyle = "black";
         renderingContext.fillRect(xPlacement,511-height,width,height);
         renderingContext.fill();
-        xPlacement += width;
+        xPlacement += width + 10;
     }
     
     
