@@ -10,14 +10,24 @@
         renderingContext = canvas.getContext("2d"),
         radialGradient = renderingContext.createRadialGradient(160, 220, 1, 180, 180, 320);
 
-    // Put your canvas drawing code (and any other code) here.
+    // Gradient for the planet.
     radialGradient.addColorStop(0, "#FFE6F0");
-    radialGradient.addColorStop(1, "#FF0066");
+    radialGradient.addColorStop(0.5, "#FF0066");
+    radialGradient.addColorStop(0.7, "#CC0099");
+    radialGradient.addColorStop(0.8, "#660066");
+    radialGradient.addColorStop(1, "#660029");
 
     // The solid planet
     renderingContext.fillStyle = radialGradient;
     renderingContext.beginPath();
-    renderingContext.arc(250,250,150,0,Math.PI*2,true); // Outer circle
+    renderingContext.arc(250,250,150,0,Math.PI*2,true);
     renderingContext.fill();
+    
+    // The rings around the planet
+    renderingContext.strokeStyle = "black";
+    renderingContext.beginPath();
+    renderingContext.moveTo(102,352);
+    renderingContext.bezierCurveTo(90,152,100,170,110,100);
+    renderingContext.stroke();
 
 }());
