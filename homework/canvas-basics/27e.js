@@ -1,7 +1,7 @@
 /*
- * This javaScript file is a canvas-based web page which generates a 3d cube wire
- * frame with sides of different shades, per request of problem 27b. Note the colors 
- * have been changed from the ones requested.
+ * This javaScript file is a canvas-based web page which generates a 3d ringed
+ * planet frame with sides of different shades, per request of problem 27e. Note
+ * the colors have been changed from the ones requested.
  */
 
 (function () {
