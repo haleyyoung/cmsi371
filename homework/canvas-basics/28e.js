@@ -35,7 +35,7 @@
         var numberOfWindows = Math.ceil(7*Math.random());
         for(var i = 0; i <= numberOfWindows; i++){
             renderingContext.fillStyle = "yellow";
-            renderingContext.fillRect(xPlacement + width/2 - 10, 511-height + (25*i), 20, 20);
+            renderingContext.fillRect(xPlacement + width/2 - 10, 511-height + 5 + (i*(height/numberOfWindows)), 20, 20);
             renderingContext.fill();
         }
         xPlacement += width + 10;
