@@ -9,7 +9,8 @@
     var canvas = document.getElementById("canvas"),
         renderingContext = canvas.getContext("2d"),
         linearGradientSky = renderingContext.createLinearGradient(0,0,0,250),
-        linearGradientWater = renderingContext.createLinearGradient(0,250,0,512);
+        linearGradientWater = renderingContext.createLinearGradient(0,250,0,512),
+        radialGradientSun = renderingContext.createRadialGradient(250, 250, 1, 180, 180, 320);
 
     //Colors for the sky
     linearGradientSky.addColorStop(0, "#FFFF66");
@@ -32,9 +33,13 @@
     renderingContext.fillStyle = linearGradientWater;
     renderingContext.fillRect(0,250,512,261);
     renderingContext.fill();
-    
+
+    //Colors for the sun
+    radialGradientSun.addColorStop(0, "#FF9900");
+    radialGradientSun.addColorStop(0.5, "red");
+
     //Sun
-    renderingContext.fillStyle = "red";
+    renderingContext.fillStyle = radialGradientSun;
     renderingContext.beginPath();
     renderingContext.arc(250,250,100,0,Math.PI,true);
     renderingContext.fill();
