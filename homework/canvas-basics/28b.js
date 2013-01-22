@@ -8,12 +8,12 @@
     // Using jQuery here.
     var canvas = document.getElementById("canvas"),
         renderingContext = canvas.getContext("2d"),
-        linearGradient = renderingContext.createLinearGradient(0,50,0,95);
+        linearGradient = renderingContext.createLinearGradient(0,0,0,250);
 
     //Colors for the sky
-    linearGradient.addColorStop(0.2, "#FFFF66");
-    linearGradient.addColorStop(0.5, "#FF4719");
-    linearGradient.addColorStop(0.7, "#FF1975");
+    linearGradient.addColorStop(0, "#FFFF66");
+    linearGradient.addColorStop(0.3, "#FF4719");
+    linearGradient.addColorStop(0.6, "#FF1975");
     linearGradient.addColorStop(1, "#660066");
 
     //Sky
@@ -24,6 +24,12 @@
     //Water
     renderingContext.fillStyle = "blue";
     renderingContext.fillRect(0,250,512,261);
+    renderingContext.fill();
+    
+    //Sun
+    renderingContext.fillStyle = "red";
+    renderingContext.beginPath();
+    renderingContext.arc(250,250,100,0,Math.PI,true);
     renderingContext.fill();
     
     

@@ -8,12 +8,12 @@
     // Using jQuery here.
     var canvas = document.getElementById("canvas"),
         renderingContext = canvas.getContext("2d"),
-        linearGradient = renderingContext.createLinearGradient(0,50,0,95);
+        linearGradient = renderingContext.createLinearGradient(0,0,0,512);
 
     //Colors for the sky
-    linearGradient.addColorStop(0.2, "#FFFF66");
-    linearGradient.addColorStop(0.5, "#FF4719");
-    linearGradient.addColorStop(0.7, "#FF1975");
+    linearGradient.addColorStop(0, "#FFFF66");
+    linearGradient.addColorStop(0.3, "#FF4719");
+    linearGradient.addColorStop(0.6, "#FF1975");
     linearGradient.addColorStop(1, "#660066");
 
     //Sky
