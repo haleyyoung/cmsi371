@@ -43,6 +43,12 @@
     renderingContext.beginPath();
     renderingContext.arc(250,250,100,0,Math.PI,true);
     renderingContext.fill();
-    
+
+    //Sun Reflection
+    radialGradientSun = renderingContext.createRadialGradient(250, 250, 1, 180, 180, 320);
+    renderingContext.globalAlpha = 0.5;
+    renderingContext.beginPath();
+    renderingContext.arc(250,250,100,Math.PI,Math.PI*2,true);
+    renderingContext.fill();
     
 }());
