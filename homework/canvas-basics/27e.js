@@ -24,10 +24,16 @@
     renderingContext.fill();
     
     // The rings around the planet
+    // First half of ring
     renderingContext.strokeStyle = "black";
     renderingContext.beginPath();
-    renderingContext.moveTo(102,352);
-    renderingContext.bezierCurveTo(90,152,100,170,110,100);
+    renderingContext.moveTo(117,180);
+    renderingContext.quadraticCurveTo(10,220,250,230);
+    renderingContext.stroke();
+    // Second half of ring
+    renderingContext.beginPath();
+    renderingContext.moveTo(383,180);
+    renderingContext.quadraticCurveTo(490,220,250,230);
     renderingContext.stroke();
 
 }());
