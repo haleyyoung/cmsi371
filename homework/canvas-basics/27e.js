@@ -27,13 +27,13 @@
     // First half of ring
     renderingContext.strokeStyle = "black";
     renderingContext.beginPath();
-    renderingContext.moveTo(117,180);
-    renderingContext.quadraticCurveTo(10,220,250,230);
+    renderingContext.moveTo(100,240);
+    renderingContext.quadraticCurveTo(0,280,250,288);
     renderingContext.stroke();
     // Second half of ring
     renderingContext.beginPath();
-    renderingContext.moveTo(383,180);
-    renderingContext.quadraticCurveTo(490,220,250,230);
+    renderingContext.moveTo(400,240);
+    renderingContext.quadraticCurveTo(500,280,250,288);
     renderingContext.stroke();
 
 }());
