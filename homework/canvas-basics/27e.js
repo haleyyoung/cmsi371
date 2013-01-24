@@ -8,7 +8,8 @@
     // Using jQuery here.
     var canvas = document.getElementById("canvas"),
         renderingContext = canvas.getContext("2d"),
-        radialGradient = renderingContext.createRadialGradient(160, 220, 1, 180, 180, 320);
+        radialGradient = renderingContext.createRadialGradient(160, 220, 1, 180, 180, 320),
+        radialGradientRing = renderingContext.createRadialGradient(115, 220, 1, 180, 120, 320);
 
     // Gradient for the planet.
     radialGradient.addColorStop(0, "#FFE6F0");
@@ -22,18 +23,24 @@
     renderingContext.beginPath();
     renderingContext.arc(250,250,150,0,Math.PI*2,true);
     renderingContext.fill();
+
+    // Gradient for the ring
+    radialGradientRing.addColorStop(0, "#FFE6F0");
+    radialGradientRing.addColorStop(1, "#19FF19");
     
+
     // The rings around the planet
     // First half of ring
-    renderingContext.strokeStyle = "black";
+    renderingContext.lineWidth = 20;
+    renderingContext.strokeStyle = radialGradientRing;
     renderingContext.beginPath();
     renderingContext.moveTo(100,240);
-    renderingContext.quadraticCurveTo(0,280,250,288);
+    renderingContext.quadraticCurveTo(0,280,251,288);
     renderingContext.stroke();
     // Second half of ring
     renderingContext.beginPath();
     renderingContext.moveTo(400,240);
-    renderingContext.quadraticCurveTo(500,280,250,288);
+    renderingContext.quadraticCurveTo(500,280,249,288);
     renderingContext.stroke();
 
 }());
