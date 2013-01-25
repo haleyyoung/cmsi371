@@ -27,13 +27,12 @@
     // Gradient for the ring
     radialGradientRing.addColorStop(0, "#FFE6F0");
     radialGradientRing.addColorStop(1, "#19FF19");
-    
 
     // The rings around the planet
     // First half of ring
-    renderingContext.lineWidth = 3;
-    renderingContext.strokeStyle = "black";
-    renderingContext.fillStyle = "black";
+    renderingContext.lineWidth = 20;
+    renderingContext.strokeStyle = radialGradientRing;
+    renderingContext.fillStyle = radialGradientRing;
     renderingContext.beginPath();
     //Botom of ring
     renderingContext.moveTo(100,240);
@@ -41,20 +40,35 @@
     //Center of ring
     renderingContext.lineTo(251,268);
     //Top of ring
-    // JD: This is superfluous---the previous lineTo already took you to this
-    //     location.  Adding another moveTo is like "starting" a new shape.
-//    renderingContext.moveTo(251,268);
     renderingContext.quadraticCurveTo(0,260,104,220);
     //Left side of ring
     renderingContext.moveTo(104,220);
-    renderingContext.arc(250,250,150,Math.PI*8.5/8, Math.PI*8.15/8, true);
+    renderingContext.arc(248,248,150,Math.PI*8.45/8, Math.PI*8.15/8, true);
+    renderingContext.lineWidth = 6;
+    renderingContext.moveTo(74,260);
+    renderingContext.lineTo(74, 240);
     renderingContext.closePath();
     renderingContext.fill();
     renderingContext.stroke();
-    // Second half of ring
+
+    // Second half of ring    
     renderingContext.beginPath();
     renderingContext.moveTo(400,240);
     renderingContext.quadraticCurveTo(500,280,249,288);
+    
+        //Center of ring
+    renderingContext.lineTo(251,268);
+    //Top of ring
+    renderingContext.quadraticCurveTo(0,260,104,220);
+    //Left side of ring
+    renderingContext.moveTo(104,220);
+    renderingContext.arc(248,248,150,Math.PI*8.45/8, Math.PI*8.15/8, true);
+    renderingContext.lineWidth = 6;
+    renderingContext.moveTo(74,260);
+    renderingContext.lineTo(74, 240);
+    renderingContext.closePath();
+    renderingContext.fill();
     renderingContext.stroke();
+    
 
 }());
