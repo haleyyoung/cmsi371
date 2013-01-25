@@ -31,14 +31,22 @@
 
     // The rings around the planet
     // First half of ring
-//    renderingContext.lineWidth = 20;
-    renderingContext.strokeStyle = radialGradientRing;
+    renderingContext.lineWidth = 3;
+    renderingContext.strokeStyle = "black";
     renderingContext.beginPath();
+    //Botom of ring
     renderingContext.moveTo(100,240);
     renderingContext.quadraticCurveTo(0,280,251,288);
+    //Center of ring
     renderingContext.lineTo(251,268);
+    //Top of ring
+    renderingContext.moveTo(251,268);
+    renderingContext.quadraticCurveTo(0,260,104,220);
+    //Left side of ring
     renderingContext.moveTo(104,220);
-    renderingContext.quadraticCurveTo(0,260,251,268);
+    renderingContext.arc(250,250,150,Math.PI*8.5/8, Math.PI*8.15/8, true);
+    renderingContext.closePath();
+    renderingContext.fill();
     renderingContext.stroke();
     // Second half of ring
     renderingContext.beginPath();
