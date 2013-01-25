@@ -41,7 +41,9 @@
     //Center of ring
     renderingContext.lineTo(251,268);
     //Top of ring
-    renderingContext.moveTo(251,268);
+    // JD: This is superfluous---the previous lineTo already took you to this
+    //     location.  Adding another moveTo is like "starting" a new shape.
+//    renderingContext.moveTo(251,268);
     renderingContext.quadraticCurveTo(0,260,104,220);
     //Left side of ring
     renderingContext.moveTo(104,220);
