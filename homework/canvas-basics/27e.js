@@ -33,6 +33,7 @@
     // First half of ring
     renderingContext.lineWidth = 3;
     renderingContext.strokeStyle = "black";
+    renderingContext.fillStyle = "black";
     renderingContext.beginPath();
     //Botom of ring
     renderingContext.moveTo(100,240);
