@@ -36,7 +36,7 @@
     renderingContext.beginPath();
     //Botom of ring
     renderingContext.moveTo(100,240);
-    renderingContext.quadraticCurveTo(0,280,251,288);
+    renderingContext.quadraticCurveTo(10,280,251,288);
     //Center of ring
     renderingContext.lineTo(251,268);
     //Top of ring
@@ -45,8 +45,8 @@
     renderingContext.moveTo(104,220);
     renderingContext.arc(248,248,150,Math.PI*8.45/8, Math.PI*8.15/8, true);
     renderingContext.lineWidth = 6;
-    renderingContext.moveTo(74,260);
-    renderingContext.lineTo(74, 240);
+    renderingContext.moveTo(75,260);
+    renderingContext.lineTo(75, 240);
     renderingContext.closePath();
     renderingContext.fill();
     renderingContext.stroke();
@@ -54,7 +54,7 @@
     // Second half of ring    
     renderingContext.beginPath();
     renderingContext.moveTo(400,240);
-    renderingContext.quadraticCurveTo(500,280,249,288);
+    renderingContext.quadraticCurveTo(480,280,249,288);
     
         //Center of ring
     renderingContext.lineTo(251,268);
@@ -63,9 +63,9 @@
     //Left side of ring
     renderingContext.moveTo(396,220);
     renderingContext.arc(248,248,150,0,0.00001, false);
-    /*renderingContext.moveTo(74,260);
-    renderingContext.lineTo(74, 240);
-    renderingContext.closePath();*/
+    renderingContext.moveTo(419,260);
+    renderingContext.lineTo(419, 240);
+    renderingContext.closePath();
     renderingContext.fill();
     renderingContext.stroke();
     
