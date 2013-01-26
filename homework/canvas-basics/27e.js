@@ -28,8 +28,8 @@
     radialGradientRing.addColorStop(0, "#FFE6F0");
     radialGradientRing.addColorStop(1, "#19FF19");
 
-    // The rings around the planet
-    // First half of ring
+    // The ring around the planet
+    // First half of ring (left)
     renderingContext.lineWidth = 20;
     renderingContext.strokeStyle = radialGradientRing;
     renderingContext.fillStyle = radialGradientRing;
@@ -45,23 +45,20 @@
     renderingContext.lineWidth = 6;
     renderingContext.moveTo(74,260);
     renderingContext.lineTo(76, 240);
-    renderingContext.closePath();
     renderingContext.fill();
     renderingContext.stroke();
 
-    // Second half of ring    
+    // Second half of ring (right)   
     renderingContext.beginPath();
     renderingContext.moveTo(400,240);
     renderingContext.quadraticCurveTo(480,280,249,288);
-    
-        //Center of ring
+    //Center of ring
     renderingContext.lineTo(251,268);
     //Top of ring
     renderingContext.quadraticCurveTo(480,260,396,220);
-    //Left side of ring
+    //Right side of ring
     renderingContext.moveTo(421,260);
     renderingContext.lineTo(419, 240);
-    renderingContext.closePath();
     renderingContext.fill();
     renderingContext.stroke();
     
