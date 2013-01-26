@@ -43,8 +43,8 @@
     renderingContext.quadraticCurveTo(0,260,104,220);
     //Left side of ring
     renderingContext.lineWidth = 6;
-    renderingContext.moveTo(75,260);
-    renderingContext.lineTo(75, 240);
+    renderingContext.moveTo(74,260);
+    renderingContext.lineTo(76, 240);
     renderingContext.closePath();
     renderingContext.fill();
     renderingContext.stroke();
@@ -59,7 +59,7 @@
     //Top of ring
     renderingContext.quadraticCurveTo(480,260,396,220);
     //Left side of ring
-    renderingContext.moveTo(419,260);
+    renderingContext.moveTo(421,260);
     renderingContext.lineTo(419, 240);
     renderingContext.closePath();
     renderingContext.fill();
