@@ -59,14 +59,13 @@
         //Center of ring
     renderingContext.lineTo(251,268);
     //Top of ring
-    renderingContext.quadraticCurveTo(0,260,104,220);
+    renderingContext.quadraticCurveTo(480,260,396,220);
     //Left side of ring
-    renderingContext.moveTo(104,220);
-    renderingContext.arc(248,248,150,Math.PI*8.45/8, Math.PI*8.15/8, true);
-    renderingContext.lineWidth = 6;
-    renderingContext.moveTo(74,260);
+    renderingContext.moveTo(396,220);
+    renderingContext.arc(248,248,150,0,0.00001, false);
+    /*renderingContext.moveTo(74,260);
     renderingContext.lineTo(74, 240);
-    renderingContext.closePath();
+    renderingContext.closePath();*/
     renderingContext.fill();
     renderingContext.stroke();
     
