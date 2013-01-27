@@ -1,6 +1,6 @@
 /*
  * This javaScript file is a canvas-based web page which generates a grid of yellow
- * hexagons like a honeycomb, per request of problem 25e. Note the colors have
+ * hexagons like a honeycomb, per request of problem 26c. Note the colors have
  * been changed from the ones requested.
  */
 
@@ -8,6 +8,9 @@
     // Using jQuery here.
     var canvas = document.getElementById("canvas"),
         renderingContext = canvas.getContext("2d");
+
+    var hexagonVertices = [[0,20],[10,0],[30,0],[40,20],[30,40],[10,40]];
+        
     //Generating multiple hexagons in an offset grid
     for(var i = 0; i < 256; i += 42){
         var j = 0;
@@ -18,12 +21,12 @@
             //Creating one hexagon
             renderingContext.fillStyle = "yellow";
             renderingContext.beginPath();
-            renderingContext.moveTo(j,i + 20);
-            renderingContext.lineTo(j + 10, i);
-            renderingContext.lineTo(j + 30, i);
-            renderingContext.lineTo(j + 40, i + 20);
-            renderingContext.lineTo(j + 30, i + 40);
-            renderingContext.lineTo(j + 10, i + 40);
+            renderingContext.moveTo(j + hexagonVertices[0][0],i + hexagonVertices[0][1]);
+            renderingContext.lineTo(j + hexagonVertices[1][0],i + hexagonVertices[1][1]);
+            renderingContext.lineTo(j + hexagonVertices[2][0],i + hexagonVertices[2][1]);
+            renderingContext.lineTo(j + hexagonVertices[3][0],i + hexagonVertices[3][1]);
+            renderingContext.lineTo(j + hexagonVertices[4][0],i + hexagonVertices[4][1]);
+            renderingContext.lineTo(j + hexagonVertices[5][0],i + hexagonVertices[5][1]);
             renderingContext.fill();
         }
     }

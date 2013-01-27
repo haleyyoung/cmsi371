@@ -1,7 +1,7 @@
 /*
  * This javaScript file is a canvas-based web page which generates squares 1
  * pixel apart filling the entire canvas. The squares go from light blue to
- * feucia, per request of problem 26c. Note the colors have been changed from
+ * feucia, per request of problem 26a. Note the colors have been changed from
  * the ones requested.
  */
 
