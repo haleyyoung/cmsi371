@@ -19,6 +19,19 @@
     var drawSide = function (sideName){
         renderingContext.beginPath();
         //This should give just "180" but it gives "180,0"
+
+        // JD: Check your semantics---although what you have below
+        //     is syntactically correct, note that [sideName] is
+        //     neither backSquare nor frontSquare (when you call
+        //     this function in the lines below), but actually
+        //     "an array with the single element sideName."
+        //
+        // See the distinction?  If not, temporarily add:
+        //
+        //    console.log(sideName);
+        //    console.log([sideName]);
+        //
+        // to see the difference between the two expressions.
         alert([sideName][0][0]);
         renderingContext.moveTo([sideName][0][0], [sideName][0][1]);
         renderingContext.lineTo([sideName][1][0], [sideName][1][1]);
@@ -29,7 +42,7 @@
     }
     
     drawSide(cubeVertices.backSquare);
-    drawSide(cubeVertices.frontSqure);
+    drawSide(cubeVertices.frontSquare);
     //Right Line to connect
     renderingContext.beginPath();
     renderingContext.moveTo(280,99);
