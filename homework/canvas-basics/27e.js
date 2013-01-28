@@ -11,6 +11,9 @@
         radialGradient = renderingContext.createRadialGradient(160, 220, 1, 180, 180, 320),
         radialGradientRing = renderingContext.createRadialGradient(115, 220, 1, 180, 120, 320);
 
+    var planet = {
+                 };
+
     // Gradient for the planet.
     radialGradient.addColorStop(0, "#FFE6F0");
     radialGradient.addColorStop(0.5, "#FF0066");
