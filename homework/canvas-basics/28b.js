@@ -11,6 +11,26 @@
         linearGradientSky = renderingContext.createLinearGradient(0,0,0,250),
         linearGradientWater = renderingContext.createLinearGradient(0,250,0,512),
         radialGradientSun = renderingContext.createRadialGradient(250, 250, 1, 180, 180, 320);
+        
+    var sceneElements = { sky: { vertices: [[0,0],[512,512]],
+                                 color: linearGradientSky
+                               },
+                          water: { vertices: [[0,250],[512,261]],
+                                   color: linearGradientWater
+                                 },
+                          sun: { radius: 100,
+                                 center: [250,250],
+                                 endpoints: [0,Math.PI],
+                                 color: radialGradientSun
+                               },
+                          reflection: { radius: 100,
+                                        center: [250,250],
+                                        endpoints: [Math.PI,Math.PI*2],
+                                        opacity: 0.5,
+                                        color: radialGradientSun
+                                      }
+                        };
+                        
 
     // Colors for the sky
     linearGradientSky.addColorStop(0, "#FFFF66");
@@ -18,16 +38,17 @@
     linearGradientSky.addColorStop(0.6, "#FF1975");
     linearGradientSky.addColorStop(1, "#660066");
 
-    // Sky
-    renderingContext.fillStyle = linearGradientSky;
-    renderingContext.fillRect(0,0,512,512);
-    renderingContext.fill();
-
     // Colors for the water
     linearGradientWater.addColorStop(0, "#008F00");
     linearGradientWater.addColorStop(0.05, "#0066CC");
     linearGradientWater.addColorStop(0.4, "#003366");
     linearGradientWater.addColorStop(1, "#000F1F");
+
+    // Sky
+    renderingContext.fillStyle = linearGradientSky;
+    renderingContext.fillRect(0,0,512,512);
+    renderingContext.fill();
+
 
     // Water
     renderingContext.fillStyle = linearGradientWater;
@@ -39,16 +60,25 @@
     radialGradientSun.addColorStop(0.5, "red");
 
     // Sun
-    renderingContext.fillStyle = radialGradientSun;
+/*    renderingContext.fillStyle = radialGradientSun;
     renderingContext.beginPath();
     renderingContext.arc(250,250,100,0,Math.PI,true);
-    renderingContext.fill();
+    renderingContext.fill();*/
 
     // Sun Reflection
-    radialGradientSun = renderingContext.createRadialGradient(250, 250, 1, 180, 180, 320);
-    renderingContext.globalAlpha = 0.5;
-    renderingContext.beginPath();
-    renderingContext.arc(250,250,100,Math.PI,Math.PI*2,true);
-    renderingContext.fill();
+    var drawSun = function(part){
+        renderingContext.fillStyle = part.color;
+        if(part.opacity){
+            renderingContext.globalAlpha = part.opacity;
+        }
+        renderingContext.beginPath();
+        renderingContext.arc(part.center[0], part.center[1],
+                             part.radius,
+                             part.endpoints[0], part.endpoints[1],true);
+        renderingContext.fill();
+    }
+    
+    drawSun(sceneElements.sun);
+    drawSun(sceneElements.reflection);
     
 }());
