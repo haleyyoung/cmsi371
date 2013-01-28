@@ -8,8 +8,8 @@
     // Using jQuery here.
     var canvas = document.getElementById("canvas"),
         renderingContext = canvas.getContext("2d"),
-        linearGradientSky = renderingContext.createLinearGradient(0,0,0,250),
-        linearGradientWater = renderingContext.createLinearGradient(0,250,0,512),
+        linearGradientSky = renderingContext.createLinearGradient(0, 0, 0, 250),
+        linearGradientWater = renderingContext.createLinearGradient(0, 250, 0, 512),
         radialGradientSun = renderingContext.createRadialGradient(250, 250, 1, 180, 180, 320);
 
     // Colors for the sky
@@ -28,45 +28,45 @@
     radialGradientSun.addColorStop(0, "#FF9900");
     radialGradientSun.addColorStop(0.5, "red");
 
-    var sceneElements = { sky: { vertices: [[0,0],[512,512]],
+    var sceneElements = { sky: { vertices: [[0, 0], [512, 512]],
                                  color: linearGradientSky
                                },
-                          water: { vertices: [[0,250],[512,261]],
+                          water: { vertices: [[0, 250], [512, 261]],
                                    color: linearGradientWater
                                  },
                           sun: { radius: 100,
-                                 center: [250,250],
-                                 endpoints: [0,Math.PI],
+                                 center: [250, 250],
+                                 endpoints: [0, Math.PI],
                                  color: radialGradientSun
                                },
                           reflection: { radius: 100,
-                                        center: [250,250],
-                                        endpoints: [Math.PI,Math.PI*2],
+                                        center: [250, 250],
+                                        endpoints: [Math.PI, Math.PI * 2],
                                         opacity: 0.5,
                                         color: radialGradientSun
                                       }
-                        };
+                        },
 
     // This is a function that draws a rectangular shape with a gradient
-    var drawBackground = function(part){
-        renderingContext.fillStyle = part.color;
-        renderingContext.fillRect(part.vertices[0][0], part.vertices[0][1],
-                                  part.vertices[1][0], part.vertices[1][1]);
-        renderingContext.fill();
-    }
+        drawBackground = function (part) {
+            renderingContext.fillStyle = part.color;
+            renderingContext.fillRect(part.vertices[0][0], part.vertices[0][1],
+                                      part.vertices[1][0], part.vertices[1][1]);
+            renderingContext.fill();
+        },
 
     // This is a funtion that draws a circle with a gradient
-    var drawSun = function(part){
-        renderingContext.fillStyle = part.color;
-        if(part.opacity){
-            renderingContext.globalAlpha = part.opacity;
-        }
-        renderingContext.beginPath();
-        renderingContext.arc(part.center[0], part.center[1],
-                             part.radius,
-                             part.endpoints[0], part.endpoints[1],true);
-        renderingContext.fill();
-    }
+        drawSun = function (part) {
+            renderingContext.fillStyle = part.color;
+            if (part.opacity) {
+                renderingContext.globalAlpha = part.opacity;
+            }
+            renderingContext.beginPath();
+            renderingContext.arc(part.center[0], part.center[1],
+                                 part.radius,
+                                 part.endpoints[0], part.endpoints[1], true);
+            renderingContext.fill();
+        };
 
     drawBackground(sceneElements.sky);
     drawBackground(sceneElements.water);

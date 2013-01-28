@@ -8,7 +8,7 @@
     // Using jQuery here.
     var canvas = document.getElementById("canvas"),
         renderingContext = canvas.getContext("2d"),
-        linearGradient = renderingContext.createLinearGradient(0,0,0,512);
+        linearGradient = renderingContext.createLinearGradient(0, 0, 0, 512);
 
     // Colors for the sky
     linearGradient.addColorStop(0, "#FFFF66");
@@ -18,26 +18,29 @@
 
     // Sky
     renderingContext.fillStyle = linearGradient;
-    renderingContext.fillRect(0,0,512,512);
+    renderingContext.fillRect(0, 0, 512, 512);
     renderingContext.fill();
 
     // Buildings
-    var xPlacement = 0;
-    while(xPlacement < 511){
+    var xPlacement = 0,
+        width = 50 * Math.random() + 25;
+    while (xPlacement + width < 511) {
         // Building
-        var height = 200*Math.random() + 200;
-        var width = 50*Math.random() + 25;
+        var height = 200 * Math.random() + 200;
         renderingContext.fillStyle = "black";
-        renderingContext.fillRect(xPlacement,511-height,width,height);
+        renderingContext.fillRect(xPlacement, 511 - height, width, height);
         renderingContext.fill();
 
         // Windows
-        var numberOfWindows = Math.ceil(7*Math.random());
-        for(var i = 0; i <= numberOfWindows; i++){
+        var numberOfWindows = Math.ceil(7 * Math.random());
+        for (var i = 0; i <= numberOfWindows; i++) {
             renderingContext.fillStyle = "yellow";
-            renderingContext.fillRect(xPlacement + width/2 - 10, 511-height + 5 + (i*(height/numberOfWindows)), 20, 20);
+            renderingContext.fillRect(xPlacement + width / 2 - 10,
+                                      511 - height + 5 + (i * (height / numberOfWindows)),
+                                      20, 20);
             renderingContext.fill();
         }
         xPlacement += width + 10;
     }
+
 }());

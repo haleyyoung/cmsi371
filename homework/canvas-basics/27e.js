@@ -9,17 +9,17 @@
     var canvas = document.getElementById("canvas"),
         renderingContext = canvas.getContext("2d"),
         radialGradient = renderingContext.createRadialGradient(160, 220, 1, 180, 180, 320),
-        radialGradientRing = renderingContext.createRadialGradient(115, 220, 1, 180, 120, 320);
+        radialGradientRing = renderingContext.createRadialGradient(115, 220, 1, 180, 120, 320),
 
-    var ring = { left: { bottom: [[100,240],[10,280],[251,288]],
-                         center: [251,268],
-                         top: [[0,260],[104,220]],
-                         edge: [[74,260],[76,240]]
+        ring = { left: { bottom: [[100, 240], [10, 280], [251, 288]],
+                         center: [251, 268],
+                         top: [[0, 260], [104, 220]],
+                         edge: [[74, 260], [76, 240]]
                        },
-                 right: { bottom: [[400,240],[480,280],[249,288]],
-                         center: [251,268],
-                         top: [[480,260],[396,220]],
-                         edge: [[421,260],[419,240]]
+                 right: { bottom: [[400, 240], [480, 280], [249, 288]],
+                         center: [251, 268],
+                         top: [[480, 260], [396, 220]],
+                         edge: [[421, 260], [419, 240]]
                         }
                };
 
@@ -35,7 +35,7 @@
     radialGradientRing.addColorStop(1, "#19FF19");
 
     // This function draws thick a quadratic curve to make part of the ring
-    var drawRing = function(side){
+    var drawRing = function (side) {
         renderingContext.lineWidth = 6;
         renderingContext.strokeStyle = radialGradientRing;
         renderingContext.fillStyle = radialGradientRing;
@@ -63,9 +63,10 @@
     // The solid planet
     renderingContext.fillStyle = radialGradient;
     renderingContext.beginPath();
-    renderingContext.arc(250,250,150,0,Math.PI*2,true);
+    renderingContext.arc(250, 250, 150, 0, Math.PI * 2, true);
     renderingContext.fill();
 
     drawRing(ring.left);
     drawRing(ring.right);
+
 }());
