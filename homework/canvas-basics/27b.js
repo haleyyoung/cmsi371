@@ -9,32 +9,39 @@
     var canvas = document.getElementById("canvas"),
         renderingContext = canvas.getContext("2d");
         
-    var cubeVertices = {backSquare: [[180,0],[180,99],[280,99],[280,0]],
-                        frontSquare: [[330,149],[330,49],[230,49],[230,149]]
-                       };
+    var backSquare = {vertices: [[180,0],[180,99],[280,99],[280,0]]
+                     },
+        frontSquare = {vertices: [[330,149],[330,49],[230,49],[230,149]],
+                       color: "#008FB2"
+                      };
 
     //Make the outline blue
     renderingContext.strokeStyle = "blue";
     //Back Side
     var drawSide = function (sideName){
         renderingContext.beginPath();
-        renderingContext.moveTo(sideName[0][0], sideName[0][1]);
-        renderingContext.lineTo(sideName[1][0], sideName[1][1]);
-        renderingContext.lineTo(sideName[2][0], sideName[2][1]);
-        renderingContext.lineTo(sideName[3][0], sideName[3][1]);
-        renderingContext.lineTo(sideName[0][0], sideName[0][1]);
+        renderingContext.moveTo(sideName.vertices[0][0], sideName.vertices[0][1]);
+        renderingContext.lineTo(sideName.vertices[1][0], sideName.vertices[1][1]);
+        renderingContext.lineTo(sideName.vertices[2][0], sideName.vertices[2][1]);
+        renderingContext.lineTo(sideName.vertices[3][0], sideName.vertices[3][1]);
+        renderingContext.lineTo(sideName.vertices[0][0], sideName.vertices[0][1]);
         renderingContext.stroke();
+        if(sideName.color){
+            renderingContext.fillStyle = sideName.color;
+            renderingContext.fill();
+        }
     }
     
-    drawSide(cubeVertices.backSquare);
-    drawSide(cubeVertices.frontSquare);
+    drawSide(backSquare);
     //Right Line to connect
     renderingContext.beginPath();
     renderingContext.moveTo(280,99);
     renderingContext.lineTo(330,149);
     renderingContext.stroke();
     //Front side
-   /* renderingContext.fillStyle = "#008FB2";
+    
+    drawSide(frontSquare);
+   /* 
     renderingContext.beginPath();
     renderingContext.moveTo(330, 149);
     renderingContext.lineTo(330, 49);
