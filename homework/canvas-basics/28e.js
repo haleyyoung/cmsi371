@@ -10,18 +10,18 @@
         renderingContext = canvas.getContext("2d"),
         linearGradient = renderingContext.createLinearGradient(0,0,0,512);
 
-    //Colors for the sky
+    // Colors for the sky
     linearGradient.addColorStop(0, "#FFFF66");
     linearGradient.addColorStop(0.3, "#FF4719");
     linearGradient.addColorStop(0.6, "#FF1975");
     linearGradient.addColorStop(1, "#660066");
 
-    //Sky
+    // Sky
     renderingContext.fillStyle = linearGradient;
     renderingContext.fillRect(0,0,512,512);
     renderingContext.fill();
 
-    //Buildings
+    // Buildings
     var xPlacement = 0;
     while(xPlacement < 511){
         // Building
