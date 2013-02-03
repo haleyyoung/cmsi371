@@ -20,7 +20,8 @@
                            bottom: {x: 200, y: 600},
                            cp3: {x: 350, y: 600},
                            cp4: {x: 350, y: 300},
-                           color: "yellow"
+                           color1: {color: "#FFFF80", stop: 0.1, x: 0, y: 450, r: 200},
+                           color2: {color: "#FFFF4D", stop: 0.2, x: 200, y: 450, r: 400}
                          },
         eyes = { ball: {x:200, y: 400},
                  ballRadius: 30,
@@ -45,8 +46,11 @@
                  height: 40,
                  color: "blue"
         },
-        cupcakeVertices = { candle: { corner: {x: 75, y:520},
-                                      width: 10,
+        shoes = { 
+                  color: "black"
+        },
+        cupcakeVertices = { candle: { corner: {x: 77, y:520},
+                                      width: 6,
                                       height: 30,
                                       color: "red"
                                      
@@ -71,12 +75,12 @@
                                    topRight: {x: 120, y: 570},
                                    cp1: {x: 70, y: 590},
                                    color: "turquoise"
-                                  }
+                                  },
                             fire: {
-                                   bottom: {x: 75, y: 520},
+                                   bottom: {x: 80, y: 520},
                                    left: {x: 70, y:510},
-                                   top: {x: 75, y: 480},
-                                   right: {x: 80, y: 510}
+                                   top: {x: 80, y: 480},
+                                   right: {x: 90, y: 510}
                                   }
         },
 
@@ -96,7 +100,14 @@
             
         minion = function (renderingContext) {
             // Body
-            renderingContext.fillStyle = minionVertices.color;
+            var bodyGradient = renderingContext.createRadialGradient(minionVertices.color1.x,
+                                   minionVertices.color1.y, minionVertices.color1.r,
+                                   minionVertices.color2.x, minionVertices.color2.y, minionVertices.color2.r);
+            bodyGradient.addColorStop(minionVertices.color1.stop, minionVertices.color1.color);
+            console.log(minionVertices.color1.color);
+            bodyGradient.addColorStop(minionVertices.color2.stop, minionVertices.color2.color);
+            console.log(minionVertices.color2.color);
+            renderingContext.fillStyle = bodyGradient;
             renderingContext.beginPath();
             renderingContext.moveTo(minionVertices.start.x, minionVertices.start.y);
             renderingContext.bezierCurveTo(minionVertices.cp1.x, minionVertices.cp1.y,
@@ -177,7 +188,14 @@
         },
         
         fire = function (renderingContext) {
-            
+            renderingContext.fillStyle = "orange";
+            renderingContext.beginPath();
+            renderingContext.moveTo(cupcakeVertices.fire.bottom.x, cupcakeVertices.fire.bottom.y);
+            renderingContext.quadraticCurveTo(cupcakeVertices.fire.left.x, cupcakeVertices.fire.left.y,
+                cupcakeVertices.fire.top.x, cupcakeVertices.fire.top.y);
+            renderingContext.quadraticCurveTo(cupcakeVertices.fire.right.x, cupcakeVertices.fire.right.y,
+                cupcakeVertices.fire.bottom.x, cupcakeVertices.fire.bottom.y);
+            renderingContext.fill();
         },
 
         circle = function (renderingContext) {
@@ -231,6 +249,43 @@
 
                     {
                         frame: 100,
+                        tx: 100,
+                        ty: 50,
+                        ease: KeyframeTweener.quadEaseInOut
+                    },
+
+                    // The last keyframe does not need an easing function.
+                    {
+                        frame: 80,
+                        tx: 80,
+                        ty: 500,
+                        rotate: 60 // Keyframe.rotate uses degrees.
+                    }
+                ]
+            },
+            {
+                draw: fire,
+                keyframes: [
+                    {
+                        frame: 0,
+                        tx: 0,
+                        ty: 0
+                    },
+                    
+                    {
+                        frame: 500,
+                        tx: 0,
+                        ty: 0
+                    },
+                    {
+                        frame: 700,
+                        tx: 20,
+                        ty: 20,
+                        ease: KeyframeTweener.linear
+                    },
+
+                    {
+                        frame: 1110,
                         tx: 100,
                         ty: 50,
                         ease: KeyframeTweener.quadEaseInOut
