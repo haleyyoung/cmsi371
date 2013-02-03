@@ -4,6 +4,15 @@
  */
 (function () {
     var canvas = document.getElementById("canvas"),
+    
+        backgroundColors = {
+                            bottom: "#D4D4D4",
+                            middle: "#A9A9A9",
+                            top: "#656565",
+                            colorStop1: 0.5,
+                            colorStop2: 0.6,
+                            colorStop3: 0.7
+        },
 
         minionVertices = { start: {x: 400, y: 350},
                            cp1: {x: 250, y: 350},
@@ -69,7 +78,11 @@
         // can choose.  Their common trait: they all accept a single
         // renderingContext argument.
         background = function (renderingContext) {
-            renderingContext.fillStyle = "blue";
+            var backgroundGradient = renderingContext.createLinearGradient(0, 0, 0, canvas.height);
+            backgroundGradient.addColorStop(0, backgroundColors.top);
+            backgroundGradient.addColorStop(backgroundColors.colorStop2, backgroundColors.middle);
+            backgroundGradient.addColorStop(backgroundColors.colorStop3, backgroundColors.bottom);
+            renderingContext.fillStyle = backgroundGradient;
             renderingContext.beginPath();
             renderingContext.fillRect(0,0, canvas.width, canvas.height);
             renderingContext.fill();
