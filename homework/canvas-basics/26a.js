@@ -12,6 +12,7 @@
     //Creating the squares as well as filling them in
     for (var i = 0; i < 253; i += 5) {
         for (var j = 0; j < 253; j += 5) {
+            // JD: Nice touch, those colors.
             renderingContext.fillStyle = 'rgb(' + (51 + j) + ',' + (150 - j) + ', 256)';
             renderingContext.fillRect(i, j, 4, 4);
             renderingContext.fill();
