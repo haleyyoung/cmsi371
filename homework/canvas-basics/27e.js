@@ -8,6 +8,8 @@
     // Using jQuery here.
     var canvas = document.getElementById("canvas"),
         renderingContext = canvas.getContext("2d"),
+        // JD: Your first radial gradient variable should take a cue from
+        //     the second one by getting a more descriptive name :)
         radialGradient = renderingContext.createRadialGradient(160, 220, 1, 180, 180, 320),
         radialGradientRing = renderingContext.createRadialGradient(115, 220, 1, 180, 120, 320),
 
@@ -16,12 +18,15 @@
                          top: [[0, 260], [104, 220]],
                          edge: [[74, 260], [76, 240]]
                        },
-                 right: { bottom: [[400, 240], [480, 280], [249, 288]],
-                         center: [251, 268],
-                         top: [[480, 260], [396, 220]],
-                         edge: [[421, 260], [419, 240]]
-                        }
-               };
+                // JD: This seems awkwardly spaced.  Above is your original
+                //     approach; below is my suggestion.
+                right: {
+                    bottom: [[400, 240], [480, 280], [249, 288]],
+                    center: [251, 268],
+                    top: [[480, 260], [396, 220]],
+                    edge: [[421, 260], [419, 240]]
+                }
+            };
 
     // Gradient for the planet.
     radialGradient.addColorStop(0, "#FFE6F0");
@@ -35,6 +40,7 @@
     radialGradientRing.addColorStop(1, "#19FF19");
 
     // This function draws thick a quadratic curve to make part of the ring
+    // JD: ...and also belongs above, alongside the other variables.
     var drawRing = function (side) {
         renderingContext.lineWidth = 6;
         renderingContext.strokeStyle = radialGradientRing;

@@ -8,6 +8,7 @@
     // Using jQuery here.
     var canvas = document.getElementById("canvas"),
         renderingContext = canvas.getContext("2d"),
+        // JD: OK, the names below are better.
         linearGradientSky = renderingContext.createLinearGradient(0, 0, 0, 250),
         linearGradientWater = renderingContext.createLinearGradient(0, 250, 0, 512),
         radialGradientSun = renderingContext.createRadialGradient(250, 250, 1, 180, 180, 320);
@@ -28,6 +29,8 @@
     radialGradientSun.addColorStop(0, "#FF9900");
     radialGradientSun.addColorStop(0.5, "red");
 
+    // JD: See my indentation suggestion in 27e.js.
+    //     But data-wise, very nicely separated.
     var sceneElements = { sky: { vertices: [[0, 0], [512, 512]],
                                  color: linearGradientSky
                                },

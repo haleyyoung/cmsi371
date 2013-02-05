@@ -11,6 +11,7 @@
         linearGradient = renderingContext.createLinearGradient(0, 0, 0, 512);
 
     // Colors for the sky
+    // JD: Very vivid and sunset-y!
     linearGradient.addColorStop(0, "#FFFF66");
     linearGradient.addColorStop(0.3, "#FF4719");
     linearGradient.addColorStop(0.6, "#FF1975");
@@ -19,12 +20,14 @@
     // Sky
     renderingContext.fillStyle = linearGradient;
     renderingContext.fillRect(0, 0, 512, 512);
+    // JD: Avoidable hardcode alert ^^^^^^^^
     renderingContext.fill();
 
     // Buildings
     var xPlacement = 0,
         width = 50 * Math.random() + 25;
     while (xPlacement + width < 511) {
+        // JD: Another avoidable^^^one (and I see more below).
         // Building
         var height = 200 * Math.random() + 200;
         renderingContext.fillStyle = "black";
