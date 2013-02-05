@@ -80,9 +80,14 @@
                                      },
                               legDown: { corner: {x: 170, y:580},
                                       width: 60,
-                                      height: 31,
+                                      height: 36,
                                       color: "blue"
                                     },
+                              shoeDown: { corner: {x: 170, y: 615},
+                                          width: 60,
+                                          height: 16,
+                                          color: "black"
+                                     },
                               legUp: { start: {x: 170, y:580},
                                        bottomLeft: {x: 150, y:610},
                                        bottomRight: {x: 190, y:630},
@@ -239,13 +244,8 @@
             renderingContext.quadraticCurveTo(minionLeftVertices.mouth.cp1.x, minionLeftVertices.mouth.cp1.y,
                                               minionLeftVertices.mouth.end.x, minionLeftVertices.mouth.end.y);
             renderingContext.stroke();
-            // Legs
+            // Left leg
             renderingContext.fillStyle = minionLeftVertices.legUp.color;
-/**            renderingContext.fillRect(minionLeftVertices.legDown.corner.x, minionLeftVertices.legDown.corner.y,
-                                      minionLeftVertices.legDown.width, minionLeftVertices.legDown.height);
-            renderingContext.fillRect(minionLeftVertices.legDown.corner.x + minionLeftVertices.legDown.width + 20,
-                                      minionLeftVertices.legDown.corner.y, minionLeftVertices.legDown.width,
-                                      minionLeftVertices.legDown.height); */
             renderingContext.beginPath();
             renderingContext.moveTo(minionLeftVertices.legUp.start.x, minionLeftVertices.legUp.start.y);
             renderingContext.lineTo(minionLeftVertices.legUp.bottomLeft.x, minionLeftVertices.legUp.bottomLeft.y);
@@ -253,16 +253,13 @@
             renderingContext.lineTo(minionLeftVertices.legUp.topRight.x, minionLeftVertices.legUp.topRight.y);
             renderingContext.lineTo(minionLeftVertices.legUp.start.x, minionLeftVertices.legUp.start.y);
             renderingContext.fill();
-            // Shoes
+            // Left shoe
             renderingContext.fillStyle = minionLeftVertices.shoeUp.color;
             renderingContext.beginPath();
             renderingContext.moveTo(minionLeftVertices.shoeUp.bottom.start.x, minionLeftVertices.shoeUp.bottom.start.y);
             renderingContext.bezierCurveTo(minionLeftVertices.shoeUp.bottom.cp1.x, minionLeftVertices.shoeUp.bottom.cp1.y,
                                               minionLeftVertices.shoeUp.bottom.cp2.x, minionLeftVertices.shoeUp.bottom.cp2.y,
                                               minionLeftVertices.shoeUp.bottom.end.x, minionLeftVertices.shoeUp.bottom.end.y);
-          //  renderingContext.bezierCurveTo(minionLeftVertices.shoes.bottom.cp4.x, minionLeftVertices.shoes.bottom.cp4.y,
-            //                                  minionLeftVertices.shoes.bottom.cp5.x, minionLeftVertices.shoes.bottom.cp5.y,
-              //                                minionLeftVertices.shoes.bottom.end.x, minionLeftVertices.shoes.bottom.end.y);
             renderingContext.closePath();
             renderingContext.fill();
             renderingContext.moveTo(minionLeftVertices.shoeUp.boot.start.x, minionLeftVertices.shoeUp.boot.start.y);
@@ -271,6 +268,14 @@
             renderingContext.lineTo(minionLeftVertices.shoeUp.boot.topRight.x, minionLeftVertices.shoeUp.boot.topRight.y);
             renderingContext.lineTo(minionLeftVertices.shoeUp.boot.start.x, minionLeftVertices.shoeUp.boot.start.y);
             renderingContext.fill();
+            // Right leg
+            renderingContext.fillStyle = minionLeftVertices.legDown.color;
+            renderingContext.fillRect(minionLeftVertices.legDown.corner.x, minionLeftVertices.legDown.corner.y,
+                                      minionLeftVertices.legDown.width, minionLeftVertices.legDown.height);
+            renderingContext.fillStyle = minionLeftVertices.shoeDown.color;
+            renderingContext.fillRect(minionLeftVertices.shoeDown.corner.x, minionLeftVertices.shoeDown.corner.y,
+                                      minionLeftVertices.shoeDown.width, minionLeftVertices.shoeDown.height);
+
         },
         
         minionRight = function (renderingContext) {
