@@ -78,19 +78,27 @@
                                        width: 4,
                                        color: "gray"
                                      },
-                              legs: { corner: {x: 150, y:580},
-                                      width: 40,
+                              legDown: { corner: {x: 170, y:580},
+                                      width: 60,
                                       height: 31,
                                       color: "blue"
                                     },
-                              shoes: {
-                                       bottom: { start: {x: 149, y: 620},
-                                                 cp1: {x: 170, y: 650},
-                                                 end: {x: 191, y: 620}
+                              legUp: { start: {x: 170, y:580},
+                                       bottomLeft: {x: 150, y:610},
+                                       bottomRight: {x: 190, y:630},
+                                       topRight: {x: 210, y:580},
+                                      color: "blue"
+                                    },
+                              shoeUp: {
+                                       bottom: { start: {x: 151, y: 610},
+                                                 cp1: {x: 120, y: 590},
+                                                 cp2: {x: 100, y: 610},
+                                                 end: {x: 149, y: 628}
                                                },
-                                       boot: { corner: {x: 150, y: 610},
-                                               width: 40,
-                                               height: 11
+                                       boot: { start: {x: 150, y: 610},
+                                               bottomLeft: {x: 148, y: 628},
+                                               bottomRight: {x: 184, y: 640},
+                                               topRight: {x: 195, y: 620}
                                              },
                                        color: "black"
                                      },
@@ -152,9 +160,7 @@
                                    minionVertices.color1.y, minionVertices.color1.r,
                                    minionVertices.color2.x, minionVertices.color2.y, minionVertices.color2.r);
             bodyGradient.addColorStop(minionVertices.color1.stop, minionVertices.color1.color);
-            console.log(minionVertices.color1.color);
             bodyGradient.addColorStop(minionVertices.color2.stop, minionVertices.color2.color);
-            console.log(minionVertices.color2.color);
             renderingContext.fillStyle = bodyGradient;
             renderingContext.beginPath();
             renderingContext.moveTo(minionVertices.start.x, minionVertices.start.y);
@@ -207,9 +213,7 @@
                                    minionVertices.color1.y, minionVertices.color1.r,
                                    minionVertices.color2.x, minionVertices.color2.y, minionVertices.color2.r);
             bodyGradient.addColorStop(minionVertices.color1.stop, minionVertices.color1.color);
-            console.log(minionVertices.color1.color);
             bodyGradient.addColorStop(minionVertices.color2.stop, minionVertices.color2.color);
-            console.log(minionVertices.color2.color);
             renderingContext.fillStyle = bodyGradient;
             renderingContext.beginPath();
             renderingContext.moveTo(minionVertices.start.x, minionVertices.start.y);
@@ -236,24 +240,37 @@
                                               minionLeftVertices.mouth.end.x, minionLeftVertices.mouth.end.y);
             renderingContext.stroke();
             // Legs
-            renderingContext.fillStyle = minionLeftVertices.legs.color;
-            renderingContext.fillRect(minionLeftVertices.legs.corner.x, minionLeftVertices.legs.corner.y,
-                                      minionLeftVertices.legs.width, minionLeftVertices.legs.height);
-            renderingContext.fillRect(minionLeftVertices.legs.corner.x + minionLeftVertices.legs.width + 20,
-                                      minionLeftVertices.legs.corner.y, minionLeftVertices.legs.width,
-                                      minionLeftVertices.legs.height);
-            // Shoes
-            renderingContext.fillStyle = minionLeftVertices.shoes.color;
-            for(var i = 0; i <= 60; i += 60){
+            renderingContext.fillStyle = minionLeftVertices.legUp.color;
+/**            renderingContext.fillRect(minionLeftVertices.legDown.corner.x, minionLeftVertices.legDown.corner.y,
+                                      minionLeftVertices.legDown.width, minionLeftVertices.legDown.height);
+            renderingContext.fillRect(minionLeftVertices.legDown.corner.x + minionLeftVertices.legDown.width + 20,
+                                      minionLeftVertices.legDown.corner.y, minionLeftVertices.legDown.width,
+                                      minionLeftVertices.legDown.height); */
             renderingContext.beginPath();
-            renderingContext.moveTo(minionLeftVertices.shoes.bottom.start.x + i, minionLeftVertices.shoes.bottom.start.y);
-            renderingContext.quadraticCurveTo(minionLeftVertices.shoes.bottom.cp1.x + i, minionLeftVertices.shoes.bottom.cp1.y,
-                                              minionLeftVertices.shoes.bottom.end.x + i, minionLeftVertices.shoes.bottom.end.y);
+            renderingContext.moveTo(minionLeftVertices.legUp.start.x, minionLeftVertices.legUp.start.y);
+            renderingContext.lineTo(minionLeftVertices.legUp.bottomLeft.x, minionLeftVertices.legUp.bottomLeft.y);
+            renderingContext.lineTo(minionLeftVertices.legUp.bottomRight.x, minionLeftVertices.legUp.bottomRight.y);
+            renderingContext.lineTo(minionLeftVertices.legUp.topRight.x, minionLeftVertices.legUp.topRight.y);
+            renderingContext.lineTo(minionLeftVertices.legUp.start.x, minionLeftVertices.legUp.start.y);
+            renderingContext.fill();
+            // Shoes
+            renderingContext.fillStyle = minionLeftVertices.shoeUp.color;
+            renderingContext.beginPath();
+            renderingContext.moveTo(minionLeftVertices.shoeUp.bottom.start.x, minionLeftVertices.shoeUp.bottom.start.y);
+            renderingContext.bezierCurveTo(minionLeftVertices.shoeUp.bottom.cp1.x, minionLeftVertices.shoeUp.bottom.cp1.y,
+                                              minionLeftVertices.shoeUp.bottom.cp2.x, minionLeftVertices.shoeUp.bottom.cp2.y,
+                                              minionLeftVertices.shoeUp.bottom.end.x, minionLeftVertices.shoeUp.bottom.end.y);
+          //  renderingContext.bezierCurveTo(minionLeftVertices.shoes.bottom.cp4.x, minionLeftVertices.shoes.bottom.cp4.y,
+            //                                  minionLeftVertices.shoes.bottom.cp5.x, minionLeftVertices.shoes.bottom.cp5.y,
+              //                                minionLeftVertices.shoes.bottom.end.x, minionLeftVertices.shoes.bottom.end.y);
             renderingContext.closePath();
             renderingContext.fill();
-            renderingContext.fillRect(minionLeftVertices.shoes.boot.corner.x + i, minionLeftVertices.shoes.boot.corner.y,
-                                      minionLeftVertices.shoes.boot.width, minionLeftVertices.shoes.boot.height);
-            }
+            renderingContext.moveTo(minionLeftVertices.shoeUp.boot.start.x, minionLeftVertices.shoeUp.boot.start.y);
+            renderingContext.lineTo(minionLeftVertices.shoeUp.boot.bottomLeft.x, minionLeftVertices.shoeUp.boot.bottomLeft.y);
+            renderingContext.lineTo(minionLeftVertices.shoeUp.boot.bottomRight.x, minionLeftVertices.shoeUp.boot.bottomRight.y);
+            renderingContext.lineTo(minionLeftVertices.shoeUp.boot.topRight.x, minionLeftVertices.shoeUp.boot.topRight.y);
+            renderingContext.lineTo(minionLeftVertices.shoeUp.boot.start.x, minionLeftVertices.shoeUp.boot.start.y);
+            renderingContext.fill();
         },
         
         minionRight = function (renderingContext) {
@@ -262,9 +279,7 @@
                                    minionVertices.color1.y, minionVertices.color1.r,
                                    minionVertices.color2.x, minionVertices.color2.y, minionVertices.color2.r);
             bodyGradient.addColorStop(minionVertices.color1.stop, minionVertices.color1.color);
-            console.log(minionVertices.color1.color);
             bodyGradient.addColorStop(minionVertices.color2.stop, minionVertices.color2.color);
-            console.log(minionVertices.color2.color);
             renderingContext.fillStyle = bodyGradient;
             renderingContext.beginPath();
             renderingContext.moveTo(minionVertices.start.x, minionVertices.start.y);
