@@ -480,7 +480,7 @@
         // has a drawing function and an array of keyframes.
         sprites = [
             {
-                draw: minion,
+                draw: [minion],
                 keyframes: [
                     {
                         frame: 50,
@@ -506,7 +506,7 @@
                 ]
             },
             {
-                draw: minionLeft,
+                draw: [minionLeft, minionRight],
                 keyframes: [
                     {
                         frame: 0,
@@ -532,7 +532,7 @@
                 ]
             },
             {
-                draw: mouthOpen,
+                draw: [mouthOpen],
                 keyframes: [
                     {
                         frame: 50,
@@ -558,7 +558,7 @@
                 ]
             },
             {
-                draw: fire,
+                draw: [fire],
                 keyframes: [
                     {
                         frame: 0,
@@ -595,7 +595,7 @@
                 ]
             },
             {
-                draw: cupcake,
+                draw: [cupcake],
                 keyframes: [
                     {
                         frame: 0,
@@ -632,7 +632,7 @@
                 ]
             },
             {
-                draw: circle,
+                draw: [circle],
                 keyframes: [
                     {
                         frame: 50,

@@ -138,7 +138,10 @@ var KeyframeTweener = {
                         );
 
                         // Draw the sprite.
-                        sprites[i].draw(renderingContext);
+                        var numberOfSprites = sprites[i].draw.length;
+                        var pickFrame = (currentFrame - startKeyframe.frame) % numberOfSprites;
+                        sprites[i].draw[pickFrame](renderingContext);
+                        
 
                         // Clean up.
                         renderingContext.restore();
