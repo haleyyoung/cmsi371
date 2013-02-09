@@ -150,7 +150,7 @@
         cupcakeVertices = { candle: { corner: {x: 77, y:520},
                                       width: 6,
                                       height: 30,
-                                      color: "red"
+                                      color: "#FF0066"
                                      
                                     },
                             frosting: {
@@ -172,13 +172,17 @@
                                    bottomRight: {x: 110, y: 620},
                                    topRight: {x: 120, y: 570},
                                    cp1: {x: 70, y: 590},
-                                   color: "turquoise"
+                                   colorLight: "turquoise",
+                                   colorDark: "#207068"
                                   },
                             fire: {
                                    bottom: {x: 80, y: 520},
                                    left: {x: 70, y:510},
                                    top: {x: 80, y: 480},
-                                   right: {x: 90, y: 510}
+                                   right: {x: 90, y: 510},
+                                   colorYellow: "yellow",
+                                   colorOrange: "orange",
+                                   colorStop: 0.4
                                   }
         },
 
@@ -422,7 +426,11 @@
         
         cupcake = function (renderingContext) {
             // Frosting
-            renderingContext.fillStyle = cupcakeVertices.frosting.color;
+            var frostingGradient = renderingContext.createRadialGradient(cupcakeVertices.frosting.cp4.x,
+              cupcakeVertices.frosting.cp4.y, 2, cupcakeVertices.frosting.cp4.x, cupcakeVertices.frosting.cp4.y, 50);
+            frostingGradient.addColorStop(0, "white");
+            frostingGradient.addColorStop(1, cupcakeVertices.frosting.color);
+            renderingContext.fillStyle = frostingGradient;
             renderingContext.beginPath();
             renderingContext.moveTo(cupcakeVertices.frosting.start.x, cupcakeVertices.frosting.start.y);
             renderingContext.quadraticCurveTo(cupcakeVertices.frosting.cp1.x, cupcakeVertices.frosting.cp1.y,
@@ -437,7 +445,13 @@
                 cupcakeVertices.cake.topLeft.x, cupcakeVertices.cake.topLeft.y);
             renderingContext.fill();
             // Cake
-            renderingContext.fillStyle = cupcakeVertices.cake.color;
+            var cakeGradient = renderingContext.createLinearGradient(cupcakeVertices.cake.topLeft.x,
+              cupcakeVertices.cake.topLeft.y, cupcakeVertices.cake.topRight.x,
+              cupcakeVertices.cake.topRight.y);
+            cakeGradient.addColorStop(0, cupcakeVertices.cake.colorDark);
+            cakeGradient.addColorStop(0.3, cupcakeVertices.cake.colorLight);
+            cakeGradient.addColorStop(1, cupcakeVertices.cake.colorDark);
+            renderingContext.fillStyle = cakeGradient;
             renderingContext.beginPath();
             renderingContext.moveTo(cupcakeVertices.cake.topLeft.x, cupcakeVertices.cake.topLeft.y);
             renderingContext.lineTo(cupcakeVertices.cake.bottomLeft.x, cupcakeVertices.cake.bottomLeft.y);
@@ -456,7 +470,11 @@
         },
         
         fire = function (renderingContext) {
-            renderingContext.fillStyle = "orange";
+            var linearGradientFire = renderingContext.createLinearGradient(cupcakeVertices.fire.left.x,
+              cupcakeVertices.fire.bottom.y, cupcakeVertices.fire.right.x, cupcakeVertices.fire.top.y);
+            linearGradientFire.addColorStop(0, cupcakeVertices.fire.colorOrange);
+            linearGradientFire.addColorStop(1, cupcakeVertices.fire.colorYellow);
+            renderingContext.fillStyle = linearGradientFire;
             renderingContext.beginPath();
             renderingContext.moveTo(cupcakeVertices.fire.bottom.x, cupcakeVertices.fire.bottom.y);
             renderingContext.quadraticCurveTo(cupcakeVertices.fire.left.x, cupcakeVertices.fire.left.y,
