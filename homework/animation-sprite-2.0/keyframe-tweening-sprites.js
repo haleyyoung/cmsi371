@@ -537,22 +537,13 @@
                         frame: 0,
                         tx: 1000,
                         ty: 0,
-                        ease: KeyframeTweener.quadEaseInOut
+                        ease: KeyframeTweener.runToAbruptStop
                     },
 
                     {
                         frame: 100,
                         tx: 100,
-                        ty: 50,
-                        ease: KeyframeTweener.quadEaseInOut
-                    },
-
-                    // The last keyframe does not need an easing function.
-                    {
-                        frame: 80,
-                        tx: 80,
-                        ty: 500,
-                        rotate: 60 // Keyframe.rotate uses degrees.
+                        ty: 50
                     }
                 ],
                 frameRate: 5
@@ -564,22 +555,13 @@
                         frame: 0,
                         tx: 1000,
                         ty: 0,
-                        ease: KeyframeTweener.quadEaseInOut
+                        ease: KeyframeTweener.runToAbruptStop
                     },
 
                     {
                         frame: 100,
                         tx: 100,
-                        ty: 50,
-                        ease: KeyframeTweener.quadEaseInOut
-                    },
-
-                    // The last keyframe does not need an easing function.
-                    {
-                        frame: 80,
-                        tx: 80,
-                        ty: 500,
-                        rotate: 60 // Keyframe.rotate uses degrees.
+                        ty: 50
                     }
                 ],
                 frameRate: 5
