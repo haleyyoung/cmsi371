@@ -40,6 +40,11 @@
                   cp3: {x: 220, y: 440},
                   cp4: {x: 200, y: 440},
                   blowRadius: 10,
+                  smile: { start: {x: 180, y: 460},
+                           cp1: {x: 200, y: 480},
+                           end: {x: 220, y: 460},
+                           color: "gray"
+                  },
                   color: "black"
         },
         legs = { corner: {x: 150, y:580},
@@ -464,6 +469,25 @@
             renderingContext.fill();
         },
         
+        mouthSmiling = function (renderingContext) {
+            renderingContext.strokeStyle = mouth.smile.color;
+            renderingContext.lineWidth = minionLeftVertices.mouth.width;
+            renderingContext.beginPath();
+            renderingContext.moveTo(mouth.smile.start.x, mouth.smile.start.y);
+            renderingContext.quadraticCurveTo(mouth.smile.cp1.x, mouth.smile.cp1.y,
+              mouth.smile.end.x, mouth.smile.end.y);
+            renderingContext.stroke();
+        },
+        
+        mouthMad = function (renderingContext) {
+            renderingContext.strokeStyle = mouth.smile.color;
+            renderingContext.lineWidth = minionLeftVertices.mouth.width;
+            renderingContext.beginPath();
+            renderingContext.moveTo(mouth.smile.start.x, mouth.smile.start.y);
+            renderingContext.lineTo(mouth.smile.end.x, mouth.smile.end.y);
+            renderingContext.stroke();
+        },
+        
         cupcake = function (renderingContext) {
             // Frosting
             var frostingGradient = renderingContext.createRadialGradient(cupcakeVertices.frosting.cp4.x,
@@ -523,6 +547,21 @@
                 cupcakeVertices.fire.bottom.x, cupcakeVertices.fire.bottom.y);
             renderingContext.fill();
         },
+        
+        fireBlowing = function (renderingContext) {
+            var linearGradientFire = renderingContext.createLinearGradient(cupcakeVertices.fire.left.x,
+              cupcakeVertices.fire.bottom.y, cupcakeVertices.fire.right.x, cupcakeVertices.fire.top.y);
+            linearGradientFire.addColorStop(0, cupcakeVertices.fire.colorOrange);
+            linearGradientFire.addColorStop(1, cupcakeVertices.fire.colorYellow);
+            renderingContext.fillStyle = linearGradientFire;
+            renderingContext.beginPath();
+            renderingContext.moveTo(cupcakeVertices.fire.bottom.x, cupcakeVertices.fire.bottom.y);
+            renderingContext.quadraticCurveTo(cupcakeVertices.fire.left.x, cupcakeVertices.fire.left.y,
+                cupcakeVertices.fire.top.x + 20, cupcakeVertices.fire.top.y - 5);
+            renderingContext.quadraticCurveTo(cupcakeVertices.fire.right.x + 20, cupcakeVertices.fire.right.y,
+                cupcakeVertices.fire.bottom.x, cupcakeVertices.fire.bottom.y);
+            renderingContext.fill();
+        },
 
         // Then, we have "easing functions" that determine how
         // intermediate frames are computed.
@@ -541,18 +580,9 @@
                     },
 
                     {
-                        frame: 150,
+                        frame: 600,
                         tx: 100,
-                        ty: 50,
-                        ease: KeyframeTweener.quadEaseInOut
-                    },
-
-                    // The last keyframe does not need an easing function.
-                    {
-                        frame: 80,
-                        tx: 80,
-                        ty: 500,
-                        rotate: 60 // Keyframe.rotate uses degrees.
+                        ty: 50
                     }
                 ]
             },
@@ -632,7 +662,7 @@
                     },
 
                     {
-                        frame: 120,
+                        frame: 200,
                         tx: 100,
                         ty: 50
                     }
@@ -642,14 +672,14 @@
                 draw: [mouthBlowing],
                 keyframes: [
                     {
-                        frame: 120,
+                        frame: 200,
                         tx: 110,
                         ty: 55,
                         ease: KeyframeTweener.quadEaseInAndOut
                     },
 
                     {
-                        frame: 150,
+                        frame:240,
                         tx: 220,
                         ty: 280,
                         sx: 0.5,
@@ -658,6 +688,41 @@
                     }
                 ]
             },
+            
+            {
+                draw: [mouthSmiling],
+                keyframes: [
+                    {
+                        frame: 240,
+                        tx: 100,
+                        ty: 50
+                    },
+                    
+                    {
+                        frame: 330,
+                        tx: 100,
+                        ty: 50
+                    }
+                ]
+            },
+            
+            {
+                draw: [mouthMad],
+                keyframes: [
+                    {
+                        frame: 330,
+                        tx: 100,
+                        ty: 50
+                    },
+                    
+                    {
+                        frame: 450,
+                        tx: 100,
+                        ty: 50
+                    }
+                ]
+            },
+            
             {
                 draw: [fire],
                 keyframes: [
@@ -668,30 +733,62 @@
                     },
                     
                     {
-                        frame: 500,
+                        frame: 150,
                         tx: 0,
+                        ty: 0,
+                        ease: KeyframeTweener.linear
+                    },
+                    {
+                        frame: 180,
+                        tx: 250,
                         ty: 0
                     },
                     {
-                        frame: 700,
-                        tx: 20,
-                        ty: 20,
-                        ease: KeyframeTweener.linear
-                    },
-
+                        frame: 210,
+                        tx: 250,
+                        ty: 0
+                    }
+                ]
+            },
+            
+            // The candle magically relights
+            {
+                draw: [fire],
+                keyframes: [
                     {
-                        frame: 1110,
-                        tx: 100,
+                        frame: 280,
+                        tx: 250,
                         ty: 50,
-                        ease: KeyframeTweener.quadEaseInOut
+                        ease: KeyframeTweener.quadEaseIn
                     },
-
-                    // The last keyframe does not need an easing function.
+                    
                     {
-                        frame: 80,
-                        tx: 80,
-                        ty: 500,
-                        rotate: 60 // Keyframe.rotate uses degrees.
+                        frame: 300,
+                        tx: 250,
+                        ty: 0
+                    },
+                    
+                    {
+                        frame: 600,
+                        tx: 250,
+                        ty: 0
+                    }
+                ]
+            },
+            {
+                draw: [fireBlowing],
+                keyframes: [
+                    {
+                        frame: 210,
+                        tx: 250,
+                        ty: 0,
+                        ease: KeyframeTweener.quadEaseIn
+                    },
+                    
+                    {
+                        frame: 220,
+                        tx: 250,
+                        ty: 0
                     }
                 ]
             },
@@ -701,34 +798,26 @@
                     {
                         frame: 0,
                         tx: 0,
-                        ty: 0
+                        ty: 0,
+                        
                     },
                     
                     {
-                        frame: 500,
+                        frame: 150,
                         tx: 0,
+                        ty: 0,
+                        ease: KeyframeTweener.quadEeaseInOut
+                    },
+                    {
+                        frame: 180,
+                        tx: 250,
+                        ty: 0,
+                        ease: KeyframeTweener.quadEeaseInOut
+                    },
+                    {
+                        frame: 1100,
+                        tx: 250,
                         ty: 0
-                    },
-                    {
-                        frame: 700,
-                        tx: 20,
-                        ty: 20,
-                        ease: KeyframeTweener.linear
-                    },
-
-                    {
-                        frame: 1110,
-                        tx: 100,
-                        ty: 50,
-                        ease: KeyframeTweener.quadEaseInOut
-                    },
-
-                    // The last keyframe does not need an easing function.
-                    {
-                        frame: 80,
-                        tx: 80,
-                        ty: 500,
-                        rotate: 60 // Keyframe.rotate uses degrees.
                     }
                 ]
             }
