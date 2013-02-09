@@ -253,7 +253,7 @@
             }
         },
         
-        minionLeft = function (renderingContext) {
+        minionSide = function (renderingContext) {
             // Body
             var bodyGradient = renderingContext.createRadialGradient(minionVertices.color1.x,
                                    minionVertices.color1.y, minionVertices.color1.r,
@@ -285,7 +285,43 @@
             renderingContext.quadraticCurveTo(minionLeftVertices.mouth.cp1.x, minionLeftVertices.mouth.cp1.y,
                                               minionLeftVertices.mouth.end.x, minionLeftVertices.mouth.end.y);
             renderingContext.stroke();
-            
+        },
+        
+        minionSideUp = function (renderingContext) {
+            // Body
+            var bodyGradient = renderingContext.createRadialGradient(minionVertices.color1.x,
+                                   minionVertices.color1.y - 10, minionVertices.color1.r,
+                                   minionVertices.color2.x, minionVertices.color2.y - 10, minionVertices.color2.r);
+            bodyGradient.addColorStop(minionVertices.color1.stop, minionVertices.color1.color);
+            bodyGradient.addColorStop(minionVertices.color2.stop, minionVertices.color2.color);
+            renderingContext.fillStyle = bodyGradient;
+            renderingContext.beginPath();
+            renderingContext.moveTo(minionVertices.start.x, minionVertices.start.y - 10);
+            renderingContext.bezierCurveTo(minionVertices.cp1.x, minionVertices.cp1.y - 10,
+                minionVertices.cp2.x, minionVertices.cp2.y - 10, minionVertices.bottom.x,
+                minionVertices.bottom.y);
+            renderingContext.bezierCurveTo(minionVertices.cp3.x, minionVertices.cp3.y - 10,
+                minionVertices.cp4.x, minionVertices.cp4.y - 10, minionVertices.start.x,
+                minionVertices.start.y - 10);
+            renderingContext.fill();
+            // Eye 
+            renderingContext.strokeStyle = minionLeftVertices.eyes.color;
+            renderingContext.lineWidth = minionLeftVertices.eyes.width;
+            renderingContext.beginPath();
+            renderingContext.moveTo(minionLeftVertices.eyes.start.x, minionLeftVertices.eyes.start.y - 10);
+            renderingContext.lineTo(minionLeftVertices.eyes.end.x, minionLeftVertices.eyes.end.y - 10);
+            renderingContext.stroke();
+            // Mouth
+            renderingContext.strokeStyle = minionLeftVertices.mouth.color;
+            renderingContext.lineWidth = minionLeftVertices.mouth.width;
+            renderingContext.beginPath();
+            renderingContext.moveTo(minionLeftVertices.mouth.start.x, minionLeftVertices.mouth.start.y - 10);
+            renderingContext.quadraticCurveTo(minionLeftVertices.mouth.cp1.x, minionLeftVertices.mouth.cp1.y - 10,
+                                              minionLeftVertices.mouth.end.x, minionLeftVertices.mouth.end.y - 10);
+            renderingContext.stroke();
+        },
+        
+        minionLeft = function (renderingContext) {        
             // Right leg
             renderingContext.fillStyle = minionLeftVertices.legDown.color;
             renderingContext.fillRect(minionLeftVertices.legDown.corner.x, minionLeftVertices.legDown.corner.y,
@@ -329,38 +365,6 @@
         },
         
         minionRight = function (renderingContext) {
-            // All of the body elements are the same as minionLeftVertices except for the legs
-            // Body
-            var bodyGradient = renderingContext.createRadialGradient(minionVertices.color1.x,
-                                   minionVertices.color1.y, minionVertices.color1.r,
-                                   minionVertices.color2.x, minionVertices.color2.y, minionVertices.color2.r);
-            bodyGradient.addColorStop(minionVertices.color1.stop, minionVertices.color1.color);
-            bodyGradient.addColorStop(minionVertices.color2.stop, minionVertices.color2.color);
-            renderingContext.fillStyle = bodyGradient;
-            renderingContext.beginPath();
-            renderingContext.moveTo(minionVertices.start.x, minionVertices.start.y);
-            renderingContext.bezierCurveTo(minionVertices.cp1.x, minionVertices.cp1.y,
-                minionVertices.cp2.x, minionVertices.cp2.y, minionVertices.bottom.x,
-                minionVertices.bottom.y);
-            renderingContext.bezierCurveTo(minionVertices.cp3.x, minionVertices.cp3.y,
-                minionVertices.cp4.x, minionVertices.cp4.y, minionVertices.start.x,
-                minionVertices.start.y);
-            renderingContext.fill();
-            // Eye 
-            renderingContext.strokeStyle = minionLeftVertices.eyes.color;
-            renderingContext.lineWidth = minionLeftVertices.eyes.width;
-            renderingContext.beginPath();
-            renderingContext.moveTo(minionLeftVertices.eyes.start.x, minionLeftVertices.eyes.start.y);
-            renderingContext.lineTo(minionLeftVertices.eyes.end.x, minionLeftVertices.eyes.end.y);
-            renderingContext.stroke();
-            // Mouth
-            renderingContext.strokeStyle = minionLeftVertices.mouth.color;
-            renderingContext.lineWidth = minionLeftVertices.mouth.width;
-            renderingContext.beginPath();
-            renderingContext.moveTo(minionLeftVertices.mouth.start.x, minionLeftVertices.mouth.start.y);
-            renderingContext.quadraticCurveTo(minionLeftVertices.mouth.cp1.x, minionLeftVertices.mouth.cp1.y,
-                                              minionLeftVertices.mouth.end.x, minionLeftVertices.mouth.end.y);
-            renderingContext.stroke();
             // Right leg
             renderingContext.fillStyle = minionRightVertices.legDown.color;
             renderingContext.fillRect(minionRightVertices.legDown.corner.x, minionRightVertices.legDown.corner.y,
@@ -523,6 +527,34 @@
                     }
                 ]
             },
+            
+            {
+                draw: [minionSide, minionSideUp],
+                keyframes: [
+                    {
+                        frame: 0,
+                        tx: 1000,
+                        ty: 0,
+                        ease: KeyframeTweener.quadEaseInOut
+                    },
+
+                    {
+                        frame: 100,
+                        tx: 100,
+                        ty: 50,
+                        ease: KeyframeTweener.quadEaseInOut
+                    },
+
+                    // The last keyframe does not need an easing function.
+                    {
+                        frame: 80,
+                        tx: 80,
+                        ty: 500,
+                        rotate: 60 // Keyframe.rotate uses degrees.
+                    }
+                ],
+                frameRate: 5
+            },
             {
                 draw: [minionLeft, minionRight],
                 keyframes: [
@@ -547,7 +579,8 @@
                         ty: 500,
                         rotate: 60 // Keyframe.rotate uses degrees.
                     }
-                ]
+                ],
+                frameRate: 5
             },
             {
                 draw: [mouthOpen],

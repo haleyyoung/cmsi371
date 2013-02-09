@@ -139,7 +139,9 @@ var KeyframeTweener = {
 
                         // Draw the sprite.
                         var numberOfSprites = sprites[i].draw.length;
-                        var pickFrame = (currentFrame - startKeyframe.frame) % numberOfSprites;
+                        // If the sprite shouldn't change with every frame
+                        frameRate = sprites[i].frameRate ? sprites[i].frameRate : 1;
+                        var pickFrame = Math.floor((currentFrame - startKeyframe.frame)/frameRate) % numberOfSprites;
                         sprites[i].draw[pickFrame](renderingContext);
                         
 
