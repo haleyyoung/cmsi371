@@ -39,6 +39,7 @@
                   right: {x: 230, y: 460},
                   cp3: {x: 220, y: 440},
                   cp4: {x: 200, y: 440},
+                  blowRadius: 10,
                   color: "black"
         },
         legs = { corner: {x: 150, y:580},
@@ -428,6 +429,13 @@
             renderingContext.fill();
         },
         
+        mouthBlowing = function (renderingContext) {
+            renderingContext.fillStyle = mouth.color;
+            renderingContext.beginPath();
+            renderingContext.arc(mouth.cp2.x, mouth.right.y, mouth.blowRadius, 0, Math.PI*2);
+            renderingContext.fill();
+        },
+        
         cupcake = function (renderingContext) {
             // Frosting
             var frostingGradient = renderingContext.createRadialGradient(cupcakeVertices.frosting.cp4.x,
@@ -488,13 +496,6 @@
             renderingContext.fill();
         },
 
-        circle = function (renderingContext) {
-            renderingContext.strokeStyle = "green";
-            renderingContext.beginPath();
-            renderingContext.arc(0, 0, 50, 0, Math.PI * 2);
-            renderingContext.stroke();
-        },
-
         // Then, we have "easing functions" that determine how
         // intermediate frames are computed.
 
@@ -505,9 +506,9 @@
                 draw: [minion],
                 keyframes: [
                     {
-                        frame: 50,
-                        tx: 1000,
-                        ty: 0,
+                        frame: 100,
+                        tx: 100,
+                        ty: 50,
                         ease: KeyframeTweener.quadEaseInOut
                     },
 
@@ -527,6 +528,7 @@
                     }
                 ]
             },
+            
             
             {
                 draw: [minionSide, minionSideUp],
@@ -586,25 +588,36 @@
                 draw: [mouthOpen],
                 keyframes: [
                     {
-                        frame: 50,
-                        tx: 1000,
-                        ty: 0,
-                        ease: KeyframeTweener.quadEaseInOut
-                    },
-
-                    {
-                        frame: 150,
+                        frame: 100,
                         tx: 100,
                         ty: 50,
                         ease: KeyframeTweener.quadEaseInOut
                     },
 
-                    // The last keyframe does not need an easing function.
                     {
-                        frame: 80,
-                        tx: 80,
-                        ty: 500,
-                        rotate: 60 // Keyframe.rotate uses degrees.
+                        frame: 120,
+                        tx: 100,
+                        ty: 50
+                    }
+                ]
+            },
+            {
+                draw: [mouthBlowing],
+                keyframes: [
+                    {
+                        frame: 120,
+                        tx: 110,
+                        ty: 55,
+                        ease: KeyframeTweener.quadEaseInAndOut
+                    },
+
+                    {
+                        frame: 150,
+                        tx: 220,
+                        ty: 280,
+                        sx: 0.5,
+                        sy: 0.5,
+                        ease: KeyframeTweener.quadEaseInAndOut
                     }
                 ]
             },
@@ -679,36 +692,6 @@
                         tx: 80,
                         ty: 500,
                         rotate: 60 // Keyframe.rotate uses degrees.
-                    }
-                ]
-            },
-            {
-                draw: [circle],
-                keyframes: [
-                    {
-                        frame: 50,
-                        tx: 300,
-                        ty: 600,
-                        sx: 0.5,
-                        sy: 0.5,
-                        ease: KeyframeTweener.quadEaseOut
-                    },
-
-                    {
-                        frame: 100,
-                        tx: 300,
-                        ty: 0,
-                        sx: 3,
-                        sy: 0.25,
-                        ease: KeyframeTweener.quadEaseOut
-                    },
-
-                    {
-                        frame: 150,
-                        tx: 300,
-                        ty: 600,
-                        sx: 0.5,
-                        sy: 0.5
                     }
                 ]
             }
