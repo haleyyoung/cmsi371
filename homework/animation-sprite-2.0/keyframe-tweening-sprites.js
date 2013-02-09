@@ -108,7 +108,20 @@
                                                topRight: {x: 195, y: 620}
                                              },
                                        color: "black"
-                                     }
+                                     },
+                              arms: {
+                                      left: { shoulder: {x: 190, y: 520},
+                                               cp1: {x: 220, y: 600},
+                                               end: {x: 200, y: 630},
+                                               width: 20,
+                                               hand: { radius: 20,
+                                                       center: {x: 195, y: 640},
+                                                       color: "black"
+                                                      
+                                              }
+                                      
+                                      }
+                              }
         
         },
 
@@ -416,6 +429,21 @@
 
 
         },
+        
+        minionSideArms = function (renderingContext) {
+            renderingContext.strokeStyle = minionVertices.color2.color;
+            renderingContext.lineWidth = minionLeftVertices.arms.left.width;
+            renderingContext.beginPath();
+            renderingContext.moveTo(minionLeftVertices.arms.left.shoulder.x, minionLeftVertices.arms.left.shoulder.y);
+            renderingContext.quadraticCurveTo(minionLeftVertices.arms.left.cp1.x, minionLeftVertices.arms.left.cp1.y,
+              minionLeftVertices.arms.left.end.x, minionLeftVertices.arms.left.end.y);
+            renderingContext.stroke();
+            renderingContext.fillStyle = minionLeftVertices.arms.left.hand.color;
+            renderingContext.beginPath();
+            renderingContext.arc(minionLeftVertices.arms.left.hand.center.x, minionLeftVertices.arms.left.hand.center.y,
+              minionLeftVertices.arms.left.hand.radius, 0, Math.PI*2);
+            renderingContext.fill();
+        },
 
         
         mouthOpen = function (renderingContext) {
@@ -565,6 +593,33 @@
                     }
                 ],
                 frameRate: 5
+            },
+            
+            {
+                draw: [minionSideArms],
+                keyframes: [
+                    {
+                        frame: 0,
+                        tx: 1000,
+                        ty: 0,
+                        ease: KeyframeTweener.runToAbruptStop
+                    },
+
+                    {
+                        frame: 100,
+                        tx: 100,
+                        ty: 50,
+                        ease: KeyframeTweener.linear
+                    },
+                    
+                    {
+                        frame: 150,
+                        tx: 500,
+                        ty: 300,
+                        rotate: 90
+                    },
+                    
+                ]
             },
             {
                 draw: [mouthOpen],
