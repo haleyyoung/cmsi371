@@ -47,6 +47,18 @@
                   },
                   color: "black"
         },
+        overalls = { left: {x: 95, y: 500},
+                     cp1: {x: 150, y: 515},
+                     bottomLeft: {x: 165, y: 560},
+                     right: {x: 305, y: 500},
+                     cp2: {x: 250, y: 515},
+                     bottomRight: {x: 235, y: 560},
+                     side: { left: {x: 210, y: 570},
+                             cp1: {x: 210, y: 570},
+                             right: {x: 210, y: 570}
+                     },
+                     color: "blue"
+        },
         legs = { corner: {x: 150, y:580},
                  width: 40,
                  height: 31,
@@ -236,6 +248,34 @@
                 minionVertices.cp4.x, minionVertices.cp4.y, minionVertices.start.x,
                 minionVertices.start.y);
             renderingContext.fill();
+            // Overalls
+            var overallGradient = renderingContext.createRadialGradient(minionVertices.start.x, minionVertices.start.y,
+              40, minionVertices.start.x, minionVertices.start.y, 470);
+            overallGradient.addColorStop(0, "transparent");
+            overallGradient.addColorStop(0.5, "transparent");
+            overallGradient.addColorStop(0.51, overalls.color);
+            renderingContext.fillStyle = overallGradient;
+            renderingContext.beginPath();
+            renderingContext.moveTo(minionVertices.start.x, minionVertices.start.y);
+            renderingContext.bezierCurveTo(minionVertices.cp1.x, minionVertices.cp1.y,
+                minionVertices.cp2.x, minionVertices.cp2.y, minionVertices.bottom.x,
+                minionVertices.bottom.y);
+            renderingContext.bezierCurveTo(minionVertices.cp3.x, minionVertices.cp3.y,
+                minionVertices.cp4.x, minionVertices.cp4.y, minionVertices.start.x,
+                minionVertices.start.y);
+            renderingContext.fill();
+            // Overalls shoulders
+            renderingContext.strokeStyle = overalls.color;
+            renderingContext.lineWidth = 10;
+            renderingContext.beginPath();
+            renderingContext.moveTo(overalls.left.x, overalls.left.y);
+            renderingContext.quadraticCurveTo(overalls.cp1.x, overalls.cp1.y, overalls.bottomLeft.x, overalls.bottomLeft.y);
+            renderingContext.stroke();
+            
+            renderingContext.beginPath();
+            renderingContext.moveTo(overalls.right.x, overalls.right.y);
+            renderingContext.quadraticCurveTo(overalls.cp2.x, overalls.cp2.y, overalls.bottomRight.x, overalls.bottomRight.y);
+            renderingContext.stroke();
             // Legs
             renderingContext.fillStyle = legs.color;
             renderingContext.fillRect(legs.corner.x, legs.corner.y, legs.width, legs.height);
@@ -736,7 +776,7 @@
                     },
                     
                     {
-                        frame: 330,
+                        frame: 315,
                         tx: 100,
                         ty: 50
                     }
@@ -747,7 +787,7 @@
                 draw: [mouthMad],
                 keyframes: [
                     {
-                        frame: 330,
+                        frame: 315,
                         tx: 100,
                         ty: 50
                     },
