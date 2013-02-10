@@ -236,7 +236,25 @@
                 minionVertices.cp4.x, minionVertices.cp4.y, minionVertices.start.x,
                 minionVertices.start.y);
             renderingContext.fill();
-            // Eye
+            // Legs
+            renderingContext.fillStyle = legs.color;
+            renderingContext.fillRect(legs.corner.x, legs.corner.y, legs.width, legs.height);
+            renderingContext.fillRect(legs.corner.x + legs.width + 20, legs.corner.y, legs.width, legs.height);
+            // Shoes
+            renderingContext.fillStyle = shoes.color;
+            for(var i = 0; i <= 60; i += 60){
+                renderingContext.beginPath();
+                renderingContext.moveTo(shoes.bottom.start.x + i, shoes.bottom.start.y);
+                renderingContext.quadraticCurveTo(shoes.bottom.cp1.x + i, shoes.bottom.cp1.y,
+                                                  shoes.bottom.end.x + i, shoes.bottom.end.y);
+                renderingContext.closePath();
+                renderingContext.fill();
+                renderingContext.fillRect(shoes.boot.corner.x + i, shoes.boot.corner.y,
+                                          shoes.boot.width, shoes.boot.height);
+            }
+        },
+        
+        eyeOpen = function (renderingContext) {
             renderingContext.fillStyle = eyes.ballColor;
             renderingContext.beginPath();
             renderingContext.arc(eyes.ball.x, eyes.ball.y, eyes.ballRadius, 0, Math.PI*2);
@@ -254,22 +272,23 @@
             renderingContext.beginPath();
             renderingContext.arc(eyes.ball.x, eyes.ball.y, eyes.goggleRadius, 0, Math.PI*2);
             renderingContext.stroke();
-            // Legs
-            renderingContext.fillStyle = legs.color;
-            renderingContext.fillRect(legs.corner.x, legs.corner.y, legs.width, legs.height);
-            renderingContext.fillRect(legs.corner.x + legs.width + 20, legs.corner.y, legs.width, legs.height);
-            // Shoes
-            renderingContext.fillStyle = shoes.color;
-            for(var i = 0; i <= 60; i += 60){
-                renderingContext.beginPath();
-                renderingContext.moveTo(shoes.bottom.start.x + i, shoes.bottom.start.y);
-                renderingContext.quadraticCurveTo(shoes.bottom.cp1.x + i, shoes.bottom.cp1.y,
-                                                  shoes.bottom.end.x + i, shoes.bottom.end.y);
-                renderingContext.closePath();
-                renderingContext.fill();
-                renderingContext.fillRect(shoes.boot.corner.x + i, shoes.boot.corner.y,
-                                          shoes.boot.width, shoes.boot.height);
-            }
+        },
+        
+        eyeBlinking = function (renderingContext) {
+            var eyeGradient = renderingContext.createLinearGradient(eyes.ball.x, eyes.ball.y,
+              eyes.ball.x + eyes.ballRadius, eyes.ball.y + eyes.ballRadius);
+            eyeGradient.addColorStop = (0, minionVertices.color1.color);
+            eyeGradient.addColorStop = (0.5, eyes.goggleColor);
+            eyeGradient.addColorStop = (0.6, minionVertices.color1.color);
+            renderingContext.fillStyle = eyeGradient;
+            renderingContext.beginPath();
+            renderingContext.arc(eyes.ball.x, eyes.ball.y, eyes.ballRadius, 0, Math.PI*2);
+            renderingContext.fill();
+            renderingContext.strokeStyle = eyes.goggleColor;
+            renderingContext.lineWidth = 10;
+            renderingContext.beginPath();
+            renderingContext.arc(eyes.ball.x, eyes.ball.y, eyes.goggleRadius, 0, Math.PI*2);
+            renderingContext.stroke();
         },
         
         minionSide = function (renderingContext) {
@@ -487,7 +506,7 @@
             renderingContext.lineTo(mouth.smile.end.x, mouth.smile.end.y);
             renderingContext.stroke();
         },
-        
+              
         cupcake = function (renderingContext) {
             // Frosting
             var frostingGradient = renderingContext.createRadialGradient(cupcakeVertices.frosting.cp4.x,
@@ -570,25 +589,6 @@
         // has a drawing function and an array of keyframes.
         sprites = [
             {
-                draw: [minion],
-                keyframes: [
-                    {
-                        frame: 100,
-                        tx: 100,
-                        ty: 50,
-                        ease: KeyframeTweener.quadEaseInOut
-                    },
-
-                    {
-                        frame: 600,
-                        tx: 100,
-                        ty: 50
-                    }
-                ]
-            },
-            
-            
-            {
                 draw: [minionSide, minionSideUp],
                 keyframes: [
                     {
@@ -651,6 +651,43 @@
                     
                 ]
             },
+
+            {
+                draw: [minion],
+                keyframes: [
+                    {
+                        frame: 100,
+                        tx: 100,
+                        ty: 50,
+                        ease: KeyframeTweener.quadEaseInAndOut
+                    },
+
+                    {
+                        frame: 600,
+                        tx: 100,
+                        ty: 50
+                    }
+                ]
+            },
+            
+            {
+                draw: [eyeOpen],
+                keyframes: [
+                    {
+                        frame: 100,
+                        tx: 100,
+                        ty: 50,
+                        ease: KeyframeTweener.quadEaseInAndOut
+                    },
+                    
+                    {
+                        frame: 340,
+                        tx: 100,
+                        ty: 50
+                    }
+                ]
+            },
+            
             {
                 draw: [mouthOpen],
                 keyframes: [
@@ -717,6 +754,42 @@
                     
                     {
                         frame: 450,
+                        tx: 100,
+                        ty: 50
+                    }
+                ]
+            },
+            
+            {
+                draw: [eyeOpen, eyeBlinking],
+                keyframes: [
+                    {
+                        frame: 340,
+                        tx: 100,
+                        ty: 50
+                    },
+                    
+                    {
+                        frame: 356,
+                        tx: 100,
+                        ty: 50
+                    }
+                ],
+                frameRate: 4
+            },
+            
+            {
+                draw: [eyeOpen],
+                keyframes: [
+                    {
+                        frame: 356,
+                        tx: 100,
+                        ty: 50,
+                        ease: KeyframeTweener.quadEaseInAndOut
+                    },
+                    
+                    {
+                        frame: 600,
                         tx: 100,
                         ty: 50
                     }
