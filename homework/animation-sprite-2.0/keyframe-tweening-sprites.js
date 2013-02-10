@@ -832,7 +832,7 @@
                         frame: 280,
                         tx: 250,
                         ty: 50,
-                        ease: KeyframeTweener.quadEaseIn
+                        ease: KeyframeTweener.fireFlickering
                     },
                     
                     {
