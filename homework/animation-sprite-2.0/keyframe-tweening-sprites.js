@@ -53,9 +53,9 @@
                      right: {x: 305, y: 500},
                      cp2: {x: 250, y: 515},
                      bottomRight: {x: 235, y: 560},
-                     side: { left: {x: 210, y: 570},
-                             cp1: {x: 210, y: 570},
-                             right: {x: 210, y: 570}
+                     side: { left: {x: 130, y: 560},
+                             cp1: {x: 210, y: 420},
+                             right: {x: 270, y: 560}
                      },
                      color: "blue"
         },
@@ -363,6 +363,31 @@
             renderingContext.quadraticCurveTo(minionLeftVertices.mouth.cp1.x, minionLeftVertices.mouth.cp1.y,
                                               minionLeftVertices.mouth.end.x, minionLeftVertices.mouth.end.y);
             renderingContext.stroke();
+            
+            // Overalls
+            var overallGradient = renderingContext.createRadialGradient(minionVertices.start.x, minionVertices.start.y,
+              40, minionVertices.start.x, minionVertices.start.y, 470);
+            overallGradient.addColorStop(0, "transparent");
+            overallGradient.addColorStop(0.5, "transparent");
+            overallGradient.addColorStop(0.51, overalls.color);
+            renderingContext.fillStyle = overallGradient;
+            renderingContext.beginPath();
+            renderingContext.moveTo(minionVertices.start.x, minionVertices.start.y);
+            renderingContext.bezierCurveTo(minionVertices.cp1.x, minionVertices.cp1.y,
+                minionVertices.cp2.x, minionVertices.cp2.y, minionVertices.bottom.x,
+                minionVertices.bottom.y);
+            renderingContext.bezierCurveTo(minionVertices.cp3.x, minionVertices.cp3.y,
+                minionVertices.cp4.x, minionVertices.cp4.y, minionVertices.start.x,
+                minionVertices.start.y);
+            renderingContext.fill();
+            // Overalls shoulders
+            renderingContext.strokeStyle = overalls.color;
+            renderingContext.lineWidth = 10;
+            renderingContext.beginPath();
+            renderingContext.moveTo(overalls.side.left.x, overalls.side.left.y);
+            renderingContext.quadraticCurveTo(overalls.side.cp1.x, overalls.side.cp1.y,
+              overalls.side.right.x, overalls.side.right.y);
+            renderingContext.stroke();
         },
         
         minionSideUp = function (renderingContext) {
@@ -396,6 +421,30 @@
             renderingContext.moveTo(minionLeftVertices.mouth.start.x, minionLeftVertices.mouth.start.y - 10);
             renderingContext.quadraticCurveTo(minionLeftVertices.mouth.cp1.x, minionLeftVertices.mouth.cp1.y - 10,
                                               minionLeftVertices.mouth.end.x, minionLeftVertices.mouth.end.y - 10);
+            renderingContext.stroke();
+            // Overalls
+            var overallGradient = renderingContext.createRadialGradient(minionVertices.start.x, minionVertices.start.y - 10,
+              40, minionVertices.start.x, minionVertices.start.y - 10, 470);
+            overallGradient.addColorStop(0, "transparent");
+            overallGradient.addColorStop(0.5, "transparent");
+            overallGradient.addColorStop(0.51, overalls.color);
+            renderingContext.fillStyle = overallGradient;
+            renderingContext.beginPath();
+            renderingContext.moveTo(minionVertices.start.x, minionVertices.start.y - 10);
+            renderingContext.bezierCurveTo(minionVertices.cp1.x, minionVertices.cp1.y - 10,
+                minionVertices.cp2.x, minionVertices.cp2.y - 10, minionVertices.bottom.x,
+                minionVertices.bottom.y);
+            renderingContext.bezierCurveTo(minionVertices.cp3.x, minionVertices.cp3.y - 10,
+                minionVertices.cp4.x, minionVertices.cp4.y - 10, minionVertices.start.x,
+                minionVertices.start.y - 10);
+            renderingContext.fill();
+            // Overalls shoulders
+            renderingContext.strokeStyle = overalls.color;
+            renderingContext.lineWidth = 10;
+            renderingContext.beginPath();
+            renderingContext.moveTo(overalls.side.left.x, overalls.side.left.y - 10);
+            renderingContext.quadraticCurveTo(overalls.side.cp1.x, overalls.side.cp1.y - 10,
+              overalls.side.right.x, overalls.side.right.y - 10);
             renderingContext.stroke();
         },
         
