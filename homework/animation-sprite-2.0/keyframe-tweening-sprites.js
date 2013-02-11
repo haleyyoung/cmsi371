@@ -47,6 +47,18 @@
                   },
                   color: "black"
         },
+        arms = { left: {x: 115, y: 525},
+                 cp1: {x: 130, y: 545},
+                 cp2: {x: 200, y: 535},
+                 right: {x: 290, y: 525},
+                 cp3: {x: 270, y: 545},
+                 cp4: {x: 265, y: 535},
+                 color: "#FFFF22",
+                 hand: { left: {x: 200, y: 535},
+                         right: {x: 265, y: 535}
+                       }
+        
+        },
         overalls = { left: {x: 95, y: 500},
                      cp1: {x: 150, y: 515},
                      bottomLeft: {x: 165, y: 560},
@@ -276,6 +288,29 @@
             renderingContext.moveTo(overalls.right.x, overalls.right.y);
             renderingContext.quadraticCurveTo(overalls.cp2.x, overalls.cp2.y, overalls.bottomRight.x, overalls.bottomRight.y);
             renderingContext.stroke();
+            // Arms
+            renderingContext.strokeStyle = arms.color;
+            renderingContext.lineWidth = minionLeftVertices.arms.left.width;
+            renderingContext.beginPath();
+            renderingContext.moveTo(arms.left.x, arms.left.y);
+            renderingContext.quadraticCurveTo(arms.cp1.x, arms.cp1.y, arms.cp2.x, arms.cp2.y);
+            renderingContext.stroke();
+            renderingContext.beginPath();
+            renderingContext.moveTo(arms.right.x, arms.right.y);
+            renderingContext.quadraticCurveTo(arms.cp3.x, arms.cp3.y, arms.cp4.x, arms.cp4.y);
+            renderingContext.stroke();
+            
+            // Hands
+            renderingContext.fillStyle = minionLeftVertices.arms.left.hand.color;
+            renderingContext.beginPath();
+            renderingContext.arc(arms.hand.left.x, arms.hand.left.y,
+              minionLeftVertices.arms.left.hand.radius, 0, Math.PI*2);
+            renderingContext.fill();
+            renderingContext.beginPath();
+            renderingContext.arc(arms.hand.right.x, arms.hand.right.y,
+              minionLeftVertices.arms.left.hand.radius, 0, Math.PI*2);
+            renderingContext.fill();
+            
             // Legs
             renderingContext.fillStyle = legs.color;
             renderingContext.fillRect(legs.corner.x, legs.corner.y, legs.width, legs.height);
@@ -315,12 +350,7 @@
         },
         
         eyeBlinking = function (renderingContext) {
-            var eyeGradient = renderingContext.createLinearGradient(eyes.ball.x, eyes.ball.y,
-              eyes.ball.x + eyes.ballRadius, eyes.ball.y + eyes.ballRadius);
-            eyeGradient.addColorStop = (0, minionVertices.color1.color);
-            eyeGradient.addColorStop = (0.5, eyes.goggleColor);
-            eyeGradient.addColorStop = (0.6, minionVertices.color1.color);
-            renderingContext.fillStyle = eyeGradient;
+            renderingContext.fillStyle = minionVertices.color1.color;
             renderingContext.beginPath();
             renderingContext.arc(eyes.ball.x, eyes.ball.y, eyes.ballRadius, 0, Math.PI*2);
             renderingContext.fill();
@@ -695,6 +725,23 @@
                 ],
                 frameRate: 5
             },
+            
+            {
+                draw: [minionSide],
+                keyframes: [
+                    {
+                        frame: 100,
+                        tx: 100,
+                        ty: 50
+                    },
+
+                    {
+                        frame: 180,
+                        tx: 100,
+                        ty: 50
+                    }
+                ]
+            },
             {
                 draw: [minionLeft, minionRight],
                 keyframes: [
@@ -712,6 +759,23 @@
                     }
                 ],
                 frameRate: 5
+            },
+            {
+                draw: [minionLeft],
+                keyframes: [
+                    {
+                        frame: 100,
+                        tx: 100,
+                        ty: 50,
+                        ease: KeyframeTweener.runToAbruptStop
+                    },
+
+                    {
+                        frame: 180,
+                        tx: 100,
+                        ty: 50
+                    }
+                ]
             },
             
             {
@@ -745,7 +809,7 @@
                 draw: [minion],
                 keyframes: [
                     {
-                        frame: 100,
+                        frame: 180,
                         tx: 100,
                         ty: 50,
                         ease: KeyframeTweener.quadEaseInAndOut
@@ -763,7 +827,7 @@
                 draw: [eyeOpen],
                 keyframes: [
                     {
-                        frame: 100,
+                        frame: 180,
                         tx: 100,
                         ty: 50,
                         ease: KeyframeTweener.quadEaseInAndOut
@@ -781,7 +845,7 @@
                 draw: [mouthOpen],
                 keyframes: [
                     {
-                        frame: 100,
+                        frame: 180,
                         tx: 100,
                         ty: 50,
                         ease: KeyframeTweener.quadEaseInOut
@@ -895,13 +959,13 @@
                     },
                     
                     {
-                        frame: 150,
+                        frame: 180,
                         tx: 0,
                         ty: 0,
                         ease: KeyframeTweener.linear
                     },
                     {
-                        frame: 180,
+                        frame: 181,
                         tx: 250,
                         ty: 0
                     },
@@ -965,13 +1029,13 @@
                     },
                     
                     {
-                        frame: 150,
+                        frame: 180,
                         tx: 0,
                         ty: 0,
-                        ease: KeyframeTweener.quadEeaseInOut
+                        ease: KeyframeTweener.linear
                     },
                     {
-                        frame: 180,
+                        frame: 181,
                         tx: 250,
                         ty: 0,
                         ease: KeyframeTweener.quadEeaseInOut

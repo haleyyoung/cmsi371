@@ -1,5 +1,5 @@
 /*
- * A simple keyframe-tweening animation module for 2D
+ * A keyframe-tweening animation module for 2D
  * canvas elements.
  */
 var KeyframeTweener = {
