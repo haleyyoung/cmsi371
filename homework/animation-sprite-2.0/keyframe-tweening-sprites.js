@@ -33,6 +33,11 @@
                  goggleRadius: 30,
                  goggleColor: "gray" 
         },
+        goggles = { left: {x: 98, y: 385},
+                    cp1: {x: 200, y: 425},
+                    right: {x: 302, y: 385},
+                    color: "black"
+        },
         mouth = { left: {x: 180, y: 460},
                   cp1: {x: 200, y: 480},
                   cp2: {x: 220, y: 490},
@@ -139,12 +144,12 @@
                                        color: "black"
                                      },
                               arms: {
-                                      left: { shoulder: {x: 190, y: 520},
-                                               cp1: {x: 220, y: 600},
-                                               end: {x: 200, y: 630},
+                                      left: { shoulder: {x: 0, y: 0},
+                                               cp1: {x: 30, y: 80},
+                                               end: {x: 10, y: 110},
                                                width: 20,
                                                hand: { radius: 20,
-                                                       center: {x: 195, y: 640},
+                                                       center: {x: 5, y: 120},
                                                        color: "black"
                                                       
                                               }
@@ -230,8 +235,7 @@
         },
 
         // First, a selection of "drawing functions" from which we
-        // can choose.  Their common trait: they all accept a single
-        // renderingContext argument.
+        // can choose.
         background = function (renderingContext) {
             var backgroundGradient = renderingContext.createLinearGradient(0, 0, 0, canvas.height);
             backgroundGradient.addColorStop(0, backgroundColors.top);
@@ -260,6 +264,13 @@
                 minionVertices.cp4.x, minionVertices.cp4.y, minionVertices.start.x,
                 minionVertices.start.y);
             renderingContext.fill();
+            // Goggles Strap
+            renderingContext.strokeStyle = goggles.color;
+            renderingContext.lineWidth = 14;
+            renderingContext.beginPath();
+            renderingContext.moveTo(goggles.left.x, goggles.left.y);
+            renderingContext.quadraticCurveTo(goggles.cp1.x, goggles.cp1.y, goggles.right.x, goggles.right.y);
+            renderingContext.stroke();
             // Overalls
             var overallGradient = renderingContext.createRadialGradient(minionVertices.start.x, minionVertices.start.y,
               40, minionVertices.start.x, minionVertices.start.y, 470);
@@ -378,6 +389,13 @@
                 minionVertices.cp4.x, minionVertices.cp4.y, minionVertices.start.x,
                 minionVertices.start.y);
             renderingContext.fill();
+            // Goggles Strap
+            renderingContext.strokeStyle = goggles.color;
+            renderingContext.lineWidth = 14;
+            renderingContext.beginPath();
+            renderingContext.moveTo(goggles.left.x, goggles.left.y + 10);
+            renderingContext.quadraticCurveTo(goggles.cp1.x, goggles.cp1.y + 10, goggles.right.x, goggles.right.y + 10);
+            renderingContext.stroke();
             // Eye 
             renderingContext.strokeStyle = minionLeftVertices.eyes.color;
             renderingContext.lineWidth = minionLeftVertices.eyes.width;
@@ -437,6 +455,13 @@
                 minionVertices.cp4.x, minionVertices.cp4.y - 10, minionVertices.start.x,
                 minionVertices.start.y - 10);
             renderingContext.fill();
+            // Goggles Strap
+            renderingContext.strokeStyle = goggles.color;
+            renderingContext.lineWidth = 14;
+            renderingContext.beginPath();
+            renderingContext.moveTo(goggles.left.x, goggles.left.y);
+            renderingContext.quadraticCurveTo(goggles.cp1.x, goggles.cp1.y, goggles.right.x, goggles.right.y);
+            renderingContext.stroke();
             // Eye 
             renderingContext.strokeStyle = minionLeftVertices.eyes.color;
             renderingContext.lineWidth = minionLeftVertices.eyes.width;
@@ -783,22 +808,22 @@
                 keyframes: [
                     {
                         frame: 0,
-                        tx: 1000,
-                        ty: 0,
+                        tx: 1200,
+                        ty: 510,
                         ease: KeyframeTweener.runToAbruptStop
                     },
 
                     {
                         frame: 100,
-                        tx: 100,
-                        ty: 50,
-                        ease: KeyframeTweener.linear
+                        tx: 300,
+                        ty: 560,
+                        ease: KeyframeTweener.quadEaseInAndOut
                     },
                     
                     {
                         frame: 150,
-                        tx: 500,
-                        ty: 300,
+                        tx: 300,
+                        ty: 560,
                         rotate: 90
                     },
                     
