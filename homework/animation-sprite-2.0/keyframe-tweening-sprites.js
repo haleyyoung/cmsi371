@@ -1068,12 +1068,30 @@
                         frame: 150,
                         tx: 330,
                         ty: 610,
+                    },
+                    {
+                        frame: 440,
+                        tx: 330,
+                        ty: 610,
                         ease: KeyframeTweener.quadEeaseInOut
                     },
                     {
-                        frame: 1100,
-                        tx: 330,
-                        ty: 610
+                        frame: 450,
+                        tx: 390,
+                        ty: 500,
+                        ease: KeyframeTweener.quadEaseIn
+                    },
+                    {
+                        frame: 455,
+                        tx: 360,
+                        ty: 360,
+                        ease: KeyframeTweener.quadEaseIn
+                    },
+                    {
+                        frame: 490,
+                        tx: -10,
+                        ty: 380,
+                        rotate: -360
                     }
                 ]
             },
@@ -1088,14 +1106,28 @@
                         ease: KeyframeTweener.fireFlickering
                     },
                     {
-                        frame: 425,
+                        frame: 440,
                         tx: 330,
-                        ty: 610
+                        ty: 610,
+                        ease: KeyframeTweener.quadEeaseInOut
                     },
                     {
-                        frame: 510,
-                        tx: 330,
-                        ty: 610
+                        frame: 450,
+                        tx: 390,
+                        ty: 500,
+                        ease: KeyframeTweener.quadEaseIn
+                    },
+                    {
+                        frame: 455,
+                        tx: 360,
+                        ty: 360,
+                        ease: KeyframeTweener.quadEaseIn
+                    },
+                    {
+                        frame: 490,
+                        tx: -10,
+                        ty: 380,
+                        rotate: -360
                     }
                 ]
             },
@@ -1122,6 +1154,43 @@
                     }
                 ]
             },
+
+            {
+                draw: [minionSide, minionSideUp],
+                keyframes: [
+                    {
+                        frame: 500,
+                        tx: 300,
+                        ty: 350,
+                        ease: KeyframeTweener.quadEaseIn
+                    },
+                    {
+                        frame: 550,
+                        tx: -100,
+                        ty: 350
+                    }
+                ],
+                frameRate: 5
+            },
+
+            {
+                draw: [minionLeft, minionRight],
+                keyframes: [
+                    {
+                        frame: 500,
+                        tx: 300,
+                        ty: 350,
+                        ease: KeyframeTweener.quadEaseIn
+                    },
+                    {
+                        frame: 550,
+                        tx: -100,
+                        ty: 350
+                    }
+                ],
+                frameRate: 5
+            },
+
             {
                 draw: [minionSideArms],
                 keyframes: [
@@ -1142,10 +1211,15 @@
                         frame: 500,
                         tx: 300,
                         ty: 560,
-                        rotate: 110
+                        ease: KeyframeTweener.quadEaseIn
+                    },
+                    {
+                        frame: 550,
+                        tx: -100,
+                        ty: 560
                     }
                 ]
-            },
+            }
         ];
 
     // Finally, we initialize the engine.  Mainly, it needs
