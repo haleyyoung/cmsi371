@@ -14,16 +14,16 @@
                             colorStop3: 0.7
         },
 
-        minionVertices = { start: {x: 200, y: 300},
-                           cp1: {x: 50, y: 300},
-                           cp2: {x: 50, y: 600},
-                           bottom: {x: 200, y: 600},
-                           cp3: {x: 350, y: 600},
-                           cp4: {x: 350, y: 300},
-                           color1: {color: "#FFFF80", stop: 0.1, x: 0, y: 450, r: 200},
-                           color2: {color: "#FFFF4D", stop: 0.2, x: 200, y: 450, r: 400}
+        minionVertices = { start: {x: 0, y: 0},
+                           cp1: {x: -150, y: 0},
+                           cp2: {x: -150, y: 300},
+                           bottom: {x: 0, y: 300},
+                           cp3: {x: 150, y: 300},
+                           cp4: {x: 150, y: 0},
+                           color1: {color: "#FFFF80", stop: 0.1, x: -200, y: 150, r: 200},
+                           color2: {color: "#FFFF4D", stop: 0.2, x: 0, y: 150, r: 400}
                          },
-        eyes = { ball: {x:200, y: 400},
+        eyes = { ball: {x:0, y: 100},
                  ballRadius: 30,
                  ballColor: "white",
                  pupilRadius:10,
@@ -33,60 +33,60 @@
                  goggleRadius: 30,
                  goggleColor: "gray" 
         },
-        goggles = { left: {x: 98, y: 385},
-                    cp1: {x: 200, y: 425},
-                    right: {x: 302, y: 385},
+        goggles = { left: {x: -102, y: 85},
+                    cp1: {x: 0, y: 125},
+                    right: {x: 102, y: 85},
                     color: "black"
         },
-        mouth = { left: {x: 180, y: 460},
-                  cp1: {x: 200, y: 480},
-                  cp2: {x: 220, y: 490},
-                  right: {x: 230, y: 460},
-                  cp3: {x: 220, y: 440},
-                  cp4: {x: 200, y: 440},
+        mouth = { left: {x: -40, y: 0},
+                  cp1: {x: -20, y: 20},
+                  cp2: {x: 0, y: 30},
+                  right: {x: 10, y: 0},
+                  cp3: {x: 0, y: -20},
+                  cp4: {x: -20, y: -20},
                   blowRadius: 10,
-                  smile: { start: {x: 180, y: 460},
-                           cp1: {x: 200, y: 480},
-                           end: {x: 220, y: 460},
+                  smile: { start: {x: -40, y: 0},
+                           cp1: {x: -20, y: 20},
+                           end: {x: 0, y: 0},
                            color: "gray"
                   },
                   color: "black"
         },
-        arms = { left: {x: 115, y: 525},
-                 cp1: {x: 130, y: 545},
-                 cp2: {x: 200, y: 535},
-                 right: {x: 290, y: 525},
-                 cp3: {x: 270, y: 545},
-                 cp4: {x: 265, y: 535},
+        arms = { left: {x: -85, y: 225},
+                 cp1: {x: -70, y: 245},
+                 cp2: {x: 0, y: 235},
+                 right: {x: 90, y: 225},
+                 cp3: {x: 70, y: 245},
+                 cp4: {x: 65, y: 235},
                  color: "#FFFF22",
-                 hand: { left: {x: 200, y: 535},
-                         right: {x: 265, y: 535}
+                 hand: { left: {x: 0, y: 235},
+                         right: {x: 65, y: 235}
                        }
         
         },
-        overalls = { left: {x: 95, y: 500},
-                     cp1: {x: 150, y: 515},
-                     bottomLeft: {x: 165, y: 560},
-                     right: {x: 305, y: 500},
-                     cp2: {x: 250, y: 515},
-                     bottomRight: {x: 235, y: 560},
-                     side: { left: {x: 130, y: 560},
-                             cp1: {x: 210, y: 420},
-                             right: {x: 270, y: 560}
+        overalls = { left: {x: -105, y: 200},
+                     cp1: {x: -50, y: 215},
+                     bottomLeft: {x: -35, y: 260},
+                     right: {x: 105, y: 200},
+                     cp2: {x: 50, y: 215},
+                     bottomRight: {x: 35, y: 260},
+                     side: { left: {x: -70, y: 260},
+                             cp1: {x: 10, y: 120},
+                             right: {x: 70, y: 260}
                      },
                      color: "blue"
         },
-        legs = { corner: {x: 150, y:580},
+        legs = { corner: {x: -50, y:280},
                  width: 40,
                  height: 31,
                  color: "blue"
         },
         shoes = {
-                  bottom: { start: {x: 149, y: 620},
-                            cp1: {x: 170, y: 650},
-                            end: {x: 191, y: 620}
+                  bottom: { start: {x: -51, y: 320},
+                            cp1: {x: -30, y: 350},
+                            end: {x: -9, y: 320}
                           },
-                  boot: { corner: {x: 150, y: 610},
+                  boot: { corner: {x: -50, y: 310},
                           width: 40,
                           height: 11
                         },
@@ -835,15 +835,15 @@
                 keyframes: [
                     {
                         frame: 180,
-                        tx: 100,
-                        ty: 50,
+                        tx: 300,
+                        ty: 350,
                         ease: KeyframeTweener.quadEaseInAndOut
                     },
 
                     {
                         frame: 600,
-                        tx: 100,
-                        ty: 50
+                        tx: 300,
+                        ty: 350
                     }
                 ]
             },
@@ -853,15 +853,15 @@
                 keyframes: [
                     {
                         frame: 180,
-                        tx: 100,
-                        ty: 50,
+                        tx: 300,
+                        ty: 350,
                         ease: KeyframeTweener.quadEaseInAndOut
                     },
                     
                     {
                         frame: 340,
-                        tx: 100,
-                        ty: 50
+                        tx: 300,
+                        ty: 350
                     }
                 ]
             },
@@ -871,15 +871,15 @@
                 keyframes: [
                     {
                         frame: 180,
-                        tx: 100,
-                        ty: 50,
+                        tx: 320,
+                        ty: 510,
                         ease: KeyframeTweener.quadEaseInOut
                     },
 
                     {
                         frame: 200,
-                        tx: 100,
-                        ty: 50
+                        tx: 320,
+                        ty: 510
                     }
                 ]
             },
@@ -888,18 +888,17 @@
                 keyframes: [
                     {
                         frame: 200,
-                        tx: 110,
-                        ty: 55,
+                        tx: 320,
+                        ty: 515,
                         ease: KeyframeTweener.quadEaseInAndOut
                     },
 
                     {
                         frame:240,
-                        tx: 220,
-                        ty: 280,
+                        tx: 320,
+                        ty: 515,
                         sx: 0.5,
-                        sy: 0.5,
-                        ease: KeyframeTweener.quadEaseInAndOut
+                        sy: 0.5
                     }
                 ]
             },
@@ -909,14 +908,14 @@
                 keyframes: [
                     {
                         frame: 240,
-                        tx: 100,
-                        ty: 50
+                        tx: 320,
+                        ty: 510
                     },
                     
                     {
                         frame: 315,
-                        tx: 100,
-                        ty: 50
+                        tx: 320,
+                        ty: 510
                     }
                 ]
             },
@@ -926,14 +925,14 @@
                 keyframes: [
                     {
                         frame: 315,
-                        tx: 100,
-                        ty: 50
+                        tx: 320,
+                        ty: 510
                     },
                     
                     {
                         frame: 450,
-                        tx: 100,
-                        ty: 50
+                        tx: 320,
+                        ty: 510
                     }
                 ]
             },
@@ -943,14 +942,14 @@
                 keyframes: [
                     {
                         frame: 340,
-                        tx: 100,
-                        ty: 50
+                        tx: 300,
+                        ty: 350
                     },
                     
                     {
                         frame: 356,
-                        tx: 100,
-                        ty: 50
+                        tx: 300,
+                        ty: 350
                     }
                 ],
                 frameRate: 4
@@ -961,15 +960,15 @@
                 keyframes: [
                     {
                         frame: 356,
-                        tx: 100,
-                        ty: 50,
+                        tx: 300,
+                        ty: 350,
                         ease: KeyframeTweener.quadEaseInAndOut
                     },
                     
                     {
                         frame: 600,
-                        tx: 100,
-                        ty: 50
+                        tx: 300,
+                        ty: 350
                     }
                 ]
             },
