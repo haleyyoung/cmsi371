@@ -93,53 +93,45 @@
                   color: "black"
         },
         
-        minionLeftVertices = { body: { start: {x: 200, y: 300},
-                                      cp1: {x: 50, y: 300},
-                                      cp2: {x: 50, y: 600},
-                                      bottom: {x: 200, y: 600},
-                                      cp3: {x: 350, y: 600},
-                                      cp4: {x: 350, y: 300},
-                                      color1: {color: "#FFFF80", stop: 0.1, x: 0, y: 450, r: 200},
-                                      color2: {color: "#FFFF4D", stop: 0.2, x: 200, y: 450, r: 400}
-                                    },
-                              eyes: { start: {x: 95, y: 360},
-                                      end: {x: 85, y: 430},
+        minionLeftVertices = {
+                              eyes: { start: {x: -105, y: 60},
+                                      end: {x: -115, y: 130},
                                       width: 20,
                                       color: "gray"
                                     },
-                              mouth: { start: {x: 86, y: 460},
-                                       cp1: {x: 90, y: 470},
-                                       end: {x: 100, y: 465},
+                              mouth: { start: {x: -114, y: 160},
+                                       cp1: {x: -110, y: 170},
+                                       end: {x: -100, y: 165},
                                        width: 4,
                                        color: "gray"
                                      },
-                              legDown: { corner: {x: 170, y:580},
+                              legDown: { corner: {x: -30, y: 280},
                                       width: 60,
                                       height: 36,
                                       color: "blue"
                                     },
-                              shoeDown: { corner: {x: 170, y: 615},
+                              shoeDown: { corner: {x: -30, y: 315},
                                           width: 60,
                                           height: 16,
                                           color: "black"
                                      },
-                              legUp: { start: {x: 170, y:580},
-                                       bottomLeft: {x: 150, y:610},
-                                       bottomRight: {x: 190, y:630},
-                                       topRight: {x: 210, y:580},
+                              legUp: { start: {x: -30, y: 280},
+                                       bottomLeft: {x: -50, y: 310},
+                                       bottomRight: {x: -10, y: 330},
+                                       topRight: {x: 10, y:280},
                                        color: "blue",
                                        separationColor: "black"
                                     },
                               shoeUp: {
-                                       bottom: { start: {x: 151, y: 610},
-                                                 cp1: {x: 120, y: 590},
-                                                 cp2: {x: 100, y: 610},
-                                                 end: {x: 149, y: 628}
+                                       bottom: { start: {x: -49, y: 310},
+                                                 cp1: {x: -80, y: 290},
+                                                 cp2: {x: -100, y: 310},
+                                                 end: {x: -51, y: 328}
                                                },
-                                       boot: { start: {x: 150, y: 610},
-                                               bottomLeft: {x: 148, y: 628},
-                                               bottomRight: {x: 184, y: 640},
-                                               topRight: {x: 195, y: 620}
+                                       boot: { start: {x: -50, y: 310},
+                                               bottomLeft: {x: -52, y: 328},
+                                               bottomRight: {x: -16, y: 340},
+                                               topRight: {x: -5, y: 320}
                                              },
                                        color: "black"
                                      },
@@ -159,36 +151,36 @@
         
         },
 
-        minionRightVertices = { legDown: { corner: {x: 170, y: 580},
+        minionRightVertices = { legDown: { corner: {x: -30, y: 280},
                                            width: 60,
                                            height: 36,
                                            color: "blue"
                                          },
-                                shoeDown: { start: {x: 175, y: 615},
-                                            cp1: {x: 140, y: 605},
-                                            cp2: {x: 120, y: 625},
-                                            end: {x: 174, y: 631},
-                                            corner: {x: 170, y: 615},
+                                shoeDown: { start: {x: -25, y: 315},
+                                            cp1: {x: -60, y: 305},
+                                            cp2: {x: -80, y: 325},
+                                            end: {x: -26, y: 331},
+                                            corner: {x: -30, y: 315},
                                             width: 60,
                                             height: 16,
                                             color: "black"
                                           },
-                                legUp: { start: {x: 170, y:580},
-                                         bottomLeft: {x: 150, y:595},
-                                         bottomRight: {x: 190, y:615},
-                                         topRight: {x: 210, y:580},
+                                legUp: { start: {x: -30, y:280},
+                                         bottomLeft: {x: -50, y:295},
+                                         bottomRight: {x: -10, y:315},
+                                         topRight: {x: 10, y:280},
                                          color: "blue"
                                        },
                                 shoeUp: {
-                                          bottom: { start: {x: 151, y: 595},
-                                                    cp1: {x: 120, y: 570},
-                                                    cp2: {x: 100, y: 595},
-                                                    end: {x: 149, y: 613}
+                                          bottom: { start: {x: -49, y: 295},
+                                                    cp1: {x: -80, y: 270},
+                                                    cp2: {x: -100, y: 295},
+                                                    end: {x: -51, y: 313}
                                                   },
-                                          boot: { start: {x: 150, y: 595},
-                                                  bottomLeft: {x: 148, y: 613},
-                                                  bottomRight: {x: 164, y: 630},
-                                                  topRight: {x: 170, y: 605}
+                                          boot: { start: {x: -50, y: 295},
+                                                  bottomLeft: {x: -52, y: 313},
+                                                  bottomRight: {x: -36, y: 330},
+                                                  topRight: {x: -30, y: 305}
                                                 },
                                           color: "black"
                                          }
@@ -737,15 +729,15 @@
                 keyframes: [
                     {
                         frame: 0,
-                        tx: 1000,
-                        ty: 0,
+                        tx: 1200,
+                        ty: 350,
                         ease: KeyframeTweener.runToAbruptStop
                     },
 
                     {
                         frame: 100,
-                        tx: 100,
-                        ty: 50
+                        tx: 300,
+                        ty: 350
                     }
                 ],
                 frameRate: 5
@@ -756,14 +748,14 @@
                 keyframes: [
                     {
                         frame: 100,
-                        tx: 100,
-                        ty: 50
+                        tx: 300,
+                        ty: 350
                     },
 
                     {
                         frame: 180,
-                        tx: 100,
-                        ty: 50
+                        tx: 300,
+                        ty: 350
                     }
                 ]
             },
@@ -772,15 +764,15 @@
                 keyframes: [
                     {
                         frame: 0,
-                        tx: 1000,
-                        ty: 0,
+                        tx: 1200,
+                        ty: 350,
                         ease: KeyframeTweener.runToAbruptStop
                     },
 
                     {
                         frame: 100,
-                        tx: 100,
-                        ty: 50
+                        tx: 300,
+                        ty: 350
                     }
                 ],
                 frameRate: 5
@@ -790,15 +782,15 @@
                 keyframes: [
                     {
                         frame: 100,
-                        tx: 100,
-                        ty: 50,
+                        tx: 300,
+                        ty: 350,
                         ease: KeyframeTweener.runToAbruptStop
                     },
 
                     {
                         frame: 180,
-                        tx: 100,
-                        ty: 50
+                        tx: 300,
+                        ty: 350
                     }
                 ]
             },
@@ -809,7 +801,7 @@
                     {
                         frame: 0,
                         tx: 1200,
-                        ty: 510,
+                        ty: 560,
                         ease: KeyframeTweener.runToAbruptStop
                     },
 
