@@ -739,7 +739,7 @@
                         ease: KeyframeTweener.quadEaseInAndOut
                     },
                     {
-                        frame: 600,
+                        frame: 440,
                         tx: 300,
                         ty: 350
                     }
@@ -824,7 +824,7 @@
                         ty: 510
                     },
                     {
-                        frame: 450,
+                        frame: 340,
                         tx: 320,
                         ty: 510
                     }
@@ -858,61 +858,9 @@
                         ease: KeyframeTweener.quadEaseInAndOut
                     },
                     {
-                        frame: 600,
+                        frame: 440,
                         tx: 300,
                         ty: 350
-                    }
-                ]
-            },
-
-            {
-                draw: [cupcake],
-                keyframes: [
-                    {
-                        frame: 0,
-                        tx: 150,
-                        ty: 610
-                    },
-                    {
-                        frame: 150,
-                        tx: 150,
-                        ty: 610,
-                        ease: KeyframeTweener.linear
-                    },
-                    {
-                        frame: 150,
-                        tx: 330,
-                        ty: 610,
-                        ease: KeyframeTweener.quadEeaseInOut
-                    },
-                    {
-                        frame: 1100,
-                        tx: 330,
-                        ty: 610
-                    }
-                ]
-            },
-
-            {
-                draw: [minionSideArms],
-                keyframes: [
-                    {
-                        frame: 0,
-                        tx: 1200,
-                        ty: 560,
-                        ease: KeyframeTweener.runToAbruptStop
-                    },
-                    {
-                        frame: 100,
-                        tx: 300,
-                        ty: 560,
-                        ease: KeyframeTweener.quadEaseInAndOut
-                    },
-                    {
-                        frame: 150,
-                        tx: 300,
-                        ty: 560,
-                        rotate: 70
                     }
                 ]
             },
@@ -960,7 +908,7 @@
                         ty: 610
                     },
                     {
-                        frame: 600,
+                        frame: 360,
                         tx: 330,
                         ty: 610
                     }
@@ -982,7 +930,222 @@
                         ty: 610
                     }
                 ]
-            }
+            },
+
+            // Trying to blow it out again
+            {
+                draw: [mouthOpen],
+                keyframes: [
+                    {
+                        frame: 340,
+                        tx: 320,
+                        ty: 510,
+                        ease: KeyframeTweener.quadEaseInOut
+                    },
+                    {
+                        frame: 345,
+                        tx: 320,
+                        ty: 510
+                    }
+                ]
+            },
+
+            {
+                draw: [mouthBlowing],
+                keyframes: [
+                    {
+                        frame: 345,
+                        tx: 320,
+                        ty: 515,
+                        ease: KeyframeTweener.quadEaseInAndOut
+                    },
+                    {
+                        frame: 395,
+                        tx: 320,
+                        ty: 515,
+                        sx: 0.5,
+                        sy: 0.5
+                    }
+                ]
+            },
+
+            {
+                draw: [fireBlowing],
+                keyframes: [
+                    {
+                        frame: 360,
+                        tx: 330,
+                        ty: 610,
+                        ease: KeyframeTweener.quadEaseIn
+                    },
+                    {
+                        frame: 390,
+                        tx: 330,
+                        ty: 610
+                    }
+                ]
+            },
+
+            {
+                draw: [mouthSmiling],
+                keyframes: [
+                    {
+                        frame: 395,
+                        tx: 320,
+                        ty: 510
+                    },
+                    {
+                        frame: 435,
+                        tx: 320,
+                        ty: 510
+                    }
+                ]
+            },
+
+            {
+                draw: [mouthMad],
+                keyframes: [
+                    {
+                        frame: 435,
+                        tx: 320,
+                        ty: 510
+                    },
+                    {
+                        frame: 440,
+                        tx: 320,
+                        ty: 510
+                    }
+                ]
+            },
+
+            {
+                draw: [minionSide],
+                keyframes: [
+                    {
+                        frame: 440,
+                        tx: 300,
+                        ty: 350
+                    },
+                    {
+                        frame: 500,
+                        tx: 300,
+                        ty: 350
+                    }
+                ]
+            },
+            
+            {
+                draw: [minionLeft],
+                keyframes: [
+                    {
+                        frame: 440,
+                        tx: 300,
+                        ty: 350
+                    },
+                    {
+                        frame: 500,
+                        tx: 300,
+                        ty: 350
+                    }
+                ]
+            },
+            // These sprites need to be drawn in this specific order and at the end
+            {
+                draw: [cupcake],
+                keyframes: [
+                    {
+                        frame: 0,
+                        tx: 150,
+                        ty: 610
+                    },
+                    {
+                        frame: 150,
+                        tx: 150,
+                        ty: 610,
+                        ease: KeyframeTweener.linear
+                    },
+                    {
+                        frame: 150,
+                        tx: 330,
+                        ty: 610,
+                        ease: KeyframeTweener.quadEeaseInOut
+                    },
+                    {
+                        frame: 1100,
+                        tx: 330,
+                        ty: 610
+                    }
+                ]
+            },
+
+            {
+                draw: [fire],
+                keyframes: [
+                    {
+                        frame: 410,
+                        tx: 330,
+                        ty: 620,
+                        ease: KeyframeTweener.fireFlickering
+                    },
+                    {
+                        frame: 425,
+                        tx: 330,
+                        ty: 610
+                    },
+                    {
+                        frame: 510,
+                        tx: 330,
+                        ty: 610
+                    }
+                ]
+            },
+            {
+                draw: [minionSideArms],
+                keyframes: [
+                    {
+                        frame: 0,
+                        tx: 1200,
+                        ty: 560,
+                        ease: KeyframeTweener.runToAbruptStop
+                    },
+                    {
+                        frame: 100,
+                        tx: 300,
+                        ty: 560,
+                        ease: KeyframeTweener.quadEaseInAndOut
+                    },
+                    {
+                        frame: 150,
+                        tx: 300,
+                        ty: 560,
+                        rotate: 70
+                    }
+                ]
+            },
+            {
+                draw: [minionSideArms],
+                keyframes: [
+                    {
+                        frame: 440,
+                        tx: 300,
+                        ty: 560,
+                        ease: KeyframeTweener.quadEaseIn
+                    },
+                    {
+                        frame: 460,
+                        tx: 300,
+                        ty: 560,
+                        rotate: -210,
+                        ease: KeyframeTweener.quadEaseInAndOut
+                    },
+                    {
+                        frame: 500,
+                        tx: 300,
+                        ty: 560,
+                        rotate: 110
+                    }
+                ]
+            },
         ];
 
     // Finally, we initialize the engine.  Mainly, it needs
