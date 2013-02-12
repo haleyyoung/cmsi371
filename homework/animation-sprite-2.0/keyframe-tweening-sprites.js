@@ -753,7 +753,7 @@
                     },
 
                     {
-                        frame: 180,
+                        frame: 150,
                         tx: 300,
                         ty: 350
                     }
@@ -788,7 +788,7 @@
                     },
 
                     {
-                        frame: 180,
+                        frame: 150,
                         tx: 300,
                         ty: 350
                     }
@@ -798,7 +798,7 @@
                 draw: [minion],
                 keyframes: [
                     {
-                        frame: 180,
+                        frame: 150,
                         tx: 300,
                         ty: 350,
                         ease: KeyframeTweener.quadEaseInAndOut
@@ -816,7 +816,7 @@
                 draw: [eyeOpen],
                 keyframes: [
                     {
-                        frame: 180,
+                        frame: 150,
                         tx: 300,
                         ty: 350,
                         ease: KeyframeTweener.quadEaseInAndOut
@@ -834,14 +834,14 @@
                 draw: [mouthOpen],
                 keyframes: [
                     {
-                        frame: 180,
+                        frame: 150,
                         tx: 320,
                         ty: 510,
                         ease: KeyframeTweener.quadEaseInOut
                     },
 
                     {
-                        frame: 200,
+                        frame: 170,
                         tx: 320,
                         ty: 510
                     }
@@ -851,14 +851,14 @@
                 draw: [mouthBlowing],
                 keyframes: [
                     {
-                        frame: 200,
+                        frame: 170,
                         tx: 320,
                         ty: 515,
                         ease: KeyframeTweener.quadEaseInAndOut
                     },
 
                     {
-                        frame:240,
+                        frame:210,
                         tx: 320,
                         ty: 515,
                         sx: 0.5,
@@ -871,13 +871,13 @@
                 draw: [mouthSmiling],
                 keyframes: [
                     {
-                        frame: 240,
+                        frame: 210,
                         tx: 320,
                         ty: 510
                     },
                     
                     {
-                        frame: 315,
+                        frame: 285,
                         tx: 320,
                         ty: 510
                     }
@@ -888,7 +888,7 @@
                 draw: [mouthMad],
                 keyframes: [
                     {
-                        frame: 315,
+                        frame: 285,
                         tx: 320,
                         ty: 510
                     },
@@ -905,13 +905,13 @@
                 draw: [eyeOpen, eyeBlinking],
                 keyframes: [
                     {
-                        frame: 340,
+                        frame: 310,
                         tx: 300,
                         ty: 350
                     },
                     
                     {
-                        frame: 356,
+                        frame: 326,
                         tx: 300,
                         ty: 350
                     }
@@ -923,7 +923,7 @@
                 draw: [eyeOpen],
                 keyframes: [
                     {
-                        frame: 356,
+                        frame: 326,
                         tx: 300,
                         ty: 350,
                         ease: KeyframeTweener.quadEaseInAndOut
@@ -947,13 +947,13 @@
                     },
                     
                     {
-                        frame: 180,
+                        frame: 150,
                         tx: 150,
                         ty: 610,
                         ease: KeyframeTweener.linear
                     },
                     {
-                        frame: 180,
+                        frame: 150,
                         tx: 330,
                         ty: 610,
                         ease: KeyframeTweener.quadEeaseInOut
@@ -1003,18 +1003,18 @@
                     },
                     
                     {
-                        frame: 180,
+                        frame: 150,
                         tx: 150,
                         ty: 610,
                         ease: KeyframeTweener.linear
                     },
                     {
-                        frame: 180,
+                        frame: 150,
                         tx: 330,
                         ty: 610
                     },
                     {
-                        frame: 210,
+                        frame: 180,
                         tx: 330,
                         ty: 610
                     }
@@ -1026,14 +1026,14 @@
                 draw: [fire],
                 keyframes: [
                     {
-                        frame: 280,
+                        frame: 250,
                         tx: 330,
                         ty: 620,
                         ease: KeyframeTweener.fireFlickering
                     },
                     
                     {
-                        frame: 300,
+                        frame: 270,
                         tx: 330,
                         ty: 610
                     },
@@ -1049,14 +1049,14 @@
                 draw: [fireBlowing],
                 keyframes: [
                     {
-                        frame: 210,
+                        frame: 180,
                         tx: 330,
                         ty: 610,
                         ease: KeyframeTweener.quadEaseIn
                     },
                     
                     {
-                        frame: 220,
+                        frame: 200,
                         tx: 330,
                         ty: 610
                     }
