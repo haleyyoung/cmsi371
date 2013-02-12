@@ -239,30 +239,35 @@
             renderingContext.fill();
         },
             
-        minion = function (renderingContext) {
+        minionBody = function (renderingContext, up) {
+            up = up ? up : 0;
             // Body
             var bodyGradient = renderingContext.createRadialGradient(minionVertices.color1.x,
-                                   minionVertices.color1.y, minionVertices.color1.r,
-                                   minionVertices.color2.x, minionVertices.color2.y, minionVertices.color2.r);
+                                   minionVertices.color1.y - up, minionVertices.color1.r,
+                                   minionVertices.color2.x, minionVertices.color2.y - up, minionVertices.color2.r);
             bodyGradient.addColorStop(minionVertices.color1.stop, minionVertices.color1.color);
             bodyGradient.addColorStop(minionVertices.color2.stop, minionVertices.color2.color);
             renderingContext.fillStyle = bodyGradient;
             renderingContext.beginPath();
-            renderingContext.moveTo(minionVertices.start.x, minionVertices.start.y);
-            renderingContext.bezierCurveTo(minionVertices.cp1.x, minionVertices.cp1.y,
-                minionVertices.cp2.x, minionVertices.cp2.y, minionVertices.bottom.x,
+            renderingContext.moveTo(minionVertices.start.x, minionVertices.start.y - up);
+            renderingContext.bezierCurveTo(minionVertices.cp1.x, minionVertices.cp1.y - up,
+                minionVertices.cp2.x, minionVertices.cp2.y - up, minionVertices.bottom.x,
                 minionVertices.bottom.y);
-            renderingContext.bezierCurveTo(minionVertices.cp3.x, minionVertices.cp3.y,
-                minionVertices.cp4.x, minionVertices.cp4.y, minionVertices.start.x,
-                minionVertices.start.y);
+            renderingContext.bezierCurveTo(minionVertices.cp3.x, minionVertices.cp3.y - up,
+                minionVertices.cp4.x, minionVertices.cp4.y - up, minionVertices.start.x,
+                minionVertices.start.y - up);
             renderingContext.fill();
             // Goggles Strap
             renderingContext.strokeStyle = goggles.color;
             renderingContext.lineWidth = 14;
             renderingContext.beginPath();
-            renderingContext.moveTo(goggles.left.x, goggles.left.y);
-            renderingContext.quadraticCurveTo(goggles.cp1.x, goggles.cp1.y, goggles.right.x, goggles.right.y);
+            renderingContext.moveTo(goggles.left.x, goggles.left.y - up);
+            renderingContext.quadraticCurveTo(goggles.cp1.x, goggles.cp1.y - up, goggles.right.x, goggles.right.y - up);
             renderingContext.stroke();
+        },
+        
+        minion = function (renderingContext) {
+            minionBody(renderingContext);
             // Overalls
             var overallGradient = renderingContext.createRadialGradient(minionVertices.start.x, minionVertices.start.y,
               40, minionVertices.start.x, minionVertices.start.y, 470);
@@ -332,18 +337,23 @@
             }
         },
         
-        eyeOpen = function (renderingContext) {
-            renderingContext.fillStyle = eyes.ballColor;
+        eyeOpen = function (renderingContext, color, radius) {
+            if (!color) {
+                renderingContext.fillStyle = eyes.ballColor;
+                renderingContext.beginPath();
+                renderingContext.arc(eyes.ball.x, eyes.ball.y, eyes.ballRadius, 0, Math.PI*2);
+                renderingContext.fill(); 
+                renderingContext.fillStyle = eyes.pupilColor;
+                renderingContext.beginPath();
+                renderingContext.arc(eyes.ball.x, eyes.ball.y, eyes.pupilRadius, 0, Math.PI*2);
+                renderingContext.fill();
+            }
+            // Check for blinking
+            color = color ? color : eyes.corneaColor;
+            radius = radius ? radius : eyes.corneaRadius;
+            renderingContext.fillStyle = color;
             renderingContext.beginPath();
-            renderingContext.arc(eyes.ball.x, eyes.ball.y, eyes.ballRadius, 0, Math.PI*2);
-            renderingContext.fill(); 
-            renderingContext.fillStyle = eyes.pupilColor;
-            renderingContext.beginPath();
-            renderingContext.arc(eyes.ball.x, eyes.ball.y, eyes.pupilRadius, 0, Math.PI*2);
-            renderingContext.fill(); 
-            renderingContext.fillStyle = eyes.corneaColor;
-            renderingContext.beginPath();
-            renderingContext.arc(eyes.ball.x, eyes.ball.y, eyes.corneaRadius, 0, Math.PI*2);
+            renderingContext.arc(eyes.ball.x, eyes.ball.y, radius, 0, Math.PI*2);
             renderingContext.fill(); 
             renderingContext.strokeStyle = eyes.goggleColor;
             renderingContext.lineWidth = 10;
@@ -353,146 +363,56 @@
         },
         
         eyeBlinking = function (renderingContext) {
-            renderingContext.fillStyle = minionVertices.color1.color;
-            renderingContext.beginPath();
-            renderingContext.arc(eyes.ball.x, eyes.ball.y, eyes.ballRadius, 0, Math.PI*2);
-            renderingContext.fill();
-            renderingContext.strokeStyle = eyes.goggleColor;
-            renderingContext.lineWidth = 10;
-            renderingContext.beginPath();
-            renderingContext.arc(eyes.ball.x, eyes.ball.y, eyes.goggleRadius, 0, Math.PI*2);
-            renderingContext.stroke();
+            eyeOpen(renderingContext, minionVertices.color1.color, eyes.ballRadius);
         },
         
-        minionSide = function (renderingContext) {
-            // Body
-            var bodyGradient = renderingContext.createRadialGradient(minionVertices.color1.x,
-                                   minionVertices.color1.y, minionVertices.color1.r,
-                                   minionVertices.color2.x, minionVertices.color2.y, minionVertices.color2.r);
-            bodyGradient.addColorStop(minionVertices.color1.stop, minionVertices.color1.color);
-            bodyGradient.addColorStop(minionVertices.color2.stop, minionVertices.color2.color);
-            renderingContext.fillStyle = bodyGradient;
-            renderingContext.beginPath();
-            renderingContext.moveTo(minionVertices.start.x, minionVertices.start.y);
-            renderingContext.bezierCurveTo(minionVertices.cp1.x, minionVertices.cp1.y,
-                minionVertices.cp2.x, minionVertices.cp2.y, minionVertices.bottom.x,
-                minionVertices.bottom.y);
-            renderingContext.bezierCurveTo(minionVertices.cp3.x, minionVertices.cp3.y,
-                minionVertices.cp4.x, minionVertices.cp4.y, minionVertices.start.x,
-                minionVertices.start.y);
-            renderingContext.fill();
-            // Goggles Strap
-            renderingContext.strokeStyle = goggles.color;
-            renderingContext.lineWidth = 14;
-            renderingContext.beginPath();
-            renderingContext.moveTo(goggles.left.x, goggles.left.y + 10);
-            renderingContext.quadraticCurveTo(goggles.cp1.x, goggles.cp1.y + 10, goggles.right.x, goggles.right.y + 10);
-            renderingContext.stroke();
+        minionSide = function (renderingContext, up) {
+            up = up ? up : 0;
+            minionBody(renderingContext, up);
             // Eye 
             renderingContext.strokeStyle = minionLeftVertices.eyes.color;
             renderingContext.lineWidth = minionLeftVertices.eyes.width;
             renderingContext.beginPath();
-            renderingContext.moveTo(minionLeftVertices.eyes.start.x, minionLeftVertices.eyes.start.y);
-            renderingContext.lineTo(minionLeftVertices.eyes.end.x, minionLeftVertices.eyes.end.y);
+            renderingContext.moveTo(minionLeftVertices.eyes.start.x, minionLeftVertices.eyes.start.y - up);
+            renderingContext.lineTo(minionLeftVertices.eyes.end.x, minionLeftVertices.eyes.end.y - up);
             renderingContext.stroke();
             // Mouth
             renderingContext.strokeStyle = minionLeftVertices.mouth.color;
             renderingContext.lineWidth = minionLeftVertices.mouth.width;
             renderingContext.beginPath();
-            renderingContext.moveTo(minionLeftVertices.mouth.start.x, minionLeftVertices.mouth.start.y);
-            renderingContext.quadraticCurveTo(minionLeftVertices.mouth.cp1.x, minionLeftVertices.mouth.cp1.y,
-                                              minionLeftVertices.mouth.end.x, minionLeftVertices.mouth.end.y);
+            renderingContext.moveTo(minionLeftVertices.mouth.start.x, minionLeftVertices.mouth.start.y - up);
+            renderingContext.quadraticCurveTo(minionLeftVertices.mouth.cp1.x, minionLeftVertices.mouth.cp1.y - up,
+                                              minionLeftVertices.mouth.end.x, minionLeftVertices.mouth.end.y - up);
             renderingContext.stroke();
-            
             // Overalls
-            var overallGradient = renderingContext.createRadialGradient(minionVertices.start.x, minionVertices.start.y,
-              40, minionVertices.start.x, minionVertices.start.y, 470);
+            var overallGradient = renderingContext.createRadialGradient(minionVertices.start.x, minionVertices.start.y - up,
+              up, minionVertices.start.x, minionVertices.start.y - up, 470);
             overallGradient.addColorStop(0, "transparent");
             overallGradient.addColorStop(0.5, "transparent");
             overallGradient.addColorStop(0.51, overalls.color);
             renderingContext.fillStyle = overallGradient;
             renderingContext.beginPath();
-            renderingContext.moveTo(minionVertices.start.x, minionVertices.start.y);
-            renderingContext.bezierCurveTo(minionVertices.cp1.x, minionVertices.cp1.y,
-                minionVertices.cp2.x, minionVertices.cp2.y, minionVertices.bottom.x,
+            renderingContext.moveTo(minionVertices.start.x, minionVertices.start.y - up);
+            renderingContext.bezierCurveTo(minionVertices.cp1.x, minionVertices.cp1.y - up,
+                minionVertices.cp2.x, minionVertices.cp2.y - up, minionVertices.bottom.x,
                 minionVertices.bottom.y);
-            renderingContext.bezierCurveTo(minionVertices.cp3.x, minionVertices.cp3.y,
-                minionVertices.cp4.x, minionVertices.cp4.y, minionVertices.start.x,
-                minionVertices.start.y);
+            renderingContext.bezierCurveTo(minionVertices.cp3.x, minionVertices.cp3.y - up,
+                minionVertices.cp4.x, minionVertices.cp4.y - up, minionVertices.start.x,
+                minionVertices.start.y - up);
             renderingContext.fill();
             // Overalls shoulders
             renderingContext.strokeStyle = overalls.color;
             renderingContext.lineWidth = 10;
             renderingContext.beginPath();
-            renderingContext.moveTo(overalls.side.left.x, overalls.side.left.y);
-            renderingContext.quadraticCurveTo(overalls.side.cp1.x, overalls.side.cp1.y,
-              overalls.side.right.x, overalls.side.right.y);
+            renderingContext.moveTo(overalls.side.left.x, overalls.side.left.y - up);
+            renderingContext.quadraticCurveTo(overalls.side.cp1.x, overalls.side.cp1.y - up,
+              overalls.side.right.x, overalls.side.right.y - up);
             renderingContext.stroke();
         },
         
         minionSideUp = function (renderingContext) {
-            // Body
-            var bodyGradient = renderingContext.createRadialGradient(minionVertices.color1.x,
-                                   minionVertices.color1.y - 10, minionVertices.color1.r,
-                                   minionVertices.color2.x, minionVertices.color2.y - 10, minionVertices.color2.r);
-            bodyGradient.addColorStop(minionVertices.color1.stop, minionVertices.color1.color);
-            bodyGradient.addColorStop(minionVertices.color2.stop, minionVertices.color2.color);
-            renderingContext.fillStyle = bodyGradient;
-            renderingContext.beginPath();
-            renderingContext.moveTo(minionVertices.start.x, minionVertices.start.y - 10);
-            renderingContext.bezierCurveTo(minionVertices.cp1.x, minionVertices.cp1.y - 10,
-                minionVertices.cp2.x, minionVertices.cp2.y - 10, minionVertices.bottom.x,
-                minionVertices.bottom.y);
-            renderingContext.bezierCurveTo(minionVertices.cp3.x, minionVertices.cp3.y - 10,
-                minionVertices.cp4.x, minionVertices.cp4.y - 10, minionVertices.start.x,
-                minionVertices.start.y - 10);
-            renderingContext.fill();
-            // Goggles Strap
-            renderingContext.strokeStyle = goggles.color;
-            renderingContext.lineWidth = 14;
-            renderingContext.beginPath();
-            renderingContext.moveTo(goggles.left.x, goggles.left.y);
-            renderingContext.quadraticCurveTo(goggles.cp1.x, goggles.cp1.y, goggles.right.x, goggles.right.y);
-            renderingContext.stroke();
-            // Eye 
-            renderingContext.strokeStyle = minionLeftVertices.eyes.color;
-            renderingContext.lineWidth = minionLeftVertices.eyes.width;
-            renderingContext.beginPath();
-            renderingContext.moveTo(minionLeftVertices.eyes.start.x, minionLeftVertices.eyes.start.y - 10);
-            renderingContext.lineTo(minionLeftVertices.eyes.end.x, minionLeftVertices.eyes.end.y - 10);
-            renderingContext.stroke();
-            // Mouth
-            renderingContext.strokeStyle = minionLeftVertices.mouth.color;
-            renderingContext.lineWidth = minionLeftVertices.mouth.width;
-            renderingContext.beginPath();
-            renderingContext.moveTo(minionLeftVertices.mouth.start.x, minionLeftVertices.mouth.start.y - 10);
-            renderingContext.quadraticCurveTo(minionLeftVertices.mouth.cp1.x, minionLeftVertices.mouth.cp1.y - 10,
-                                              minionLeftVertices.mouth.end.x, minionLeftVertices.mouth.end.y - 10);
-            renderingContext.stroke();
-            // Overalls
-            var overallGradient = renderingContext.createRadialGradient(minionVertices.start.x, minionVertices.start.y - 10,
-              40, minionVertices.start.x, minionVertices.start.y - 10, 470);
-            overallGradient.addColorStop(0, "transparent");
-            overallGradient.addColorStop(0.5, "transparent");
-            overallGradient.addColorStop(0.51, overalls.color);
-            renderingContext.fillStyle = overallGradient;
-            renderingContext.beginPath();
-            renderingContext.moveTo(minionVertices.start.x, minionVertices.start.y - 10);
-            renderingContext.bezierCurveTo(minionVertices.cp1.x, minionVertices.cp1.y - 10,
-                minionVertices.cp2.x, minionVertices.cp2.y - 10, minionVertices.bottom.x,
-                minionVertices.bottom.y);
-            renderingContext.bezierCurveTo(minionVertices.cp3.x, minionVertices.cp3.y - 10,
-                minionVertices.cp4.x, minionVertices.cp4.y - 10, minionVertices.start.x,
-                minionVertices.start.y - 10);
-            renderingContext.fill();
-            // Overalls shoulders
-            renderingContext.strokeStyle = overalls.color;
-            renderingContext.lineWidth = 10;
-            renderingContext.beginPath();
-            renderingContext.moveTo(overalls.side.left.x, overalls.side.left.y - 10);
-            renderingContext.quadraticCurveTo(overalls.side.cp1.x, overalls.side.cp1.y - 10,
-              overalls.side.right.x, overalls.side.right.y - 10);
-            renderingContext.stroke();
+            minionSide(renderingContext, 10);
+
         },
         
         minionLeft = function (renderingContext) {        
