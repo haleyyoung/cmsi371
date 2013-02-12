@@ -187,39 +187,39 @@
         
         },
         
-        cupcakeVertices = { candle: { corner: {x: 77, y:520},
+        cupcakeVertices = { candle: { corner: {x: 7, y: -70},
                                       width: 6,
                                       height: 30,
                                       color: "#FF0066"
                                      
                                     },
                             frosting: {
-                                       start: {x: 40, y:570},
-                                       cp1: {x: 50, y: 550},
-                                       cp2: {x: 60, y: 545},
-                                       cp3: {x: 70, y: 530},
-                                       cp4: {x: 80, y: 530},
-                                       cp5: {x: 80, y: 530},
-                                       cp6: {x: 90, y: 530},
-                                       cp7: {x: 100, y: 545},
-                                       cp8: {x: 110, y: 550},
-                                       end: {x: 120, y: 570},
+                                       start: {x: -30, y: -20},
+                                       cp1: {x: -20, y: -40},
+                                       cp2: {x: -10, y: -45},
+                                       cp3: {x: 0, y: -60},
+                                       cp4: {x: 10, y: -60},
+                                       cp5: {x: 10, y: -60},
+                                       cp6: {x: 20, y: -60},
+                                       cp7: {x: 30, y: -45},
+                                       cp8: {x: 40, y: -40},
+                                       end: {x: 50, y: -20},
                                        color: "purple"
                                       },
                             cake: {
-                                   topLeft: {x: 40, y: 570},
-                                   bottomLeft: {x: 50, y: 620},
-                                   bottomRight: {x: 110, y: 620},
-                                   topRight: {x: 120, y: 570},
-                                   cp1: {x: 70, y: 590},
+                                   topLeft: {x: -30, y: -20},
+                                   bottomLeft: {x: -20, y: 30},
+                                   bottomRight: {x: 40, y: 30},
+                                   topRight: {x: 50, y: -20},
+                                   cp1: {x: 0, y: 0},
                                    colorLight: "turquoise",
                                    colorDark: "#207068"
                                   },
                             fire: {
-                                   bottom: {x: 80, y: 520},
-                                   left: {x: 70, y:510},
-                                   top: {x: 80, y: 480},
-                                   right: {x: 90, y: 510},
+                                   bottom: {x: 10, y: -70},
+                                   left: {x: 0, y:-80},
+                                   top: {x: 10, y: -110},
+                                   right: {x: 20, y: -80},
                                    colorYellow: "yellow",
                                    colorOrange: "orange",
                                    colorStop: 0.4
@@ -794,34 +794,6 @@
                     }
                 ]
             },
-            
-            {
-                draw: [minionSideArms],
-                keyframes: [
-                    {
-                        frame: 0,
-                        tx: 1200,
-                        ty: 560,
-                        ease: KeyframeTweener.runToAbruptStop
-                    },
-
-                    {
-                        frame: 100,
-                        tx: 300,
-                        ty: 560,
-                        ease: KeyframeTweener.quadEaseInAndOut
-                    },
-                    
-                    {
-                        frame: 150,
-                        tx: 300,
-                        ty: 560,
-                        rotate: 90
-                    },
-                    
-                ]
-            },
-
             {
                 draw: [minion],
                 keyframes: [
@@ -964,31 +936,87 @@
                     }
                 ]
             },
+            {
+                draw: [cupcake],
+                keyframes: [
+                    {
+                        frame: 0,
+                        tx: 150,
+                        ty: 610,
+                        
+                    },
+                    
+                    {
+                        frame: 180,
+                        tx: 150,
+                        ty: 610,
+                        ease: KeyframeTweener.linear
+                    },
+                    {
+                        frame: 180,
+                        tx: 330,
+                        ty: 610,
+                        ease: KeyframeTweener.quadEeaseInOut
+                    },
+                    {
+                        frame: 1100,
+                        tx: 330,
+                        ty: 610
+                    }
+                ]
+            },
+            
+            {
+                draw: [minionSideArms],
+                keyframes: [
+                    {
+                        frame: 0,
+                        tx: 1200,
+                        ty: 560,
+                        ease: KeyframeTweener.runToAbruptStop
+                    },
+
+                    {
+                        frame: 100,
+                        tx: 300,
+                        ty: 560,
+                        ease: KeyframeTweener.quadEaseInAndOut
+                    },
+                    
+                    {
+                        frame: 150,
+                        tx: 300,
+                        ty: 560,
+                        rotate: 70
+                    },
+                    
+                ]
+            },
             
             {
                 draw: [fire],
                 keyframes: [
                     {
                         frame: 0,
-                        tx: 0,
-                        ty: 0
+                        tx: 150,
+                        ty: 610
                     },
                     
                     {
                         frame: 180,
-                        tx: 0,
-                        ty: 0,
+                        tx: 150,
+                        ty: 610,
                         ease: KeyframeTweener.linear
                     },
                     {
-                        frame: 181,
-                        tx: 250,
-                        ty: 0
+                        frame: 180,
+                        tx: 330,
+                        ty: 610
                     },
                     {
                         frame: 210,
-                        tx: 250,
-                        ty: 0
+                        tx: 330,
+                        ty: 610
                     }
                 ]
             },
@@ -999,21 +1027,21 @@
                 keyframes: [
                     {
                         frame: 280,
-                        tx: 250,
-                        ty: 50,
+                        tx: 330,
+                        ty: 620,
                         ease: KeyframeTweener.fireFlickering
                     },
                     
                     {
                         frame: 300,
-                        tx: 250,
-                        ty: 0
+                        tx: 330,
+                        ty: 610
                     },
                     
                     {
                         frame: 600,
-                        tx: 250,
-                        ty: 0
+                        tx: 330,
+                        ty: 610
                     }
                 ]
             },
@@ -1022,44 +1050,15 @@
                 keyframes: [
                     {
                         frame: 210,
-                        tx: 250,
-                        ty: 0,
+                        tx: 330,
+                        ty: 610,
                         ease: KeyframeTweener.quadEaseIn
                     },
                     
                     {
                         frame: 220,
-                        tx: 250,
-                        ty: 0
-                    }
-                ]
-            },
-            {
-                draw: [cupcake],
-                keyframes: [
-                    {
-                        frame: 0,
-                        tx: 0,
-                        ty: 0,
-                        
-                    },
-                    
-                    {
-                        frame: 180,
-                        tx: 0,
-                        ty: 0,
-                        ease: KeyframeTweener.linear
-                    },
-                    {
-                        frame: 181,
-                        tx: 250,
-                        ty: 0,
-                        ease: KeyframeTweener.quadEeaseInOut
-                    },
-                    {
-                        frame: 1100,
-                        tx: 250,
-                        ty: 0
+                        tx: 330,
+                        ty: 610
                     }
                 ]
             }
