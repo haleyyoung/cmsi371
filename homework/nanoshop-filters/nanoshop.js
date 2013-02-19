@@ -37,10 +37,25 @@ var basicDarkener = function (r, g, b, a) {
     colorAccentuate = function (r, g, b, a, color) {
         switch (color) {
             case "red":
-                return [r, g, g, a];
+                if(r >= g && r >= b){
+                    return [r, g, b, a];
+                }
+                else{
+                    return [r, r, r, a];
+                }
             case "green":
-                return [r, g, r, a];
+                if(g >= r && g >= b){
+                    return [r, g, b, a];
+                }
+                else{
+                    return [g, g, g, a];
+                }
             case "blue":
-                return [r, r, b, a];
+                if(b >= r && b >= g){
+                    return [r, g, b, a];
+                }
+                else{
+                    return [b, b, b, a];
+                }
         }
     }
