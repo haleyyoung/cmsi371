@@ -5,49 +5,73 @@
 (function () {
     var canvas = $("#picture")[0],
         renderingContext = canvas.getContext("2d"),
-        gradient;
+        gradient,
+        linearGradientSky = renderingContext.createLinearGradient(0, 0, 0, 250),
+        linearGradientWater = renderingContext.createLinearGradient(0, 250, 0, 512),
+        radialGradientSun = renderingContext.createRadialGradient(250, 250, 1, 180, 180, 320);
 
-    // Adapted from original code by Tyler Nichols.
-    gradient = renderingContext.createRadialGradient(120, 120, 15, 120, 120, 75);
-    gradient.addColorStop(0, "rgb(255, 102, 102)");
-    gradient.addColorStop(1, "red");
+    // Colors for the sky
+    linearGradientSky.addColorStop(0, "#FFFF66");
+    linearGradientSky.addColorStop(0.3, "#FF4719");
+    linearGradientSky.addColorStop(0.6, "#FF1975");
+    linearGradientSky.addColorStop(1, "#660066");
 
-    // Draw the sphere with a radial gradient
-    renderingContext.beginPath();
-    renderingContext.fillStyle = gradient;
-    renderingContext.arc(150, 150, 75, 0, 2 * Math.PI, true);
-    renderingContext.shadowColor = "gray";
-    renderingContext.shadowBlur = 20;
-    renderingContext.shadowOffsetX = 10;
-    renderingContext.shadowOffsetY = 15;
-    renderingContext.fill();
-    renderingContext.closePath();
+    // Colors for the water
+    linearGradientWater.addColorStop(0, "#008F00");
+    linearGradientWater.addColorStop(0.05, "#0066CC");
+    linearGradientWater.addColorStop(0.4, "#003366");
+    linearGradientWater.addColorStop(1, "#000F1F");
 
-    // Draw the top of the cube
-    renderingContext.beginPath();
-    renderingContext.fillStyle = "rgb(140, 140, 250)";
-    renderingContext.moveTo(300, 300);
-    renderingContext.lineTo(335, 265);
-    renderingContext.lineTo(435, 265);
-    renderingContext.lineTo(400, 300);
-    renderingContext.lineTo(300, 300);
-    renderingContext.fill();
-    renderingContext.closePath();
+    // Colors for the sun
+    radialGradientSun.addColorStop(0, "#FF9900");
+    radialGradientSun.addColorStop(0.5, "red");
 
-    // Draw the face of the cube
-    renderingContext.fillStyle = "rgb(110, 110, 200)";
-    renderingContext.fillRect(300, 300, 100, 100);
+    // JD: See my indentation suggestion in 27e.js.
+    //     But data-wise, very nicely separated.
+    var sceneElements = { sky: { vertices: [[0, 0], [512, 512]],
+                                 color: linearGradientSky
+                               },
+                          water: { vertices: [[0, 250], [512, 261]],
+                                   color: linearGradientWater
+                                 },
+                          sun: { radius: 100,
+                                 center: [250, 250],
+                                 endpoints: [0, Math.PI],
+                                 color: radialGradientSun
+                               },
+                          reflection: { radius: 100,
+                                        center: [250, 250],
+                                        endpoints: [Math.PI, Math.PI * 2],
+                                        opacity: 0.5,
+                                        color: radialGradientSun
+                                      }
+                        },
 
-    // Draw the right side of the cube
-    renderingContext.beginPath();
-    renderingContext.fillStyle = "rgb(79, 79, 159)";
-    renderingContext.moveTo(435, 265);
-    renderingContext.lineTo(435, 355);
-    renderingContext.lineTo(400, 400);
-    renderingContext.lineTo(400, 300);
-    renderingContext.lineTo(435, 265);
-    renderingContext.fill();
-    renderingContext.closePath();
+    // This is a function that draws a rectangular shape with a gradient
+        drawBackground = function (part) {
+            renderingContext.fillStyle = part.color;
+            renderingContext.fillRect(part.vertices[0][0], part.vertices[0][1],
+                                      part.vertices[1][0], part.vertices[1][1]);
+            renderingContext.fill();
+        },
+
+    // This is a funtion that draws a circle with a gradient
+        drawSun = function (part) {
+            renderingContext.fillStyle = part.color;
+            if (part.opacity) {
+                renderingContext.globalAlpha = part.opacity;
+            }
+            renderingContext.beginPath();
+            renderingContext.arc(part.center[0], part.center[1],
+                                 part.radius,
+                                 part.endpoints[0], part.endpoints[1], true);
+            renderingContext.fill();
+        };
+
+    drawBackground(sceneElements.sky);
+    drawBackground(sceneElements.water);
+    drawSun(sceneElements.sun);
+    drawSun(sceneElements.reflection);
 
     // Display a quick alert that we are about to apply the filter.
     alert("Here goes...");
@@ -67,7 +91,7 @@
     renderingContext.putImageData(
         Nanoshop.applyFilter(
             renderingContext.getImageData(0, 0, canvas.width, canvas.height),
-            colorAccentuate, "blue"),
+            colorAccentuate, "green"),
         0,
         0
     );

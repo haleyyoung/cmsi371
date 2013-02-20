@@ -42,22 +42,17 @@ var basicDarkener = function (r, g, b, a) {
                 if(r >= g && r >= b){
                     return [r, g, b, a];
                 }
-                else{
-                    return [average, average, average, a];
-                }
+                break;
             case "green":
                 if(g >= r && g >= b){
                     return [r, g, b, a];
                 }
-                else{
-                    return [average, average, average, a];
-                }
+                break;
             case "blue":
                 if(b >= r && b >= g){
                     return [r, g, b, a];
                 }
-                else{
-                    return [average, average, average, a];
-                }
+                break;
         }
+        return [average, average, average, a];
     }
