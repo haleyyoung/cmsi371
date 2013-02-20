@@ -1,104 +1,32 @@
 /*
- * This demo script uses the Nanoshop module to apply a simple
- * filter on a canvas drawing.
+ * This demo script uses the Nanoshop module to apply simple
+ * filters on a canvas drawing.
  */
 (function () {
     var canvas = $("#picture")[0],
         renderingContext = canvas.getContext("2d"),
-        gradient,
-        linearGradientSky = renderingContext.createLinearGradient(0, 0, 0, 250),
-        linearGradientWater = renderingContext.createLinearGradient(0, 250, 0, 512),
-        radialGradientSun = renderingContext.createRadialGradient(250, 250, 1, 180, 180, 320);
-
-    // Colors for the sky
-    linearGradientSky.addColorStop(0, "#FFFF66");
-    linearGradientSky.addColorStop(0.3, "#FF4719");
-    linearGradientSky.addColorStop(0.6, "#FF1975");
-    linearGradientSky.addColorStop(1, "#660066");
-
-    // Colors for the water
-    linearGradientWater.addColorStop(0, "#008F00");
-    linearGradientWater.addColorStop(0.05, "#0066CC");
-    linearGradientWater.addColorStop(0.4, "#003366");
-    linearGradientWater.addColorStop(1, "#000F1F");
-
-    // Colors for the sun
-    radialGradientSun.addColorStop(0, "#FF9900");
-    radialGradientSun.addColorStop(0.5, "red");
-
-    // JD: See my indentation suggestion in 27e.js.
-    //     But data-wise, very nicely separated.
-    var sceneElements = { sky: { vertices: [[0, 0], [512, 512]],
-                                 color: linearGradientSky
-                               },
-                          water: { vertices: [[0, 250], [512, 261]],
-                                   color: linearGradientWater
-                                 },
-                          sun: { radius: 100,
-                                 center: [250, 250],
-                                 endpoints: [0, Math.PI],
-                                 color: radialGradientSun
-                               },
-                          reflection: { radius: 100,
-                                        center: [250, 250],
-                                        endpoints: [Math.PI, Math.PI * 2],
-                                        opacity: 0.5,
-                                        color: radialGradientSun
-                                      }
-                        },
-
-    // This is a function that draws a rectangular shape with a gradient
-        drawBackground = function (part) {
-            renderingContext.fillStyle = part.color;
-            renderingContext.fillRect(part.vertices[0][0], part.vertices[0][1],
-                                      part.vertices[1][0], part.vertices[1][1]);
-            renderingContext.fill();
-        },
-
-    // This is a funtion that draws a circle with a gradient
-        drawSun = function (part) {
-            renderingContext.fillStyle = part.color;
-            if (part.opacity) {
-                renderingContext.globalAlpha = part.opacity;
-            }
-            renderingContext.beginPath();
-            renderingContext.arc(part.center[0], part.center[1],
-                                 part.radius,
-                                 part.endpoints[0], part.endpoints[1], true);
-            renderingContext.fill();
-        };
-
-    drawBackground(sceneElements.sky);
-    drawBackground(sceneElements.water);
-    drawSun(sceneElements.sun);
-    drawSun(sceneElements.reflection); 
-    // Display a quick alert that we are about to apply the filter.
-    alert("Here goes...");
-
-    // Filter time.
-/*    renderingContext.putImageData(
-        Nanoshop.applyFilter(
-            renderingContext.getImageData(0, 0, canvas.width, canvas.height),
-            basicDarkener),
-        0,
-        0
-    );
-    // Display a quick alert that we are about to apply the filter.
-    alert("Here goes...color");
-
-    // Filter time.
+        gradient;
+    alert("colorAccentuate");
     renderingContext.putImageData(
         Nanoshop.applyFilter(
             renderingContext.getImageData(0, 0, canvas.width, canvas.height),
-            colorAccentuate, "green"),
+            colorAccentuate, "red"),
         0,
         0
-    ); */
-    alert("Here goes...glow");
+    );
+    alert("primaryColors");
     renderingContext.putImageData(
         Nanoshop.applyFilter(
             renderingContext.getImageData(0, 0, canvas.width, canvas.height),
             primaryColors),
+        0,
+        0
+    );
+    alert("basicDarkener");
+    renderingContext.putImageData(
+        Nanoshop.applyFilter(
+            renderingContext.getImageData(0, 0, canvas.width, canvas.height),
+            basicDarkener),
         0,
         0
     );

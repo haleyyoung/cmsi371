@@ -34,6 +34,9 @@ var basicDarkener = function (r, g, b, a) {
         return [r / 2, g / 2, b / 2, a];
     },
 
+    // This creates the effect of graying out every color except for the ones
+    // you want to stand out. For the color parameter, pick "red", "green" or
+    // "blue".
     colorAccentuate = function (r, g, b, a, color) {
         // Britain Southwick gave me the idea to average the colors for grayscale
         var average = (r + g + b)/3;
@@ -57,6 +60,8 @@ var basicDarkener = function (r, g, b, a) {
         return [average, average, average, a];
     },
     
+    // This turns all of the colors into shades of red, green and blue. The
+    // primary colors of graphics, that is.
     primaryColors = function (r, g, b, a) {
         if(r >= g && r >= b){
             return [r, 0, 0, a];
