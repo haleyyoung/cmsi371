@@ -71,8 +71,7 @@
     drawBackground(sceneElements.sky);
     drawBackground(sceneElements.water);
     drawSun(sceneElements.sun);
-    drawSun(sceneElements.reflection);
-
+    drawSun(sceneElements.reflection); 
     // Display a quick alert that we are about to apply the filter.
     alert("Here goes...");
 
@@ -83,7 +82,7 @@
             basicDarkener),
         0,
         0
-    );*/
+    );
     // Display a quick alert that we are about to apply the filter.
     alert("Here goes...color");
 
@@ -92,6 +91,14 @@
         Nanoshop.applyFilter(
             renderingContext.getImageData(0, 0, canvas.width, canvas.height),
             colorAccentuate, "green"),
+        0,
+        0
+    ); */
+    alert("Here goes...glow");
+    renderingContext.putImageData(
+        Nanoshop.applyFilter(
+            renderingContext.getImageData(0, 0, canvas.width, canvas.height),
+            primaryColors),
         0,
         0
     );

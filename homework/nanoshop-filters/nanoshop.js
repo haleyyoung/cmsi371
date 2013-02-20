@@ -36,7 +36,7 @@ var basicDarkener = function (r, g, b, a) {
 
     colorAccentuate = function (r, g, b, a, color) {
         // Britain Southwick gave me the idea to average the colors for grayscale
-        var average = (r+ g + b)/3;
+        var average = (r + g + b)/3;
         switch (color) {
             case "red":
                 if(r >= g && r >= b){
@@ -55,4 +55,14 @@ var basicDarkener = function (r, g, b, a) {
                 break;
         }
         return [average, average, average, a];
-    }
+    },
+    
+    primaryColors = function (r, g, b, a) {
+        if(r >= g && r >= b){
+            return [r, 0, 0, a];
+        }
+        else if(g >= r && g >= b){
+            return [0, g, 0, a];
+        }
+        return [0, 0, b, a];
+    };
