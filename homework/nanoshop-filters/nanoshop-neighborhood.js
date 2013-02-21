@@ -48,15 +48,30 @@ var NanoshopNeighborhood = {
             aTotal = 0,
             pixelNumberHalf = pixelNumber / 2;
         // If we're still in the first row
-        if((pixelNumber < width - 1 && pixelNumberHalf === Math.floor(pixelNumberHalf)) ||
-          (pixelNumber % width === 0 && pixelNumber % (width * 2) === 0) ||
-          (rgbaNeighborhood[0].r == 0 && rgbaNeighborhood[0].g === 0 &&
-          rgbaNeighborhood[0].g === 0)) {
+        if(((pixelNumber < (width - 1)) && (pixelNumberHalf === Math.floor(pixelNumberHalf))) ||
+          ((pixelNumber % (width * 2)) === 0) ||
+          (rgbaNeighborhood[3].r !== 0 && rgbaNeighborhood[3].g !== 0 &&
+          rgbaNeighborhood[3].b !== 0)) {
             return [0,0,0,rgbaNeighborhood[4].a];
         }
         return [ rgbaNeighborhood[4].r, rgbaNeighborhood[4].g, rgbaNeighborhood[4].b, rgbaNeighborhood[4].a];
     },
-
+    /*
+     * A basic "difference"---this one returns the difference between each pixel
+     * and its neighbor in the given neighborhood.
+     */
+    deviation: function (rgbaNeighborhood) {
+        var rTotal = 0,
+            gTotal = 0,
+            bTotal = 0,
+            i;
+        for (i = 0; i < 8; i += 1) {
+            rTotal += rgbaNeighborhood[i + 1].r - rgbaNeighborhood[i].r;
+            gTotal += rgbaNeighborhood[i + 1].g - rgbaNeighborhood[i].g;
+            bTotal += rgbaNeighborhood[i + 1].b - rgbaNeighborhood[i].b;
+        }
+        return [ rTotal, gTotal, bTotal, rgbaNeighborhood[4].a];
+    },
     /*
      * Applies the given filter to the given ImageData object,
      * then modifies its pixels according to the given filter.
