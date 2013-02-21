@@ -38,24 +38,31 @@ var NanoshopNeighborhood = {
     },
 
      /*
-     * A basic "checkerboard"---this one returns the average of all the pixels in the
-     * given neighborhood.
+     * A basic "random saturation"---this one returns a random number up to the 
+     * maximum of all the pixels in the given neighborhood in terms of r, g, and b.
      */
-    checkerboard: function (rgbaNeighborhood, pixelNumber, width) {
+    maximum: function (rgbaNeighborhood, pixelNumber, width) {
         var rTotal = 0,
             gTotal = 0,
             bTotal = 0,
-            aTotal = 0,
-            pixelNumberHalf = pixelNumber / 2;
-        // If we're still in the first row
-        if(((pixelNumber < (width - 1)) && (pixelNumberHalf === Math.floor(pixelNumberHalf))) ||
-          ((pixelNumber % (width * 2)) === 0) ||
-          (rgbaNeighborhood[3].r !== 0 && rgbaNeighborhood[3].g !== 0 &&
-          rgbaNeighborhood[3].b !== 0)) {
-            return [0,0,0,rgbaNeighborhood[4].a];
+            i;
+        for (i = 0; i < 9; i += 1) {
+            if(rTotal < rgbaNeighborhood[i].r){
+                rTotal = rgbaNeighborhood[i].r;
+            }
+            if(gTotal < rgbaNeighborhood[i].g){
+                gTotal = rgbaNeighborhood[i].g;
+            }
+            if(bTotal < rgbaNeighborhood[i].b){
+                bTotal = rgbaNeighborhood[i].b;
+            }
+            rTotal = Math.random()*rTotal;
+            gTotal = Math.random()*gTotal;
+            bTotal = Math.random()*bTotal;
         }
-        return [ rgbaNeighborhood[4].r, rgbaNeighborhood[4].g, rgbaNeighborhood[4].b, rgbaNeighborhood[4].a];
+        return [rTotal, gTotal, bTotal, rgbaNeighborhood[4].a];
     },
+
     /*
      * A basic "difference"---this one returns the difference between each pixel
      * and its neighbor in the given neighborhood.
@@ -72,6 +79,7 @@ var NanoshopNeighborhood = {
         }
         return [ rTotal, gTotal, bTotal, rgbaNeighborhood[4].a];
     },
+
     /*
      * Applies the given filter to the given ImageData object,
      * then modifies its pixels according to the given filter.
