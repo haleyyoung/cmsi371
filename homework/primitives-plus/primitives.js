@@ -252,8 +252,9 @@ var Primitives = {
 
         color = color || [0, 0, 0];
         while (true) {
-                console.log("here   " + dash);
-            if ((xDifference % dash) < (dash - 1)) {
+            // If the dash parameter doesn't exist, draw like normal,
+            // otherwise compare the current pixel to the dash parameter
+            if (!dash || (xDifference % (dash + 1)) < dash) {
                 this.setPixel(context, x, y, color[0], color[1], color[2]);
             }
             if (x === x2) {
