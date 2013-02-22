@@ -278,16 +278,32 @@ var Primitives = {
      * permutations of that eighth's coordinates.  So we define a helper
      * function that all of the circle implementations will use...
      */
-    plotCirclePoints: function (context, xc, yc, x, y, color) {
-        color = color || [0, 0, 0];
-        this.setPixel(context, xc + x, yc + y, color[0], color[1], color[2]);
-        this.setPixel(context, xc + x, yc - y, color[0], color[1], color[2]);
-        this.setPixel(context, xc + y, yc + x, color[0], color[1], color[2]);
-        this.setPixel(context, xc + y, yc - x, color[0], color[1], color[2]);
-        this.setPixel(context, xc - x, yc + y, color[0], color[1], color[2]);
-        this.setPixel(context, xc - x, yc - y, color[0], color[1], color[2]);
-        this.setPixel(context, xc - y, yc + x, color[0], color[1], color[2]);
-        this.setPixel(context, xc - y, yc - x, color[0], color[1], color[2]);
+    plotCirclePoints: function (context, xc, yc, x, y, colorTop, colorBottom) {
+        colorTop = colorTop || [0, 0, 0];
+        colorBottom = colorBottom || [0, 0, 0];
+        var r = Math.sqrt(x^2 + y^2),
+            redDifference = (colorTop[0] - colorBottom[0]) / (2 * r),
+            greenDifference = (colorTop[1] - colorBottom[1]) / (2 * r),
+            blueDifference = (colorTop[2] - colorBottom[2]) / (2 * r),
+            i = x;
+        do{
+//            alert("colorTop[0] " + colorTop[0] + " colorTop[1] " + colorTop[1] + " colorTop[2] " + colorTop[2]);
+            this.setPixel(context, xc + x, yc + y, colorTop[0], colorTop[1], colorTop[2]);
+            this.setPixel(context, xc + x, yc - y, colorTop[0], colorTop[1], colorTop[2]);
+            this.setPixel(context, xc + y, yc + x, colorTop[0], colorTop[1], colorTop[2]);
+            this.setPixel(context, xc + y, yc - x, colorTop[0], colorTop[1], colorTop[2]);
+            this.setPixel(context, xc - x, yc + y, colorTop[0], colorTop[1], colorTop[2]);
+            this.setPixel(context, xc - x, yc - y, colorTop[0], colorTop[1], colorTop[2]);
+            this.setPixel(context, xc - y, yc + x, colorTop[0], colorTop[1], colorTop[2]);
+            this.setPixel(context, xc - y, yc - x, colorTop[0], colorTop[1], colorTop[2]);
+            // Getting closer to the origin
+            if (i > 0) {
+                i -= 1;
+            }
+            else if(i < 0){
+                i += 1;
+            }
+        } while (i !== 0);
     },
 
     // First, the most naive possible implementation: circle by trigonometry.
@@ -369,13 +385,13 @@ var Primitives = {
     },
 
     // Last but not least...
-    circleBres3: function (context, xc, yc, r, color) {
+    circleBres3: function (context, xc, yc, r, colorTop, colorBottom) {
         var x = r,
             y = 0,
             e = 0;
 
         while (y <= x) {
-            this.plotCirclePoints(context, xc, yc, x, y, color);
+            this.plotCirclePoints(context, xc, yc, x, y, colorTop, colorBottom);
             y += 1;
             e += (2 * y - 1);
             if (e > x) {
