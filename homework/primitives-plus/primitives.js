@@ -286,24 +286,20 @@ var Primitives = {
             greenDifference = (colorTop[1] - colorBottom[1]) / (2 * r),
             blueDifference = (colorTop[2] - colorBottom[2]) / (2 * r),
             i = x;
+            console.log(x);
         do{
 //            alert("colorTop[0] " + colorTop[0] + " colorTop[1] " + colorTop[1] + " colorTop[2] " + colorTop[2]);
-            this.setPixel(context, xc + x, yc + y, colorTop[0], colorTop[1], colorTop[2]);
-            this.setPixel(context, xc + x, yc - y, colorTop[0], colorTop[1], colorTop[2]);
-            this.setPixel(context, xc + y, yc + x, colorTop[0], colorTop[1], colorTop[2]);
-            this.setPixel(context, xc + y, yc - x, colorTop[0], colorTop[1], colorTop[2]);
-            this.setPixel(context, xc - x, yc + y, colorTop[0], colorTop[1], colorTop[2]);
-            this.setPixel(context, xc - x, yc - y, colorTop[0], colorTop[1], colorTop[2]);
-            this.setPixel(context, xc - y, yc + x, colorTop[0], colorTop[1], colorTop[2]);
-            this.setPixel(context, xc - y, yc - x, colorTop[0], colorTop[1], colorTop[2]);
+            this.setPixel(context, xc + i, yc + y, colorTop[0], colorTop[1], colorTop[2]);
+            this.setPixel(context, xc + i, yc - y, colorTop[0], colorTop[1], colorTop[2]);
+            this.setPixel(context, xc + y, yc + i, colorTop[0], colorTop[1], colorTop[2]);
+            this.setPixel(context, xc + y, yc - i, colorTop[0], colorTop[1], colorTop[2]);
+            this.setPixel(context, xc - i, yc + y, colorTop[0], colorTop[1], colorTop[2]);
+            this.setPixel(context, xc - i, yc - y, colorTop[0], colorTop[1], colorTop[2]);
+            this.setPixel(context, xc - y, yc + i, colorTop[0], colorTop[1], colorTop[2]);
+            this.setPixel(context, xc - y, yc - i, colorTop[0], colorTop[1], colorTop[2]);
             // Getting closer to the origin
-            if (i > 0) {
-                i -= 1;
-            }
-            else if(i < 0){
-                i += 1;
-            }
-        } while (i !== 0);
+            i -= 1;
+        } while (i > -1);
     },
 
     // First, the most naive possible implementation: circle by trigonometry.
