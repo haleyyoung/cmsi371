@@ -286,17 +286,22 @@ var Primitives = {
             blueDifference = (colorTop[2] - colorBottom[2]) / (2 * r),
             color = [colorTop[0] + redDifference*Math.abs(y - (yc - r)), colorTop[1] + 
               greenDifference*Math.abs(y - (yc - r)), colorTop[2] + blueDifference*Math.abs(y - (yc - r))],
-            i = x;
+            i = x,
+            j = y;
         do{
             this.setPixel(context, Math.floor(xc + i), Math.floor(yc + y), color[0], color[1], color[2]);
             this.setPixel(context, Math.floor(xc + i), Math.floor(yc - y), color[0], color[1], color[2]);
-            this.setPixel(context, Math.floor(xc + y), Math.floor(yc + i), color[0], color[1], color[2]);
-            this.setPixel(context, Math.floor(xc + y), Math.floor(yc - i), color[0], color[1], color[2]);
             this.setPixel(context, Math.floor(xc - i), Math.floor(yc + y), color[0], color[1], color[2]);
             this.setPixel(context, Math.floor(xc - i), Math.floor(yc - y), color[0], color[1], color[2]);
-            this.setPixel(context, Math.floor(xc - y), Math.floor(yc + i), color[0], color[1], color[2]);
-            this.setPixel(context, Math.floor(xc - y), Math.floor(yc - i), color[0], color[1], color[2]);
-            // Getting closer to the origin
+            do {
+                this.setPixel(context, Math.floor(xc + j), Math.floor(yc + i), color[0], color[1], color[2]);
+                this.setPixel(context, Math.floor(xc + j), Math.floor(yc - i), color[0], color[1], color[2]);
+                this.setPixel(context, Math.floor(xc - j), Math.floor(yc + i), color[0], color[1], color[2]);
+                this.setPixel(context, Math.floor(xc - j), Math.floor(yc - i), color[0], color[1], color[2]);
+                // Getting closer to the center of the circle
+                j -=1;
+            } while (j > -1);
+            // Getting closer to the center of the circle
             i -= 1;
         } while (i > -1);
     },
@@ -314,7 +319,6 @@ var Primitives = {
             y = 0;
 
         while (x >= y) {
-            console.log("circle trig " + x + " " + y);
             this.plotCirclePoints(context, xc, yc, x, y, r, color);
             x = x * c - y * s;
             y = x * s + y * c;
@@ -328,7 +332,6 @@ var Primitives = {
             y = 0;
 
         while (x >= y) {
-            console.log("dda");
             this.plotCirclePoints(context, xc, yc, x, y, r, color);
             x = x - (epsilon * y);
             y = y + (epsilon * x);
@@ -340,7 +343,7 @@ var Primitives = {
         var p = 3 - 2 * r,
             x = 0,
             y = r;
-
+            
         while (x < y) {
             console.log("bres1 " + x + " " + y);
             this.plotCirclePoints(context, xc, yc, x, y, r, color);
