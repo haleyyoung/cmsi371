@@ -291,31 +291,31 @@ var Primitives = {
             color,
             i = x,
             j = y;
-        do{
-            color = [colorTop[0] + redDifference*(Math.floor(yc + y) - (yc - r)), colorTop[1] + 
-              greenDifference*(Math.floor(yc + y) - (yc - r)), colorTop[2] +
-              blueDifference*(Math.floor(yc + y) - (yc - r))];
+        do {
+            color = [colorTop[0] + redDifference * (Math.floor(yc + y) - (yc - r)), colorTop[1] +
+                greenDifference * (Math.floor(yc + y) - (yc - r)), colorTop[2] +
+                blueDifference * (Math.floor(yc + y) - (yc - r))];
 
             this.setPixel(context, Math.floor(xc + i), Math.floor(yc + y), color[0], color[1], color[2]);
             this.setPixel(context, Math.floor(xc - i), Math.floor(yc + y), color[0], color[1], color[2]);
 
-            color = [colorTop[0] + redDifference*(Math.floor(yc - y) - (yc - r)), colorTop[1] + 
-              greenDifference*(Math.floor(yc - y) - (yc - r)), colorTop[2] +
-              blueDifference*(Math.floor(yc - y) - (yc - r))];
+            color = [colorTop[0] + redDifference * (Math.floor(yc - y) - (yc - r)), colorTop[1] +
+                greenDifference * (Math.floor(yc - y) - (yc - r)), colorTop[2] +
+                blueDifference * (Math.floor(yc - y) - (yc - r))];
             this.setPixel(context, Math.floor(xc + i), Math.floor(yc - y), color[0], color[1], color[2]);
             this.setPixel(context, Math.floor(xc - i), Math.floor(yc - y), color[0], color[1], color[2]);
 
             do {
-                color = [colorTop[0] + redDifference*(Math.floor(yc + i) - (yc - r)), colorTop[1] + 
-                  greenDifference*(Math.floor(yc + i) - (yc - r)), colorTop[2] +
-                  blueDifference*(Math.floor(yc + i) - (yc - r))];
+                color = [colorTop[0] + redDifference * (Math.floor(yc + i) - (yc - r)), colorTop[1] +
+                    greenDifference * (Math.floor(yc + i) - (yc - r)), colorTop[2] +
+                    blueDifference * (Math.floor(yc + i) - (yc - r))];
 
                 this.setPixel(context, Math.floor(xc + j), Math.floor(yc + i), color[0], color[1], color[2]);
                 this.setPixel(context, Math.floor(xc - j), Math.floor(yc + i), color[0], color[1], color[2]);
 
-                color = [colorTop[0] + redDifference*(Math.floor(yc - i) - (yc - r)), colorTop[1] + 
-                  greenDifference*(Math.floor(yc - i) - (yc - r)), colorTop[2] +
-                  blueDifference*(Math.floor(yc - i) - (yc - r))];
+                color = [colorTop[0] + redDifference * (Math.floor(yc - i) - (yc - r)), colorTop[1] +
+                    greenDifference * (Math.floor(yc - i) - (yc - r)), colorTop[2] +
+                    blueDifference * (Math.floor(yc - i) - (yc - r))];
 
                 this.setPixel(context, Math.floor(xc + j), Math.floor(yc - i), color[0], color[1], color[2]);
                 this.setPixel(context, Math.floor(xc - j), Math.floor(yc - i), color[0], color[1], color[2]);

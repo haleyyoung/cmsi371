@@ -47,18 +47,18 @@ var NanoshopNeighborhood = {
             bTotal = 0,
             i;
         for (i = 0; i < 9; i += 1) {
-            if(rTotal < rgbaNeighborhood[i].r){
+            if (rTotal < rgbaNeighborhood[i].r) {
                 rTotal = rgbaNeighborhood[i].r;
             }
-            if(gTotal < rgbaNeighborhood[i].g){
+            if (gTotal < rgbaNeighborhood[i].g) {
                 gTotal = rgbaNeighborhood[i].g;
             }
-            if(bTotal < rgbaNeighborhood[i].b){
+            if (bTotal < rgbaNeighborhood[i].b) {
                 bTotal = rgbaNeighborhood[i].b;
             }
-            rTotal = Math.random()*rTotal;
-            gTotal = Math.random()*gTotal;
-            bTotal = Math.random()*bTotal;
+            rTotal = Math.random() * rTotal;
+            gTotal = Math.random() * gTotal;
+            bTotal = Math.random() * bTotal;
         }
         return [rTotal, gTotal, bTotal, rgbaNeighborhood[4].a];
     },
@@ -127,14 +127,14 @@ var NanoshopNeighborhood = {
             pixel = filter([
                 // The row of pixels above the current one.
                 firstRow ?
-                    (pixelColumn ? rgba(i - 4) : rgba(i)) :
-                    (pixelColumn ? rgba(iAbove - 4) : rgba(iAbove)),
+                        (pixelColumn ? rgba(i - 4) : rgba(i)) :
+                        (pixelColumn ? rgba(iAbove - 4) : rgba(iAbove)),
 
                 firstRow ? rgba(i) : rgba(iAbove),
 
                 firstRow ?
-                    ((pixelColumn < rowWidth - 4) ? rgba(i + 4) : rgba(i)) :
-                    ((pixelColumn < rowWidth - 4) ? rgba(iAbove + 4) : rgba(iAbove)),
+                        ((pixelColumn < rowWidth - 4) ? rgba(i + 4) : rgba(i)) :
+                        ((pixelColumn < rowWidth - 4) ? rgba(iAbove + 4) : rgba(iAbove)),
 
                 // The current row of pixels.
                 pixelColumn ? rgba(i - 4) : rgba(i),
@@ -147,15 +147,15 @@ var NanoshopNeighborhood = {
 
                 // The row of pixels below the current one.
                 lastRow ?
-                    (pixelColumn ? rgba(i - 4) : rgba(i)) :
-                    (pixelColumn ? rgba(iBelow - 4) : rgba(iBelow)),
+                        (pixelColumn ? rgba(i - 4) : rgba(i)) :
+                        (pixelColumn ? rgba(iBelow - 4) : rgba(iBelow)),
 
                 lastRow ? rgba(i) : rgba(iBelow),
 
                 lastRow ?
-                    ((pixelColumn < rowWidth - 4) ? rgba(i + 4) : rgba(i)) :
-                    ((pixelColumn < rowWidth - 4) ? rgba(iBelow + 4) : rgba(iBelow))
-            ], i/4, imageData.width);
+                        ((pixelColumn < rowWidth - 4) ? rgba(i + 4) : rgba(i)) :
+                        ((pixelColumn < rowWidth - 4) ? rgba(iBelow + 4) : rgba(iBelow))
+            ], i / 4, imageData.width);
 
             // Apply the color that is returned by the filter.
             for (j = 0; j < 4; j += 1) {

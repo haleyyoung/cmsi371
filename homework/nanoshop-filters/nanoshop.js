@@ -39,34 +39,33 @@ var basicDarkener = function (r, g, b, a) {
     // "blue".
     colorAccentuate = function (r, g, b, a, color) {
         // Britain Southwick gave me the idea to average the colors for grayscale
-        var average = (r + g + b)/3;
+        var average = (r + g + b) / 3;
         switch (color) {
-            case "red":
-                if(r >= g && r >= b){
-                    return [r, g, b, a];
-                }
-                break;
-            case "green":
-                if(g >= r && g >= b){
-                    return [r, g, b, a];
-                }
-                break;
-            case "blue":
-                if(b >= r && b >= g){
-                    return [r, g, b, a];
-                }
-                break;
+        case "red":
+            if (r >= g && r >= b) {
+                return [r, g, b, a];
+            }
+            break;
+        case "green":
+            if (g >= r && g >= b) {
+                return [r, g, b, a];
+            }
+            break;
+        case "blue":
+            if (b >= r && b >= g) {
+                return [r, g, b, a];
+            }
+            break;
         }
         return [average, average, average, a];
     },
-    
+
     // This turns all of the colors into shades of red, green and blue. The
     // primary colors of graphics, that is.
     primaryColors = function (r, g, b, a) {
-        if(r >= g && r >= b){
+        if (r >= g && r >= b) {
             return [r, 0, 0, a];
-        }
-        else if(g >= r && g >= b){
+        } else if (g >= r && g >= b) {
             return [0, g, 0, a];
         }
         return [0, 0, b, a];
