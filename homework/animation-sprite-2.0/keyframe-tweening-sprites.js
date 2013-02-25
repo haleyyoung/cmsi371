@@ -244,6 +244,9 @@
                 colorStop: 0.4
             }
         },
+ 
+        // JD: Hmmmm, based on the data structures above and the code below,
+        //     I think you should use blank lines more :)
 
         // First, a selection of "drawing functions" from which we
         // can choose.
@@ -259,7 +262,7 @@
         },
 
         minionBody = function (renderingContext, up) {
-            up = up ? up : 0;
+            up = up ? up : 0; // JD: Cooler way: up = up || 0;
             // Body
             var bodyGradient = renderingContext.createRadialGradient(minionVertices.color1.x,
                     minionVertices.color1.y - up, minionVertices.color1.r,
@@ -369,8 +372,13 @@
                 renderingContext.fill();
             }
             // Check for blinking
-            color = color ? color : eyes.corneaColor;
-            radius = radius ? radius : eyes.corneaRadius;
+            // JD: I changed these ones for the cooler JavaScript way.
+            //     Don't these just look better?
+            //color = color ? color : eyes.corneaColor;
+            //radius = radius ? radius : eyes.corneaRadius;
+            color = color || eyes.corneaColor;
+            radius = radius || eyes.corneaRadius;
+
             renderingContext.fillStyle = color;
             renderingContext.beginPath();
             renderingContext.arc(eyes.ball.x, eyes.ball.y, radius, 0, Math.PI * 2);
@@ -387,6 +395,7 @@
         },
 
         minionSide = function (renderingContext, up) {
+            // JD: up = up || 0;
             up = up ? up : 0;
             minionBody(renderingContext, up);
             // Eye 
