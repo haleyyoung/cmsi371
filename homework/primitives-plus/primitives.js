@@ -278,25 +278,24 @@ var Primitives = {
      * permutations of that eighth's coordinates.  So we define a helper
      * function that all of the circle implementations will use...
      */
-    plotCirclePoints: function (context, xc, yc, x, y, colorTop, colorBottom) {
+    plotCirclePoints: function (context, xc, yc, x, y, r, colorTop, colorBottom) {
         colorTop = colorTop || [0, 0, 0];
         colorBottom = colorBottom || [0, 0, 0];
-        var r = Math.sqrt(x^2 + y^2),
-            redDifference = (colorTop[0] - colorBottom[0]) / (2 * r),
+        var redDifference = (colorTop[0] - colorBottom[0]) / (2 * r),
             greenDifference = (colorTop[1] - colorBottom[1]) / (2 * r),
             blueDifference = (colorTop[2] - colorBottom[2]) / (2 * r),
+            color = [colorTop[0] + redDifference*Math.abs(y - (yc - r)), colorTop[1] + 
+              greenDifference*Math.abs(y - (yc - r)), colorTop[2] + blueDifference*Math.abs(y - (yc - r))],
             i = x;
-            console.log(x);
         do{
-//            alert("colorTop[0] " + colorTop[0] + " colorTop[1] " + colorTop[1] + " colorTop[2] " + colorTop[2]);
-            this.setPixel(context, xc + i, yc + y, colorTop[0], colorTop[1], colorTop[2]);
-            this.setPixel(context, xc + i, yc - y, colorTop[0], colorTop[1], colorTop[2]);
-            this.setPixel(context, xc + y, yc + i, colorTop[0], colorTop[1], colorTop[2]);
-            this.setPixel(context, xc + y, yc - i, colorTop[0], colorTop[1], colorTop[2]);
-            this.setPixel(context, xc - i, yc + y, colorTop[0], colorTop[1], colorTop[2]);
-            this.setPixel(context, xc - i, yc - y, colorTop[0], colorTop[1], colorTop[2]);
-            this.setPixel(context, xc - y, yc + i, colorTop[0], colorTop[1], colorTop[2]);
-            this.setPixel(context, xc - y, yc - i, colorTop[0], colorTop[1], colorTop[2]);
+            this.setPixel(context, Math.floor(xc + i), Math.floor(yc + y), color[0], color[1], color[2]);
+            this.setPixel(context, Math.floor(xc + i), Math.floor(yc - y), color[0], color[1], color[2]);
+            this.setPixel(context, Math.floor(xc + y), Math.floor(yc + i), color[0], color[1], color[2]);
+            this.setPixel(context, Math.floor(xc + y), Math.floor(yc - i), color[0], color[1], color[2]);
+            this.setPixel(context, Math.floor(xc - i), Math.floor(yc + y), color[0], color[1], color[2]);
+            this.setPixel(context, Math.floor(xc - i), Math.floor(yc - y), color[0], color[1], color[2]);
+            this.setPixel(context, Math.floor(xc - y), Math.floor(yc + i), color[0], color[1], color[2]);
+            this.setPixel(context, Math.floor(xc - y), Math.floor(yc - i), color[0], color[1], color[2]);
             // Getting closer to the origin
             i -= 1;
         } while (i > -1);
@@ -315,7 +314,8 @@ var Primitives = {
             y = 0;
 
         while (x >= y) {
-            this.plotCirclePoints(context, xc, yc, x, y, color);
+            console.log("circle trig " + x + " " + y);
+            this.plotCirclePoints(context, xc, yc, x, y, r, color);
             x = x * c - y * s;
             y = x * s + y * c;
         }
@@ -328,7 +328,8 @@ var Primitives = {
             y = 0;
 
         while (x >= y) {
-            this.plotCirclePoints(context, xc, yc, x, y, color);
+            console.log("dda");
+            this.plotCirclePoints(context, xc, yc, x, y, r, color);
             x = x - (epsilon * y);
             y = y + (epsilon * x);
         }
@@ -341,7 +342,8 @@ var Primitives = {
             y = r;
 
         while (x < y) {
-            this.plotCirclePoints(context, xc, yc, x, y, color);
+            console.log("bres1 " + x + " " + y);
+            this.plotCirclePoints(context, xc, yc, x, y, r, color);
             if (p < 0) {
                 p = p + 4 * x + 6;
             } else {
@@ -351,7 +353,7 @@ var Primitives = {
             x += 1;
         }
         if (x === y) {
-            this.plotCirclePoints(context, xc, yc, x, y, color);
+            this.plotCirclePoints(context, xc, yc, x, y, r, color);
         }
     },
 
@@ -364,7 +366,8 @@ var Primitives = {
             v = e - r;
 
         while (x <= y) {
-            this.plotCirclePoints(context, xc, yc, x, y, color);
+            console.log("bres2");
+            this.plotCirclePoints(context, xc, yc, x, y, r, color);
             if (e < 0) {
                 x += 1;
                 u += 2;
@@ -387,7 +390,8 @@ var Primitives = {
             e = 0;
 
         while (y <= x) {
-            this.plotCirclePoints(context, xc, yc, x, y, colorTop, colorBottom);
+            console.log("bres3 " + xc);
+            this.plotCirclePoints(context, xc, yc, x, y, r, [0,0,200], [0,0,0]);
             y += 1;
             e += (2 * y - 1);
             if (e > x) {
