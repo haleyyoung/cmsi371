@@ -28,7 +28,7 @@
     radialGradientSun.addColorStop(0, "#FF9900");
     radialGradientSun.addColorStop(0.5, "red");
 
-    var sceneElements = { 
+    var sceneElements = {
             sky: {
                 vertices: [[0, 0], [512, 512]],
                 color: linearGradientSky
@@ -49,8 +49,8 @@
                 endpoints: [Math.PI, Math.PI * 2],
                 opacity: 0.5,
                 color: radialGradientSun
-           }
-    },
+            }
+        },
 
     // This is a function that draws a rectangular shape with a gradient
         drawBackground = function (part) {

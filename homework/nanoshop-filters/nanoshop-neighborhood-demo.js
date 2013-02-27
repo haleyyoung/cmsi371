@@ -82,15 +82,45 @@
     // (end of adapted code by Tyler Nichols)
 
     // Set a little event handler to apply the filter.
-    $("#apply-filter-button").click(function () {
+    $("#apply-filter-darkener").click(function () {
         // Filter time.
         renderingContext.putImageData(
             NanoshopNeighborhood.applyFilter(
                 renderingContext,
                 renderingContext.getImageData(0, 0, canvas.width, canvas.height),
-                //NanoshopNeighborhood.darkener
-                //NanoshopNeighborhood.averager // Convenience comment for easy switching.
-                //NanoshopNeighborhood.maximum
+                NanoshopNeighborhood.darkener
+            ),
+            0, 0
+        );
+    });
+    $("#apply-filter-averager").click(function () {
+        // Filter time.
+        renderingContext.putImageData(
+            NanoshopNeighborhood.applyFilter(
+                renderingContext,
+                renderingContext.getImageData(0, 0, canvas.width, canvas.height),
+                NanoshopNeighborhood.averager
+            ),
+            0, 0
+        );
+    });
+    $("#apply-filter-maximum").click(function () {
+        // Filter time.
+        renderingContext.putImageData(
+            NanoshopNeighborhood.applyFilter(
+                renderingContext,
+                renderingContext.getImageData(0, 0, canvas.width, canvas.height),
+                NanoshopNeighborhood.maximum
+            ),
+            0, 0
+        );
+    });
+    $("#apply-filter-deviation").click(function () {
+        // Filter time.
+        renderingContext.putImageData(
+            NanoshopNeighborhood.applyFilter(
+                renderingContext,
+                renderingContext.getImageData(0, 0, canvas.width, canvas.height),
                 NanoshopNeighborhood.deviation
             ),
             0, 0
