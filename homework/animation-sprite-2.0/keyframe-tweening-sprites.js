@@ -244,9 +244,7 @@
                 colorStop: 0.4
             }
         },
- 
-        // JD: Hmmmm, based on the data structures above and the code below,
-        //     I think you should use blank lines more :)
+
 
         // First, a selection of "drawing functions" from which we
         // can choose.
@@ -262,7 +260,8 @@
         },
 
         minionBody = function (renderingContext, up) {
-            up = up ? up : 0; // JD: Cooler way: up = up || 0;
+            up = up || 0;
+
             // Body
             var bodyGradient = renderingContext.createRadialGradient(minionVertices.color1.x,
                     minionVertices.color1.y - up, minionVertices.color1.r,
@@ -279,6 +278,7 @@
                 minionVertices.cp4.x, minionVertices.cp4.y - up, minionVertices.start.x,
                 minionVertices.start.y - up);
             renderingContext.fill();
+
             // Goggles Strap
             renderingContext.strokeStyle = goggles.color;
             renderingContext.lineWidth = 14;
@@ -292,6 +292,7 @@
         minion = function (renderingContext) {
             minionBody(renderingContext);
             var i,
+
             // Overalls
                 overallGradient = renderingContext.createRadialGradient(minionVertices.start.x, minionVertices.start.y,
                     40, minionVertices.start.x, minionVertices.start.y, 470);
@@ -308,6 +309,7 @@
                 minionVertices.cp4.x, minionVertices.cp4.y, minionVertices.start.x,
                 minionVertices.start.y);
             renderingContext.fill();
+
             // Overalls shoulders
             renderingContext.strokeStyle = overalls.color;
             renderingContext.lineWidth = 10;
@@ -321,6 +323,7 @@
             renderingContext.quadraticCurveTo(overalls.cp2.x, overalls.cp2.y, overalls.bottomRight.x,
                 overalls.bottomRight.y);
             renderingContext.stroke();
+
             // Arms
             renderingContext.strokeStyle = arms.color;
             renderingContext.lineWidth = minionLeftVertices.arms.left.width;
@@ -332,6 +335,7 @@
             renderingContext.moveTo(arms.right.x, arms.right.y);
             renderingContext.quadraticCurveTo(arms.cp3.x, arms.cp3.y, arms.cp4.x, arms.cp4.y);
             renderingContext.stroke();
+
             // Hands
             renderingContext.fillStyle = minionLeftVertices.arms.left.hand.color;
             renderingContext.beginPath();
@@ -342,10 +346,12 @@
             renderingContext.arc(arms.hand.right.x, arms.hand.right.y,
                 minionLeftVertices.arms.left.hand.radius, 0, Math.PI * 2);
             renderingContext.fill();
+
             // Legs
             renderingContext.fillStyle = legs.color;
             renderingContext.fillRect(legs.corner.x, legs.corner.y, legs.width, legs.height);
             renderingContext.fillRect(legs.corner.x + legs.width + 20, legs.corner.y, legs.width, legs.height);
+
             // Shoes
             renderingContext.fillStyle = shoes.color;
             for (i = 0; i <= 60; i += 60) {
@@ -372,10 +378,6 @@
                 renderingContext.fill();
             }
             // Check for blinking
-            // JD: I changed these ones for the cooler JavaScript way.
-            //     Don't these just look better?
-            //color = color ? color : eyes.corneaColor;
-            //radius = radius ? radius : eyes.corneaRadius;
             color = color || eyes.corneaColor;
             radius = radius || eyes.corneaRadius;
 
@@ -395,9 +397,9 @@
         },
 
         minionSide = function (renderingContext, up) {
-            // JD: up = up || 0;
-            up = up ? up : 0;
+            up = up || 0;
             minionBody(renderingContext, up);
+
             // Eye 
             renderingContext.strokeStyle = minionLeftVertices.eyes.color;
             renderingContext.lineWidth = minionLeftVertices.eyes.width;
@@ -405,6 +407,7 @@
             renderingContext.moveTo(minionLeftVertices.eyes.start.x, minionLeftVertices.eyes.start.y - up);
             renderingContext.lineTo(minionLeftVertices.eyes.end.x, minionLeftVertices.eyes.end.y - up);
             renderingContext.stroke();
+
             // Mouth
             renderingContext.strokeStyle = minionLeftVertices.mouth.color;
             renderingContext.lineWidth = minionLeftVertices.mouth.width;
@@ -413,6 +416,7 @@
             renderingContext.quadraticCurveTo(minionLeftVertices.mouth.cp1.x, minionLeftVertices.mouth.cp1.y - up,
                 minionLeftVertices.mouth.end.x, minionLeftVertices.mouth.end.y - up);
             renderingContext.stroke();
+
             // Overalls
             var overallGradient = renderingContext.createRadialGradient(minionVertices.start.x,
                     minionVertices.start.y - up, up, minionVertices.start.x, minionVertices.start.y - up, 470);
@@ -429,6 +433,7 @@
                 minionVertices.cp4.x, minionVertices.cp4.y - up, minionVertices.start.x,
                 minionVertices.start.y - up);
             renderingContext.fill();
+
             // Overalls shoulders
             renderingContext.strokeStyle = overalls.color;
             renderingContext.lineWidth = 10;
@@ -451,6 +456,7 @@
             renderingContext.fillStyle = minionLeftVertices.shoeDown.color;
             renderingContext.fillRect(minionLeftVertices.shoeDown.corner.x, minionLeftVertices.shoeDown.corner.y,
                 minionLeftVertices.shoeDown.width, minionLeftVertices.shoeDown.height);
+
             // Left leg
             renderingContext.fillStyle = minionLeftVertices.legUp.color;
             renderingContext.beginPath();
@@ -460,6 +466,7 @@
             renderingContext.lineTo(minionLeftVertices.legUp.topRight.x, minionLeftVertices.legUp.topRight.y);
             renderingContext.lineTo(minionLeftVertices.legUp.start.x, minionLeftVertices.legUp.start.y);
             renderingContext.fill();
+
             // Separation between legs
             renderingContext.strokeStyle = minionLeftVertices.legUp.separationColor;
             renderingContext.lineWidth = 1;
@@ -467,6 +474,7 @@
             renderingContext.moveTo(minionLeftVertices.legUp.bottomRight.x, minionLeftVertices.legUp.bottomRight.y);
             renderingContext.lineTo(minionLeftVertices.legUp.topRight.x, minionLeftVertices.legUp.topRight.y);
             renderingContext.stroke();
+
             // Left shoe
             renderingContext.fillStyle = minionLeftVertices.shoeUp.color;
             renderingContext.beginPath();
@@ -494,6 +502,7 @@
             renderingContext.fillStyle = minionRightVertices.legDown.color;
             renderingContext.fillRect(minionRightVertices.legDown.corner.x, minionRightVertices.legDown.corner.y,
                 minionRightVertices.legDown.width, minionRightVertices.legDown.height);
+
             // Right shoe
             renderingContext.fillStyle = minionLeftVertices.shoeUp.color;
             renderingContext.beginPath();
@@ -515,6 +524,7 @@
             renderingContext.lineTo(minionRightVertices.shoeUp.boot.start.x,
                 minionRightVertices.shoeUp.boot.start.y);
             renderingContext.fill();
+
             // Left leg
             renderingContext.fillStyle = minionRightVertices.legUp.color;
             renderingContext.beginPath();
@@ -524,6 +534,7 @@
             renderingContext.lineTo(minionRightVertices.legUp.topRight.x, minionRightVertices.legUp.topRight.y);
             renderingContext.lineTo(minionRightVertices.legUp.start.x, minionRightVertices.legUp.start.y);
             renderingContext.fill();
+
             // Separation between legs
             renderingContext.strokeStyle = minionLeftVertices.legUp.separationColor;
             renderingContext.lineWidth = 1;
@@ -532,6 +543,7 @@
             renderingContext.lineTo(minionRightVertices.legDown.corner.x,
                 minionRightVertices.legDown.corner.y + minionRightVertices.legDown.height);
             renderingContext.stroke();
+
             // Left shoe
             renderingContext.fillStyle = minionLeftVertices.shoeDown.color;
             renderingContext.fillRect(minionRightVertices.shoeDown.corner.x, minionRightVertices.shoeDown.corner.y,
@@ -619,6 +631,7 @@
             renderingContext.quadraticCurveTo(cupcakeVertices.cake.cp1.x, cupcakeVertices.cake.cp1.y,
                 cupcakeVertices.cake.topLeft.x, cupcakeVertices.cake.topLeft.y);
             renderingContext.fill();
+
             // Cake
             cakeGradient.addColorStop(0, cupcakeVertices.cake.colorDark);
             cakeGradient.addColorStop(0.3, cupcakeVertices.cake.colorLight);
@@ -632,6 +645,7 @@
             renderingContext.quadraticCurveTo(cupcakeVertices.cake.cp1.x, cupcakeVertices.cake.cp1.y,
                 cupcakeVertices.cake.topLeft.x, cupcakeVertices.cake.topLeft.y);
             renderingContext.fill();
+
             // Candle
             renderingContext.fillStyle = cupcakeVertices.candle.color;
             renderingContext.beginPath();
@@ -1058,6 +1072,7 @@
                     }
                 ]
             },
+
             // These sprites need to be drawn in this specific order and at the end
             {
                 draw: [cupcake],
