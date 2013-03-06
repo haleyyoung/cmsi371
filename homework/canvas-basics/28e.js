@@ -11,7 +11,6 @@
         linearGradient = renderingContext.createLinearGradient(0, 0, 0, 512);
 
     // Colors for the sky
-    // JD: Very vivid and sunset-y!
     linearGradient.addColorStop(0, "#FFFF66");
     linearGradient.addColorStop(0.3, "#FF4719");
     linearGradient.addColorStop(0.6, "#FF1975");
@@ -19,19 +18,18 @@
 
     // Sky
     renderingContext.fillStyle = linearGradient;
-    renderingContext.fillRect(0, 0, 512, 512);
-    // JD: Avoidable hardcode alert ^^^^^^^^
+    renderingContext.fillRect(0, 0, canvas.width, canvas.height);
     renderingContext.fill();
 
     // Buildings
     var xPlacement = 0,
+        rightMostPixel = canvas.width - 1;
         width = 50 * Math.random() + 25;
-    while (xPlacement + width < 511) {
-        // JD: Another avoidable^^^one (and I see more below).
+    while (xPlacement + width < rightMostPixel) {
         // Building
         var height = 200 * Math.random() + 200;
         renderingContext.fillStyle = "black";
-        renderingContext.fillRect(xPlacement, 511 - height, width, height);
+        renderingContext.fillRect(xPlacement, rightMostPixel - height, width, height);
         renderingContext.fill();
 
         // Windows
@@ -39,8 +37,8 @@
         for (var i = 0; i <= numberOfWindows; i++) {
             renderingContext.fillStyle = "yellow";
             renderingContext.fillRect(xPlacement + width / 2 - 10,
-                                      511 - height + 5 + (i * (height / numberOfWindows)),
-                                      20, 20);
+                rightMostPixel - height + 5 + (i * (height / numberOfWindows)),
+                20, 20);
             renderingContext.fill();
         }
         xPlacement += width + 10;

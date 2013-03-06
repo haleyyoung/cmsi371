@@ -16,12 +16,10 @@
     renderingContext.fillStyle = "#CC00FF";
     renderingContext.beginPath();
     renderingContext.moveTo(hexagonVertices[0][0], hexagonVertices[0][1]);
-    // JD: Hmmmm, this part looks loop-able...and if so, all of a
-    //     sudden your code can support polygons of any size :)
-    renderingContext.lineTo(hexagonVertices[1][0], hexagonVertices[1][1]);
-    renderingContext.lineTo(hexagonVertices[2][0], hexagonVertices[2][1]);
-    renderingContext.lineTo(hexagonVertices[3][0], hexagonVertices[3][1]);
-    renderingContext.lineTo(hexagonVertices[4][0], hexagonVertices[4][1]);
-    renderingContext.lineTo(hexagonVertices[5][0], hexagonVertices[5][1]);
+
+    for (var i = 1; i < hexagonVertices.length; i++) {
+        renderingContext.lineTo(hexagonVertices[i][0], hexagonVertices[i][1]);
+    }
+
     renderingContext.fill();
 }());

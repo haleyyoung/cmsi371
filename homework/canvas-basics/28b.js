@@ -8,7 +8,6 @@
     // Using jQuery here.
     var canvas = document.getElementById("canvas"),
         renderingContext = canvas.getContext("2d"),
-        // JD: OK, the names below are better.
         linearGradientSky = renderingContext.createLinearGradient(0, 0, 0, 250),
         linearGradientWater = renderingContext.createLinearGradient(0, 250, 0, 512),
         radialGradientSun = renderingContext.createRadialGradient(250, 250, 1, 180, 180, 320);
@@ -29,26 +28,28 @@
     radialGradientSun.addColorStop(0, "#FF9900");
     radialGradientSun.addColorStop(0.5, "red");
 
-    // JD: See my indentation suggestion in 27e.js.
-    //     But data-wise, very nicely separated.
-    var sceneElements = { sky: { vertices: [[0, 0], [512, 512]],
-                                 color: linearGradientSky
-                               },
-                          water: { vertices: [[0, 250], [512, 261]],
-                                   color: linearGradientWater
-                                 },
-                          sun: { radius: 100,
-                                 center: [250, 250],
-                                 endpoints: [0, Math.PI],
-                                 color: radialGradientSun
-                               },
-                          reflection: { radius: 100,
-                                        center: [250, 250],
-                                        endpoints: [Math.PI, Math.PI * 2],
-                                        opacity: 0.5,
-                                        color: radialGradientSun
-                                      }
-                        },
+    var sceneElements = { sky: {
+                              vertices: [[0, 0], [512, 512]],
+                              color: linearGradientSky
+                          },
+                          water: {
+                              vertices: [[0, 250], [512, 261]],
+                              color: linearGradientWater
+                          },
+                          sun: {
+                              radius: 100,
+                              center: [250, 250],
+                              endpoints: [0, Math.PI],
+                              color: radialGradientSun
+                          },
+                          reflection: {
+                              radius: 100,
+                              center: [250, 250],
+                              endpoints: [Math.PI, Math.PI * 2],
+                              opacity: 0.5,
+                              color: radialGradientSun
+                          }
+    },
 
     // This is a function that draws a rectangular shape with a gradient
         drawBackground = function (part) {
