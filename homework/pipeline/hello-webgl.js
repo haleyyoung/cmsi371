@@ -90,7 +90,7 @@
         },
 
         // Three solid triangles.
-        {
+    /*    {
             color: { r: 1.0, g: 0, b: 1.0 },
             vertices: [].concat(
                 [ 0.0, 0.0, 0.0 ],
@@ -118,7 +118,7 @@
                 [ -0.25, 0.5, 0.5 ]
             ),
             mode: gl.TRIANGLES
-        },
+        }, */
 
         // A quadrilateral.
         {
@@ -133,9 +133,15 @@
         },
 
         // Shape library demonstration.
-        {
+      /*  {
             color: { r: 1, g: 0.5, b: 0 },
             vertices: Shapes.toRawLineArray(Shapes.icosahedron()),
+            mode: gl.LINES
+        }, */
+        
+        {
+            color: {r: 1, g: 0, b: 1},
+            vertices: Shapes.toRawLineArray(Shapes.triangularPrismRectangleBase()),
             mode: gl.LINES
         }
     ];

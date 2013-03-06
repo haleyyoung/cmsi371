@@ -77,7 +77,6 @@ var Shapes = {
                 [ 0, 2, 5, 3 ],  // Rectangle
                 [ 3, 4, 5 ],
                 [ 4, 5, 2, 1 ],  // Rectangle
-                [ 1, 8, 4 ],
                 [ 0, 1, 4, 3 ], // Rectangle, bottom
             ]
         };
