@@ -54,7 +54,7 @@ var Shapes = {
     },
     
     /*
-     * Returns the vertices for an elongated sphere.
+     * Returns the vertices for a triangular prism with 2 rectangular sides and base.
      */
     triangularPrismRectangleBase: function () {
         // These variables are actually "constants" for trangular prism coordinates.
@@ -74,11 +74,11 @@ var Shapes = {
 
             indices: [
                 [ 0, 1, 2 ],
-                [ 0, 2, 5, 3 ],  // Trapezoid
+                [ 0, 2, 5, 3 ],  // Rectangle
                 [ 3, 4, 5 ],
-                [ 4, 5, 2, 1 ],  // Trapezoid
+                [ 4, 5, 2, 1 ],  // Rectangle
                 [ 1, 8, 4 ],
-                [ 0, 1, 4, 3 ], // Trapezoid, bottom
+                [ 0, 1, 4, 3 ], // Rectangle, bottom
             ]
         };
     },
