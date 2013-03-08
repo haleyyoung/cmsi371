@@ -291,6 +291,11 @@ var Primitives = {
             color,
             i = x,
             j = y;
+
+        // JD: All functional, but now that you got it working, you can
+        //     probably compact this a bit---consolidate repeated expressions
+        //     (and thus superfluous operations), extracting functions from
+        //     repeated statements (thus shortening your source), etc.
         do {
             color = [colorTop[0] + redDifference * (Math.floor(yc + y) - (yc - r)), colorTop[1] +
                 greenDifference * (Math.floor(yc + y) - (yc - r)), colorTop[2] +

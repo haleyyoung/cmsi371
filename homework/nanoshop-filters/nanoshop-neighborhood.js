@@ -37,10 +37,12 @@ var NanoshopNeighborhood = {
         return [ rTotal / 9, gTotal / 9, bTotal / 9, aTotal / 9 ];
     },
 
-     /*
+    /*
      * A basic "random saturation"---this one returns a random number up to the 
      * maximum of all the pixels in the given neighborhood in terms of r, g, and b.
      */
+    // JD: See, you did the filters right here.  Why didn't you follow
+    //     this pattern with single-pixel Nanoshop?
     maximum: function (rgbaNeighborhood, pixelNumber, width) {
         var rTotal = 0,
             gTotal = 0,
