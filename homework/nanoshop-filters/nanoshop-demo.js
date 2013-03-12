@@ -12,7 +12,7 @@
         renderingContext.putImageData(
             Nanoshop.applyFilter(
                 renderingContext.getImageData(0, 0, canvas.width, canvas.height),
-                colorAccentuate, "blue"),
+                Nanoshop.colorAccentuate, {color: "blue"}),
             0,
             0
         );
@@ -22,7 +22,7 @@
         renderingContext.putImageData(
             Nanoshop.applyFilter(
                 renderingContext.getImageData(0, 0, canvas.width, canvas.height),
-                primaryColors),
+                Nanoshop.primaryColors),
             0,
             0
         );
@@ -32,7 +32,7 @@
         renderingContext.putImageData(
             Nanoshop.applyFilter(
                 renderingContext.getImageData(0, 0, canvas.width, canvas.height),
-                basicDarkener),
+                Nanoshop.basicDarkener),
             0,
             0
         );
