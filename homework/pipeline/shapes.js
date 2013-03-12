@@ -54,9 +54,10 @@ var Shapes = {
     },
     
     /*
-     * Returns the vertices for a triangular prism with 2 rectangular sides and base.
+     * Returns the vertices for a triangular prism with 2 rectangular sides and base
+     * (basically laying on its side).
      */
-    triangularPrismRectangleBase: function () {
+    triangularPrism: function () {
         // These variables are actually "constants" for trangular prism coordinates.
         var X = 0.75,
             Y = 0.5,
@@ -66,7 +67,7 @@ var Shapes = {
             vertices: [
                 [ X, 0.0, Z ],
                 [ -X, 0.0, Z ],
-                [ 0.0, Y, Z ]
+                [ 0.0, Y, Z ],
                 [ X, 0.0, -Z ],
                 [ -X, 0.0, -Z ],
                 [ 0.0, Y, -Z ]
@@ -74,10 +75,13 @@ var Shapes = {
 
             indices: [
                 [ 0, 1, 2 ],
-                [ 0, 2, 5, 3 ],  // Rectangle
+                [ 0, 2, 3 ], //Rectangle
+                [ 3, 5, 2 ],
                 [ 3, 4, 5 ],
-                [ 4, 5, 2, 1 ],  // Rectangle
-                [ 0, 1, 4, 3 ], // Rectangle, bottom
+                [ 4, 5, 1 ],  // Rectangle
+                [ 1, 2, 5 ],
+                [ 0, 1, 3 ], // Rectangle, bottom
+                [ 4, 1, 3 ]
             ]
         };
     },

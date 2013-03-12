@@ -141,11 +141,13 @@
         
         {
             color: {r: 1, g: 0, b: 1},
-            vertices: Shapes.toRawLineArray(Shapes.triangularPrismRectangleBase()),
+            vertices: Shapes.toRawLineArray(Shapes.triangularPrism()),
             mode: gl.LINES
         }
     ];
 
+
+console.log(Shapes.toRawLineArray(Shapes.triangularPrism()));
     // Pass the vertices to WebGL.
     for (i = 0, max = objectsToDraw.length; i < max; i += 1) {
         objectsToDraw[i].buffer = GLSLUtilities.initVertexBuffer(gl,
