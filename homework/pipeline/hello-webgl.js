@@ -138,10 +138,16 @@
             vertices: Shapes.toRawLineArray(Shapes.icosahedron()),
             mode: gl.LINES
         }, */
-        
+
         {
             color: {r: 1, g: 0, b: 1},
             vertices: Shapes.toRawLineArray(Shapes.triangularPrism()),
+            mode: gl.LINES
+        },
+        
+        {
+            color: {r: 0, g: 1, b: 1},
+            vertices: Shapes.toRawLineArray(Shapes.cube()),
             mode: gl.LINES
         }
     ];

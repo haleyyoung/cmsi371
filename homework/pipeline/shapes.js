@@ -85,6 +85,40 @@ var Shapes = {
             ]
         };
     },
+    
+    cube: function() {
+        var X = 0.75,
+            Y = 0.75,
+            Z = -0.75;
+
+        return {
+            vertices: [
+                [X, Y, Z],
+                [X, -Y, Z],
+                [-X, -Y, Z],
+                [-X, Y, Z],
+                [X, Y, -Z],
+                [X, -Y, -Z],
+                [-X, -Y, -Z],
+                [-X, Y, -Z]
+            ],
+
+            indices: [
+                [ 0, 1, 3 ], // Front
+                [ 3, 2, 1 ],
+                [ 0, 1, 5 ], // Sides
+                [ 5, 4, 0 ],
+                [ 3, 2, 6 ],
+                [ 6, 7, 3 ],
+                [ 0, 3, 4 ], // Top
+                [ 3, 4, 7 ],
+                [ 1, 2, 5 ], // Bottom
+                [ 2, 5, 6 ],
+                [ 4, 5, 6 ], // Back
+                [ 4, 6, 7 ]
+            ]
+        };
+    },
 
     /*
      * Utility function for turning indexed vertices into a "raw" coordinate array
