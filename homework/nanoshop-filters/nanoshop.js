@@ -10,6 +10,10 @@ var Nanoshop = {
      * A filter is a function (r, g, b, a) that returns another
      * pixel as a 4-element array representing an RGBA value.
      */
+    // JD: The addition of the color parameter is noted and generally
+    //     done well.  But, to expand this a bit further, this can be
+    //     generalized into a broader-purpose "options" object, so that
+    //     you can support a variety of filters with different parameters.
     applyFilter: function (imageData, filter, color) {
         // For every pixel, replace with something determined by the filter.
         var i,
@@ -30,6 +34,8 @@ var Nanoshop = {
 };
 
 // Possible filters to choose from
+// JD: Ack---these are supposed to go *inside* Nanoshop.
+//     No need to pollute the global namespace with these!
 var basicDarkener = function (r, g, b, a) {
         return [r / 2, g / 2, b / 2, a];
     },
