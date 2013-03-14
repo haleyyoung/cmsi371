@@ -213,6 +213,8 @@
             }
             shapes[i].colorBuffer = GLSLUtilities.initVertexBuffer(gl,
                     shapes[i].colors);
+            // Look for nested shapes' vertices to pass. Also checks to make
+            // sure the children array isn't empty
             if (shapes[i].children && shapes[i].children.length !== 0) {
                 passVertices(shapes[i].children);                
             }
