@@ -146,7 +146,6 @@ var Shapes = {
         for (i = 0; i < latitudeLines; i++) {
             currentLatitude = i * maxTheta / latitudeLines;
             for (j = 0; j < longitudeLines; j++) {
-            console.log("vertex " + (latitudeLines * i + j));
                 vertices[latitudeLines * i + j] = [];
                 currentLongitude += j * maxTheta / longitudeLines;
                 vertices[latitudeLines * i + j][0] = radius * Math.sin(currentLatitude) * Math.cos(currentLongitude);
@@ -161,8 +160,7 @@ var Shapes = {
 
                 indices[2 * ((latitudeLines - 1) * k + l)] = [];
                 indices[2 * ((latitudeLines - 1) * k + l) + 1] = [];
-                
-                console.log("index " + (2*((latitudeLines - 1) * k + l)) + " next " + (2*((latitudeLines - 1) * k + l) + 1));
+
                 // First Triangle
                 // Top left of square
                 indices[2 * ((latitudeLines - 1) * k + l)][0] = longitudeLines * k + l;
@@ -178,6 +176,10 @@ var Shapes = {
                 indices[2 * ((latitudeLines - 1) * k + l) + 1][1] = longitudeLines * (k + 1) + l + 1;
                 // Top right of square
                 indices[2 * ((latitudeLines - 1) * k + l) + 1][2] = longitudeLines * k + l + 1;
+                
+                console.log((2 * ((latitudeLines - 1) * k + l)) + " top triangle " + indices[1*((latitudeLines - 1) * k + l)][0] + ", " + indices[1*((latitudeLines - 1) * k + l)][1] + ", " + indices[1*((latitudeLines - 1) * k + l)][2]);
+                console.log((2 * ((latitudeLines - 1) * k + l) + 1) + " bottom triangle " + indices[1*((latitudeLines - 1) * k + l) + 1][0] + ", " + indices[1*((latitudeLines - 1) * k + l) + 1][1] + ", " + indices[1*((latitudeLines - 1) * k + l) + 1][2]);
+                
             }
         }
 
@@ -223,6 +225,7 @@ var Shapes = {
 
         for (i = 0, maxi = indexedVertices.indices.length; i < maxi; i += 1) {
             for (j = 0, maxj = indexedVertices.indices[i].length; j < maxj; j += 1) {
+//console.log("number? " + indexedVertices.indices[i][j]);
                 result = result.concat(
                     indexedVertices.vertices[
                         indexedVertices.indices[i][j]
