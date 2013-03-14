@@ -189,6 +189,12 @@
                     mode: gl.LINES
                 }
             ]
+        },
+
+        {
+            color: {r: 1, g: 0.5, b: 0.5},
+            vertices: Shapes.toRawLineArray(Shapes.sphere()),
+            mode: gl.LINES
         }
     ];
 

@@ -135,40 +135,48 @@ var Shapes = {
             longitudeLines = 10,
             currentLatitude,
             currentLongitude,
-            vertices,
-            indices,
-            structureToReturn,
+            vertices = [],
+            indices = [],
+            structureToReturn = {},
             i,
             j,
             k;
 
+        //Build vertices
         for (i = 0; i < latitudeLines; i++) {
             currentLatitude = i * maxTheta / latitudeLines;
             for (j = 0; j < longitudeLines; j++) {
+                vertices[longitudeLines * i + j] = [];
                 currentLongitude += j * maxTheta / longitudeLines;
                 vertices[longitudeLines * i + j][0] = radius * Math.sin(currentLatitude) * Math.cos(currentLongitude);
-                vertcies[longitudeLines * i + j][1] = radius * Math.cos(currentLatitude);
+                vertices[longitudeLines * i + j][1] = radius * Math.cos(currentLatitude);
                 vertices[longitudeLines * i + j][2] = radius * Math.sin(currentLatitude) * Math.sin(currentLongitude);
             }
         }
         
+        // Build indices
         for (k = 0; k < (latitudeLines - 1); k++) {
             for(l = 0; l < (longitudeLines - 1); l++) {
+
+                indices[2 * ((latitudeLines - 1) * k + l)] = [];
+                indices[2 * ((latitudeLines - 1) * k + l) + 1] = [];
+                
+                console.log("index " + (2 * (longitudeLines * k + l)) + " next " + (2 * (longitudeLines * k + l) + 1));
                 // First Triangle
                 // Top left of square
-                indices[2 * (longitudeLines * k + l)][0] = vertices[longitudeLines * k + l];
+                indices[2 * ((latitudeLines - 1) * k + l)][0] = longitudeLines * k + l;
                 // Top right of square
-                indices[2 * (longitudeLines * k + l)][1] = vertices[longitudeLines * k + l + 1];
+                indices[2 * ((latitudeLines - 1) * k + l)][1] = longitudeLines * k + l + 1;
                 // Bottom left of square
-                indices[2 * (longitudeLines * k + l)][2] = vertices[longitudeLines * (k + 1) + l];
+                indices[2 * ((latitudeLines - 1) * k + l)][2] = longitudeLines * (k + 1) + l;
                 
                 // Second Triangle
                 // Bottom left of square
-                indices[2 * (longitudeLines * k + l)][2] = vertices[longitudeLines * (k + 1) + l];
+                indices[2 * ((latitudeLines - 1) * k + l) + 1][0] = longitudeLines * (k + 1) + l;
                 // Bottom right of square
-                indices[2 * (longitudeLines * k + l)][2] = vertices[longitudeLines * (k + 1) + l + 1];
+                indices[2 * ((latitudeLines - 1) * k + l) + 1][1] = longitudeLines * (k + 1) + l + 1;
                 // Top right of square
-                indices[2 * (longitudeLines * k + l)][1] = vertices[longitudeLines * k + l + 1];
+                indices[2 * ((latitudeLines - 1) * k + l) + 1][2] = longitudeLines * k + l + 1;
             }
         }
 
