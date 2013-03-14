@@ -142,13 +142,14 @@
         {
             color: {r: 1, g: 0, b: 1},
             vertices: Shapes.toRawLineArray(Shapes.triangularPrism()),
-            mode: gl.LINES
-        },
-        
-        {
-            color: {r: 0, g: 1, b: 1},
-            vertices: Shapes.toRawLineArray(Shapes.cube()),
-            mode: gl.LINES
+            mode: gl.LINES,
+            children: [
+                    {
+                    color: {r: 0, g: 1, b: 1},
+                    vertices: Shapes.toRawLineArray(Shapes.cube()),
+                    mode: gl.LINES
+                }
+            ]
         }
     ];
 
@@ -197,11 +198,23 @@ console.log(Shapes.toRawLineArray(Shapes.triangularPrism()));
      * Displays an individual object.
      */
     drawObject = function (object) {
+    console.log("1");
         gl.uniform3f(gl.getUniformLocation(shaderProgram, "color"),
             object.color.r, object.color.g, object.color.b);
+    console.log("2");
         gl.bindBuffer(gl.ARRAY_BUFFER, object.buffer);
+    console.log("test " + gl.ARRAY_BUFFER);
         gl.vertexAttribPointer(vertexPosition, 3, gl.FLOAT, false, 0, 0);
+    console.log("4");
         gl.drawArrays(object.mode, 0, object.vertices.length / 3);
+    console.log("5");
+        if (object.children) {
+            console.log("has a child ");
+            for (var i = 0; i < object.children.length; i++) {
+                console.log(object.children[i]);
+                drawObject(object.children[i]);
+            }
+        }
     };
 
     /*
