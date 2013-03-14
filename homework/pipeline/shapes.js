@@ -146,11 +146,12 @@ var Shapes = {
         for (i = 0; i < latitudeLines; i++) {
             currentLatitude = i * maxTheta / latitudeLines;
             for (j = 0; j < longitudeLines; j++) {
-                vertices[longitudeLines * i + j] = [];
+            console.log("vertex " + (latitudeLines * i + j));
+                vertices[latitudeLines * i + j] = [];
                 currentLongitude += j * maxTheta / longitudeLines;
-                vertices[longitudeLines * i + j][0] = radius * Math.sin(currentLatitude) * Math.cos(currentLongitude);
-                vertices[longitudeLines * i + j][1] = radius * Math.cos(currentLatitude);
-                vertices[longitudeLines * i + j][2] = radius * Math.sin(currentLatitude) * Math.sin(currentLongitude);
+                vertices[latitudeLines * i + j][0] = radius * Math.sin(currentLatitude) * Math.cos(currentLongitude);
+                vertices[latitudeLines * i + j][1] = radius * Math.cos(currentLatitude);
+                vertices[latitudeLines * i + j][2] = radius * Math.sin(currentLatitude) * Math.sin(currentLongitude);
             }
         }
         
@@ -161,7 +162,7 @@ var Shapes = {
                 indices[2 * ((latitudeLines - 1) * k + l)] = [];
                 indices[2 * ((latitudeLines - 1) * k + l) + 1] = [];
                 
-                console.log("index " + (2 * (longitudeLines * k + l)) + " next " + (2 * (longitudeLines * k + l) + 1));
+                console.log("index " + (2*((latitudeLines - 1) * k + l)) + " next " + (2*((latitudeLines - 1) * k + l) + 1));
                 // First Triangle
                 // Top left of square
                 indices[2 * ((latitudeLines - 1) * k + l)][0] = longitudeLines * k + l;
