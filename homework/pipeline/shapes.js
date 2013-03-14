@@ -85,7 +85,10 @@ var Shapes = {
             ]
         };
     },
-    
+
+    /*
+     * Returns the vertices for a cube.
+     */    
     cube: function() {
         var X = 0.75,
             Y = 0.75,
@@ -118,6 +121,60 @@ var Shapes = {
                 [ 4, 6, 7 ]
             ]
         };
+    },
+
+    /*
+     * Returns the vertices for a unit sphere mesh.
+     * Mathematical concept from http://learningwebgl.com/blog/?p=1253
+     */
+    sphere: function() {
+        var radius = 1,
+            maxTheta = Math.PI,
+            maxPhi = 2 * Math.PI,
+            latitudeLines = 10,
+            longitudeLines = 10,
+            currentLatitude,
+            currentLongitude,
+            vertices,
+            indices,
+            structureToReturn,
+            i,
+            j,
+            k;
+
+        for (i = 0; i < latitudeLines; i++) {
+            currentLatitude = i * maxTheta / latitudeLines;
+            for (j = 0; j < longitudeLines; j++) {
+                currentLongitude += j * maxTheta / longitudeLines;
+                vertices[longitudeLines * i + j][0] = radius * Math.sin(currentLatitude) * Math.cos(currentLongitude);
+                vertcies[longitudeLines * i + j][1] = radius * Math.cos(currentLatitude);
+                vertices[longitudeLines * i + j][2] = radius * Math.sin(currentLatitude) * Math.sin(currentLongitude);
+            }
+        }
+        
+        for (k = 0; k < (latitudeLines - 1); k++) {
+            for(l = 0; l < (longitudeLines - 1); l++) {
+                // First Triangle
+                // Top left of square
+                indices[2 * (longitudeLines * k + l)][0] = vertices[longitudeLines * k + l];
+                // Top right of square
+                indices[2 * (longitudeLines * k + l)][1] = vertices[longitudeLines * k + l + 1];
+                // Bottom left of square
+                indices[2 * (longitudeLines * k + l)][2] = vertices[longitudeLines * (k + 1) + l];
+                
+                // Second Triangle
+                // Bottom left of square
+                indices[2 * (longitudeLines * k + l)][2] = vertices[longitudeLines * (k + 1) + l];
+                // Bottom right of square
+                indices[2 * (longitudeLines * k + l)][2] = vertices[longitudeLines * (k + 1) + l + 1];
+                // Top right of square
+                indices[2 * (longitudeLines * k + l)][1] = vertices[longitudeLines * k + l + 1];
+            }
+        }
+
+        structureToReturn.vertices = vertices;
+        structureToReturn.indices = indices;
+        return structureToReturn;
     },
 
     /*
