@@ -128,57 +128,6 @@
     // Build the objects to display.
     objectsToDraw = [
         {
-            vertices: [].concat(
-                [ 0.0, 0.0, 0.0 ],
-                [ 0.5, 0.0, -0.75 ],
-                [ 0.0, 0.5, 0.0 ]
-            ),
-            colors: [].concat(
-                [ 1.0, 0.0, 0.0 ],
-                [ 0.0, 1.0, 0.0 ],
-                [ 0.0, 0.0, 1.0 ]
-            ),
-            mode: gl.TRIANGLES
-        },
-
-        {
-            color: { r: 0.0, g: 1.0, b: 0 },
-            vertices: [].concat(
-                [ 0.25, 0.0, -0.5 ],
-                [ 0.75, 0.0, -0.5 ],
-                [ 0.25, 0.5, -0.5 ]
-            ),
-            mode: gl.TRIANGLES
-        },
-
-        {
-            color: { r: 0.0, g: 0.0, b: 1.0 },
-            vertices: [].concat(
-                [ -0.25, 0.0, 0.5 ],
-                [ 0.5, 0.0, 0.5 ],
-                [ -0.25, 0.5, 0.5 ]
-            ),
-            mode: gl.TRIANGLES
-        },
-
-        {
-            color: { r: 0.0, g: 0.0, b: 1.0 },
-            vertices: [].concat(
-                [ -1.0, -1.0, 0.75 ],
-                [ -1.0, -0.1, -1.0 ],
-                [ -0.1, -0.1, -1.0 ],
-                [ -0.1, -1.0, 0.75 ]
-            ),
-            mode: gl.LINE_LOOP
-        },
-
-        /*{
-            color: { r: 0.0, g: 0.5, b: 0.0 },
-            vertices: Shapes.toRawLineArray(Shapes.icosahedron()),
-            mode: gl.LINES
-        }, */
-
-        {
             color: {r: 1, g: 0, b: 1},
             vertices: Shapes.toRawLineArray(Shapes.triangularPrism()),
             mode: gl.LINES,
@@ -200,6 +149,7 @@
 
     // Pass the vertices to WebGL.
     passVertices = function (shapes) {
+        console.log("vertices");
         for (i = 0, maxi = shapes.length; i < maxi; i += 1) {
             shapes[i].buffer = GLSLUtilities.initVertexBuffer(gl,
                     shapes[i].vertices);
@@ -219,6 +169,7 @@
             }
             shapes[i].colorBuffer = GLSLUtilities.initVertexBuffer(gl,
                     shapes[i].colors);
+
             // Look for nested shapes' vertices to pass. Also checks to make
             // sure the children array isn't empty
             if (shapes[i].children && shapes[i].children.length !== 0) {
@@ -268,6 +219,7 @@
      */
     drawObject = function (object) {
         // Set the varying colors.
+        console.log("drawing object");
         gl.bindBuffer(gl.ARRAY_BUFFER, object.colorBuffer);
         gl.vertexAttribPointer(vertexColor, 3, gl.FLOAT, false, 0, 0);
 

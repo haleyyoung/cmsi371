@@ -176,10 +176,6 @@ var Shapes = {
                 indices[2 * ((latitudeLines - 1) * k + l) + 1][1] = longitudeLines * (k + 1) + l + 1;
                 // Top right of square
                 indices[2 * ((latitudeLines - 1) * k + l) + 1][2] = longitudeLines * k + l + 1;
-                
-                console.log((2 * ((latitudeLines - 1) * k + l)) + " top triangle " + indices[1*((latitudeLines - 1) * k + l)][0] + ", " + indices[1*((latitudeLines - 1) * k + l)][1] + ", " + indices[1*((latitudeLines - 1) * k + l)][2]);
-                console.log((2 * ((latitudeLines - 1) * k + l) + 1) + " bottom triangle " + indices[1*((latitudeLines - 1) * k + l) + 1][0] + ", " + indices[1*((latitudeLines - 1) * k + l) + 1][1] + ", " + indices[1*((latitudeLines - 1) * k + l) + 1][2]);
-                
             }
         }
 
@@ -225,7 +221,6 @@ var Shapes = {
 
         for (i = 0, maxi = indexedVertices.indices.length; i < maxi; i += 1) {
             for (j = 0, maxj = indexedVertices.indices[i].length; j < maxj; j += 1) {
-//console.log("number? " + indexedVertices.indices[i][j]);
                 result = result.concat(
                     indexedVertices.vertices[
                         indexedVertices.indices[i][j]
