@@ -149,7 +149,6 @@
 
     // Pass the vertices to WebGL.
     passVertices = function (shapes) {
-        console.log("vertices");
         for (i = 0, maxi = shapes.length; i < maxi; i += 1) {
             shapes[i].buffer = GLSLUtilities.initVertexBuffer(gl,
                     shapes[i].vertices);
@@ -219,7 +218,6 @@
      */
     drawObject = function (object) {
         // Set the varying colors.
-        console.log("drawing object");
         gl.bindBuffer(gl.ARRAY_BUFFER, object.colorBuffer);
         gl.vertexAttribPointer(vertexColor, 3, gl.FLOAT, false, 0, 0);
 
