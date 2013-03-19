@@ -134,8 +134,8 @@ var Shapes = {
         var radius = 0.5,
             maxTheta = Math.PI,
             maxPhi = 2 * Math.PI,
-            latitudeLines = 10,
-            longitudeLines = 10,
+            latitudeLines = 20,
+            longitudeLines = 20,
             currentLatitude,
             currentLongitude,
             vertices = [],
@@ -146,7 +146,7 @@ var Shapes = {
             k,
             l;
         // Figure out if we're working with a balloon shape
-        balloon = balloon ? 0.6 : 0;
+        balloon = balloon ? 0.5 : 0;
         //Build vertices
         for (i = 0; i < (latitudeLines + 1); i++) {
             currentLatitude = i * maxTheta / latitudeLines;

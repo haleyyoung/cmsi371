@@ -34,12 +34,6 @@
         // The big "draw scene" function.
         drawScene,
 
-        // Reusable loop variables.
-        i,
-        maxi,
-        j,
-        maxj,
-
         /*
          * This code does not really belong here: it should live
          * in a separate library of matrix and transformation
@@ -129,34 +123,39 @@
     objectsToDraw = [
         {
             color: {r: 1, g: 0, b: 0},
-            vertices: Shapes.toRawLineArray(Shapes.triangularPrism()),
-            mode: gl.LINES,
+            vertices: Shapes.toRawTriangleArray(Shapes.triangularPrism()),
+            mode: gl.TRIANGLES,
             children: [
                     {
                     color: {r: 0, g: 1, b: 0.5},
                     vertices: Shapes.toRawLineArray(Shapes.cube()),
-                    mode: gl.LINES,
-                    children: [
-                        {
-                        color: {r: 0.8, g: 1, b: 0},
-                        vertices: Shapes.toRawLineArray(Shapes.sphere(false)),
-                        mode: gl.LINES
-                        }
-                    ]
+                    mode: gl.LINES
                 }
             ]
         },
 
         {
             color: {r: 0.6, g: 0, b: 1},
-            vertices: Shapes.toRawLineArray(Shapes.sphere(true)),
-            mode: gl.LINES
+            vertices: Shapes.toRawTriangleArray(Shapes.sphere(true)),
+            mode: gl.TRIANGLES,
+                children: [
+                    {
+                    color: {r: 0.8, g: 1, b: 0},
+                    vertices: Shapes.toRawLineArray(Shapes.sphere(false)),
+                    mode: gl.LINES
+                    }
+                ]
         }
     ];
 
     // Pass the vertices to WebGL.
     passVertices = function (shapes) {
-        for (var i = 0, maxi = shapes.length; i < maxi; i += 1) {
+        // Reusable loop variables.
+        var i,
+            maxi,
+            j,
+            maxj;
+        for (i = 0, maxi = shapes.length; i < maxi; i += 1) {
             shapes[i].buffer = GLSLUtilities.initVertexBuffer(gl,
                     shapes[i].vertices);
 
@@ -164,6 +163,7 @@
                 // If we have a single color, we expand that into an array
                 // of the same color over and over.
                 shapes[i].colors = [];
+
                 for (j = 0, maxj = shapes[i].vertices.length / 3;
                         j < maxj; j += 1) {
                     shapes[i].colors = shapes[i].colors.concat(
@@ -232,6 +232,7 @@
         gl.bindBuffer(gl.ARRAY_BUFFER, object.buffer);
         gl.vertexAttribPointer(vertexPosition, 3, gl.FLOAT, false, 0, 0);
         gl.drawArrays(object.mode, 0, object.vertices.length / 3);
+
         if (object.children) {
             for (var i = 0; i < object.children.length; i++) {
                 drawObject(object.children[i]);
