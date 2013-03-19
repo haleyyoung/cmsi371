@@ -128,12 +128,12 @@
     // Build the objects to display.
     objectsToDraw = [
         {
-            color: {r: 1, g: 0, b: 1},
+            color: {r: 1, g: 0, b: 0},
             vertices: Shapes.toRawLineArray(Shapes.triangularPrism()),
             mode: gl.LINES,
             children: [
                     {
-                    color: {r: 0, g: 1, b: 1},
+                    color: {r: 0, g: 1, b: 0.5},
                     vertices: Shapes.toRawLineArray(Shapes.cube()),
                     mode: gl.LINES
                 }
@@ -141,7 +141,7 @@
         },
 
         {
-            color: {r: 1, g: 0.5, b: 0.5},
+            color: {r: 0.6, g: 0, b: 1},
             vertices: Shapes.toRawLineArray(Shapes.sphere()),
             mode: gl.LINES
         }
@@ -149,7 +149,7 @@
 
     // Pass the vertices to WebGL.
     passVertices = function (shapes) {
-        for (i = 0, maxi = shapes.length; i < maxi; i += 1) {
+        for (var i = 0, maxi = shapes.length; i < maxi; i += 1) {
             shapes[i].buffer = GLSLUtilities.initVertexBuffer(gl,
                     shapes[i].vertices);
 
@@ -172,7 +172,7 @@
             // Look for nested shapes' vertices to pass. Also checks to make
             // sure the children array isn't empty
             if (shapes[i].children && shapes[i].children.length !== 0) {
-                passVertices(shapes[i].children);                
+                passVertices(shapes[i].children);
             }
         }
     };
