@@ -11,7 +11,7 @@
 
         // This variable stores 3D model information.
         objectsToDraw,
-        
+
         // The function that passes the shape vertices to WebGL
         passVertices,
 
@@ -126,7 +126,7 @@
             vertices: Shapes.toRawTriangleArray(Shapes.triangularPrism()),
             mode: gl.TRIANGLES,
             children: [
-                    {
+                {
                     color: {r: 0, g: 1, b: 0.5},
                     vertices: Shapes.toRawLineArray(Shapes.cube()),
                     mode: gl.LINES
@@ -138,13 +138,13 @@
             color: {r: 0.6, g: 0, b: 1},
             vertices: Shapes.toRawTriangleArray(Shapes.sphere(true)),
             mode: gl.TRIANGLES,
-                children: [
-                    {
+            children: [
+                {
                     color: {r: 0.8, g: 1, b: 0},
                     vertices: Shapes.toRawLineArray(Shapes.sphere(false)),
                     mode: gl.LINES
-                    }
-                ]
+                }
+            ]
         }
     ];
 
@@ -155,6 +155,7 @@
             maxi,
             j,
             maxj;
+
         for (i = 0, maxi = shapes.length; i < maxi; i += 1) {
             shapes[i].buffer = GLSLUtilities.initVertexBuffer(gl,
                     shapes[i].vertices);
@@ -224,6 +225,8 @@
      * Displays an individual object.
      */
     drawObject = function (object) {
+        var i;
+
         // Set the varying colors.
         gl.bindBuffer(gl.ARRAY_BUFFER, object.colorBuffer);
         gl.vertexAttribPointer(vertexColor, 3, gl.FLOAT, false, 0, 0);
@@ -234,7 +237,7 @@
         gl.drawArrays(object.mode, 0, object.vertices.length / 3);
 
         if (object.children) {
-            for (var i = 0; i < object.children.length; i++) {
+            for (i = 0; i < object.children.length; i += 1) {
                 drawObject(object.children[i]);
             }
         }
@@ -244,6 +247,9 @@
      * Displays the scene.
      */
     drawScene = function () {
+        var i,
+            maxi;
+
         // Clear the display.
         gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
 
