@@ -142,7 +142,7 @@
 
         {
             color: {r: 0.6, g: 0, b: 1},
-            vertices: Shapes.toRawLineArray(Shapes.sphere()),
+            vertices: Shapes.toRawLineArray(Shapes.sphere(true)),
             mode: gl.LINES
         }
     ];

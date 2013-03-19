@@ -124,11 +124,14 @@ var Shapes = {
     },
 
     /*
-     * Returns the vertices for a unit sphere mesh.
+     * Returns the vertices for a sphere mesh.
      * Mathematical concept from http://learningwebgl.com/blog/?p=1253
+     * Takes a parameter called balloon, if balloon is not passed in, then we
+     * assume we're building a regular sphere, otherwise a balloon shape is
+     * generated.
      */
-    sphere: function() {
-        var radius = 1,
+    sphere: function(balloon) {
+        var radius = 0.5,
             maxTheta = Math.PI,
             maxPhi = 2 * Math.PI,
             latitudeLines = 10,
@@ -140,8 +143,10 @@ var Shapes = {
             structureToReturn = {},
             i,
             j,
-            k;
-
+            k,
+            l;
+        // Figure out if we're working with a balloon shape
+        balloon = balloon ? 0.6 : 0;
         //Build vertices
         for (i = 0; i < (latitudeLines + 1); i++) {
             currentLatitude = i * maxTheta / latitudeLines;
@@ -151,6 +156,10 @@ var Shapes = {
                 vertices[latitudeLines * i + j][0] = radius * Math.sin(currentLatitude) * Math.cos(currentLongitude);
                 vertices[latitudeLines * i + j][1] = radius * Math.cos(currentLatitude);
                 vertices[latitudeLines * i + j][2] = radius * Math.sin(currentLatitude) * Math.sin(currentLongitude);
+                if (balloon) {
+                    vertices[latitudeLines * i + j][0] *= (currentLatitude*balloon);
+                    vertices[latitudeLines * i + j][2] *= (currentLatitude*balloon);
+                }
             }
         }
         
