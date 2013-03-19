@@ -135,7 +135,14 @@
                     {
                     color: {r: 0, g: 1, b: 0.5},
                     vertices: Shapes.toRawLineArray(Shapes.cube()),
-                    mode: gl.LINES
+                    mode: gl.LINES,
+                    children: [
+                        {
+                        color: {r: 0.8, g: 1, b: 0},
+                        vertices: Shapes.toRawLineArray(Shapes.sphere(false)),
+                        mode: gl.LINES
+                        }
+                    ]
                 }
             ]
         },
