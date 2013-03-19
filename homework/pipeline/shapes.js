@@ -143,9 +143,9 @@ var Shapes = {
             k;
 
         //Build vertices
-        for (i = 0; i < latitudeLines; i++) {
+        for (i = 0; i < (latitudeLines + 1); i++) {
             currentLatitude = i * maxTheta / latitudeLines;
-            for (j = 0; j < longitudeLines; j++) {
+            for (j = 0; j < (longitudeLines + 1); j++) {
                 vertices[latitudeLines * i + j] = [];
                 currentLongitude = j * maxPhi / longitudeLines;
                 vertices[latitudeLines * i + j][0] = radius * Math.sin(currentLatitude) * Math.cos(currentLongitude);
@@ -155,27 +155,27 @@ var Shapes = {
         }
         
         // Build indices
-        for (k = 0; k < (latitudeLines - 1); k++) {
-            for(l = 0; l < (longitudeLines - 1); l++) {
+        for (k = 0; k < (latitudeLines + 1); k++) {
+            for(l = 0; l < (longitudeLines + 1); l++) {
 
-                indices[2 * ((latitudeLines - 1) * k + l)] = [];
-                indices[2 * ((latitudeLines - 1) * k + l) + 1] = [];
+                indices[2 * ((latitudeLines + 1) * k + l)] = [];
+                indices[2 * ((latitudeLines + 1) * k + l) + 1] = [];
 
                 // First Triangle
                 // Top left of square
-                indices[2 * ((latitudeLines - 1) * k + l)][0] = longitudeLines * k + l;
+                indices[2 * ((latitudeLines + 1) * k + l)][0] = longitudeLines * k + l;
                 // Top right of square
-                indices[2 * ((latitudeLines - 1) * k + l)][1] = longitudeLines * k + l + 1;
+                indices[2 * ((latitudeLines + 1) * k + l)][1] = longitudeLines * k + l + 1;
                 // Bottom left of square
-                indices[2 * ((latitudeLines - 1) * k + l)][2] = longitudeLines * (k + 1) + l;
+                indices[2 * ((latitudeLines + 1) * k + l)][2] = longitudeLines * (k + 1) + l;
                 
                 // Second Triangle
                 // Bottom left of square
-                indices[2 * ((latitudeLines - 1) * k + l) + 1][0] = longitudeLines * (k + 1) + l;
+                indices[2 * ((latitudeLines + 1) * k + l) + 1][0] = longitudeLines * (k + 1) + l;
                 // Bottom right of square
-                indices[2 * ((latitudeLines - 1) * k + l) + 1][1] = longitudeLines * (k + 1) + l + 1;
+                indices[2 * ((latitudeLines + 1) * k + l) + 1][1] = longitudeLines * (k + 1) + l + 1;
                 // Top right of square
-                indices[2 * ((latitudeLines - 1) * k + l) + 1][2] = longitudeLines * k + l + 1;
+                indices[2 * ((latitudeLines + 1) * k + l) + 1][2] = longitudeLines * k + l + 1;
             }
         }
 
