@@ -52,7 +52,7 @@ var Shapes = {
             ]
         };
     },
-    
+
     /*
      * Returns the vertices for a triangular prism with 2 rectangular sides and base
      * (basically laying on its side).
@@ -88,8 +88,8 @@ var Shapes = {
 
     /*
      * Returns the vertices for a cube.
-     */    
-    cube: function() {
+     */
+    cube: function () {
         var X = 0.75,
             Y = 0.75,
             Z = -0.75;
@@ -126,11 +126,12 @@ var Shapes = {
     /*
      * Returns the vertices for a sphere mesh.
      * Mathematical concept from http://learningwebgl.com/blog/?p=1253
+     *
      * Takes a parameter called balloon, if balloon is not passed in, then we
      * assume we're building a regular sphere, otherwise a balloon shape is
      * generated.
      */
-    sphere: function(balloon) {
+    sphere: function (balloon) {
         var radius = 0.5,
             maxTheta = Math.PI,
             maxPhi = 2 * Math.PI,
@@ -138,6 +139,8 @@ var Shapes = {
             longitudeLines = 20,
             currentLatitude,
             currentLongitude,
+            currentVertex,
+            currentIndex,
             vertices = [],
             indices = [],
             structureToReturn = {},
@@ -145,46 +148,53 @@ var Shapes = {
             j,
             k,
             l;
+
         // Figure out if we're working with a balloon shape
         balloon = balloon ? 0.5 : 0;
         //Build vertices
-        for (i = 0; i < (latitudeLines + 1); i++) {
+        for (i = 0; i < (latitudeLines + 1); i += 1) {
             currentLatitude = i * maxTheta / latitudeLines;
-            for (j = 0; j < (longitudeLines + 1); j++) {
-                vertices[latitudeLines * i + j] = [];
+            for (j = 0; j < (longitudeLines + 1); j += 1) {
+                currentVertex = latitudeLines * i + j;
+
+                vertices[currentVertex] = [];
                 currentLongitude = j * maxPhi / longitudeLines;
-                vertices[latitudeLines * i + j][0] = radius * Math.sin(currentLatitude) * Math.cos(currentLongitude);
-                vertices[latitudeLines * i + j][1] = radius * Math.cos(currentLatitude);
-                vertices[latitudeLines * i + j][2] = radius * Math.sin(currentLatitude) * Math.sin(currentLongitude);
+
+                vertices[currentVertex][0] = radius * Math.sin(currentLatitude) * Math.cos(currentLongitude);
+                vertices[currentVertex][1] = radius * Math.cos(currentLatitude);
+                vertices[currentVertex][2] = radius * Math.sin(currentLatitude) * Math.sin(currentLongitude);
                 if (balloon) {
-                    vertices[latitudeLines * i + j][0] *= (currentLatitude*balloon);
-                    vertices[latitudeLines * i + j][2] *= (currentLatitude*balloon);
+                    vertices[currentVertex][0] *= (currentLatitude * balloon);
+                    vertices[currentVertex][2] *= (currentLatitude * balloon);
                 }
             }
         }
-        
+
         // Build indices
-        for (k = 0; k < (latitudeLines + 1); k++) {
-            for(l = 0; l < (longitudeLines + 1); l++) {
+        for (k = 0; k < (latitudeLines + 1); k += 1) {
+            for (l = 0; l < (longitudeLines + 1); l += 1) {
+                currentIndex = 2 * ((latitudeLines + 1) * k + l);
 
                 indices[2 * ((latitudeLines + 1) * k + l)] = [];
                 indices[2 * ((latitudeLines + 1) * k + l) + 1] = [];
 
                 // First Triangle
                 // Top left of square
-                indices[2 * ((latitudeLines + 1) * k + l)][0] = longitudeLines * k + l;
+                indices[currentIndex][0] = longitudeLines * k + l;
                 // Top right of square
-                indices[2 * ((latitudeLines + 1) * k + l)][1] = longitudeLines * k + l + 1;
+                indices[currentIndex][1] = longitudeLines * k + l + 1;
                 // Bottom left of square
-                indices[2 * ((latitudeLines + 1) * k + l)][2] = longitudeLines * (k + 1) + l;
-                
+                indices[currentIndex][2] = longitudeLines * (k + 1) + l;
+
                 // Second Triangle
+                currentIndex += 1;
+
                 // Bottom left of square
-                indices[2 * ((latitudeLines + 1) * k + l) + 1][0] = longitudeLines * (k + 1) + l;
+                indices[currentIndex][0] = longitudeLines * (k + 1) + l;
                 // Bottom right of square
-                indices[2 * ((latitudeLines + 1) * k + l) + 1][1] = longitudeLines * (k + 1) + l + 1;
+                indices[currentIndex][1] = longitudeLines * (k + 1) + l + 1;
                 // Top right of square
-                indices[2 * ((latitudeLines + 1) * k + l) + 1][2] = longitudeLines * k + l + 1;
+                indices[currentIndex][2] = longitudeLines * k + l + 1;
             }
         }
 
