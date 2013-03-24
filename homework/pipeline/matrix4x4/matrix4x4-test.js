@@ -13,25 +13,57 @@ $(function () {
              0,0,0,1
             ],
             "Default matrix constructor");
-        });
+    });
+    
+    test("Pure Matrix Multiplication", function () {
+        var m2 = Matrix.getMultiplicationMatrix(
+            [2,1,-4,3,
+             5,88,2.3,17,
+             0,1,4,23,
+             90,6,7,-5
+            ],
+            [1,1,1,1,
+             1,1,1,1,
+             1,1,1,1,
+             1,1,1,1
+            ]
+        );
+        deepEqual(m2.elements,
+            [2,2,2,2,
+             112.3,112.3,112.3,112.3,
+             28,28,28,28,
+             98,98,98,98  
+            ],
+            "Pure matrix multiplication"
+            );
+    });
         
     test("Pure Transformation Matrices", function () {
         var m = Matrix.getTranslationMatrix(5,9,-1);
         deepEqual(m.elements,
             [1,0,0,5,
-             0,1,0,0,
+             0,1,0,9,
              0,0,1,-1,
              0,0,0,1
             ],
             "Pure translation matrix"
             );
             
-        m = matrix.getScaleMatrix(2,5,21);
+        m = Matrix.getScaleMatrix(2,5,21);
         deepEqual(m.elements,
-            [2,0,0,0
-             
+            [2,0,0,0,
+             0,5,0,0,
+             0,0,21,0,
+             0,0,0,1
             ],
             "Pure scaling matrix"
+            );
+            
+        m = Matrix.getRotationMatrix(0,1,1,1);
+        deepEqual(m.elements,
+            [
+            ],
+            "Pure rotation matrix"
             );
     });
 
