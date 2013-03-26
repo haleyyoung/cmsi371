@@ -98,6 +98,7 @@ var Matrix = (function () {
         xs = x * s;
         ys = y * s;
         zs = z * s;
+        console.log(axisLength);
 
         // Matrix in row major order.
         return new Matrix(
@@ -151,6 +152,26 @@ var Matrix = (function () {
             1.0
         ];
     };
+
+    matrix.getColumnMajorOrder = function (rowMajor) {
+        var columnMajor = [];
+        columnMajor[0] = rowMajor[0];
+        columnMajor[1] = rowMajor[4];
+        columnMajor[2] = rowMajor[8];
+        columnMajor[3] = rowMajor[12];
+        columnMajor[4] = rowMajor[1];
+        columnMajor[5] = rowMajor[5];
+        columnMajor[6] = rowMajor[9];
+        columnMajor[7] = rowMajor[13];
+        columnMajor[8] = rowMajor[2];
+        columnMajor[9] = rowMajor[6];
+        columnMajor[10] = rowMajor[10];
+        columnMajor[11] = rowMajor[14];
+        columnMajor[12] = rowMajor[3];
+        columnMajor[13] = rowMajor[7];
+        columnMajor[14] = rowMajor[11];
+        columnMajor[15] = rowMajor[15];
+    }
 
     return matrix;
 })();

@@ -69,60 +69,73 @@ $(function () {
             "Pure rotation matrix"
             );
 
-            (x2 * oneMinusC) + c,
-            (xy * oneMinusC) - zs,
-            (xz * oneMinusC) + ys,
-            0.0,
-
-            (xy * oneMinusC) + zs,
-            (y2 * oneMinusC) + c,
-            (yz * oneMinusC) - xs,
-            0.0,
-
-            (xz * oneMinusC) - ys,
-            (yz * oneMinusC) + xs,
-            (z2 * oneMinusC) + c,
-
         m = Matrix.getRotationMatrix(1,0,1,0);
         deepEqual(m.elements,
-            [0.9998477101325989, 0, 0.017452405765652657, 0,
+            [Math.cos(1 * Math.PI / 180.0), 0, Math.sin(1 * Math.PI / 180.0), 0,
              0, 1, 0, 0,
-             -0.017452405765652657, 0, 0.9998477101325989, 0,
+             (-1 * Math.sin(1 * Math.PI / 180.0)), 0, Math.cos(1 * Math.PI / 180.0), 0,
              0, 0, 0, 1
             ],
             "Pure rotation matrix test 2"
             );
+
         m = Matrix.getRotationMatrix(300,1,1,1);
+        var axisLength = Math.sqrt(3);
+        var x = 1/axisLength;
+        var y = 1/axisLength;
+        var z = 1/axisLength;
+        var cosine = Math.cos(300 * Math.PI / 180.0);
+        var sine = Math.sin(300 * Math.PI / 180.0);
+
         deepEqual(m.elements,
-            [0.6666666865348816, 0.6666666865348816, -0.3333333432674408, 0,
-             -0.3333333432674408, 0.6666666865348816, 0.6666666865348816, 0,
-             0.6666666865348816, -0.3333333432674408, 0.6666666865348816, 0,
+            [(x * x * (1-cosine) + cosine), (x * y * (1 - cosine) - z * sine), (x * z * (1 - cosine) + y * sine), 0,
+             (x * y * (1 - cosine) + z * sine), (y * y * (1 - cosine) + cosine), (y * z * (1 - cosine) - x * sine), 0,
+             (x * z * (1- cosine) - y * sine), (y * z * (1 - cosine) + x * sine), (z * z * (1 - cosine) + cosine), 0,
              0, 0, 0, 1
             ],
             "Pure rotation matrix test 3"
             );
+
         m = Matrix.getRotationMatrix(5,2,0,0);
+        axisLength = Math.sqrt(4);
+        x = 2/axisLength;
+        y = 0;
+        z = 0;
+        cosine = Math.cos(5 * Math.PI / 180.0);
+        sine = Math.sin(5 * Math.PI / 180.0);
+
         deepEqual(m.elements,
             [1,0,0,0,
-             0,0.9961947202682495,-0.08715574443340302,0,
-             0,0.08715574443340302,0.9961947202682495,0,
+             0, cosine, (-1 * x * sine),0,
+             0, (x * sine), cosine,0,
              0,0,0,1
             ],
             "Pure rotation matrix test 4"
             );
         m = Matrix.getRotationMatrix(-1,2,-7,0.5);
+        axisLength = Math.sqrt(4 + 49 + (0.5 * 0.5));
+        x = 2/axisLength;
+        y = -7/axisLength;
+        z = 0.5/axisLength;
+        cosine = Math.cos(-1 * Math.PI / 180.0);
+        sine = Math.sin(-1 * Math.PI / 180.0);
         deepEqual(m.elements,
-            [0.9998591542243958, 0.001155776553787291, 0.016744328662753105, 0,
-             -0.0012358617968857288, 0.9999878406524658, 0.004773266147822142, 0,
-             -0.016738608479499817, -0.004793287254869938, 0.9998484253883362, 0,
+            [(x * x * (1 - cosine) + cosine), (x * y * (1 - cosine) - z * sine), (x * z * (1 - cosine) + y * sine), 0,
+             (x * y * (1 - cosine) + z * sine), (y * y * (1 - cosine) + cosine), (y * z * (1 - cosine) - x * sine), 0,
+             (x * z * (1 - cosine) - y * sine), (y * z * (1 - cosine) + x * sine), (z * z * (1 - cosine) + cosine), 0,
              0,0,0,1
             ],
             "Pure rotation matrix test 5"
             );
         m = Matrix.getRotationMatrix(2.6,0,0,1);
+        x = 0;
+        y = 0;
+        z = 1;
+        cosine = Math.cos(2.6 * Math.PI / 180.0);
+        sine = Math.sin(2.6 * Math.PI / 180.0);
         deepEqual(m.elements,
-            [0.9989705681800842, -0.045362986624240875, 0, 0,
-             0.045362986624240875, 0.9989705681800842, 0, 0,
+            [cosine,(-1 * z * sine), 0, 0,
+             (z * sine), cosine, 0, 0,
              0,0,1,0,
              0,0,0,1
             ],
