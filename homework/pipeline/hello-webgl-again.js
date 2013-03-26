@@ -136,7 +136,7 @@
 
         {
             color: {r: 0.6, g: 0, b: 1},
-            vertices: Shapes.toRawTriangleArray(Shapes.sphere(true)),
+            vertices: Shapes.toRawTriangleArray(Shapes.sphere(0.5)),
             mode: gl.TRIANGLES,
             children: [
                 {
@@ -150,9 +150,6 @@
 
     // Pass the vertices to WebGL.
     passVertices = function (shapes) {
-        // Reusable loop variables.
-        // JD: ^^^^Well, not reusable anymore now that they're local (as they
-        //     should be when using recursion!)  :)
         var i,
             maxi,
             j,
