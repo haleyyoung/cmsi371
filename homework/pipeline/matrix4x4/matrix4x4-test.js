@@ -142,4 +142,89 @@ $(function () {
             "Pure rotation matrix test 6"
             );
     });
+    test("Pure Matrix Projection", function () {
+        var m3 = Matrix.getOrthoMatrix(-4,4,-2,2,-10,10);
+        deepEqual(m3.elements,
+            [2,2,2,2,
+             112.3,112.3,112.3,112.3,
+             28,28,28,28,
+             98,98,98,98
+            ],
+            "Pure matrix multiplication"
+            );
+    });
+    test("Pure Matrix Row Major To Column Major", function () {
+        var m4 = Matrix.getColumnMajorOrder(
+            [1,2,3,4,
+             5,6,7,8,
+             9,10,11,12,
+             13,14,15,16
+            ]);
+        deepEqual(m4.elements,
+            [1,5,9,13,
+             2,6,10,14,
+             3,7,11,15,
+             4,8,12,16
+            ],
+            "Matrix row major to column major 1"
+            );
+
+        var m4 = Matrix.getColumnMajorOrder(
+            [0,0,0,0,
+            1,1,1,1,
+            0,0,0,0,
+            1,1,1,1
+            ]);
+        deepEqual(m4.elements,
+            [0,1,0,1,
+            0,1,0,1,
+            0,1,0,1,
+            0,1,0,1
+            ],
+            "Matrix row major to column major 2"
+            );
+
+        var m4 = Matrix.getColumnMajorOrder(
+            [0,0,0,0,
+             0,0,0,0,
+             0,0,0,0,
+             0,0,0,0
+            ]);
+        deepEqual(m4.elements,
+            [0,0,0,0,
+             0,0,0,0,
+             0,0,0,0,
+             0,0,0,0
+            ],
+            "Matrix row major to column major 3"
+            );
+        var m4 = Matrix.getColumnMajorOrder(
+            [0,0,1,2,
+             0,0,3,4,
+             0,0,5,6,
+             0,0,7,8
+            ]);
+        deepEqual(m4.elements,
+            [0,0,0,0,
+             0,0,0,0,
+             1,3,5,7,
+             2,4,6,8
+            ],
+            "Matrix row major to column major 4"
+            );
+        var m4 = Matrix.getColumnMajorOrder(
+            [1,0,0,0,
+            0,1,0,0,
+            0,0,1,0,
+            0,0,0,1
+            ]);
+        deepEqual(m4.elements,
+            [1,0,0,0,
+            0,1,0,0,
+            0,0,1,0,
+            0,0,0,1
+            ],
+            "Matrix row major to column major 5"
+            );
+    });
 });
