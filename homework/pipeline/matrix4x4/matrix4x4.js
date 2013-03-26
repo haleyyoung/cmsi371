@@ -9,33 +9,33 @@ var Matrix = (function () {
              0,0,0,1
             ];
     };
-    
+
     matrix.getMultiplicationMatrix = function (m1,m2) {
         var mMultiplied = [];
         mMultiplied[0] = m1[0]*m2[0] + m1[1]*m2[4] + m1[2]*m2[8] + m1[3]*m2[12];
         mMultiplied[1] = m1[0]*m2[1] + m1[1]*m2[5] + m1[2]*m2[9] + m1[3]*m2[13];
         mMultiplied[2] = m1[0]*m2[2] + m1[1]*m2[6] + m1[2]*m2[10] + m1[3]*m2[14];
         mMultiplied[3] = m1[0]*m2[3] + m1[1]*m2[7] + m1[2]*m2[11] + m1[3]*m2[15];
-        
+
         mMultiplied[4] = m1[4]*m2[0] + m1[5]*m2[4] + m1[6]*m2[8] + m1[7]*m2[12];
         mMultiplied[5] = m1[4]*m2[1] + m1[5]*m2[5] + m1[6]*m2[9] + m1[7]*m2[13];
         mMultiplied[6] = m1[4]*m2[2] + m1[5]*m2[6] + m1[6]*m2[10] + m1[7]*m2[14];
         mMultiplied[7] = m1[4]*m2[3] + m1[5]*m2[7] + m1[6]*m2[11] + m1[7]*m2[15];
-        
+
         mMultiplied[8] = m1[8]*m2[0] + m1[9]*m2[4] + m1[10]*m2[8] + m1[11]*m2[12];
         mMultiplied[9] = m1[8]*m2[1] + m1[9]*m2[5] + m1[10]*m2[9] + m1[11]*m2[13];
         mMultiplied[10] = m1[8]*m2[2] + m1[9]*m2[6] + m1[10]*m2[10] + m1[11]*m2[14];
         mMultiplied[11] = m1[8]*m2[3] + m1[9]*m2[7] + m1[10]*m2[11] + m1[11]*m2[15];
-        
+
         mMultiplied[12] = m1[12]*m2[0] + m1[13]*m2[4] + m1[14]*m2[8] + m1[15]*m2[12];
         mMultiplied[13] = m1[12]*m2[1] + m1[13]*m2[5] + m1[14]*m2[9] + m1[15]*m2[13];
         mMultiplied[14] = m1[12]*m2[2] + m1[13]*m2[6] + m1[14]*m2[10] + m1[15]*m2[14];
         mMultiplied[15] = m1[12]*m2[3] + m1[13]*m2[7] + m1[14]*m2[11] + m1[15]*m2[15];
-        
+
         for(var i = 0; i < 16; i++) {
             console.log(mMultiplied[i]);
         }
-        
+
         return new Matrix(
             mMultiplied[0], mMultiplied[1], mMultiplied[2], mMultiplied[3],
              mMultiplied[4], mMultiplied[5], mMultiplied[6], mMultiplied[7],
@@ -86,6 +86,7 @@ var Matrix = (function () {
         x /= axisLength;
         y /= axisLength;
         z /= axisLength;
+        console.log("x " + x + " y " + y + " z " +z);
 
         // *Now* we can calculate the other terms.
         x2 = x * x;
@@ -120,6 +121,35 @@ var Matrix = (function () {
             0.0,
             1.0
         );
+    };
+
+    matrix.getOrthoMatrix = function (left, right, bottom, top, zNear, zFar) {
+        var width = right - left,
+            height = top - bottom,
+            depth = zFar - zNear;
+
+        // Matrix in row major order.
+        return [
+            2.0 / width,
+            0.0,
+            0.0,
+            -(right + left) / width,
+
+            0.0,
+            2.0 / height,
+            0.0,
+            -(top + bottom) / height,
+
+            0.0,
+            0.0,
+            -2.0 / depth,
+            -(zFar + zNear) / depth,
+
+            0.0,
+            0.0,
+            0.0,
+            1.0
+        ];
     };
 
     return matrix;
