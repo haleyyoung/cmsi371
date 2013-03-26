@@ -150,6 +150,9 @@ var Shapes = {
             l;
 
         // Figure out if we're working with a balloon shape
+        // JD: Why restrict balloon to a boolean?  It seems that you have lots
+        //     of possibilities here if you allow balloon to be any number
+        //     (I know because I tried!).
         balloon = balloon ? 0.5 : 0;
         //Build vertices
         for (i = 0; i < (latitudeLines + 1); i += 1) {

@@ -151,6 +151,8 @@
     // Pass the vertices to WebGL.
     passVertices = function (shapes) {
         // Reusable loop variables.
+        // JD: ^^^^Well, not reusable anymore now that they're local (as they
+        //     should be when using recursion!)  :)
         var i,
             maxi,
             j,
