@@ -153,6 +153,34 @@ var Matrix = (function () {
         );
     };
 
+    matrix.getFrustumMatrix = function (left, right, bottom, top, zNear, zFar) {
+        var width = right - left,
+            height = top - bottom,
+            depth = zFar - zNear;
+
+        return new Matrix(
+            2.0 * zNear / width,
+            0.0,
+            (right + left) / width,
+            0.0,
+
+            0.0,
+            2.0 * zNear / height,
+            (top + bottom) / height,
+            0.0,
+
+            0.0,
+            0.0,
+            -(zFar + zNear) / depth,
+            -2.0 * zFar * zNear / depth,
+
+            0.0,
+            0.0,
+            -1.0,
+            0.0
+        );
+    };
+
     matrix.getColumnMajorOrder = function (rowMajor) {
         return new Matrix(
             rowMajor[0],
