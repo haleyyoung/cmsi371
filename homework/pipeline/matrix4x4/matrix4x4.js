@@ -1,3 +1,5 @@
+// JD: To be clear, our library is quite 4x4-matrix-specific, so you
+//     might not want to use the general name "Matrix" for this object.
 var Matrix = (function () {
     // Define the constructor.
     var matrix = function () {
@@ -10,6 +12,13 @@ var Matrix = (function () {
                     ];
     };
 
+    // JD: I think this function will be easier to use if done as
+    //     an object-oriented method (i.e., assign to prototype and
+    //     refer to "this").  This gives you expressions like:
+    //
+    //       newTransform = oldTransform.multiply(Matrix.getTranslationMatrx(...));
+    //
+    //     More readable, yes?
     matrix.getMultiplicationMatrix = function (m1, m2) {
         var mMultiplied = [];
         mMultiplied[0] = m1[0] * m2[0] + m1[1] * m2[4] + m1[2] * m2[8] + m1[3] * m2[12];
@@ -56,6 +65,9 @@ var Matrix = (function () {
     };
 
     matrix.getTranslationMatrix = function (tx, ty, tz) {
+        // JD: Because this is in row-major order, I think it is
+        //     appropriate to write this out with 4 elements per
+        //     source code row.
         return new Matrix(
             1,
             0,
@@ -140,6 +152,8 @@ var Matrix = (function () {
         zs = z * s;
 
         // Matrix in row major order.
+        // JD: This one I chose to break into multiple lines because
+        //     the individual elements started getting kinda long.
         return new Matrix(
             (x2 * oneMinusC) + c,
             (xy * oneMinusC) - zs,
