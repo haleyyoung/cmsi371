@@ -10,7 +10,7 @@ $(function () {
 
     // This suite checks instantiation basics.
     test("Creation and Data Access", function () {
-        var m1 = new Matrix();
+        var m1 = new Matrix4x4();
         deepEqual(m1.elements,
             [1, 0, 0, 0,
                 0, 1, 0, 0,
@@ -21,7 +21,7 @@ $(function () {
     });
 
     test("Pure Matrix Multiplication", function () {
-        var m2 = Matrix.getMultiplicationMatrix(
+        var m2 = Matrix4x4.getMultiplicationMatrix4x4(
             [0, 0, 0, 0,
                 0, 0, 0, 0,
                 0, 0, 0, 0,
@@ -42,7 +42,7 @@ $(function () {
                 ],
             "Pure matrix multiplication");
 
-        m2 = Matrix.getMultiplicationMatrix(
+        m2 = Matrix4x4.getMultiplicationMatrix4x4(
             [1, 1, 1, 1,
                 1, 1, 1, 1,
                 1, 1, 1, 1,
@@ -62,7 +62,7 @@ $(function () {
                 ],
             "Pure matrix multiplication 2");
 
-        m2 = Matrix.getMultiplicationMatrix(
+        m2 = Matrix4x4.getMultiplicationMatrix4x4(
             [2, 1, -4, 3,
                 5, 88, 2.3, 17,
                 0, 1, 4, 23,
@@ -80,11 +80,11 @@ $(function () {
                 -340, -368, -396, -424,
                 -118, -216, -314, -412
                 ],
-            "Pure matrix multiplication 3");
+            "Pure Matrix4x4 multiplication 3");
     });
 
     test("Pure Transformation Matrices", function () {
-        var m3 = Matrix.getTranslationMatrix(5, 9, -1);
+        var m3 = Matrix4x4.getTranslationMatrix4x4(5, 9, -1);
         deepEqual(m3.elements,
             [1, 0, 0, 5,
                 0, 1, 0, 9,
@@ -93,16 +93,16 @@ $(function () {
                 ],
             "Pure translation matrix");
 
-        m3 = Matrix.getTranslationMatrix(-2, 81, 53.34);
+        m3 = Matrix4x4.getTranslationMatrix4x4(-2, 81, 53.34);
         deepEqual(m3.elements,
             [1, 0, 0, -2,
                 0, 1, 0, 81,
                 0, 0, 1, 53.34,
                 0, 0, 0, 1
                 ],
-            "Pure translation matrix 2");
+            "Pure translation Matrix4x4 2");
 
-        m3 = Matrix.getTranslationMatrix(0, 0, 0);
+        m3 = Matrix4x4.getTranslationMatrix4x4(0, 0, 0);
         deepEqual(m3.elements,
             [1, 0, 0, 0,
                 0, 1, 0, 0,
@@ -111,16 +111,16 @@ $(function () {
                 ],
             "Pure translation matrix 3");
 
-        m3 = Matrix.getScaleMatrix(2, 5, 21);
+        m3 = Matrix4x4.getScaleMatrix4x4(2, 5, 21);
         deepEqual(m3.elements,
             [2, 0, 0, 0,
                 0, 5, 0, 0,
                 0, 0, 21, 0,
                 0, 0, 0, 1
                 ],
-            "Pure scaling matrix");
+            "Pure scaling Matrix4x4");
 
-        m3 = Matrix.getScaleMatrix(0, 0, 0);
+        m3 = Matrix4x4.getScaleMatrix4x4(0, 0, 0);
         deepEqual(m3.elements,
             [0, 0, 0, 0,
                 0, 0, 0, 0,
@@ -129,7 +129,7 @@ $(function () {
                 ],
             "Pure scaling matrix");
 
-        m3 = Matrix.getScaleMatrix(-99, 0, 243981);
+        m3 = Matrix4x4.getScaleMatrix4x4(-99, 0, 243981);
         deepEqual(m3.elements,
             [-99, 0, 0, 0,
                 0, 0, 0, 0,
@@ -138,7 +138,7 @@ $(function () {
                 ],
             "Pure scaling matrix");
 
-        m3 = Matrix.getRotationMatrix(0, 0, 0, 1);
+        m3 = Matrix4x4.getRotationMatrix4x4(0, 0, 0, 1);
         deepEqual(m3.elements,
             [1, 0, 0, 0,
                 0, 1, 0, 0,
@@ -147,7 +147,7 @@ $(function () {
                 ],
             "Pure rotation matrix");
 
-        m3 = Matrix.getRotationMatrix(1, 0, 1, 0);
+        m3 = Matrix4x4.getRotationMatrix4x4(1, 0, 1, 0);
         deepEqual(m3.elements,
             [Math.cos(Math.PI / 180.0), 0, Math.sin(Math.PI / 180.0), 0,
                 0, 1, 0, 0,
@@ -156,7 +156,7 @@ $(function () {
                 ],
             "Pure rotation matrix test 2");
 
-        m3 = Matrix.getRotationMatrix(300, 1, 1, 1);
+        m3 = Matrix4x4.getRotationMatrix4x4(300, 1, 1, 1);
         var axisLength = Math.sqrt(3),
             x = 1 / axisLength,
             y = 1 / axisLength,
@@ -170,9 +170,9 @@ $(function () {
                 (x * z * (1 - cosine) - y * sine), (y * z * (1 - cosine) + x * sine), (z * z * (1 - cosine) + cosine), 0,
                 0, 0, 0, 1
                 ],
-            "Pure rotation matrix test 3");
+            "Pure rotation Matrix4x4 test 3");
 
-        m3 = Matrix.getRotationMatrix(5, 2, 0, 0);
+        m3 = Matrix4x4.getRotationMatrix4x4(5, 2, 0, 0);
         axisLength = Math.sqrt(4);
         x = 2 / axisLength;
         y = 0;
@@ -188,7 +188,7 @@ $(function () {
                 ],
             "Pure rotation matrix test 4");
 
-        m3 = Matrix.getRotationMatrix(-1, 2, -7, 0.5);
+        m3 = Matrix4x4.getRotationMatrix4x4(-1, 2, -7, 0.5);
         axisLength = Math.sqrt(4 + 49 + (0.5 * 0.5));
         x = 2 / axisLength;
         y = -7 / axisLength;
@@ -201,9 +201,9 @@ $(function () {
                 (x * z * (1 - cosine) - y * sine), (y * z * (1 - cosine) + x * sine), (z * z * (1 - cosine) + cosine), 0,
                 0, 0, 0, 1
                 ],
-            "Pure rotation matrix test 5");
+            "Pure rotation Matrix4x4 test 5");
 
-        m3 = Matrix.getRotationMatrix(2.6, 0, 0, 1);
+        m3 = Matrix4x4.getRotationMatrix4x4(2.6, 0, 0, 1);
         x = 0;
         y = 0;
         z = 1;
@@ -218,8 +218,8 @@ $(function () {
             "Pure rotation matrix test 6");
     });
 
-    test("Pure Matrix Projection", function () {
-        var m4 = Matrix.getOrthoMatrix(-4, 4, -2, 2, -10, 10),
+    test("Pure Matrix4x4 Projection", function () {
+        var m4 = Matrix4x4.getOrthoMatrix4x4(-4, 4, -2, 2, -10, 10),
             width = 4 + 4,
             height = 2 + 2,
             depth = 10 + 10;
@@ -231,7 +231,7 @@ $(function () {
                 ],
             "Pure matrix orthogonal projection");
 
-        m4 = Matrix.getOrthoMatrix(-1, 1, -1, 1, -1, 1);
+        m4 = Matrix4x4.getOrthoMatrix4x4(-1, 1, -1, 1, -1, 1);
         width = 1 + 1;
         height = 1 + 1;
         depth = 1 + 1;
@@ -243,7 +243,7 @@ $(function () {
                 ],
             "Pure matrix orthogonal projection 2");
 
-        m4 = Matrix.getOrthoMatrix(0, 2, 0, 2, 0, 2);
+        m4 = Matrix4x4.getOrthoMatrix4x4(0, 2, 0, 2, 0, 2);
         width = 2;
         height = 2;
         depth = 2;
@@ -253,9 +253,9 @@ $(function () {
                 0, 0, -1, -1,
                 0, 0, 0, 1
                 ],
-            "Pure matrix orthogonal projection 3");
+            "Pure Matrix4x4 orthogonal projection 3");
 
-        m4 = Matrix.getFrustumMatrix(-4, 4, -2, 2, -10, 10);
+        m4 = Matrix4x4.getFrustumMatrix4x4(-4, 4, -2, 2, -10, 10);
         width = 4 + 4;
         height = 2 + 2;
         depth = 10 + 10;
@@ -266,9 +266,9 @@ $(function () {
                 0, 0, 0, 10,
                 0, 0, -1, 0
                 ],
-            "Pure matrix frustum projection");
+            "Pure Matrix4x4 frustum projection");
 
-        m4 = Matrix.getFrustumMatrix(-1, 1, -1, 1, -1, 1);
+        m4 = Matrix4x4.getFrustumMatrix4x4(-1, 1, -1, 1, -1, 1);
         width = 1 + 1;
         height = 1 + 1;
         depth = 1 + 1;
@@ -278,9 +278,9 @@ $(function () {
                 0, 0, 0, 1,
                 0, 0, -1, 0
                 ],
-            "Pure matrix frustum projection 2");
+            "Pure Matrix4x4 frustum projection 2");
 
-        m4 = Matrix.getFrustumMatrix(0, 1, 0, 1, 0, 1);
+        m4 = Matrix4x4.getFrustumMatrix4x4(0, 1, 0, 1, 0, 1);
         width = 1;
         height = 1;
         depth = 1;
@@ -290,11 +290,11 @@ $(function () {
                 0, 0, -1, 0,
                 0, 0, -1, 0
                 ],
-            "Pure matrix frustum projection 3");
+            "Pure Matrix4x4 frustum projection 3");
     });
 
-    test("Pure Matrix Row Major To Column Major", function () {
-        var m5 = Matrix.getColumnMajorOrder(
+    test("Pure Matrix4x4 Row Major To Column Major", function () {
+        var m5 = Matrix4x4.getColumnMajorOrder(
             [1, 2, 3, 4,
                 5, 6, 7, 8,
                 9, 10, 11, 12,
@@ -307,9 +307,9 @@ $(function () {
                 3, 7, 11, 15,
                 4, 8, 12, 16
                 ],
-            "Matrix row major to column major 1");
+            "Matrix4x4 row major to column major 1");
 
-        m5 = Matrix.getColumnMajorOrder(
+        m5 = Matrix4x4.getColumnMajorOrder(
             [0, 0, 0, 0,
                 1, 1, 1, 1,
                 0, 0, 0, 0,
@@ -322,9 +322,9 @@ $(function () {
                 0, 1, 0, 1,
                 0, 1, 0, 1
                 ],
-            "Matrix row major to column major 2");
+            "Matrix4x4 row major to column major 2");
 
-        m5 = Matrix.getColumnMajorOrder(
+        m5 = Matrix4x4.getColumnMajorOrder(
             [0, 0, 0, 0,
                 0, 0, 0, 0,
                 0, 0, 0, 0,
@@ -337,8 +337,8 @@ $(function () {
                 0, 0, 0, 0,
                 0, 0, 0, 0
                 ],
-            "Matrix row major to column major 3");
-        m5 = Matrix.getColumnMajorOrder(
+            "Matrix4x4 row major to column major 3");
+        m5 = Matrix4x4.getColumnMajorOrder(
             [0, 0, 1, 2,
                 0, 0, 3, 4,
                 0, 0, 5, 6,
@@ -351,8 +351,8 @@ $(function () {
                 1, 3, 5, 7,
                 2, 4, 6, 8
                 ],
-            "Matrix row major to column major 4");
-        m5 = Matrix.getColumnMajorOrder(
+            "Matrix4x4 row major to column major 4");
+        m5 = Matrix4x4.getColumnMajorOrder(
             [1, 0, 0, 0,
                 0, 1, 0, 0,
                 0, 0, 1, 0,
@@ -365,6 +365,6 @@ $(function () {
                 0, 0, 1, 0,
                 0, 0, 0, 1
                 ],
-            "Matrix row major to column major 5");
+            "Matrix4x4 row major to column major 5");
     });
 });

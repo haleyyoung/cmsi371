@@ -1,8 +1,8 @@
 // JD: To be clear, our library is quite 4x4-matrix-specific, so you
 //     might not want to use the general name "Matrix" for this object.
-var Matrix = (function () {
+var Matrix4x4 = (function () {
     // Define the constructor.
-    var matrix = function () {
+    var matrix4x4 = function () {
         this.elements = arguments.length ?
                 [].slice.call(arguments) :
                 [1, 0, 0, 0,
@@ -19,7 +19,7 @@ var Matrix = (function () {
     //       newTransform = oldTransform.multiply(Matrix.getTranslationMatrx(...));
     //
     //     More readable, yes?
-    matrix.getMultiplicationMatrix = function (m1, m2) {
+    matrix4x4.getMultiplicationMatrix4x4 = function (m1, m2) {
         var mMultiplied = [];
         mMultiplied[0] = m1[0] * m2[0] + m1[1] * m2[4] + m1[2] * m2[8] + m1[3] * m2[12];
         mMultiplied[1] = m1[0] * m2[1] + m1[1] * m2[5] + m1[2] * m2[9] + m1[3] * m2[13];
@@ -41,7 +41,7 @@ var Matrix = (function () {
         mMultiplied[14] = m1[12] * m2[2] + m1[13] * m2[6] + m1[14] * m2[10] + m1[15] * m2[14];
         mMultiplied[15] = m1[12] * m2[3] + m1[13] * m2[7] + m1[14] * m2[11] + m1[15] * m2[15];
 
-        return new Matrix(
+        return new Matrix4x4(
             mMultiplied[0],
             mMultiplied[1],
             mMultiplied[2],
@@ -64,11 +64,11 @@ var Matrix = (function () {
         );
     };
 
-    matrix.getTranslationMatrix = function (tx, ty, tz) {
+    matrix4x4.getTranslationMatrix4x4 = function (tx, ty, tz) {
         // JD: Because this is in row-major order, I think it is
         //     appropriate to write this out with 4 elements per
         //     source code row.
-        return new Matrix(
+        return new Matrix4x4(
             1,
             0,
             0,
@@ -91,8 +91,8 @@ var Matrix = (function () {
         );
     };
 
-    matrix.getScaleMatrix = function (sx, sy, sz) {
-        return new Matrix(
+    matrix4x4.getScaleMatrix4x4 = function (sx, sy, sz) {
+        return new Matrix4x4(
             sx,
             0,
             0,
@@ -115,9 +115,9 @@ var Matrix = (function () {
         );
     };
 
-    matrix.getRotationMatrix = function (angle, x, y, z) {
+    matrix4x4.getRotationMatrix4x4 = function (angle, x, y, z) {
         // In production code, this function should be associated
-        // with a matrix object with associated functions.
+        // with a Matrix4x4 object with associated functions.
         var axisLength = Math.sqrt((x * x) + (y * y) + (z * z)),
             s = Math.sin(angle * Math.PI / 180.0),
             c = Math.cos(angle * Math.PI / 180.0),
@@ -151,10 +151,10 @@ var Matrix = (function () {
         ys = y * s;
         zs = z * s;
 
-        // Matrix in row major order.
+        // Matrix4x4 in row major order.
         // JD: This one I chose to break into multiple lines because
         //     the individual elements started getting kinda long.
-        return new Matrix(
+        return new Matrix4x4(
             (x2 * oneMinusC) + c,
             (xy * oneMinusC) - zs,
             (xz * oneMinusC) + ys,
@@ -177,13 +177,13 @@ var Matrix = (function () {
         );
     };
 
-    matrix.getOrthoMatrix = function (left, right, bottom, top, zNear, zFar) {
+    matrix4x4.getOrthoMatrix4x4 = function (left, right, bottom, top, zNear, zFar) {
         var width = right - left,
             height = top - bottom,
             depth = zFar - zNear;
 
-        // Matrix in row major order.
-        return new Matrix(
+        // Matrix4x4 in row major order.
+        return new Matrix4x4(
             2.0 / width,
             0.0,
             0.0,
@@ -206,12 +206,12 @@ var Matrix = (function () {
         );
     };
 
-    matrix.getFrustumMatrix = function (left, right, bottom, top, zNear, zFar) {
+    matrix4x4.getFrustumMatrix4x4 = function (left, right, bottom, top, zNear, zFar) {
         var width = right - left,
             height = top - bottom,
             depth = zFar - zNear;
 
-        return new Matrix(
+        return new Matrix4x4(
             2.0 * zNear / width,
             0.0,
             (right + left) / width,
@@ -234,8 +234,8 @@ var Matrix = (function () {
         );
     };
 
-    matrix.getColumnMajorOrder = function (rowMajor) {
-        return new Matrix(
+    matrix4x4.getColumnMajorOrder = function (rowMajor) {
+        return new Matrix4x4(
             rowMajor[0],
             rowMajor[4],
             rowMajor[8],
@@ -258,5 +258,5 @@ var Matrix = (function () {
         );
     };
 
-    return matrix;
+    return matrix4x4;
 })();
