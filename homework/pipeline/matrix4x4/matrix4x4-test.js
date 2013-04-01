@@ -2,6 +2,11 @@
  * Unit tests for our vector object.
  */
 $(function () {
+    // JD: I'm guessing that you have the additional indent on your
+    //     matrices because jsLint was not happy.  In this case, I
+    //     think you have good reason to override this rule; it just
+    //     makes sense to (when possible) express your matrices as
+    //     close to the mathematical expression as can be managed.
 
     // This suite checks instantiation basics.
     test("Creation and Data Access", function () {
