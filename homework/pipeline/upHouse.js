@@ -284,4 +284,4 @@
         }
     });
 
-}(document.getElementById("hello-webgl")));
+}(document.getElementById("upHouse")));
