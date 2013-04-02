@@ -133,16 +133,16 @@
                 }
             ],
             instanceTransform: {
-                tx:,
-                ty:,
-                tz:,
-                sx:,
-                sy:,
-                sz:,
-                angle:,
-                rx:,
-                ry:,
-                rz:
+                tx:0.1,
+                ty:0,
+                tz:0,
+                sx:1,
+                sy:1,
+                sz:1,
+                angle:0,
+                rx:0,
+                ry:0,
+                rz:1
             }
         },
 
@@ -253,7 +253,7 @@
             }
         }
         if (object.instanceTransform) {
-            getInstanceTransform(object.instanceTransform);
+            Matrix4x4.getInstanceTransform(object.instanceTransform);
         }
     };
 

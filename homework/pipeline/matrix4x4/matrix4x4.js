@@ -1,5 +1,3 @@
-// JD: To be clear, our library is quite 4x4-matrix-specific, so you
-//     might not want to use the general name "Matrix" for this object.
 var Matrix4x4 = (function () {
     // Define the constructor.
     var matrix4x4 = function () {
@@ -12,13 +10,6 @@ var Matrix4x4 = (function () {
                     ];
     };
 
-    // JD: I think this function will be easier to use if done as
-    //     an object-oriented method (i.e., assign to prototype and
-    //     refer to "this").  This gives you expressions like:
-    //
-    //       newTransform = oldTransform.multiply(Matrix.getTranslationMatrx(...));
-    //
-    //     More readable, yes?
     matrix4x4.prototype.getMultiplicationMatrix4x4 = function (m2) {
         var mMultiplied = [];
         mMultiplied[0] = this.elements[0][0] * m2[0] + this.elements[0][1] * m2[4] + this.elements[0][2] * m2[8] + this.elements[0][3] * m2[12];
@@ -65,53 +56,20 @@ var Matrix4x4 = (function () {
     };
 
     matrix4x4.getTranslationMatrix4x4 = function (tx, ty, tz) {
-        // JD: Because this is in row-major order, I think it is
-        //     appropriate to write this out with 4 elements per
-        //     source code row.
         return new Matrix4x4(
-            1,
-            0,
-            0,
-            tx,
-
-            0,
-            1,
-            0,
-            ty,
-
-            0,
-            0,
-            1,
-            tz,
-
-            0,
-            0,
-            0,
-            1
+            1, 0, 0, tx,
+            0, 1, 0, ty,
+            0, 0, 1, tz,
+            0, 0, 0, 1
         );
     };
 
     matrix4x4.getScaleMatrix4x4 = function (sx, sy, sz) {
         return new Matrix4x4(
-            sx,
-            0,
-            0,
-            0,
-
-            0,
-            sy,
-            0,
-            0,
-
-            0,
-            0,
-            sz,
-            0,
-
-            0,
-            0,
-            0,
-            1
+            sx, 0, 0, 0,
+            0, sy, 0, 0,
+            0, 0, sz, 0,
+            0, 0, 0, 1
         );
     };
 
@@ -152,8 +110,6 @@ var Matrix4x4 = (function () {
         zs = z * s;
 
         // Matrix4x4 in row major order.
-        // JD: This one I chose to break into multiple lines because
-        //     the individual elements started getting kinda long.
         return new Matrix4x4(
             (x2 * oneMinusC) + c,
             (xy * oneMinusC) - zs,
@@ -264,14 +220,15 @@ var Matrix4x4 = (function () {
             rotate = new Matrix4x4();
 
         if (transforms.tx) {
-            translate = getTranslationMatrix(transforms.tx, transforms.ty, transforms.tz);
+            translate = Matrix4x4.getTranslationMatrix4x4(transforms.tx, transforms.ty, transforms.tz);
         }
         if (transforms.sx) {
-            scale = getTranslationMatrix(transforms.tx, transforms.ty, transforms.tz);
+            scale = Matrix4x4.getTranslationMatrix4x4(transforms.tx, transforms.ty, transforms.tz);
         }
         if (transforms.angle) {
-            rotate = getRotationMatrix(transforms.angle, transforms.rx, transforms.ry, transforms.rz);
+            rotate = Matrix4x4.getRotationMatrix4x4(transforms.angle, transforms.rx, transforms.ry, transforms.rz);
         }
+        console.log(translate.elements + "\n" + scale.elements + "\n" + rotate.elements + "\n")
     };
 
     return matrix4x4;
