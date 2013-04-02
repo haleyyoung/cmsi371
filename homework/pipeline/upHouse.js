@@ -131,7 +131,19 @@
                     vertices: Shapes.toRawLineArray(Shapes.cube()),
                     mode: gl.LINES
                 }
-            ]
+            ],
+            instanceTransform: {
+                tx:,
+                ty:,
+                tz:,
+                sx:,
+                sy:,
+                sz:,
+                angle:,
+                rx:,
+                ry:,
+                rz:
+            }
         },
 
         {
@@ -239,6 +251,9 @@
             for (i = 0; i < object.children.length; i += 1) {
                 drawObject(object.children[i]);
             }
+        }
+        if (object.instanceTransform) {
+            getInstanceTransform(object.instanceTransform);
         }
     };
 

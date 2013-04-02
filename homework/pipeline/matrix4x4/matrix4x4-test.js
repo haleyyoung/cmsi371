@@ -21,12 +21,14 @@ $(function () {
     });
 
     test("Pure Matrix Multiplication", function () {
-        var m2 = Matrix4x4.getMultiplicationMatrix4x4(
+        var matrixToMultiply = new Matrix4x4(
             [0, 0, 0, 0,
                 0, 0, 0, 0,
                 0, 0, 0, 0,
                 0, 0, 0, 0
-                ],
+                ]
+        );
+        var m2 = matrixToMultiply.getMultiplicationMatrix4x4(
             [1, 1, 1, 1,
                 1, 1, 1, 1,
                 1, 1, 1, 1,
@@ -42,12 +44,15 @@ $(function () {
                 ],
             "Pure matrix multiplication");
 
-        m2 = Matrix4x4.getMultiplicationMatrix4x4(
+        matrixToMultiply = new Matrix4x4(
             [1, 1, 1, 1,
                 1, 1, 1, 1,
                 1, 1, 1, 1,
                 1, 1, 1, 1
-                ],
+                ]
+        );
+
+        m2 = matrixToMultiply.getMultiplicationMatrix4x4(
             [1, 1, 1, 1,
                 1, 1, 1, 1,
                 1, 1, 1, 1,
@@ -62,12 +67,15 @@ $(function () {
                 ],
             "Pure matrix multiplication 2");
 
-        m2 = Matrix4x4.getMultiplicationMatrix4x4(
+        matrixToMultiply = new Matrix4x4(
             [2, 1, -4, 3,
                 5, 88, 2.3, 17,
                 0, 1, 4, 23,
                 90, 6, 7, -5
-                ],
+                ]
+        );
+
+        m2 = matrixToMultiply.getMultiplicationMatrix4x4(
             [-1, -2, -3, -4,
                 -5, -6, -7, -8,
                 -9, -10, -11, -12,
