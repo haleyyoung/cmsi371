@@ -1,6 +1,12 @@
 /*
- * Unit tests for our vector object.
+ * Unit tests for our vector object. // JD: Uhhh, matrix, right?
  */
+// JD: Nice coverage; my one suggestion is that you make your test
+//     messages a little more descriptive; after all, each test case
+//     should capture some kind of distinct case.  For example, your
+//     "Pure translation matrix 3" test is better described as "Pure
+//     translation by the zero vector."  Messages like this will make
+//     your unit test page more informative.
 $(function () {
     // JD: I'm guessing that you have the additional indent on your
     //     matrices because jsLint was not happy.  In this case, I
