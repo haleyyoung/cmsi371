@@ -1,18 +1,7 @@
 /*
  * Unit tests for our vector object. // JD: Uhhh, matrix, right?
  */
-// JD: Nice coverage; my one suggestion is that you make your test
-//     messages a little more descriptive; after all, each test case
-//     should capture some kind of distinct case.  For example, your
-//     "Pure translation matrix 3" test is better described as "Pure
-//     translation by the zero vector."  Messages like this will make
-//     your unit test page more informative.
 $(function () {
-    // JD: I'm guessing that you have the additional indent on your
-    //     matrices because jsLint was not happy.  In this case, I
-    //     think you have good reason to override this rule; it just
-    //     makes sense to (when possible) express your matrices as
-    //     close to the mathematical expression as can be managed.
 
     // This suite checks instantiation basics.
     test("Creation and Data Access", function () {
@@ -308,13 +297,14 @@ $(function () {
     });
 
     test("Pure Matrix4x4 Row Major To Column Major", function () {
-        var m5 = Matrix4x4.getColumnMajorOrder(
+        var rowMajorMatrix = new Matrix4x4(
             [1, 2, 3, 4,
                 5, 6, 7, 8,
                 9, 10, 11, 12,
                 13, 14, 15, 16
                 ]
         );
+        var m5 = rowMajorMatrix.getColumnMajorOrder();
         deepEqual(m5.elements,
             [1, 5, 9, 13,
                 2, 6, 10, 14,
@@ -323,13 +313,14 @@ $(function () {
                 ],
             "Matrix4x4 row major to column major 1");
 
-        m5 = Matrix4x4.getColumnMajorOrder(
+        rowMajorMatrix = new Matrix4x4(
             [0, 0, 0, 0,
                 1, 1, 1, 1,
                 0, 0, 0, 0,
                 1, 1, 1, 1
                 ]
         );
+        m5 = rowMajorMatrix.getColumnMajorOrder();
         deepEqual(m5.elements,
             [0, 1, 0, 1,
                 0, 1, 0, 1,
@@ -338,13 +329,14 @@ $(function () {
                 ],
             "Matrix4x4 row major to column major 2");
 
-        m5 = Matrix4x4.getColumnMajorOrder(
+        rowMajorMatrix = new Matrix4x4(
             [0, 0, 0, 0,
                 0, 0, 0, 0,
                 0, 0, 0, 0,
                 0, 0, 0, 0
                 ]
         );
+        m5 = rowMajorMatrix.getColumnMajorOrder();
         deepEqual(m5.elements,
             [0, 0, 0, 0,
                 0, 0, 0, 0,
@@ -352,13 +344,15 @@ $(function () {
                 0, 0, 0, 0
                 ],
             "Matrix4x4 row major to column major 3");
-        m5 = Matrix4x4.getColumnMajorOrder(
+
+        rowMajorMatrix = new Matrix4x4(
             [0, 0, 1, 2,
                 0, 0, 3, 4,
                 0, 0, 5, 6,
                 0, 0, 7, 8
                 ]
         );
+        m5 = rowMajorMatrix.getColumnMajorOrder();
         deepEqual(m5.elements,
             [0, 0, 0, 0,
                 0, 0, 0, 0,
@@ -366,13 +360,15 @@ $(function () {
                 2, 4, 6, 8
                 ],
             "Matrix4x4 row major to column major 4");
-        m5 = Matrix4x4.getColumnMajorOrder(
+
+        rowMajorMatrix = new Matrix4x4(
             [1, 0, 0, 0,
                 0, 1, 0, 0,
                 0, 0, 1, 0,
                 0, 0, 0, 1
                 ]
         );
+        m5 = rowMajorMatrix.getColumnMajorOrder();
         deepEqual(m5.elements,
             [1, 0, 0, 0,
                 0, 1, 0, 0,

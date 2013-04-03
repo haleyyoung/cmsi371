@@ -12,25 +12,41 @@ var Matrix4x4 = (function () {
 
     matrix4x4.prototype.getMultiplicationMatrix4x4 = function (m2) {
         var mMultiplied = [];
-        mMultiplied[0] = this.elements[0][0] * m2[0] + this.elements[0][1] * m2[4] + this.elements[0][2] * m2[8] + this.elements[0][3] * m2[12];
-        mMultiplied[1] = this.elements[0][0] * m2[1] + this.elements[0][1] * m2[5] + this.elements[0][2] * m2[9] + this.elements[0][3] * m2[13];
-        mMultiplied[2] = this.elements[0][0] * m2[2] + this.elements[0][1] * m2[6] + this.elements[0][2] * m2[10] + this.elements[0][3] * m2[14];
-        mMultiplied[3] = this.elements[0][0] * m2[3] + this.elements[0][1] * m2[7] + this.elements[0][2] * m2[11] + this.elements[0][3] * m2[15];
+        mMultiplied[0] = this.elements[0][0] * m2[0] + this.elements[0][1] *
+            m2[4] + this.elements[0][2] * m2[8] + this.elements[0][3] * m2[12];
+        mMultiplied[1] = this.elements[0][0] * m2[1] + this.elements[0][1] *
+            m2[5] + this.elements[0][2] * m2[9] + this.elements[0][3] * m2[13];
+        mMultiplied[2] = this.elements[0][0] * m2[2] + this.elements[0][1] *
+            m2[6] + this.elements[0][2] * m2[10] + this.elements[0][3] * m2[14];
+        mMultiplied[3] = this.elements[0][0] * m2[3] + this.elements[0][1] *
+            m2[7] + this.elements[0][2] * m2[11] + this.elements[0][3] * m2[15];
 
-        mMultiplied[4] = this.elements[0][4] * m2[0] + this.elements[0][5] * m2[4] + this.elements[0][6] * m2[8] + this.elements[0][7] * m2[12];
-        mMultiplied[5] = this.elements[0][4] * m2[1] + this.elements[0][5] * m2[5] + this.elements[0][6] * m2[9] + this.elements[0][7] * m2[13];
-        mMultiplied[6] = this.elements[0][4] * m2[2] + this.elements[0][5] * m2[6] + this.elements[0][6] * m2[10] + this.elements[0][7] * m2[14];
-        mMultiplied[7] = this.elements[0][4] * m2[3] + this.elements[0][5] * m2[7] + this.elements[0][6] * m2[11] + this.elements[0][7] * m2[15];
+        mMultiplied[4] = this.elements[0][4] * m2[0] + this.elements[0][5] *
+            m2[4] + this.elements[0][6] * m2[8] + this.elements[0][7] * m2[12];
+        mMultiplied[5] = this.elements[0][4] * m2[1] + this.elements[0][5] *
+            m2[5] + this.elements[0][6] * m2[9] + this.elements[0][7] * m2[13];
+        mMultiplied[6] = this.elements[0][4] * m2[2] + this.elements[0][5] *
+            m2[6] + this.elements[0][6] * m2[10] + this.elements[0][7] * m2[14];
+        mMultiplied[7] = this.elements[0][4] * m2[3] + this.elements[0][5] *
+            m2[7] + this.elements[0][6] * m2[11] + this.elements[0][7] * m2[15];
 
-        mMultiplied[8] = this.elements[0][8] * m2[0] + this.elements[0][9] * m2[4] + this.elements[0][10] * m2[8] + this.elements[0][11] * m2[12];
-        mMultiplied[9] = this.elements[0][8] * m2[1] + this.elements[0][9] * m2[5] + this.elements[0][10] * m2[9] + this.elements[0][11] * m2[13];
-        mMultiplied[10] = this.elements[0][8] * m2[2] + this.elements[0][9] * m2[6] + this.elements[0][10] * m2[10] + this.elements[0][11] * m2[14];
-        mMultiplied[11] = this.elements[0][8] * m2[3] + this.elements[0][9] * m2[7] + this.elements[0][10] * m2[11] + this.elements[0][11] * m2[15];
+        mMultiplied[8] = this.elements[0][8] * m2[0] + this.elements[0][9] *
+            m2[4] + this.elements[0][10] * m2[8] + this.elements[0][11] * m2[12];
+        mMultiplied[9] = this.elements[0][8] * m2[1] + this.elements[0][9] *
+            m2[5] + this.elements[0][10] * m2[9] + this.elements[0][11] * m2[13];
+        mMultiplied[10] = this.elements[0][8] * m2[2] + this.elements[0][9] *
+            m2[6] + this.elements[0][10] * m2[10] + this.elements[0][11] * m2[14];
+        mMultiplied[11] = this.elements[0][8] * m2[3] + this.elements[0][9] *
+            m2[7] + this.elements[0][10] * m2[11] + this.elements[0][11] * m2[15];
 
-        mMultiplied[12] = this.elements[0][12] * m2[0] + this.elements[0][13] * m2[4] + this.elements[0][14] * m2[8] + this.elements[0][15] * m2[12];
-        mMultiplied[13] = this.elements[0][12] * m2[1] + this.elements[0][13] * m2[5] + this.elements[0][14] * m2[9] + this.elements[0][15] * m2[13];
-        mMultiplied[14] = this.elements[0][12] * m2[2] + this.elements[0][13] * m2[6] + this.elements[0][14] * m2[10] + this.elements[0][15] * m2[14];
-        mMultiplied[15] = this.elements[0][12] * m2[3] + this.elements[0][13] * m2[7] + this.elements[0][14] * m2[11] + this.elements[0][15] * m2[15];
+        mMultiplied[12] = this.elements[0][12] * m2[0] + this.elements[0][13] *
+            m2[4] + this.elements[0][14] * m2[8] + this.elements[0][15] * m2[12];
+        mMultiplied[13] = this.elements[0][12] * m2[1] + this.elements[0][13] *
+            m2[5] + this.elements[0][14] * m2[9] + this.elements[0][15] * m2[13];
+        mMultiplied[14] = this.elements[0][12] * m2[2] + this.elements[0][13] *
+            m2[6] + this.elements[0][14] * m2[10] + this.elements[0][15] * m2[14];
+        mMultiplied[15] = this.elements[0][12] * m2[3] + this.elements[0][13] *
+            m2[7] + this.elements[0][14] * m2[11] + this.elements[0][15] * m2[15];
 
         return new Matrix4x4(
             mMultiplied[0],
@@ -190,27 +206,27 @@ var Matrix4x4 = (function () {
         );
     };
 
-    matrix4x4.getColumnMajorOrder = function (rowMajor) {
+    matrix4x4.prototype.getColumnMajorOrder = function () {
         return new Matrix4x4(
-            rowMajor[0],
-            rowMajor[4],
-            rowMajor[8],
-            rowMajor[12],
+            this.elements[0][0],
+            this.elements[0][4],
+            this.elements[0][8],
+            this.elements[0][12],
 
-            rowMajor[1],
-            rowMajor[5],
-            rowMajor[9],
-            rowMajor[13],
+            this.elements[0][1],
+            this.elements[0][5],
+            this.elements[0][9],
+            this.elements[0][13],
 
-            rowMajor[2],
-            rowMajor[6],
-            rowMajor[10],
-            rowMajor[14],
+            this.elements[0][2],
+            this.elements[0][6],
+            this.elements[0][10],
+            this.elements[0][14],
 
-            rowMajor[3],
-            rowMajor[7],
-            rowMajor[11],
-            rowMajor[15]
+            this.elements[0][3],
+            this.elements[0][7],
+            this.elements[0][11],
+            this.elements[0][15]
         );
     };
 
@@ -219,16 +235,38 @@ var Matrix4x4 = (function () {
             scale = new Matrix4x4();
             rotate = new Matrix4x4();
 
-        if (transforms.tx) {
-            translate = Matrix4x4.getTranslationMatrix4x4(transforms.tx, transforms.ty, transforms.tz);
+        translate = Matrix4x4.getTranslationMatrix4x4(
+                transforms.tx || 0,
+                transforms.ty || 0,
+                transforms.tz || 0
+            );
+
+        scale = Matrix4x4.getScaleMatrix4x4(
+                transforms.sx || 1,
+                transforms.sy || 1,
+                transforms.sz || 1
+            );
+
+        //  If the user specifies an invalid axis (0, 0, 0), then we assume the
+        //  axis to be (1, 1, 1). If some dimension is not specified, then it is
+        //  a default value of 1, therefore making sure a (0, 0, 0) vector is not
+        //  possible.
+        if (transforms.rx === 0 && transforms.ry === 0 && transforms.rz === 0) {
+            rotate = Matrix4x4.getRotationMatrix4x4(
+                    transforms.angle || 0, 1, 1, 1
+                );
         }
-        if (transforms.sx) {
-            scale = Matrix4x4.getTranslationMatrix4x4(transforms.tx, transforms.ty, transforms.tz);
+        else{
+            rotate = Matrix4x4.getRotationMatrix4x4(
+                    transforms.angle || 0,
+                    transforms.rx || 1,
+                    transforms.ry || 1,
+                    transforms.rz || 1
+                );
         }
-        if (transforms.angle) {
-            rotate = Matrix4x4.getRotationMatrix4x4(transforms.angle, transforms.rx, transforms.ry, transforms.rz);
-        }
-        console.log(translate.elements + "\n" + scale.elements + "\n" + rotate.elements + "\n")
+        console.log(translate.elements + "\n" + scale.elements + "\n" + rotate.elements);
+        console.log(scale.getMultiplicationMatrix4x4(rotate.elements));
+        return translate.getMultiplicationMatrix4x4(scale.getMultiplicationMatrix4x4(rotate));
     };
 
     return matrix4x4;
