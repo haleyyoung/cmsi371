@@ -17,11 +17,10 @@ $(function () {
 
     test("Pure Matrix Multiplication", function () {
         var matrixToMultiply = new Matrix4x4(
-            [0, 0, 0, 0,
+            0, 0, 0, 0,
                 0, 0, 0, 0,
                 0, 0, 0, 0,
                 0, 0, 0, 0
-                ]
         );
         var m2 = matrixToMultiply.getMultiplicationMatrix4x4(
             [1, 1, 1, 1,
@@ -40,11 +39,10 @@ $(function () {
             "Pure matrix multiplication");
 
         matrixToMultiply = new Matrix4x4(
-            [1, 1, 1, 1,
+            1, 1, 1, 1,
                 1, 1, 1, 1,
                 1, 1, 1, 1,
                 1, 1, 1, 1
-                ]
         );
 
         m2 = matrixToMultiply.getMultiplicationMatrix4x4(
@@ -63,11 +61,10 @@ $(function () {
             "Pure matrix multiplication 2");
 
         matrixToMultiply = new Matrix4x4(
-            [2, 1, -4, 3,
+            2, 1, -4, 3,
                 5, 88, 2.3, 17,
                 0, 1, 4, 23,
                 90, 6, 7, -5
-                ]
         );
 
         m2 = matrixToMultiply.getMultiplicationMatrix4x4(
@@ -298,17 +295,12 @@ $(function () {
 
     test("Pure Matrix4x4 Row Major To Column Major", function () {
         var rowMajorMatrix = new Matrix4x4(
-            [1, 2, 3, 4,
+            1, 2, 3, 4,
                 5, 6, 7, 8,
                 9, 10, 11, 12,
                 13, 14, 15, 16
-                ]
         );
-        // JD: Look at the structure of this object in your console.
-        console.log(rowMajorMatrix);
         var m5 = rowMajorMatrix.getColumnMajorOrder();
-        // JD: Then look at this one.  Spot the difference!
-        console.log(m5);
         deepEqual(m5.elements,
             [1, 5, 9, 13,
                 2, 6, 10, 14,
@@ -318,11 +310,10 @@ $(function () {
             "Matrix4x4 row major to column major 1");
 
         rowMajorMatrix = new Matrix4x4(
-            [0, 0, 0, 0,
+            0, 0, 0, 0,
                 1, 1, 1, 1,
                 0, 0, 0, 0,
                 1, 1, 1, 1
-                ]
         );
         m5 = rowMajorMatrix.getColumnMajorOrder();
         deepEqual(m5.elements,
@@ -334,11 +325,10 @@ $(function () {
             "Matrix4x4 row major to column major 2");
 
         rowMajorMatrix = new Matrix4x4(
-            [0, 0, 0, 0,
+            0, 0, 0, 0,
                 0, 0, 0, 0,
                 0, 0, 0, 0,
                 0, 0, 0, 0
-                ]
         );
         m5 = rowMajorMatrix.getColumnMajorOrder();
         deepEqual(m5.elements,
@@ -350,11 +340,10 @@ $(function () {
             "Matrix4x4 row major to column major 3");
 
         rowMajorMatrix = new Matrix4x4(
-            [0, 0, 1, 2,
+            0, 0, 1, 2,
                 0, 0, 3, 4,
                 0, 0, 5, 6,
                 0, 0, 7, 8
-                ]
         );
         m5 = rowMajorMatrix.getColumnMajorOrder();
         deepEqual(m5.elements,
@@ -366,11 +355,10 @@ $(function () {
             "Matrix4x4 row major to column major 4");
 
         rowMajorMatrix = new Matrix4x4(
-            [1, 0, 0, 0,
+            1, 0, 0, 0,
                 0, 1, 0, 0,
                 0, 0, 1, 0,
                 0, 0, 0, 1
-                ]
         );
         m5 = rowMajorMatrix.getColumnMajorOrder();
         deepEqual(m5.elements,

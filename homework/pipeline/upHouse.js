@@ -202,7 +202,7 @@
 
         // Set up the rotation matrix.
         gl.uniformMatrix4fv(rotationMatrix, gl.FALSE, new Float32Array(
-            Matrix4x4.getColumnMajorOrder(Matrix4x4.getRotationMatrix4x4(currentRotation, 0, 1, 0).elements).elements
+            Matrix4x4.getRotationMatrix4x4(currentRotation, 0, 1, 0).getColumnMajorOrder().elements
         ));
 
         // Display the objects.
@@ -217,7 +217,7 @@
     // Set up the projection matrix.
     gl.uniformMatrix4fv(projectionMatrix,
         gl.FALSE, new Float32Array(
-            Matrix4x4.getColumnMajorOrder(Matrix4x4.getOrthoMatrix4x4(-150, 150, -150, 150, 5, 10000).elements).elements
+            Matrix4x4.getOrthoMatrix4x4(-150, 150, -150, 150, 5, 10000).getColumnMajorOrder().elements
         )
     );
 

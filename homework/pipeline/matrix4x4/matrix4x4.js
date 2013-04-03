@@ -12,41 +12,41 @@ var Matrix4x4 = (function () {
 
     matrix4x4.prototype.getMultiplicationMatrix4x4 = function (m2) {
         var mMultiplied = [];
-        mMultiplied[0] = this.elements[0][0] * m2[0] + this.elements[0][1] *
-            m2[4] + this.elements[0][2] * m2[8] + this.elements[0][3] * m2[12];
-        mMultiplied[1] = this.elements[0][0] * m2[1] + this.elements[0][1] *
-            m2[5] + this.elements[0][2] * m2[9] + this.elements[0][3] * m2[13];
-        mMultiplied[2] = this.elements[0][0] * m2[2] + this.elements[0][1] *
-            m2[6] + this.elements[0][2] * m2[10] + this.elements[0][3] * m2[14];
-        mMultiplied[3] = this.elements[0][0] * m2[3] + this.elements[0][1] *
-            m2[7] + this.elements[0][2] * m2[11] + this.elements[0][3] * m2[15];
+        mMultiplied[0] = this.elements[0] * m2[0] + this.elements[1] *
+            m2[4] + this.elements[2] * m2[8] + this.elements[3] * m2[12];
+        mMultiplied[1] = this.elements[0] * m2[1] + this.elements[1] *
+            m2[5] + this.elements[2] * m2[9] + this.elements[3] * m2[13];
+        mMultiplied[2] = this.elements[0] * m2[2] + this.elements[1] *
+            m2[6] + this.elements[2] * m2[10] + this.elements[3] * m2[14];
+        mMultiplied[3] = this.elements[0] * m2[3] + this.elements[1] *
+            m2[7] + this.elements[2] * m2[11] + this.elements[3] * m2[15];
 
-        mMultiplied[4] = this.elements[0][4] * m2[0] + this.elements[0][5] *
-            m2[4] + this.elements[0][6] * m2[8] + this.elements[0][7] * m2[12];
-        mMultiplied[5] = this.elements[0][4] * m2[1] + this.elements[0][5] *
-            m2[5] + this.elements[0][6] * m2[9] + this.elements[0][7] * m2[13];
-        mMultiplied[6] = this.elements[0][4] * m2[2] + this.elements[0][5] *
-            m2[6] + this.elements[0][6] * m2[10] + this.elements[0][7] * m2[14];
-        mMultiplied[7] = this.elements[0][4] * m2[3] + this.elements[0][5] *
-            m2[7] + this.elements[0][6] * m2[11] + this.elements[0][7] * m2[15];
+        mMultiplied[4] = this.elements[4] * m2[0] + this.elements[5] *
+            m2[4] + this.elements[6] * m2[8] + this.elements[7] * m2[12];
+        mMultiplied[5] = this.elements[4] * m2[1] + this.elements[5] *
+            m2[5] + this.elements[6] * m2[9] + this.elements[7] * m2[13];
+        mMultiplied[6] = this.elements[4] * m2[2] + this.elements[5] *
+            m2[6] + this.elements[6] * m2[10] + this.elements[7] * m2[14];
+        mMultiplied[7] = this.elements[4] * m2[3] + this.elements[5] *
+            m2[7] + this.elements[6] * m2[11] + this.elements[7] * m2[15];
 
-        mMultiplied[8] = this.elements[0][8] * m2[0] + this.elements[0][9] *
-            m2[4] + this.elements[0][10] * m2[8] + this.elements[0][11] * m2[12];
-        mMultiplied[9] = this.elements[0][8] * m2[1] + this.elements[0][9] *
-            m2[5] + this.elements[0][10] * m2[9] + this.elements[0][11] * m2[13];
-        mMultiplied[10] = this.elements[0][8] * m2[2] + this.elements[0][9] *
-            m2[6] + this.elements[0][10] * m2[10] + this.elements[0][11] * m2[14];
-        mMultiplied[11] = this.elements[0][8] * m2[3] + this.elements[0][9] *
-            m2[7] + this.elements[0][10] * m2[11] + this.elements[0][11] * m2[15];
+        mMultiplied[8] = this.elements[8] * m2[0] + this.elements[9] *
+            m2[4] + this.elements[10] * m2[8] + this.elements[11] * m2[12];
+        mMultiplied[9] = this.elements[8] * m2[1] + this.elements[9] *
+            m2[5] + this.elements[10] * m2[9] + this.elements[11] * m2[13];
+        mMultiplied[10] = this.elements[8] * m2[2] + this.elements[9] *
+            m2[6] + this.elements[10] * m2[10] + this.elements[11] * m2[14];
+        mMultiplied[11] = this.elements[8] * m2[3] + this.elements[9] *
+            m2[7] + this.elements[10] * m2[11] + this.elements[11] * m2[15];
 
-        mMultiplied[12] = this.elements[0][12] * m2[0] + this.elements[0][13] *
-            m2[4] + this.elements[0][14] * m2[8] + this.elements[0][15] * m2[12];
-        mMultiplied[13] = this.elements[0][12] * m2[1] + this.elements[0][13] *
-            m2[5] + this.elements[0][14] * m2[9] + this.elements[0][15] * m2[13];
-        mMultiplied[14] = this.elements[0][12] * m2[2] + this.elements[0][13] *
-            m2[6] + this.elements[0][14] * m2[10] + this.elements[0][15] * m2[14];
-        mMultiplied[15] = this.elements[0][12] * m2[3] + this.elements[0][13] *
-            m2[7] + this.elements[0][14] * m2[11] + this.elements[0][15] * m2[15];
+        mMultiplied[12] = this.elements[12] * m2[0] + this.elements[13] *
+            m2[4] + this.elements[14] * m2[8] + this.elements[15] * m2[12];
+        mMultiplied[13] = this.elements[12] * m2[1] + this.elements[13] *
+            m2[5] + this.elements[14] * m2[9] + this.elements[15] * m2[13];
+        mMultiplied[14] = this.elements[12] * m2[2] + this.elements[13] *
+            m2[6] + this.elements[14] * m2[10] + this.elements[15] * m2[14];
+        mMultiplied[15] = this.elements[12] * m2[3] + this.elements[13] *
+            m2[7] + this.elements[14] * m2[11] + this.elements[15] * m2[15];
 
         return new Matrix4x4(
             mMultiplied[0],
@@ -208,25 +208,25 @@ var Matrix4x4 = (function () {
 
     matrix4x4.prototype.getColumnMajorOrder = function () {
         return new Matrix4x4(
-            this.elements[0][0],
-            this.elements[0][4],
-            this.elements[0][8],
-            this.elements[0][12],
+            this.elements[0],
+            this.elements[4],
+            this.elements[8],
+            this.elements[12],
 
-            this.elements[0][1],
-            this.elements[0][5],
-            this.elements[0][9],
-            this.elements[0][13],
+            this.elements[1],
+            this.elements[5],
+            this.elements[9],
+            this.elements[13],
 
-            this.elements[0][2],
-            this.elements[0][6],
-            this.elements[0][10],
-            this.elements[0][14],
+            this.elements[2],
+            this.elements[6],
+            this.elements[10],
+            this.elements[14],
 
-            this.elements[0][3],
-            this.elements[0][7],
-            this.elements[0][11],
-            this.elements[0][15]
+            this.elements[3],
+            this.elements[7],
+            this.elements[11],
+            this.elements[15]
         );
     };
 
