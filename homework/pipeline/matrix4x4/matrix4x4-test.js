@@ -304,7 +304,11 @@ $(function () {
                 13, 14, 15, 16
                 ]
         );
+        // JD: Look at the structure of this object in your console.
+        console.log(rowMajorMatrix);
         var m5 = rowMajorMatrix.getColumnMajorOrder();
+        // JD: Then look at this one.  Spot the difference!
+        console.log(m5);
         deepEqual(m5.elements,
             [1, 5, 9, 13,
                 2, 6, 10, 14,
