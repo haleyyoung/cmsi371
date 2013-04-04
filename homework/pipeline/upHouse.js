@@ -159,6 +159,7 @@
 
     // Hold on to the important variables within the shaders.
     vertexPosition = gl.getAttribLocation(shaderProgram, "vertexPosition");
+    console.log(vertexPosition);
     gl.enableVertexAttribArray(vertexPosition);
     vertexColor = gl.getAttribLocation(shaderProgram, "vertexColor");
     gl.enableVertexAttribArray(vertexColor);
@@ -185,8 +186,15 @@
                 drawObject(object.children[i]);
             }
         }
+
+        // Need to fix!!!!!!
         if (object.instanceTransform) {
-            Matrix4x4.getInstanceTransform(object.instanceTransform);
+            // Set up the instance transform matrix.
+          //  gl.uniformMatrix4fv(instanceTransformMatrix, gl.FALSE, new Float32Array(
+           //     Matrix4x4.getInstanceTransform(currentRotation, 0, 1, 0).getColumnMajorOrder().elements
+            //));
+             var blah = Matrix4x4.getInstanceTransform(object.instanceTransform);
+            console.log(blah);
         }
     };
 
@@ -204,6 +212,8 @@
         gl.uniformMatrix4fv(rotationMatrix, gl.FALSE, new Float32Array(
             Matrix4x4.getRotationMatrix4x4(currentRotation, 0, 1, 0).getColumnMajorOrder().elements
         ));
+        console.log("here");
+        console.log(currentRotation);
 
         // Display the objects.
         for (i = 0, maxi = objectsToDraw.length; i < maxi; i += 1) {
@@ -217,7 +227,7 @@
     // Set up the projection matrix.
     gl.uniformMatrix4fv(projectionMatrix,
         gl.FALSE, new Float32Array(
-            Matrix4x4.getOrthoMatrix4x4(-150, 150, -150, 150, 5, 10000).getColumnMajorOrder().elements
+            Matrix4x4.getOrthoMatrix4x4(-30, 30, -30, 30, 5, 10000).getColumnMajorOrder().elements
         )
     );
 

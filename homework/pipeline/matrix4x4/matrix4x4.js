@@ -264,9 +264,8 @@ var Matrix4x4 = (function () {
                     transforms.rz || 1
                 );
         }
-        console.log(translate.elements + "\n" + scale.elements + "\n" + rotate.elements);
-        console.log(scale.getMultiplicationMatrix4x4(rotate.elements));
-        return translate.getMultiplicationMatrix4x4(scale.getMultiplicationMatrix4x4(rotate));
+        // Rotation has to be done first so that the object is rotated around the origin
+        return translate.getMultiplicationMatrix4x4(scale.getMultiplicationMatrix4x4(rotate.elements).elements);
     };
 
     return matrix4x4;
