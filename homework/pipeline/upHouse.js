@@ -30,6 +30,9 @@
         vertexPosition,
         vertexColor,
 
+        // Context save variable
+        savedContext = instanceTransformMatrix,
+
         // An individual "draw object" function.
         drawObject,
 
@@ -92,6 +95,16 @@
             ]
         }
     ];
+
+    // Context save function
+    save = function () {
+        savedContext = instanceTransformMatrix;
+    };
+
+    // Context restore function
+    restore = function () {
+        instanceTransformMatrix = savedContext;
+    };
 
     // Pass the vertices to WebGL.
     passVertices = function (shapes) {
@@ -160,7 +173,6 @@
 
     // Hold on to the important variables within the shaders.
     vertexPosition = gl.getAttribLocation(shaderProgram, "vertexPosition");
-    console.log(vertexPosition);
     gl.enableVertexAttribArray(vertexPosition);
     vertexColor = gl.getAttribLocation(shaderProgram, "vertexColor");
     gl.enableVertexAttribArray(vertexColor);
@@ -195,30 +207,48 @@
      */
     drawScene = function () {
         var i,
-            maxi;
+            maxi,
+            initialTransform = {
+                tx:0,
+                ty:0,
+                tz:-50.0,
+                sx:10,
+                sy:10,
+                sz:10,
+                angle:0,
+                rx:0,
+                ry:0,
+                rz:1
+            };
 
         // Clear the display.
         gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+
+        //save the context
+        savedContext =
+            Matrix4x4.getInstanceTransform(initialTransform).getColumnMajorOrder().elements;
+        //save();
 
         // Set up the rotation matrix.
         gl.uniformMatrix4fv(rotationMatrix, gl.FALSE, new Float32Array(
             Matrix4x4.getRotationMatrix4x4(currentRotation, 0, 1, 0).getColumnMajorOrder().elements
         ));
-        console.log("here");
-        console.log(currentRotation);
 
         // Display the objects.
         for (i = 0, maxi = objectsToDraw.length; i < maxi; i += 1) {
             // Need to fix!!!!!!
             if (objectsToDraw[i].instanceTransform) {
                 // Set up the instance transform matrix.
-                console.log("transform!!!!");
-                console.log(Matrix4x4.getInstanceTransform(objectsToDraw[i].instanceTransform).getColumnMajorOrder().elements);
+                //restore();
                 gl.uniformMatrix4fv(instanceTransformMatrix, gl.FALSE, new Float32Array(
                     Matrix4x4.getInstanceTransform(objectsToDraw[i].instanceTransform).getColumnMajorOrder().elements
                 ));
-                 //var blah = Matrix4x4.getInstanceTransform(object.instanceTransform);
-                console.log("blah");
+            }
+            else{
+
+                gl.uniformMatrix4fv(instanceTransformMatrix, gl.FALSE, new Float32Array(
+                    savedContext
+                ));
             }
             drawObject(objectsToDraw[i]);
         }
