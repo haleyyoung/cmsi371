@@ -34,6 +34,7 @@
 
         <!-- Shapes is a library that generates "canned" shapes. -->
         <script src="matrix4x4/matrix4x4.js"></script>
+        <script src="vector/vector.js"></script>
 
 
         <!-- Set up shaders: we've placed the source in script elements for
@@ -53,10 +54,11 @@
             attribute vec3 vertexColor;
             varying vec4 finalVertexColor;
             uniform mat4 rotationMatrix;
+            uniform mat4 instanceTransformMatrix;
             uniform mat4 projectionMatrix;
 
             void main(void) {
-                gl_Position = projectionMatrix * rotationMatrix * vec4(vertexPosition.xy * 10.0, (vertexPosition.z - 50.0) * 10.0, 1.0);
+                gl_Position = projectionMatrix * rotationMatrix * instanceTransformMatrix * vec4(vertexPosition, 1.0);
                 finalVertexColor = vec4(vertexColor, 1.0);
             }
         </script>

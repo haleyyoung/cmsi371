@@ -25,6 +25,7 @@
         currentRotation = 0.0,
         currentInterval,
         rotationMatrix,
+        instanceTransformMatrix,
         projectionMatrix,
         vertexPosition,
         vertexColor,
@@ -65,12 +66,12 @@
                 }
             ],
             instanceTransform: {
-                tx:0.1,
+                tx:0,
                 ty:0,
-                tz:0,
-                sx:1,
-                sy:1,
-                sz:1,
+                tz:-50.0,
+                sx:10,
+                sy:10,
+                sz:10,
                 angle:0,
                 rx:0,
                 ry:0,
@@ -164,6 +165,7 @@
     vertexColor = gl.getAttribLocation(shaderProgram, "vertexColor");
     gl.enableVertexAttribArray(vertexColor);
     rotationMatrix = gl.getUniformLocation(shaderProgram, "rotationMatrix");
+    instanceTransformMatrix = gl.getUniformLocation(shaderProgram, "instanceTransformMatrix");
     projectionMatrix = gl.getUniformLocation(shaderProgram, "projectionMatrix");
 
     /*
@@ -186,16 +188,6 @@
                 drawObject(object.children[i]);
             }
         }
-
-        // Need to fix!!!!!!
-        if (object.instanceTransform) {
-            // Set up the instance transform matrix.
-          //  gl.uniformMatrix4fv(instanceTransformMatrix, gl.FALSE, new Float32Array(
-           //     Matrix4x4.getInstanceTransform(currentRotation, 0, 1, 0).getColumnMajorOrder().elements
-            //));
-             var blah = Matrix4x4.getInstanceTransform(object.instanceTransform);
-            console.log(blah);
-        }
     };
 
     /*
@@ -217,6 +209,17 @@
 
         // Display the objects.
         for (i = 0, maxi = objectsToDraw.length; i < maxi; i += 1) {
+            // Need to fix!!!!!!
+            if (objectsToDraw[i].instanceTransform) {
+                // Set up the instance transform matrix.
+                console.log("transform!!!!");
+                console.log(Matrix4x4.getInstanceTransform(objectsToDraw[i].instanceTransform).getColumnMajorOrder().elements);
+                gl.uniformMatrix4fv(instanceTransformMatrix, gl.FALSE, new Float32Array(
+                    Matrix4x4.getInstanceTransform(objectsToDraw[i].instanceTransform).getColumnMajorOrder().elements
+                ));
+                 //var blah = Matrix4x4.getInstanceTransform(object.instanceTransform);
+                console.log("blah");
+            }
             drawObject(objectsToDraw[i]);
         }
 
