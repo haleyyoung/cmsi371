@@ -351,8 +351,17 @@
             gl.uniformMatrix4fv(instanceTransformMatrix, gl.FALSE, new Float32Array(
                 Matrix4x4.getInstanceTransform(object.instanceTransform).getColumnMajorOrder().elements
             ));
+
+            // Set up the rotation matrix.
+            console.log("currentRotation " + currentRotation);
+            gl.uniformMatrix4fv(rotationMatrix, gl.FALSE, new Float32Array(
+                Matrix4x4.getRotationMatrix4x4(currentRotation,
+                    object.instanceTransform.tx, 1,
+                    object.instanceTransform.tz).getColumnMajorOrder().elements
+            ));
         }
-                // Set the varying colors.
+
+        // Set the varying colors.
         gl.bindBuffer(gl.ARRAY_BUFFER, object.colorBuffer);
         gl.vertexAttribPointer(vertexColor, 3, gl.FLOAT, false, 0, 0);
 
@@ -395,10 +404,7 @@
             console.log("saved context 1");
         console.log(savedContext);
 
-        // Set up the rotation matrix.
-        gl.uniformMatrix4fv(rotationMatrix, gl.FALSE, new Float32Array(
-            Matrix4x4.getRotationMatrix4x4(currentRotation, 0, 1, 0).getColumnMajorOrder().elements
-        ));
+
 
         // Display the objects.
         for (i = 0, maxi = objectsToDraw.length; i < maxi; i += 1) {
