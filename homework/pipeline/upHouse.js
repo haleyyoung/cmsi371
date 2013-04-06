@@ -25,6 +25,7 @@
         currentRotation = 0.0,
         currentInterval,
         rotationMatrix,
+        initialTransform,
         instanceTransformMatrix,
         projectionMatrix,
         vertexPosition,
@@ -57,20 +58,35 @@
 
     // Build the objects to display.
     objectsToDraw = [
+        // Roof with cube child
         {
+            name: "prism",
             color: {r: 1, g: 0, b: 0},
             vertices: Shapes.toRawTriangleArray(Shapes.triangularPrism()),
             mode: gl.TRIANGLES,
             children: [
                 {
+                    name: "cube",
                     color: {r: 0, g: 1, b: 0.5},
                     vertices: Shapes.toRawLineArray(Shapes.cube()),
-                    mode: gl.LINES
+                    mode: gl.LINES,
+                    instanceTransform: {
+                        tx:20,
+                        ty:0,
+                        tz:-70.0,
+                        sx:15,
+                        sy:15,
+                        sz:15,
+                        angle:0,
+                        rx:0,
+                        ry:0,
+                        rz:1
+                    }
                 }
             ],
             instanceTransform: {
                 tx:0,
-                ty:0,
+                ty:30,
                 tz:-50.0,
                 sx:10,
                 sy:10,
@@ -82,28 +98,61 @@
             }
         },
 
+        // Balloon with sphere child
         {
+            name: "Balloon",
             color: {r: 0.6, g: 0, b: 1},
             vertices: Shapes.toRawTriangleArray(Shapes.sphere(0.5)),
             mode: gl.TRIANGLES,
             children: [
                 {
+                    name:"sphere",
                     color: {r: 0.8, g: 1, b: 0},
                     vertices: Shapes.toRawLineArray(Shapes.sphere(false)),
-                    mode: gl.LINES
+                    mode: gl.LINES,
+                    instanceTransform: {
+                        tx:15,
+                        ty:0,
+                        tz:-40.0,
+                        sx:5,
+                        sy:5,
+                        sz:5,
+                        angle:0,
+                        rx:0,
+                        ry:0,
+                        rz:1
+                    }
                 }
-            ]
+            ],
+            instanceTransform: {
+                tx:0,
+                ty:25,
+                tz:-50.0,
+                sx:10,
+                sy:10,
+                sz:10,
+                angle:0,
+                rx:0,
+                ry:0,
+                rz:1
+            }
         }
     ];
 
     // Context save function
     save = function () {
-        savedContext = instanceTransformMatrix;
+            console.log("initial transform");
+        console.log(initialTransform);
+        savedContext = initialTransform;
     };
 
     // Context restore function
     restore = function () {
-        instanceTransformMatrix = savedContext;
+        console.log("restoring!!!!");
+        console.log(savedContext);
+        gl.uniformMatrix4fv(instanceTransformMatrix, gl.FALSE, new Float32Array(
+            savedContext
+        ));
     };
 
     // Pass the vertices to WebGL.
@@ -185,8 +234,17 @@
      */
     drawObject = function (object) {
         var i;
-
-        // Set the varying colors.
+        // Need to fix!!!!!!
+        restore();
+        if (object.instanceTransform) {
+            // Set up the instance transform matrix.
+            console.log("instanceTransformMatrix");
+            console.log(object.name);
+            gl.uniformMatrix4fv(instanceTransformMatrix, gl.FALSE, new Float32Array(
+                Matrix4x4.getInstanceTransform(object.instanceTransform).getColumnMajorOrder().elements
+            ));
+        }
+                // Set the varying colors.
         gl.bindBuffer(gl.ARRAY_BUFFER, object.colorBuffer);
         gl.vertexAttribPointer(vertexColor, 3, gl.FLOAT, false, 0, 0);
 
@@ -207,27 +265,27 @@
      */
     drawScene = function () {
         var i,
-            maxi,
-            initialTransform = {
-                tx:0,
-                ty:0,
-                tz:-50.0,
-                sx:10,
-                sy:10,
-                sz:10,
-                angle:0,
-                rx:0,
-                ry:0,
-                rz:1
-            };
+            maxi;
+        initialTransform = Matrix4x4.getInstanceTransform({
+            tx:0,
+            ty:0,
+            tz:0,
+            sx:1,
+            sy:1,
+            sz:1,
+            angle:0,
+            rx:0,
+            ry:0,
+            rz:1
+        }).getColumnMajorOrder().elements;
 
         // Clear the display.
         gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
 
         //save the context
-        savedContext =
-            Matrix4x4.getInstanceTransform(initialTransform).getColumnMajorOrder().elements;
-        //save();
+        save();
+            console.log("saved context 1");
+        console.log(savedContext);
 
         // Set up the rotation matrix.
         gl.uniformMatrix4fv(rotationMatrix, gl.FALSE, new Float32Array(
@@ -236,20 +294,7 @@
 
         // Display the objects.
         for (i = 0, maxi = objectsToDraw.length; i < maxi; i += 1) {
-            // Need to fix!!!!!!
-            if (objectsToDraw[i].instanceTransform) {
-                // Set up the instance transform matrix.
-                //restore();
-                gl.uniformMatrix4fv(instanceTransformMatrix, gl.FALSE, new Float32Array(
-                    Matrix4x4.getInstanceTransform(objectsToDraw[i].instanceTransform).getColumnMajorOrder().elements
-                ));
-            }
-            else{
-
-                gl.uniformMatrix4fv(instanceTransformMatrix, gl.FALSE, new Float32Array(
-                    savedContext
-                ));
-            }
+            console.log("i "+ i);
             drawObject(objectsToDraw[i]);
         }
 
