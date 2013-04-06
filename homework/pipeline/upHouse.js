@@ -61,22 +61,22 @@
         // Roof with cube child
         {
             name: "prism",
-            color: {r: 1, g: 0, b: 0},
+            color: {r: 0.5, g: 0.5, b: 0.5},
             vertices: Shapes.toRawTriangleArray(Shapes.triangularPrism()),
             mode: gl.TRIANGLES,
             children: [
                 {
                     name: "cube",
-                    color: {r: 0, g: 1, b: 0.5},
-                    vertices: Shapes.toRawLineArray(Shapes.cube()),
-                    mode: gl.LINES,
+                    color: {r: 0.99999, g: 0.943, b: 0.45},
+                    vertices: Shapes.toRawTriangleArray(Shapes.cube()),
+                    mode: gl.TRIANGLES,
                     instanceTransform: {
-                        tx:20,
-                        ty:0,
-                        tz:-70.0,
-                        sx:15,
-                        sy:15,
-                        sz:15,
+                        tx:0,
+                        ty:-6,
+                        tz:-50.0,
+                        sx:10,
+                        sy:8,
+                        sz:10,
                         angle:0,
                         rx:0,
                         ry:0,
@@ -86,7 +86,7 @@
             ],
             instanceTransform: {
                 tx:0,
-                ty:30,
+                ty:0,
                 tz:-50.0,
                 sx:10,
                 sy:10,
@@ -106,13 +106,121 @@
             mode: gl.TRIANGLES,
             children: [
                 {
-                    name:"sphere",
-                    color: {r: 0.8, g: 1, b: 0},
-                    vertices: Shapes.toRawLineArray(Shapes.sphere(false)),
-                    mode: gl.LINES,
+                    // Red
+                    color: {r: 1, g: 0, b: 0},
+                    vertices: Shapes.toRawTriangleArray(Shapes.sphere(0.5)),
+                    mode: gl.TRIANGLES,
                     instanceTransform: {
-                        tx:15,
-                        ty:0,
+                        tx:1,
+                        ty:15,
+                        tz:-40.0,
+                        sx:5,
+                        sy:5,
+                        sz:5,
+                        angle:0,
+                        rx:0,
+                        ry:0,
+                        rz:1
+                    }
+                },
+                {
+                    // Orange
+                    color: {r: 0.99999, g: 0.48, b: 0.01},
+                    vertices: Shapes.toRawTriangleArray(Shapes.sphere(0.5)),
+                    mode: gl.TRIANGLES,
+                    instanceTransform: {
+                        tx:4,
+                        ty:13,
+                        tz:-40.0,
+                        sx:5,
+                        sy:5,
+                        sz:5,
+                        angle:0,
+                        rx:0,
+                        ry:0,
+                        rz:1
+                    }
+                },
+                {
+                    // Yellow
+                    color: {r: 0.9999, g: 0.9999, b: 0.20},
+                    vertices: Shapes.toRawTriangleArray(Shapes.sphere(0.5)),
+                    mode: gl.TRIANGLES,
+                    instanceTransform: {
+                        tx:-1,
+                        ty:12,
+                        tz:-40.0,
+                        sx:5,
+                        sy:5,
+                        sz:5,
+                        angle:0,
+                        rx:0,
+                        ry:0,
+                        rz:1
+                    }
+                },
+                {
+                    // Green
+                    color: {r: 0.46, g: 0.9999, b: 0.05},
+                    vertices: Shapes.toRawTriangleArray(Shapes.sphere(0.5)),
+                    mode: gl.TRIANGLES,
+                    instanceTransform: {
+                        tx:2,
+                        ty:11,
+                        tz:-40.0,
+                        sx:5,
+                        sy:5,
+                        sz:5,
+                        angle:0,
+                        rx:0,
+                        ry:0,
+                        rz:1
+                    }
+                },
+                {
+                    // Light blue
+                    color: {r: 0.33, g: 0.94, b: 0.9999},
+                    vertices: Shapes.toRawTriangleArray(Shapes.sphere(0.5)),
+                    mode: gl.TRIANGLES,
+                    instanceTransform: {
+                        tx:-2,
+                        ty:14,
+                        tz:-40.0,
+                        sx:5,
+                        sy:5,
+                        sz:5,
+                        angle:0,
+                        rx:0,
+                        ry:0,
+                        rz:1
+                    }
+                },
+                {
+                    // Dark blue
+                    color: {r: 0.2, g: 0.58, b: 0.9999},
+                    vertices: Shapes.toRawTriangleArray(Shapes.sphere(0.5)),
+                    mode: gl.TRIANGLES,
+                    instanceTransform: {
+                        tx:-3,
+                        ty:10,
+                        tz:-40.0,
+                        sx:5,
+                        sy:5,
+                        sz:5,
+                        angle:0,
+                        rx:0,
+                        ry:0,
+                        rz:1
+                    }
+                },
+                {
+                    // Magenta
+                    color: {r: 1, g: 0, b: 0.45},
+                    vertices: Shapes.toRawTriangleArray(Shapes.sphere(0.5)),
+                    mode: gl.TRIANGLES,
+                    instanceTransform: {
+                        tx:6,
+                        ty:10,
                         tz:-40.0,
                         sx:5,
                         sy:5,
@@ -125,16 +233,16 @@
                 }
             ],
             instanceTransform: {
-                tx:0,
-                ty:25,
-                tz:-50.0,
-                sx:10,
-                sy:10,
-                sz:10,
+                tx:5,
+                ty:8,
+                tz:-40.0,
+                sx:5,
+                sy:5,
+                sz:5,
                 angle:0,
                 rx:0,
-                ry:0,
-                rz:1
+                ry:1,
+                rz:0
             }
         }
     ];
