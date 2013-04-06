@@ -249,17 +249,19 @@
 
     // Context save function
     save = function () {
-            console.log("initial transform");
-        console.log(initialTransform);
         savedContext = initialTransform;
     };
 
     // Context restore function
     restore = function () {
-        console.log("restoring!!!!");
-        console.log(savedContext);
+        // Reset instance transform matrix
         gl.uniformMatrix4fv(instanceTransformMatrix, gl.FALSE, new Float32Array(
             savedContext
+        ));
+
+        // Reset rotation matrix
+        gl.uniformMatrix4fv(rotationMatrix, gl.FALSE, new Float32Array(
+            Matrix4x4.getRotationMatrix4x4(currentRotation, 0, 1, 0).getColumnMajorOrder().elements
         ));
     };
 
@@ -342,18 +344,16 @@
      */
     drawObject = function (object) {
         var i;
-        // Need to fix!!!!!!
+
         restore();
+
         if (object.instanceTransform) {
-            // Set up the instance transform matrix.
-            console.log("instanceTransformMatrix");
-            console.log(object.name);
+            // Change the instance transform matrix.
             gl.uniformMatrix4fv(instanceTransformMatrix, gl.FALSE, new Float32Array(
                 Matrix4x4.getInstanceTransform(object.instanceTransform).getColumnMajorOrder().elements
             ));
 
-            // Set up the rotation matrix.
-            console.log("currentRotation " + currentRotation);
+            // Change the rotation matrix.
             gl.uniformMatrix4fv(rotationMatrix, gl.FALSE, new Float32Array(
                 Matrix4x4.getRotationMatrix4x4(currentRotation,
                     object.instanceTransform.tx, 1,
@@ -399,16 +399,11 @@
         // Clear the display.
         gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
 
-        //save the context
+        //save the original context
         save();
-            console.log("saved context 1");
-        console.log(savedContext);
-
-
 
         // Display the objects.
         for (i = 0, maxi = objectsToDraw.length; i < maxi; i += 1) {
-            console.log("i "+ i);
             drawObject(objectsToDraw[i]);
         }
 
