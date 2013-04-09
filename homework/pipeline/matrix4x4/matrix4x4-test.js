@@ -369,4 +369,77 @@ $(function () {
                 ],
             "Matrix4x4 row major to column major 5");
     });
+    test("Camera (look-at) Matrix4x4", function () {
+        var p = new Vector(1,0,0),
+            q = new Vector(0,1,0),
+            up = new Vector(0,0,1),
+            ze = (p.subtract(q)).unit(),
+            ye = (up.subtract(up.projection(ze))).unit(),
+            xe = ye.cross(ze),
+            pDotXe = p.dot(xe),
+            pDotYe = p.dot(ye),
+            pDotZe = p.dot(ze),
+            m6 = Matrix4x4.getLookAtMatrix(p,q,up);
+        deepEqual(m6.elements,
+            [xe.elements[0], xe.elements[1], xe.elements[2], -pDotXe,
+                ye.elements[0], ye.elements[1], ye.elements[2], -pDotYe,
+                ze.elements[0], ze.elements[1], ze.elements[2], -pDotZe,
+                0,0,0,1
+                ],
+            "Matrix4x4 look at matrix 1");
+
+        p = new Vector(0,1,0),
+        q = new Vector(0,0,1),
+        up = new Vector(1,0,0),
+        ze = (p.subtract(q)).unit(),
+        ye = (up.subtract(up.projection(ze))).unit(),
+        xe = ye.cross(ze),
+        pDotXe = p.dot(xe),
+        pDotYe = p.dot(ye),
+        pDotZe = p.dot(ze);
+        m6 = Matrix4x4.getLookAtMatrix(p,q,up);
+        deepEqual(m6.elements,
+            [xe.elements[0], xe.elements[1], xe.elements[2], -pDotXe,
+                ye.elements[0], ye.elements[1], ye.elements[2], -pDotYe,
+                ze.elements[0], ze.elements[1], ze.elements[2], -pDotZe,
+                0,0,0,1
+                ],
+            "Matrix4x4 look at matrix 2");
+
+        p = new Vector(0,0,1),
+        q = new Vector(1,0,0),
+        up = new Vector(0,1,0),
+        ze = (p.subtract(q)).unit(),
+        ye = (up.subtract(up.projection(ze))).unit(),
+        xe = ye.cross(ze),
+        pDotXe = p.dot(xe),
+        pDotYe = p.dot(ye),
+        pDotZe = p.dot(ze);
+        m6 = Matrix4x4.getLookAtMatrix(p,q,up);
+        deepEqual(m6.elements,
+            [xe.elements[0], xe.elements[1], xe.elements[2], -pDotXe,
+                ye.elements[0], ye.elements[1], ye.elements[2], -pDotYe,
+                ze.elements[0], ze.elements[1], ze.elements[2], -pDotZe,
+                0,0,0,1
+                ],
+            "Matrix4x4 look at matrix 3");
+
+        p = new Vector(-7,11,26),
+        q = new Vector(1,1,1),
+        up = new Vector(1,12,-0.768),
+        ze = (p.subtract(q)).unit(),
+        ye = (up.subtract(up.projection(ze))).unit(),
+        xe = ye.cross(ze),
+        pDotXe = p.dot(xe),
+        pDotYe = p.dot(ye),
+        pDotZe = p.dot(ze);
+        m6 = Matrix4x4.getLookAtMatrix(p,q,up);
+        deepEqual(m6.elements,
+            [xe.elements[0], xe.elements[1], xe.elements[2], -pDotXe,
+                ye.elements[0], ye.elements[1], ye.elements[2], -pDotYe,
+                ze.elements[0], ze.elements[1], ze.elements[2], -pDotZe,
+                0,0,0,1
+                ],
+            "Matrix4x4 look at matrix 4");
+    });
 });
