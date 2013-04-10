@@ -57,6 +57,56 @@
 
     // Build the objects to display.
     objectsToDraw = [
+        {
+            name: "grass",
+            color:{r: 0.35, g: 0.85, b: 0.17},
+            vertices: Shapes.toRawTriangleArray(Shapes.cube()),
+            mode: gl.TRIANGLES,
+            instanceTransform: {
+                tx:0,
+                ty:-30,
+                tz:-100,
+                sx:100,
+                sy:1,
+                sz:100,
+                setupRotation:{
+                    angle:45,
+                    rx:1,
+                    ry:0,
+                    rz:0
+                }
+            }
+        },
+        {
+            name: "sky",
+            color:{r: 0.95, g: 0.6, b: 1},
+            vertices: Shapes.toRawTriangleArray(Shapes.cube()),
+            mode: gl.TRIANGLES,
+            instanceTransform: {
+                tx:0,
+                ty:0,
+                tz:-1000,
+                sx:10000,
+                sy:10000,
+                sz:1
+            },
+            children:[
+                {
+                    name: "sun",
+                    color: {r: 1, g: 0.5, b: 0.5},
+                    vertices: Shapes.toRawTriangleArray(Shapes.sphere()),
+                    mode: gl.TRIANGLES,
+                    instanceTransform: {
+                        tx:20,
+                        ty:16,
+                        tz:-60.0,
+                        sx:20,
+                        sy:20,
+                        sz:20
+                    }
+                }
+            ]
+        },
         // Roof with cube child
         {
             name: "prism",
@@ -66,7 +116,7 @@
             children: [
                 {
                     name: "cube",
-                    color: {r: 0.99999, g: 0.943, b: 0.45},
+                    color: {r: 1, g: 0.943, b: 0.45},
                     vertices: Shapes.toRawTriangleArray(Shapes.cube()),
                     mode: gl.TRIANGLES,
                     instanceTransform: {
