@@ -252,7 +252,14 @@ var Matrix4x4 = (function () {
         //  a default value of 1, therefore making sure a (0, 0, 0) vector is not
         //  possible.
 
-        // Initialize rx, ry, and rz to 1 if they're undefined
+        // Initialize rx, ry, and rz to 1 if they're undefined, also initialize
+        // setupRotation if it's not defined
+        if (transforms.setupRotation === undefined) {
+            transforms.setupRotation = {
+                angle: 0
+            };
+        }
+
         if (transforms.setupRotation.rx === undefined) {
             transforms.setupRotation.rx = 1;
         }

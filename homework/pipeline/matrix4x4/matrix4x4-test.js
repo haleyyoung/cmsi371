@@ -399,11 +399,7 @@ $(function () {
             tz:0,
             sx:1,
             sy:1,
-            sz:1,
-            setupRotation: {
-                angle:0,
-                rz:0
-            }
+            sz:1
         });
         deepEqual(m5.elements,
             [1,0,0,0,
