@@ -95,21 +95,23 @@
                 rx:0,
                 ry:1,
                 rz:0
-            }
+            },
+            rotatable: true
         },
 
         // Balloon with sphere child
         {
             name: "Balloon",
             color: {r: 0.6, g: 0, b: 1},
-            vertices: Shapes.toRawTriangleArray(Shapes.sphere(0.5)),
-            mode: gl.TRIANGLES,
+            vertices: Shapes.toRawLineArray(Shapes.sphere(0.5)),
+            mode: gl.LINES,
             children: [
                 {
                     // Red
+                    name: "red balloon",
                     color: {r: 1, g: 0, b: 0},
-                    vertices: Shapes.toRawTriangleArray(Shapes.sphere(0.5)),
-                    mode: gl.TRIANGLES,
+                    vertices: Shapes.toRawLineArray(Shapes.sphere(0.5)),
+                    mode: gl.LINES,
                     instanceTransform: {
                         tx:1,
                         ty:15,
@@ -117,17 +119,24 @@
                         sx:5,
                         sy:5,
                         sz:5,
-                        angle:180,
+                        angle:0,
                         rx:0,
-                        ry:0,
-                        rz:1
-                    }
+                        ry:1,
+                        rz:0,
+                        setupRotation:{
+                            angle:180,
+                            rx:0,
+                            ry:0,
+                            rz:1
+                        }
+                    },
+                    rotatable: true
                 },
                 {
                     // Orange
                     color: {r: 0.99999, g: 0.48, b: 0.01},
-                    vertices: Shapes.toRawTriangleArray(Shapes.sphere(0.5)),
-                    mode: gl.TRIANGLES,
+                    vertices: Shapes.toRawLineArray(Shapes.sphere(0.5)),
+                    mode: gl.LINES,
                     instanceTransform: {
                         tx:4,
                         ty:13,
@@ -135,17 +144,24 @@
                         sx:5,
                         sy:5,
                         sz:5,
-                        angle:180,
+                        angle:0,
                         rx:0,
-                        ry:0,
-                        rz:1
-                    }
+                        ry:1,
+                        rz:0,
+                        setupRotation:{
+                            angle:180,
+                            rx:0,
+                            ry:0,
+                            rz:1
+                        }
+                    },
+                    rotatable: true
                 },
                 {
                     // Yellow
                     color: {r: 0.9999, g: 0.9999, b: 0.20},
-                    vertices: Shapes.toRawTriangleArray(Shapes.sphere(0.5)),
-                    mode: gl.TRIANGLES,
+                    vertices: Shapes.toRawLineArray(Shapes.sphere(0.5)),
+                    mode: gl.LINES,
                     instanceTransform: {
                         tx:-1,
                         ty:12,
@@ -153,17 +169,24 @@
                         sx:5,
                         sy:5,
                         sz:5,
-                        angle:180,
+                        angle:0,
                         rx:0,
-                        ry:0,
-                        rz:1
-                    }
+                        ry:1,
+                        rz:0,
+                        setupRotation:{
+                            angle:180,
+                            rx:0,
+                            ry:0,
+                            rz:1
+                        }
+                    },
+                    rotatable: true
                 },
                 {
                     // Green
                     color: {r: 0.46, g: 0.9999, b: 0.05},
-                    vertices: Shapes.toRawTriangleArray(Shapes.sphere(0.5)),
-                    mode: gl.TRIANGLES,
+                    vertices: Shapes.toRawLineArray(Shapes.sphere(0.5)),
+                    mode: gl.LINES,
                     instanceTransform: {
                         tx:2,
                         ty:11,
@@ -171,17 +194,24 @@
                         sx:5,
                         sy:5,
                         sz:5,
-                        angle:180,
+                        angle:0,
                         rx:0,
-                        ry:0,
-                        rz:1
-                    }
+                        ry:1,
+                        rz:0,
+                        setupRotation:{
+                            angle:180,
+                            rx:0,
+                            ry:0,
+                            rz:1
+                        }
+                    },
+                    rotatable: true
                 },
                 {
                     // Light blue
                     color: {r: 0.33, g: 0.94, b: 0.9999},
-                    vertices: Shapes.toRawTriangleArray(Shapes.sphere(0.5)),
-                    mode: gl.TRIANGLES,
+                    vertices: Shapes.toRawLineArray(Shapes.sphere(0.5)),
+                    mode: gl.LINES,
                     instanceTransform: {
                         tx:-2,
                         ty:14,
@@ -189,17 +219,24 @@
                         sx:5,
                         sy:5,
                         sz:5,
-                        angle:180,
+                        angle:0,
                         rx:0,
-                        ry:0,
-                        rz:1
-                    }
+                        ry:1,
+                        rz:0,
+                        setupRotation:{
+                            angle:180,
+                            rx:0,
+                            ry:0,
+                            rz:1
+                        }
+                    },
+                    rotatable: true
                 },
                 {
                     // Dark blue
                     color: {r: 0.2, g: 0.58, b: 0.9999},
-                    vertices: Shapes.toRawTriangleArray(Shapes.sphere(0.5)),
-                    mode: gl.TRIANGLES,
+                    vertices: Shapes.toRawLineArray(Shapes.sphere(0.5)),
+                    mode: gl.LINES,
                     instanceTransform: {
                         tx:-3,
                         ty:10,
@@ -207,17 +244,24 @@
                         sx:5,
                         sy:5,
                         sz:5,
-                        angle:180,
+                        angle:0,
                         rx:0,
-                        ry:0,
-                        rz:1
-                    }
+                        ry:1,
+                        rz:0,
+                        setupRotation:{
+                            angle:180,
+                            rx:0,
+                            ry:0,
+                            rz:1
+                        }
+                    },
+                    rotatable: true
                 },
                 {
                     // Magenta
                     color: {r: 1, g: 0, b: 0.45},
-                    vertices: Shapes.toRawTriangleArray(Shapes.sphere(0.5)),
-                    mode: gl.TRIANGLES,
+                    vertices: Shapes.toRawLineArray(Shapes.sphere(0.5)),
+                    mode: gl.LINES,
                     instanceTransform: {
                         tx:6,
                         ty:10,
@@ -225,11 +269,18 @@
                         sx:5,
                         sy:5,
                         sz:5,
-                        angle:180,
+                        angle:0,
                         rx:0,
-                        ry:0,
-                        rz:1
-                    }
+                        ry:1,
+                        rz:0,
+                        setupRotation:{
+                            angle:180,
+                            rx:0,
+                            ry:0,
+                            rz:1
+                        }
+                    },
+                    rotatable: true
                 }
             ],
             instanceTransform: {
@@ -239,11 +290,18 @@
                 sx:5,
                 sy:5,
                 sz:5,
-                angle:180,
+                angle:0,
                 rx:0,
-                ry:0,
-                rz:1
-            }
+                ry:1,
+                rz:0,
+                setupRotation:{
+                    angle:180,
+                    rx:0,
+                    ry:0,
+                    rz:1
+                }
+            },
+            rotatable: true
         }
     ];
 
@@ -425,7 +483,7 @@
                 var updateRotation = function (objects) {
                     for (var i = 0; i < objects.length; i++) {
                         if (objects[i].rotatable) {
-                            console.log("here");
+                            console.log("here " + objects[i].name);
                             objects[i].instanceTransform.angle += 1.0;
                             console.log(objects[i].instanceTransform.angle);
                             if (objects[i].instanceTransform.angle > 360) {
@@ -433,6 +491,7 @@
                             }
                         }
                         if (objects[i].children) {
+                            console.log("has children " + objects[i].name);
                             updateRotation(objects[i].children);
                         }
                     }
