@@ -379,10 +379,12 @@ $(function () {
             sx:1,
             sy:1,
             sz:1,
-            angle:0,
-            rx:0,
-            ry:0,
-            rz:0
+            setupRotation:{
+                angle:0,
+                rx:0,
+                ry:0,
+                rz:0
+            }
         });
         deepEqual(m5.elements,
             [1,0,0,0,
@@ -398,8 +400,10 @@ $(function () {
             sx:1,
             sy:1,
             sz:1,
-            angle:0,
-            rz:0
+            setupRotation: {
+                angle:0,
+                rz:0
+            }
         });
         deepEqual(m5.elements,
             [1,0,0,0,
@@ -415,10 +419,12 @@ $(function () {
             sx:1,
             sy:1,
             sz:1,
-            angle:0,
-            rx:1,
-            ry:0,
-            rz:0
+            setupRotation: {
+                angle:0,
+                rx:1,
+                ry:0,
+                rz:0
+            }
         });
         deepEqual(m5.elements,
             [1,0,0,1,
@@ -434,8 +440,10 @@ $(function () {
             sx:2,
             sy:4,
             sz:7,
-            angle:0,
-            rz:0
+            setupRotation: {
+                angle:0,
+                rz:0
+            }
         });
         deepEqual(m5.elements,
             [2,0,0,0,
@@ -459,10 +467,12 @@ $(function () {
             sx:1,
             sy:1,
             sz:1,
-            angle:-1,
-            rx:2,
-            ry:-7,
-            rz:0.5
+            setupRotation: {
+                angle:-1,
+                rx:2,
+                ry:-7,
+                rz:0.5
+            }
         });
         deepEqual(m5.elements,
             [(x * x * (1 - cosine) + cosine), (x * y * (1 - cosine) - z * sine), (x * z * (1 - cosine) + y * sine), 0,
@@ -486,10 +496,12 @@ $(function () {
             sx:1,
             sy:2,
             sz:1.5,
-            angle:-1,
-            rx:2,
-            ry:-7,
-            rz:0.5
+            setupRotation: {
+                angle:-1,
+                rx:2,
+                ry:-7,
+                rz:0.5
+            }
         });
         deepEqual(m5.elements,
             [(x * x * (1 - cosine) + cosine), (x * y * (1 - cosine) - z * sine), (x * z * (1 - cosine) + y * sine), 5,

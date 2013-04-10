@@ -253,27 +253,27 @@ var Matrix4x4 = (function () {
         //  possible.
 
         // Initialize rx, ry, and rz to 1 if they're undefined
-        if (transforms.rx === undefined) {
-            transforms.rx = 1;
+        if (transforms.setupRotation.rx === undefined) {
+            transforms.setupRotation.rx = 1;
         }
-        if (transforms.ry === undefined) {
-            transforms.ry = 1;
+        if (transforms.setupRotation.ry === undefined) {
+            transforms.setupRotation.ry = 1;
         }
-        if (transforms.rz === undefined) {
-            transforms.rz = 1;
+        if (transforms.setupRotation.rz === undefined) {
+            transforms.setupRotation.rz = 1;
         }
 
-        if (transforms.rx === 0 && transforms.ry === 0 && transforms.rz === 0) {
+        if (transforms.setupRotation.rx === 0 && transforms.setupRotation.ry === 0 && transforms.setupRotation.rz === 0) {
             rotate = Matrix4x4.getRotationMatrix4x4(
-                    transforms.angle || 0, 1, 1, 1
+                    transforms.setupRotation.angle || 0, 1, 1, 1
                 );
         }
         else{
             rotate = Matrix4x4.getRotationMatrix4x4(
-                    transforms.angle || 0,
-                    transforms.rx,
-                    transforms.ry,
-                    transforms.rz
+                    transforms.setupRotation.angle || 0,
+                    transforms.setupRotation.rx,
+                    transforms.setupRotation.ry,
+                    transforms.setupRotation.rz
                 );
         }
         // Rotation has to be done first so that the object is rotated around the origin

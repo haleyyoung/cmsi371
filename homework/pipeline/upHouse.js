@@ -78,8 +78,15 @@
                         sz:10,
                         angle:0,
                         rx:0,
-                        ry:0,
-                        rz:1
+                        ry:1,
+                        rz:0
+                    },
+                    rotatable: true,
+                    axis: {
+                        angle:0,
+                        rx:0,
+                        ry:1,
+                        rz:0
                     }
                 }
             ],
@@ -92,8 +99,8 @@
                 sz:10,
                 angle:0,
                 rx:0,
-                ry:0,
-                rz:1
+                ry:1,
+                rz:0
             }
         },
 
@@ -423,9 +430,13 @@
             currentInterval = setInterval(function () {
                 var updateRotation = function (objects) {
                     for (var i = 0; i < objects.length; i++) {
-                        objects[i].instanceTransform.angle += 1.0;
-                        if (objects[i].instanceTransform.angle > 360) {
-                            objects[i].instanceTransform.angle -= 360;
+                        if (objects[i].rotatable) {
+                            console.log("here");
+                            objects[i].instanceTransform.angle += 1.0;
+                            console.log(objects[i].instanceTransform.angle);
+                            if (objects[i].instanceTransform.angle > 360) {
+                                objects[i].instanceTransform.angle -= 360;
+                            }
                         }
                         if (objects[i].children) {
                             updateRotation(objects[i].children);
