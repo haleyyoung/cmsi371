@@ -483,15 +483,12 @@
                 var updateRotation = function (objects) {
                     for (var i = 0; i < objects.length; i++) {
                         if (objects[i].rotatable) {
-                            console.log("here " + objects[i].name);
                             objects[i].instanceTransform.angle += 1.0;
-                            console.log(objects[i].instanceTransform.angle);
                             if (objects[i].instanceTransform.angle > 360) {
                                 objects[i].instanceTransform.angle -= 360;
                             }
                         }
                         if (objects[i].children) {
-                            console.log("has children " + objects[i].name);
                             updateRotation(objects[i].children);
                         }
                     }
