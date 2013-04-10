@@ -415,12 +415,10 @@ $(function () {
             sx:1,
             sy:1,
             sz:1,
-            setupRotation: {
-                angle:0,
-                rx:1,
-                ry:0,
-                rz:0
-            }
+            angle:0,
+            rx:1,
+            ry:0,
+            rz:0
         });
         deepEqual(m5.elements,
             [1,0,0,1,
@@ -428,7 +426,7 @@ $(function () {
              0,0,1,684,
              0,0,0,1
              ],
-            "Matrix4x4 instance transform only translation");
+            "Matrix4x4 instance transform only translation, no setupRotation");
         m5 = Matrix4x4.getInstanceTransform({
             tx:0,
             ty:0,

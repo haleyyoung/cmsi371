@@ -81,13 +81,7 @@
                         ry:1,
                         rz:0
                     },
-                    rotatable: true,
-                    axis: {
-                        angle:0,
-                        rx:0,
-                        ry:1,
-                        rz:0
-                    }
+                    rotatable: true
                 }
             ],
             instanceTransform: {

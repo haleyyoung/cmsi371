@@ -234,6 +234,7 @@ var Matrix4x4 = (function () {
         var translate = new Matrix4x4();
             scale = new Matrix4x4();
             rotate = new Matrix4x4();
+            rotateSetup = new Matrix4x4();
 
         translate = Matrix4x4.getTranslationMatrix4x4(
                 transforms.tx || 0,
@@ -252,14 +253,13 @@ var Matrix4x4 = (function () {
         //  a default value of 1, therefore making sure a (0, 0, 0) vector is not
         //  possible.
 
-        // Initialize rx, ry, and rz to 1 if they're undefined, also initialize
-        // setupRotation if it's not defined
+        // Initialize setupRotation.rx, setupRotation.ry, and setupRotation.rz to 1
+        // if they're undefined, also initialize setupRotation if it's not defined
         if (transforms.setupRotation === undefined) {
             transforms.setupRotation = {
                 angle: 0
             };
         }
-
         if (transforms.setupRotation.rx === undefined) {
             transforms.setupRotation.rx = 1;
         }
@@ -271,20 +271,48 @@ var Matrix4x4 = (function () {
         }
 
         if (transforms.setupRotation.rx === 0 && transforms.setupRotation.ry === 0 && transforms.setupRotation.rz === 0) {
-            rotate = Matrix4x4.getRotationMatrix4x4(
+            rotateSetup = Matrix4x4.getRotationMatrix4x4(
                     transforms.setupRotation.angle || 0, 1, 1, 1
                 );
         }
         else{
+            rotateSetup = Matrix4x4.getRotationMatrix4x4(
+                transforms.setupRotation.angle,
+                transforms.setupRotation.rx,
+                transforms.setupRotation.ry,
+                transforms.setupRotation.rz
+            );
+        }
+
+
+        // Initialize rx, ry, and rz to 1 if they're undefined
+        if (transforms.rx === undefined) {
+            transforms.rx = 1;
+        }
+        if (transforms.ry === undefined) {
+            transforms.ry = 1;
+        }
+        if (transforms.rz === undefined) {
+            transforms.rz = 1;
+        }
+
+        if (transforms.rx === 0 && transforms.ry === 0 && transforms.rz === 0) {
             rotate = Matrix4x4.getRotationMatrix4x4(
-                    transforms.setupRotation.angle || 0,
-                    transforms.setupRotation.rx,
-                    transforms.setupRotation.ry,
-                    transforms.setupRotation.rz
+                    transforms.angle || 0, 1, 1, 1
                 );
         }
+        else{
+            rotate = Matrix4x4.getRotationMatrix4x4(
+                    transforms.angle || 0,
+                    transforms.rx,
+                    transforms.ry,
+                    transforms.rz
+                );
+        }
+
         // Rotation has to be done first so that the object is rotated around the origin
-        return translate.getMultiplicationMatrix4x4(scale.getMultiplicationMatrix4x4(rotate.elements).elements);
+        return translate.getMultiplicationMatrix4x4(scale.getMultiplicationMatrix4x4(
+            rotate.getMultiplicationMatrix4x4(rotateSetup.elements).elements).elements);
     };
 
     // p, q, and up are expected to be vectors
