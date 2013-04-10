@@ -259,9 +259,9 @@ var Matrix4x4 = (function () {
         else{
             rotate = Matrix4x4.getRotationMatrix4x4(
                     transforms.angle || 0,
-                    transforms.rx || 1,
-                    transforms.ry || 1,
-                    transforms.rz || 1
+                    transforms.rx,
+                    transforms.ry,
+                    transforms.rz
                 );
         }
         // Rotation has to be done first so that the object is rotated around the origin

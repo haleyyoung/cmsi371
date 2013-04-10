@@ -22,7 +22,6 @@
         abort = false,
 
         // Important state variables.
-        currentRotation = 0.0,
         currentInterval,
         rotationMatrix,
         initialTransform,
@@ -117,7 +116,7 @@
                         sx:5,
                         sy:5,
                         sz:5,
-                        angle:0,
+                        angle:180,
                         rx:0,
                         ry:0,
                         rz:1
@@ -135,7 +134,7 @@
                         sx:5,
                         sy:5,
                         sz:5,
-                        angle:0,
+                        angle:180,
                         rx:0,
                         ry:0,
                         rz:1
@@ -153,7 +152,7 @@
                         sx:5,
                         sy:5,
                         sz:5,
-                        angle:0,
+                        angle:180,
                         rx:0,
                         ry:0,
                         rz:1
@@ -171,7 +170,7 @@
                         sx:5,
                         sy:5,
                         sz:5,
-                        angle:0,
+                        angle:180,
                         rx:0,
                         ry:0,
                         rz:1
@@ -189,7 +188,7 @@
                         sx:5,
                         sy:5,
                         sz:5,
-                        angle:0,
+                        angle:180,
                         rx:0,
                         ry:0,
                         rz:1
@@ -207,7 +206,7 @@
                         sx:5,
                         sy:5,
                         sz:5,
-                        angle:0,
+                        angle:180,
                         rx:0,
                         ry:0,
                         rz:1
@@ -225,7 +224,7 @@
                         sx:5,
                         sy:5,
                         sz:5,
-                        angle:0,
+                        angle:180,
                         rx:0,
                         ry:0,
                         rz:1
@@ -239,10 +238,10 @@
                 sx:5,
                 sy:5,
                 sz:5,
-                angle:0,
+                angle:180,
                 rx:0,
-                ry:1,
-                rz:0
+                ry:0,
+                rz:1
             }
         }
     ];
@@ -261,7 +260,7 @@
 
         // Reset rotation matrix
         gl.uniformMatrix4fv(rotationMatrix, gl.FALSE, new Float32Array(
-            Matrix4x4.getRotationMatrix4x4(currentRotation, 0, 1, 0).getColumnMajorOrder().elements
+            new Matrix4x4().elements
         ));
     };
 
@@ -352,13 +351,6 @@
             gl.uniformMatrix4fv(instanceTransformMatrix, gl.FALSE, new Float32Array(
                 Matrix4x4.getInstanceTransform(object.instanceTransform).getColumnMajorOrder().elements
             ));
-
-            // Change the rotation matrix.
-            gl.uniformMatrix4fv(rotationMatrix, gl.FALSE, new Float32Array(
-                Matrix4x4.getRotationMatrix4x4(currentRotation,
-                    object.instanceTransform.tx, 1,
-                    object.instanceTransform.tz).getColumnMajorOrder().elements
-            ));
         }
 
         // Set the varying colors.
@@ -429,11 +421,19 @@
             currentInterval = null;
         } else {
             currentInterval = setInterval(function () {
-                currentRotation += 1.0;
+                var updateRotation = function (objects) {
+                    for (var i = 0; i < objects.length; i++) {
+                        objects[i].instanceTransform.angle += 1.0;
+                        if (objects[i].instanceTransform.angle > 360) {
+                            objects[i].instanceTransform.angle -= 360;
+                        }
+                        if (objects[i].children) {
+                            updateRotation(objects[i].children);
+                        }
+                    }
+                };
+                updateRotation(objectsToDraw);
                 drawScene();
-                if (currentRotation >= 360.0) {
-                    currentRotation -= 360.0;
-                }
             }, 30);
         }
     });
