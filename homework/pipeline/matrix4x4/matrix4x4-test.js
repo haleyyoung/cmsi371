@@ -369,6 +369,138 @@ $(function () {
                 ],
             "Matrix4x4 row major to column major 5");
     });
+
+
+    test("Pure Matrix4x4 Instance Transform Multiplication", function () {
+        var m5 = Matrix4x4.getInstanceTransform({
+            tx:0,
+            ty:0,
+            tz:0,
+            sx:1,
+            sy:1,
+            sz:1,
+            angle:0,
+            rx:0,
+            ry:0,
+            rz:0
+        });
+        deepEqual(m5.elements,
+            [1,0,0,0,
+             0,1,0,0,
+             0,0,1,0,
+             0,0,0,1
+             ],
+            "Matrix4x4 instance transform no rotation, scaling or translation");
+        m5 = Matrix4x4.getInstanceTransform({
+            tx:0,
+            ty:0,
+            tz:0,
+            sx:1,
+            sy:1,
+            sz:1,
+            angle:0,
+            rz:0
+        });
+        deepEqual(m5.elements,
+            [1,0,0,0,
+             0,1,0,0,
+             0,0,1,0,
+             0,0,0,1
+             ],
+            "Matrix4x4 instance transform no rotation with undefined attributes");
+        m5 = Matrix4x4.getInstanceTransform({
+            tx:1,
+            ty:34,
+            tz:684,
+            sx:1,
+            sy:1,
+            sz:1,
+            angle:0,
+            rx:1,
+            ry:0,
+            rz:0
+        });
+        deepEqual(m5.elements,
+            [1,0,0,1,
+             0,1,0,34,
+             0,0,1,684,
+             0,0,0,1
+             ],
+            "Matrix4x4 instance transform only translation");
+        m5 = Matrix4x4.getInstanceTransform({
+            tx:0,
+            ty:0,
+            tz:0,
+            sx:2,
+            sy:4,
+            sz:7,
+            angle:0,
+            rz:0
+        });
+        deepEqual(m5.elements,
+            [2,0,0,0,
+             0,4,0,0,
+             0,0,7,0,
+             0,0,0,1
+             ],
+            "Matrix4x4 instance transform only scaling");
+
+        var axisLength = Math.sqrt(4 + 49 + (0.5 * 0.5)),
+        x = 2 / axisLength,
+        y = -7 / axisLength,
+        z = 0.5 / axisLength,
+        cosine = Math.cos(-1 * Math.PI / 180.0),
+        sine = Math.sin(-1 * Math.PI / 180.0);
+
+        m5 = Matrix4x4.getInstanceTransform({
+            tx:0,
+            ty:0,
+            tz:0,
+            sx:1,
+            sy:1,
+            sz:1,
+            angle:-1,
+            rx:2,
+            ry:-7,
+            rz:0.5
+        });
+        deepEqual(m5.elements,
+            [(x * x * (1 - cosine) + cosine), (x * y * (1 - cosine) - z * sine), (x * z * (1 - cosine) + y * sine), 0,
+                (x * y * (1 - cosine) + z * sine), (y * y * (1 - cosine) + cosine), (y * z * (1 - cosine) - x * sine), 0,
+                (x * z * (1 - cosine) - y * sine), (y * z * (1 - cosine) + x * sine), (z * z * (1 - cosine) + cosine), 0,
+                0, 0, 0, 1
+             ],
+            "Matrix4x4 instance transform only rotation");
+
+        axisLength = Math.sqrt(4 + 49 + (0.5 * 0.5));
+        x = 2 / axisLength;
+        y = -7 / axisLength;
+        z = 0.5 / axisLength;
+        cosine = Math.cos(-1 * Math.PI / 180.0);
+        sine = Math.sin(-1 * Math.PI / 180.0);
+
+        m5 = Matrix4x4.getInstanceTransform({
+            tx:5,
+            ty:6,
+            tz:7,
+            sx:1,
+            sy:2,
+            sz:1.5,
+            angle:-1,
+            rx:2,
+            ry:-7,
+            rz:0.5
+        });
+        deepEqual(m5.elements,
+            [(x * x * (1 - cosine) + cosine), (x * y * (1 - cosine) - z * sine), (x * z * (1 - cosine) + y * sine), 5,
+                2*(x * y * (1 - cosine) + z * sine), 2*(y * y * (1 - cosine) + cosine), 2*(y * z * (1 - cosine) - x * sine), 6,
+                1.5*(x * z * (1 - cosine) - y * sine), 1.5*(y * z * (1 - cosine) + x * sine), 1.5*(z * z * (1 - cosine) + cosine), 7,
+                0, 0, 0, 1
+             ],
+            "Matrix4x4 instance transform rotation, scaling, and translation");
+
+    });
+
     test("Camera (look-at) Matrix4x4", function () {
         var p = new Vector(1,0,0),
             q = new Vector(0,1,0),

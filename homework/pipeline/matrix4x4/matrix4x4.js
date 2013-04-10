@@ -251,6 +251,18 @@ var Matrix4x4 = (function () {
         //  axis to be (1, 1, 1). If some dimension is not specified, then it is
         //  a default value of 1, therefore making sure a (0, 0, 0) vector is not
         //  possible.
+
+        // Initialize rx, ry, and rz to 1 if they're undefined
+        if (transforms.rx === undefined) {
+            transforms.rx = 1;
+        }
+        if (transforms.ry === undefined) {
+            transforms.ry = 1;
+        }
+        if (transforms.rz === undefined) {
+            transforms.rz = 1;
+        }
+
         if (transforms.rx === 0 && transforms.ry === 0 && transforms.rz === 0) {
             rotate = Matrix4x4.getRotationMatrix4x4(
                     transforms.angle || 0, 1, 1, 1
