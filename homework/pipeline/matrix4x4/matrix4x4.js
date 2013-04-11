@@ -255,11 +255,16 @@ var Matrix4x4 = (function () {
 
         // Initialize setupRotation.rx, setupRotation.ry, and setupRotation.rz to 1
         // if they're undefined, also initialize setupRotation if it's not defined
+
+        // JD: OK, I expected many of these changes because I talked you
+        //     through them; what I don't get is why you have two rotation
+        //     matrices---rotateSetup then rotate?
         if (transforms.setupRotation === undefined) {
             transforms.setupRotation = {
                 angle: 0
             };
         }
+
         if (transforms.setupRotation.rx === undefined) {
             transforms.setupRotation.rx = 1;
         }
@@ -274,8 +279,7 @@ var Matrix4x4 = (function () {
             rotateSetup = Matrix4x4.getRotationMatrix4x4(
                     transforms.setupRotation.angle || 0, 1, 1, 1
                 );
-        }
-        else{
+        } else {
             rotateSetup = Matrix4x4.getRotationMatrix4x4(
                 transforms.setupRotation.angle,
                 transforms.setupRotation.rx,
@@ -284,6 +288,13 @@ var Matrix4x4 = (function () {
             );
         }
 
+        // JD: Now, assuming that you do keep the two matrices, notice
+        //     here that you have roughly the same logic for setting up
+        //     an object with angle, rx, ry, and rz properties.  You can
+        //     pull this out into a function.  And better yet, once that
+        //     is pulled out into a function, you can write a unit test
+        //     for *just that*, thus ensuring that your undefined-handling
+        //     logic stays on-function even as you make future changes.
 
         // Initialize rx, ry, and rz to 1 if they're undefined
         if (transforms.rx === undefined) {
@@ -300,8 +311,7 @@ var Matrix4x4 = (function () {
             rotate = Matrix4x4.getRotationMatrix4x4(
                     transforms.angle || 0, 1, 1, 1
                 );
-        }
-        else{
+        } else {
             rotate = Matrix4x4.getRotationMatrix4x4(
                     transforms.angle || 0,
                     transforms.rx,

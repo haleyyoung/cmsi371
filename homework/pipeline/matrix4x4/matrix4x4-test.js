@@ -511,6 +511,21 @@ $(function () {
         var p = new Vector(1,0,0),
             q = new Vector(0,1,0),
             up = new Vector(0,0,1),
+            // JD: This is technically correct, but in spirit it's a little
+            //     off.  You are just repeating the code here.  What if
+            //     someone introduced a bug to the projection function
+            //     (which did not get caught by the unit tests for that
+            //     one)?  Then now your unit test will still check out,
+            //     but the results will be wrong.
+            //
+            //     Better to compute the true value of the result and
+            //     *just check against the final value*.  The one exception
+            //     to this rule is the limited precision of floating point.
+            //     That's the only time you break down the literal, to
+            //     ensure that a floating point value is truly consistent.
+            //     Knowing when it is necessary to do that does require an
+            //     understanding of floating point representation---but
+            //     then that's why we require CMSI 284  :-D
             ze = (p.subtract(q)).unit(),
             ye = (up.subtract(up.projection(ze))).unit(),
             xe = ye.cross(ze),
@@ -518,12 +533,15 @@ $(function () {
             pDotYe = p.dot(ye),
             pDotZe = p.dot(ze),
             m6 = Matrix4x4.getLookAtMatrix(p,q,up);
+
+        // JD: Tweaked the spacing/indenting a bit here.
         deepEqual(m6.elements,
-            [xe.elements[0], xe.elements[1], xe.elements[2], -pDotXe,
+            [
+                xe.elements[0], xe.elements[1], xe.elements[2], -pDotXe,
                 ye.elements[0], ye.elements[1], ye.elements[2], -pDotYe,
                 ze.elements[0], ze.elements[1], ze.elements[2], -pDotZe,
-                0,0,0,1
-                ],
+                0, 0, 0, 1
+            ],
             "Matrix4x4 look at matrix 1");
 
         p = new Vector(0,1,0),

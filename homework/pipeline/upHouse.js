@@ -122,6 +122,16 @@
                     instanceTransform: {
                         tx:0,
                         ty:-6,
+                        // JD: We should talk a bit about whether a child's
+                        //     instance transform should be absolute or
+                        //     relative to its parent.  For example, here
+                        //     you have tz = -50 for the cube.  The roof
+                        //     also has tz = -50.  The current absolute
+                        //     interpretation of the instance transform
+                        //     means that if you move the prism, then you
+                        //     will need to move the cube.  With a relative
+                        //     interpretation, then moving the parent will
+                        //     move the child automatically.
                         tz:-50.0,
                         sx:10,
                         sy:8,
@@ -453,6 +463,8 @@
     drawObject = function (object) {
         var i;
 
+        // JD: I can see why you're doing restore here, but I have an
+        //     alternate suggestion... (see below)
         restore();
 
         if (object.instanceTransform) {
@@ -473,7 +485,18 @@
 
         if (object.children) {
             for (i = 0; i < object.children.length; i += 1) {
+                // JD: ..."bracketing" this with save and restore will
+                //     facilitate relative instance transforms:
+                //
+                //save();
                 drawObject(object.children[i]);
+                //restore();
+                //
+                // JD: See how that would work?  Of course, this requires
+                //     that your save/restore structure is a *stack*, and
+                //     not a single value.  It may even be better to call
+                //     these functions "pushInstanceTransform" and
+                //     "popInstanceTransform."
             }
         }
     };
@@ -501,7 +524,7 @@
         gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
 
         //save the original context
-        save();
+        save(); // JD: See my comment above on using save/restore.
 
         // Display the objects.
         for (i = 0, maxi = objectsToDraw.length; i < maxi; i += 1) {
