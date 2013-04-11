@@ -10,6 +10,7 @@
     var gl, // The WebGL context.
 
         // This variable stores 3D model information.
+        balloonGroup,
         objectsToDraw,
 
         // The function that passes the shape vertices to WebGL
@@ -29,6 +30,9 @@
         projectionMatrix,
         vertexPosition,
         vertexColor,
+
+        // Utility functions for managing balloons.
+        createBalloon,
 
         // Context save variable
         savedContext = instanceTransformMatrix,
@@ -55,110 +59,35 @@
     gl.clearColor(0.0, 0.0, 0.0, 0.0);
     gl.viewport(0, 0, canvas.width, canvas.height);
 
-    // Build the objects to display.
-    objectsToDraw = [
-        {
-            name: "grass",
-            color:{r: 0.35, g: 0.85, b: 0.17},
-            vertices: Shapes.toRawTriangleArray(Shapes.cube()),
-            mode: gl.TRIANGLES,
+    createBalloon = function () {
+        return {
+            color: {r: Math.random(), g: Math.random(), b: Math.random()},
+            vertices: Shapes.toRawLineArray(Shapes.sphere(0.5)),
+            mode: gl.LINES,
             instanceTransform: {
-                tx:0,
-                ty:-30,
-                tz:-100,
-                sx:100,
-                sy:1,
-                sz:100,
-                setupRotation:{
-                    angle:45,
-                    rx:1,
-                    ry:0,
-                    rz:0
-                }
-            }
-        },
-        {
-            name: "sky",
-            color:{r: 0.95, g: 0.6, b: 1},
-            vertices: Shapes.toRawTriangleArray(Shapes.cube()),
-            mode: gl.TRIANGLES,
-            instanceTransform: {
-                tx:0,
-                ty:0,
-                tz:-1000,
-                sx:10000,
-                sy:10000,
-                sz:1
-            },
-            children:[
-                {
-                    name: "sun",
-                    color: {r: 1, g: 0.5, b: 0.5},
-                    vertices: Shapes.toRawTriangleArray(Shapes.sphere()),
-                    mode: gl.TRIANGLES,
-                    instanceTransform: {
-                        tx:20,
-                        ty:16,
-                        tz:-60.0,
-                        sx:20,
-                        sy:20,
-                        sz:20
-                    }
-                }
-            ]
-        },
-        // Roof with cube child
-        {
-            name: "prism",
-            color: {r: 0.5, g: 0.5, b: 0.5},
-            vertices: Shapes.toRawTriangleArray(Shapes.triangularPrism()),
-            mode: gl.TRIANGLES,
-            children: [
-                {
-                    name: "cube",
-                    color: {r: 1, g: 0.943, b: 0.45},
-                    vertices: Shapes.toRawTriangleArray(Shapes.cube()),
-                    mode: gl.TRIANGLES,
-                    instanceTransform: {
-                        tx:0,
-                        ty:-6,
-                        // JD: We should talk a bit about whether a child's
-                        //     instance transform should be absolute or
-                        //     relative to its parent.  For example, here
-                        //     you have tz = -50 for the cube.  The roof
-                        //     also has tz = -50.  The current absolute
-                        //     interpretation of the instance transform
-                        //     means that if you move the prism, then you
-                        //     will need to move the cube.  With a relative
-                        //     interpretation, then moving the parent will
-                        //     move the child automatically.
-                        tz:-50.0,
-                        sx:10,
-                        sy:8,
-                        sz:10,
-                        angle:0,
-                        rx:0,
-                        ry:1,
-                        rz:0
-                    },
-                    rotatable: true
-                }
-            ],
-            instanceTransform: {
-                tx:0,
-                ty:0,
-                tz:-50.0,
-                sx:10,
-                sy:10,
-                sz:10,
+                tx: 5 - Math.random() * 10,
+                ty: 10 + Math.random() * 10,
+                tz: -40 - Math.random() * 40,
+                sx:5,
+                sy:5,
+                sz:5,
                 angle:0,
                 rx:0,
                 ry:1,
-                rz:0
+                rz:0,
+                setupRotation:{
+                    angle:180,
+                    rx:0,
+                    ry:0,
+                    rz:1
+                }
             },
             rotatable: true
-        },
+        };
+    };
 
+    // Build the objects to display.
+    balloonGroup =
         // Balloon with sphere child
         {
             name: "Balloon",
@@ -362,7 +291,112 @@
                 }
             },
             rotatable: true
-        }
+        };
+
+    objectsToDraw = [
+        {
+            name: "grass",
+            color:{r: 0.35, g: 0.85, b: 0.17},
+            vertices: Shapes.toRawTriangleArray(Shapes.cube()),
+            mode: gl.TRIANGLES,
+            instanceTransform: {
+                tx:0,
+                ty:-30,
+                tz:-100,
+                sx:100,
+                sy:1,
+                sz:100,
+                setupRotation:{
+                    angle:45,
+                    rx:1,
+                    ry:0,
+                    rz:0
+                }
+            }
+        },
+        {
+            name: "sky",
+            color:{r: 0.95, g: 0.6, b: 1},
+            vertices: Shapes.toRawTriangleArray(Shapes.cube()),
+            mode: gl.TRIANGLES,
+            instanceTransform: {
+                tx:0,
+                ty:0,
+                tz:-1000,
+                sx:10000,
+                sy:10000,
+                sz:1
+            },
+            children:[
+                {
+                    name: "sun",
+                    color: {r: 1, g: 0.5, b: 0.5},
+                    vertices: Shapes.toRawTriangleArray(Shapes.sphere()),
+                    mode: gl.TRIANGLES,
+                    instanceTransform: {
+                        tx:20,
+                        ty:16,
+                        tz:-60.0,
+                        sx:20,
+                        sy:20,
+                        sz:20
+                    }
+                }
+            ]
+        },
+        // Roof with cube child
+        {
+            name: "prism",
+            color: {r: 0.5, g: 0.5, b: 0.5},
+            vertices: Shapes.toRawTriangleArray(Shapes.triangularPrism()),
+            mode: gl.TRIANGLES,
+            children: [
+                {
+                    name: "cube",
+                    color: {r: 1, g: 0.943, b: 0.45},
+                    vertices: Shapes.toRawTriangleArray(Shapes.cube()),
+                    mode: gl.TRIANGLES,
+                    instanceTransform: {
+                        tx:0,
+                        ty:-6,
+                        // JD: We should talk a bit about whether a child's
+                        //     instance transform should be absolute or
+                        //     relative to its parent.  For example, here
+                        //     you have tz = -50 for the cube.  The roof
+                        //     also has tz = -50.  The current absolute
+                        //     interpretation of the instance transform
+                        //     means that if you move the prism, then you
+                        //     will need to move the cube.  With a relative
+                        //     interpretation, then moving the parent will
+                        //     move the child automatically.
+                        tz:-50.0,
+                        sx:10,
+                        sy:8,
+                        sz:10,
+                        angle:0,
+                        rx:0,
+                        ry:1,
+                        rz:0
+                    },
+                    rotatable: true
+                }
+            ],
+            instanceTransform: {
+                tx:0,
+                ty:0,
+                tz:-50.0,
+                sx:10,
+                sy:10,
+                sz:10,
+                angle:0,
+                rx:0,
+                ry:1,
+                rz:0
+            },
+            rotatable: true
+        },
+
+        balloonGroup
     ];
 
     // Context save function
@@ -570,6 +604,13 @@
                 drawScene();
             }, 30);
         }
+    });
+
+    // Set up the event handler for adding a balloon.
+    $("#add-balloon-button").click(function () {
+        balloonGroup.children.push(createBalloon());
+        passVertices(balloonGroup.children);
+        drawScene();
     });
 
 }(document.getElementById("upHouse")));
