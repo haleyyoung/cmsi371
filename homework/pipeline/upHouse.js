@@ -13,6 +13,9 @@
         balloonGroup,
         objectsToDraw,
 
+        // Color options for adding balloons
+        balloonColors,
+
         // The function that passes the shape vertices to WebGL
         passVertices,
 
@@ -61,7 +64,7 @@
 
     createBalloon = function () {
         return {
-            color: {r: Math.random(), g: Math.random(), b: Math.random()},
+            color: balloonColors[Math.floor(12*Math.random())],
             vertices: Shapes.toRawLineArray(Shapes.sphere(0.5)),
             mode: gl.LINES,
             instanceTransform: {
@@ -85,6 +88,33 @@
             rotatable: true
         };
     };
+
+    balloonColors = [
+        // red
+        {r: 1, g: 0, b: 0},
+        // orange
+        {r: 0.99999, g: 0.48, b: 0.01},
+        // yellow
+        {r: 0.9999, g: 0.9999, b: 0.20},
+        // green
+        {r: 0.46, g: 0.9999, b: 0.05},
+        // magenta
+        {r: 1, g: 0, b: 0.45},
+        // purple
+        {r: 0.6, g: 0, b: 1},
+        // orange
+        {r: 0.99999, g: 0.48, b: 0.01},
+        // green
+        {r: 0.46, g: 0.9999, b: 0.05},
+        // light blue
+        {r: 0.33, g: 0.94, b: 0.9999},
+        // dark blue
+        {r: 0.2, g: 0.58, b: 0.9999},
+        // purple
+        {r: 0.6, g: 0, b: 1},
+        // magenta
+        {r: 1, g: 0, b: 0.45}
+    ];
 
     // Build the objects to display.
     balloonGroup =
@@ -610,6 +640,12 @@
     $("#add-balloon-button").click(function () {
         balloonGroup.children.push(createBalloon());
         passVertices(balloonGroup.children);
+        drawScene();
+    });
+
+    // Set up the event handler for removing a balloon.
+    $("#remove-balloon-button").click(function () {
+        balloonGroup.children.splice(balloonGroup.length*Math.random(), 1);
         drawScene();
     });
 
