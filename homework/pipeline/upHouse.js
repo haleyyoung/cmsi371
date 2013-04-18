@@ -19,6 +19,13 @@
         // The function that passes the shape vertices to WebGL
         passVertices,
 
+        // Object update functions
+        updateRotation,
+        updatePosition,
+        getNetAcceleration,
+        // Used by updatePosition() and getNetAcceleration()
+        netAcceleration = new Vector(),
+
         // The shader program to use.
         shaderProgram,
 
@@ -85,7 +92,10 @@
                     rz:1
                 }
             },
-            rotatable: true
+            rotatable: true,
+            floatable: true,
+            accelerationVector: new Vector(0, 1, 0),
+            speedVector: new Vector(0, 0, 0)
         };
     };
 
@@ -125,7 +135,7 @@
             vertices: Shapes.toRawLineArray(Shapes.sphere(0.5)),
             mode: gl.LINES,
             children: [
-                {
+                /*{
                     // Red
                     name: "red balloon",
                     color: {r: 1, g: 0, b: 0},
@@ -319,6 +329,27 @@
                         }
                     },
                     rotatable: true
+                },*/
+                {
+                    color: {r: 1, g: 1, b: 1},
+                    vertices: Shapes.toRawLineArray(Shapes.string(0,-0.5,0,-1.0,-0.8,0)),
+                    mode: gl.LINES,
+                    instanceTransform: {
+                        tx:5,
+                        ty:8,
+                        tz:-40.0,
+                        sx:5,
+                        sy:5,
+                        sz:5,
+                        angle:0,
+                        rx:0,
+                        ry:1,
+                        rz:0
+                    },
+                    rotatable: true,
+                    floatable: true,
+                    accelerationVector: new Vector(0, -9.8, 0),
+                    speedVector: new Vector(0, 0, 0)
                 }
             ],
             instanceTransform: {
@@ -339,7 +370,10 @@
                     rz:1
                 }
             },
-            rotatable: true
+            rotatable: true,
+            floatable: true,
+            accelerationVector: new Vector(0, -9.8, 0),
+            speedVector: new Vector(0, 0, 0)
         };
 
     objectsToDraw = [
@@ -428,6 +462,7 @@
                         rz:0
                     },
                     rotatable: true,
+                    floatable: true,
                     accelerationVector: new Vector(0, -9.8, 0),
                     speedVector: new Vector(0, 0, 0)
                 }
@@ -444,7 +479,10 @@
                 ry:1,
                 rz:0
             },
-            rotatable: true
+            rotatable: true,
+            floatable: true,
+            accelerationVector: new Vector(0, -9.8, 0),
+            speedVector: new Vector(0, 0, 0)
         },
 
         balloonGroup
@@ -543,6 +581,41 @@
     projectionMatrix = gl.getUniformLocation(shaderProgram, "projectionMatrix");
 
     /*
+     * Updates the rotation matrix of each object.
+     */
+    updateRotation = function (objects) {
+        for (var i = 0; i < objects.length; i++) {
+            if (objects[i].rotatable) {
+                objects[i].instanceTransform.angle += 1.0;
+                if (objects[i].instanceTransform.angle > 360) {
+                    objects[i].instanceTransform.angle -= 360;
+                }
+            }
+            if (objects[i].children) {
+                updateRotation(objects[i].children);
+            }
+        }
+    };
+
+    getNetAcceleration = function (objects) {
+        for (var i = 0; i < objects.length; i++) {
+            netAcceleration.add(objects[i].accelerationVector);
+            if (objects[i].children) {
+                getNetAcceleration(objects[i].children);
+            }
+        }
+    };
+
+    updatePosition = function (objects) {
+        for (var i = 0; i < objects.length; i++) {
+            getNewPosition(objects[i], netAcceleration);
+            if (objects[i].children) {
+                updatePosition(objects[i].children);
+            }
+        }
+    };
+
+    /*
      * Displays an individual object.
      */
     drawObject = function (object) {
@@ -638,19 +711,8 @@
             currentInterval = null;
         } else {
             currentInterval = setInterval(function () {
-                var updateRotation = function (objects) {
-                    for (var i = 0; i < objects.length; i++) {
-                        if (objects[i].rotatable) {
-                            objects[i].instanceTransform.angle += 1.0;
-                            if (objects[i].instanceTransform.angle > 360) {
-                                objects[i].instanceTransform.angle -= 360;
-                            }
-                        }
-                        if (objects[i].children) {
-                            updateRotation(objects[i].children);
-                        }
-                    }
-                };
+                getNetAcceleration(objectsToDraw);
+                updatePosition(objectsToDraw);
                 updateRotation(objectsToDraw);
                 drawScene();
             }, 30);

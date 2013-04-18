@@ -1,16 +1,18 @@
-var getNewPosition = function (object, framesPerSecond) {
+var getNewPosition = function (object, netAcceleration, framesPerSecond) {
+    console.log("here");
     var accelerationVector = new Vector();
-    var accelerationVector.elements[0] = object.accelerationVector.x / framesPerSecond;
-    var accelerationVector.elements[1] = object.accelerationVector.y / framesPerSecond;
-    var accelerationVector.elements[2] = object.accelerationVector.z / framesPerSecond;
+    accelerationVector.elements[0] = netAcceleration.x();
+    accelerationVector.elements[1] = netAcceleration.y();
+    accelerationVector.elements[2] = netAcceleration.z();
 
     object.speedVector.add(object.accelerationVector);
 
-    object.instanceTransform.tx += object.speedVector.x / framesPerSecond;
-    object.instanceTransform.ty += object.speedVector.y / framesPerSecond;
-    object.instanceTransform.tz += object.speedVector.z / framesPerSecond;
+    object.instanceTransform.tx += object.speedVector.x();
+    object.instanceTransform.ty += object.speedVector.y();
+    object.instanceTransform.tz += object.speedVector.z();
 
     if (object.instanceTransform.ty < 0) {
         object.instanceTransform.ty = 0;
+        object.speedVector.elements[1] = 0;
     }
 };
