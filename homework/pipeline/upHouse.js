@@ -147,7 +147,26 @@
                             rx:0,
                             ry:0,
                             rz:1
-                        }
+                        },
+                        children: [
+                            {
+                                color: {r: 1, g: 1, b: 1},
+                                vertices: Shapes.toRawLineArray(Shapes.string(0,-0.5,0,-0.25,-1,0)),
+                                mode: gl.LINES,
+                                instanceTransform: {
+                                    tx:1,
+                                    ty:15,
+                                    tz:-40.0,
+                                    sx:5,
+                                    sy:5,
+                                    sz:5,
+                                    angle:0,
+                                    rx:0,
+                                    ry:1,
+                                    rz:0
+                                }
+                            }
+                        ]
                     },
                     rotatable: true
                 },
@@ -360,7 +379,7 @@
             children:[
                 {
                     name: "sun",
-                    color: {r: 1, g: 0.5, b: 0.5},
+                    color: {r: 1, g: 0.5, b: 0.65},
                     vertices: Shapes.toRawTriangleArray(Shapes.sphere()),
                     mode: gl.TRIANGLES,
                     instanceTransform: {
@@ -408,7 +427,9 @@
                         ry:1,
                         rz:0
                     },
-                    rotatable: true
+                    rotatable: true,
+                    accelerationVector: new Vector(0, -9.8, 0),
+                    speedVector: new Vector(0, 0, 0)
                 }
             ],
             instanceTransform: {

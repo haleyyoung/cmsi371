@@ -124,6 +124,23 @@ var Shapes = {
     },
 
     /*
+     * Returns the vertices for a string on a balloon.
+     */
+    string: function (x1, y1, z1, x2, y2, z2) {
+
+        return {
+            vertices: [
+                [x1, y1, z1],
+                [x2, y2, z2],
+            ],
+
+            indices: [
+                [ 0, 1, 0 ]
+            ]
+        };
+    },
+
+    /*
      * Returns the vertices for a sphere mesh.
      * Mathematical concept from http://learningwebgl.com/blog/?p=1253
      *
