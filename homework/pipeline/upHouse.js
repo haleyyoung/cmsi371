@@ -24,7 +24,7 @@
         updatePosition,
         getNetAcceleration,
         // Used by updatePosition() and getNetAcceleration()
-        netAcceleration = new Vector(),
+        netAcceleration = new Vector(0, 0, 0),
 
         // The shader program to use.
         shaderProgram,
@@ -348,7 +348,7 @@
                     },
                     rotatable: true,
                     floatable: true,
-                    accelerationVector: new Vector(0, -9.8, 0),
+                    accelerationVector: new Vector(0, 0, 0),
                     speedVector: new Vector(0, 0, 0)
                 }
             ],
@@ -372,7 +372,7 @@
             },
             rotatable: true,
             floatable: true,
-            accelerationVector: new Vector(0, -9.8, 0),
+            accelerationVector: new Vector(0, 1, 0),
             speedVector: new Vector(0, 0, 0)
         };
 
@@ -598,8 +598,11 @@
     };
 
     getNetAcceleration = function (objects) {
+        console.log("in getNetAcceleration");
         for (var i = 0; i < objects.length; i++) {
-            netAcceleration.add(objects[i].accelerationVector);
+            if (objects[i].accelerationVector){
+                netAcceleration.add(objects[i].accelerationVector);
+            }
             if (objects[i].children) {
                 getNetAcceleration(objects[i].children);
             }
@@ -607,6 +610,7 @@
     };
 
     updatePosition = function (objects) {
+        console.log("in updatePosition");
         for (var i = 0; i < objects.length; i++) {
             getNewPosition(objects[i], netAcceleration);
             if (objects[i].children) {
