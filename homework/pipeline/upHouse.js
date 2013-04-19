@@ -24,7 +24,7 @@
         updatePosition,
         getNetAcceleration,
         // Used by updatePosition() and getNetAcceleration()
-        netAcceleration = new Vector(0, 0, 0),
+        netAcceleration,
 
         // The shader program to use.
         shaderProgram,
@@ -70,13 +70,14 @@
     gl.viewport(0, 0, canvas.width, canvas.height);
 
     createBalloon = function () {
+        var tyInitial = 10 + Math.random() * 10;
         return {
             color: balloonColors[Math.floor(12*Math.random())],
             vertices: Shapes.toRawLineArray(Shapes.sphere(0.5)),
             mode: gl.LINES,
             instanceTransform: {
                 tx: 5 - Math.random() * 10,
-                ty: 10 + Math.random() * 10,
+                ty: tyInitial,
                 tz: -40 - Math.random() * 40,
                 sx:5,
                 sy:5,
@@ -94,7 +95,8 @@
             },
             rotatable: true,
             floatable: true,
-            accelerationVector: new Vector(0, 1, 0),
+            ground: tyInitial,
+            accelerationVector: new Vector(0, 0.1, 0),
             speedVector: new Vector(0, 0, 0)
         };
     };
@@ -130,7 +132,7 @@
     balloonGroup =
         // Balloon with sphere child
         {
-            name: "Balloon",
+            name: "purple balloon",
             color: {r: 0.6, g: 0, b: 1},
             vertices: Shapes.toRawLineArray(Shapes.sphere(0.5)),
             mode: gl.LINES,
@@ -331,6 +333,7 @@
                     rotatable: true
                 },*/
                 {
+                    name: "purple balloon string",
                     color: {r: 1, g: 1, b: 1},
                     vertices: Shapes.toRawLineArray(Shapes.string(0,-0.5,0,-1.0,-0.8,0)),
                     mode: gl.LINES,
@@ -372,7 +375,8 @@
             },
             rotatable: true,
             floatable: true,
-            accelerationVector: new Vector(0, 1, 0),
+            ground: -10,
+            accelerationVector: new Vector(0, 0.1, 0),
             speedVector: new Vector(0, 0, 0)
         };
 
@@ -463,7 +467,8 @@
                     },
                     rotatable: true,
                     floatable: true,
-                    accelerationVector: new Vector(0, -9.8, 0),
+                    ground: -24,
+                    accelerationVector: new Vector(0, 0, 0),
                     speedVector: new Vector(0, 0, 0)
                 }
             ],
@@ -481,7 +486,8 @@
             },
             rotatable: true,
             floatable: true,
-            accelerationVector: new Vector(0, -9.8, 0),
+            ground: -18,
+            accelerationVector: new Vector(0, 0, 0),
             speedVector: new Vector(0, 0, 0)
         },
 
@@ -598,10 +604,10 @@
     };
 
     getNetAcceleration = function (objects) {
-        console.log("in getNetAcceleration");
         for (var i = 0; i < objects.length; i++) {
             if (objects[i].accelerationVector){
-                netAcceleration.add(objects[i].accelerationVector);
+                netAcceleration = netAcceleration.add(objects[i].accelerationVector);
+                console.log("netAcceleration " + netAcceleration.elements);
             }
             if (objects[i].children) {
                 getNetAcceleration(objects[i].children);
@@ -609,10 +615,11 @@
         }
     };
 
-    updatePosition = function (objects) {
-        console.log("in updatePosition");
+    updatePosition = function (objects, framesPerSecond) {
+      //  console.log("in updatePosition");
+      //  console.log("netAcceleration " + netAcceleration.y());
         for (var i = 0; i < objects.length; i++) {
-            getNewPosition(objects[i], netAcceleration);
+            getNewPosition(objects[i], netAcceleration, framesPerSecond);
             if (objects[i].children) {
                 updatePosition(objects[i].children);
             }
@@ -715,8 +722,9 @@
             currentInterval = null;
         } else {
             currentInterval = setInterval(function () {
+                netAcceleration = new Vector(0, 0, 0);
                 getNetAcceleration(objectsToDraw);
-                updatePosition(objectsToDraw);
+                updatePosition(objectsToDraw, 30);
                 updateRotation(objectsToDraw);
                 drawScene();
             }, 30);
