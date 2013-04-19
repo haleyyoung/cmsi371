@@ -70,7 +70,9 @@
     gl.viewport(0, 0, canvas.width, canvas.height);
 
     createBalloon = function () {
-        var tyInitial = 10 + Math.random() * 10;
+        // Create balloon in comparison to where the roof currently is
+        var randomHeight = Math.random() * 10;
+        var tyInitial = objectsToDraw[3].instanceTransform.ty + randomHeight;
         return {
             color: balloonColors[Math.floor(12*Math.random())],
             vertices: Shapes.toRawLineArray(Shapes.sphere(0.5)),
@@ -95,9 +97,9 @@
             },
             rotatable: true,
             floatable: true,
-            ground: tyInitial,
+            ground: objectsToDraw[3].ground + randomHeight,
             accelerationVector: new Vector(0, 0.1, 0),
-            speedVector: new Vector(0, 0, 0)
+            speedVector: objectsToDraw[3].speedVector
         };
     };
 
@@ -591,8 +593,10 @@
      */
     updateRotation = function (objects) {
         for (var i = 0; i < objects.length; i++) {
+
             if (objects[i].rotatable) {
                 objects[i].instanceTransform.angle += 1.0;
+
                 if (objects[i].instanceTransform.angle > 360) {
                     objects[i].instanceTransform.angle -= 360;
                 }
@@ -605,9 +609,9 @@
 
     getNetAcceleration = function (objects) {
         for (var i = 0; i < objects.length; i++) {
+
             if (objects[i].accelerationVector){
                 netAcceleration = netAcceleration.add(objects[i].accelerationVector);
-                console.log("netAcceleration " + netAcceleration.elements);
             }
             if (objects[i].children) {
                 getNetAcceleration(objects[i].children);
@@ -616,12 +620,10 @@
     };
 
     updatePosition = function (objects, framesPerSecond) {
-      //  console.log("in updatePosition");
-      //  console.log("netAcceleration " + netAcceleration.y());
         for (var i = 0; i < objects.length; i++) {
             getNewPosition(objects[i], netAcceleration, framesPerSecond);
             if (objects[i].children) {
-                updatePosition(objects[i].children);
+                updatePosition(objects[i].children, framesPerSecond);
             }
         }
     };
@@ -716,7 +718,7 @@
     drawScene();
 
     // Set up the rotation toggle: clicking on the canvas does it.
-    $(canvas).click(function () {
+    //$(canvas).click(function () {
         if (currentInterval) {
             clearInterval(currentInterval);
             currentInterval = null;
@@ -725,11 +727,13 @@
                 netAcceleration = new Vector(0, 0, 0);
                 getNetAcceleration(objectsToDraw);
                 updatePosition(objectsToDraw, 30);
-                updateRotation(objectsToDraw);
+                if (objectsToDraw[2].ground !== objectsToDraw[2].instanceTransform.ty) {
+                    updateRotation(objectsToDraw);
+                }
                 drawScene();
             }, 30);
         }
-    });
+   // });
 
     // Set up the event handler for adding a balloon.
     $("#add-balloon-button").click(function () {
