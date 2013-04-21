@@ -71,7 +71,7 @@
 
     createBalloon = function () {
         // Create balloon in comparison to where the roof currently is
-        var randomHeight = Math.random() * 10;
+        var randomHeight = Math.random() * 10 + 3;
         var tyInitial = objectsToDraw[3].instanceTransform.ty + randomHeight;
         return {
             color: balloonColors[Math.floor(12*Math.random())],
@@ -103,6 +103,7 @@
         };
     };
 
+    // Some colors are repeated to balance out color scheme of the balloon group
     balloonColors = [
         // red
         {r: 1, g: 0, b: 0},
@@ -131,332 +132,37 @@
     ];
 
     // Build the objects to display.
-    balloonGroup =
-        // Balloon with sphere child
-        {
-            name: "purple balloon",
-            color: {r: 0.6, g: 0, b: 1},
-            vertices: Shapes.toRawLineArray(Shapes.sphere(0.5)),
-            mode: gl.LINES,
-            children: [
-                {
-                    // Red
-                    name: "red balloon",
-                    color: {r: 1, g: 0, b: 0},
-                    vertices: Shapes.toRawLineArray(Shapes.sphere(0.5)),
-                    mode: gl.LINES,
-                    instanceTransform: {
-                        tx:1,
-                        ty:15,
-                        tz:-40.0,
-                        sx:5,
-                        sy:5,
-                        sz:5,
-                        angle:0,
-                        rx:0,
-                        ry:1,
-                        rz:0,
-                        setupRotation:{
-                            angle:180,
-                            rx:0,
-                            ry:0,
-                            rz:1
-                        },
-                        children: [
-                            {
-                                color: {r: 1, g: 1, b: 1},
-                                vertices: Shapes.toRawLineArray(Shapes.string(0,-0.5,0,-0.25,-1,0)),
-                                mode: gl.LINES,
-                                instanceTransform: {
-                                    tx:1,
-                                    ty:15,
-                                    tz:-40.0,
-                                    sx:5,
-                                    sy:5,
-                                    sz:5,
-                                    angle:0,
-                                    rx:0,
-                                    ry:1,
-                                    rz:0
-                                }
-                            }
-                        ]
-                    },
-                    rotatable: true,
-                    floatable: true,
-                    ground: -2,
-                    accelerationVector: new Vector(0, 0.1, 0),
-                    speedVector: new Vector(0, 0, 0)
-                },
-                {
-                    // Orange
-                    color: {r: 0.99999, g: 0.48, b: 0.01},
-                    vertices: Shapes.toRawLineArray(Shapes.sphere(0.5)),
-                    mode: gl.LINES,
-                    instanceTransform: {
-                        tx:4,
-                        ty:13,
-                        tz:-40.0,
-                        sx:5,
-                        sy:5,
-                        sz:5,
-                        angle:0,
-                        rx:0,
-                        ry:1,
-                        rz:0,
-                        setupRotation:{
-                            angle:180,
-                            rx:0,
-                            ry:0,
-                            rz:1
-                        }
-                    },
-                    rotatable: true,
-                    floatable: true,
-                    ground: -4,
-                    accelerationVector: new Vector(0, 0.1, 0),
-                    speedVector: new Vector(0, 0, 0)
-                },
-                {
-                    // Yellow
-                    color: {r: 0.9999, g: 0.9999, b: 0.20},
-                    vertices: Shapes.toRawLineArray(Shapes.sphere(0.5)),
-                    mode: gl.LINES,
-                    instanceTransform: {
-                        tx:-1,
-                        ty:12,
-                        tz:-40.0,
-                        sx:5,
-                        sy:5,
-                        sz:5,
-                        angle:0,
-                        rx:0,
-                        ry:1,
-                        rz:0,
-                        setupRotation:{
-                            angle:180,
-                            rx:0,
-                            ry:0,
-                            rz:1
-                        }
-                    },
-                    rotatable: true,
-                    floatable: true,
-                    ground: -5,
-                    accelerationVector: new Vector(0, 0.1, 0),
-                    speedVector: new Vector(0, 0, 0)
-                },
-                {
-                    // Green
-                    color: {r: 0.46, g: 0.9999, b: 0.05},
-                    vertices: Shapes.toRawLineArray(Shapes.sphere(0.5)),
-                    mode: gl.LINES,
-                    instanceTransform: {
-                        tx:2,
-                        ty:11,
-                        tz:-40.0,
-                        sx:5,
-                        sy:5,
-                        sz:5,
-                        angle:0,
-                        rx:0,
-                        ry:1,
-                        rz:0,
-                        setupRotation:{
-                            angle:180,
-                            rx:0,
-                            ry:0,
-                            rz:1
-                        }
-                    },
-                    rotatable: true,
-                    floatable: true,
-                    ground: -6,
-                    accelerationVector: new Vector(0, 0.1, 0),
-                    speedVector: new Vector(0, 0, 0)
-                },
-                {
-                    // Light blue
-                    color: {r: 0.33, g: 0.94, b: 0.9999},
-                    vertices: Shapes.toRawLineArray(Shapes.sphere(0.5)),
-                    mode: gl.LINES,
-                    instanceTransform: {
-                        tx:-2,
-                        ty:14,
-                        tz:-40.0,
-                        sx:5,
-                        sy:5,
-                        sz:5,
-                        angle:0,
-                        rx:0,
-                        ry:1,
-                        rz:0,
-                        setupRotation:{
-                            angle:180,
-                            rx:0,
-                            ry:0,
-                            rz:1
-                        }
-                    },
-                    rotatable: true,
-                    floatable: true,
-                    ground: -3,
-                    accelerationVector: new Vector(0, 0.1, 0),
-                    speedVector: new Vector(0, 0, 0)
-                },
-                {
-                    // Dark blue
-                    color: {r: 0.2, g: 0.58, b: 0.9999},
-                    vertices: Shapes.toRawLineArray(Shapes.sphere(0.5)),
-                    mode: gl.LINES,
-                    children: [
-                        {
-                            name: "dark blue balloon string",
-                            color: {r: 1, g: 1, b: 1},
-                            vertices: Shapes.toRawLineArray(Shapes.string(0,-0.5,0,0.6,-1.2,0)),
-                            mode: gl.LINES,
-                            instanceTransform: {
-                                tx:-3,
-                                ty:10,
-                                tz:-40.0,
-                                sx:5,
-                                sy:5,
-                                sz:5,
-                                angle:0,
-                                rx:0,
-                                ry:1,
-                                rz:0
-                            },
-                            floatable: true,
-                            ground: -7,
-                            accelerationVector: new Vector(0, 0, 0),
-                            speedVector: new Vector(0, 0, 0)
-                        }
-                    ],
-                    instanceTransform: {
-                        tx:-3,
-                        ty:10,
-                        tz:-40.0,
-                        sx:5,
-                        sy:5,
-                        sz:5,
-                        angle:0,
-                        rx:0,
-                        ry:1,
-                        rz:0,
-                        setupRotation:{
-                            angle:180,
-                            rx:0,
-                            ry:0,
-                            rz:1
-                        }
-                    },
-                    rotatable: true,
-                    floatable: true,
-                    ground: -7,
-                    accelerationVector: new Vector(0, 0.1, 0),
-                    speedVector: new Vector(0, 0, 0)
-                },
-                {
-                    // Magenta
-                    color: {r: 1, g: 0, b: 0.45},
-                    vertices: Shapes.toRawLineArray(Shapes.sphere(0.5)),
-                    mode: gl.LINES,
-                    children: [
-                        {
-                            name: "magenta balloon string",
-                            color: {r: 1, g: 1, b: 1},
-                            vertices: Shapes.toRawLineArray(Shapes.string(0,-0.5,0,-1.0,-0.8,0)),
-                            mode: gl.LINES,
-                            instanceTransform: {
-                                tx:6,
-                                ty:10,
-                                tz:-40.0,
-                                sx:5,
-                                sy:5,
-                                sz:5,
-                                angle:0,
-                                rx:0,
-                                ry:1,
-                                rz:0
-                            },
-                            floatable: true,
-                            ground: -7,
-                            accelerationVector: new Vector(0, 0, 0),
-                            speedVector: new Vector(0, 0, 0)
-                        }
-                    ],
-                    instanceTransform: {
-                        tx:6,
-                        ty:10,
-                        tz:-40.0,
-                        sx:5,
-                        sy:5,
-                        sz:5,
-                        angle:0,
-                        rx:0,
-                        ry:1,
-                        rz:0,
-                        setupRotation:{
-                            angle:180,
-                            rx:0,
-                            ry:0,
-                            rz:1
-                        }
-                    },
-                    rotatable: true,
-                    floatable: true,
-                    ground: -7,
-                    accelerationVector: new Vector(0, 0.1, 0),
-                    speedVector: new Vector(0, 0, 0)
-                },
-                {
-                    name: "purple balloon string",
-                    color: {r: 1, g: 1, b: 1},
-                    vertices: Shapes.toRawLineArray(Shapes.string(0,-0.5,0,-1.0,-0.8,0)),
-                    mode: gl.LINES,
-                    instanceTransform: {
-                        tx:5,
-                        ty:8,
-                        tz:-40.0,
-                        sx:5,
-                        sy:5,
-                        sz:5,
-                        angle:0,
-                        rx:0,
-                        ry:1,
-                        rz:0
-                    },
-                    floatable: true,
-                    ground: -9,
-                    accelerationVector: new Vector(0, 0, 0),
-                    speedVector: new Vector(0, 0, 0)
-                }
-            ],
-            instanceTransform: {
-                tx:5,
-                ty:8,
-                tz:-40.0,
-                sx:5,
-                sy:5,
-                sz:5,
-                angle:0,
+    balloonGroup = {
+        name: "red balloon",
+        color: {r: 1, g: 0, b: 0},
+        vertices: Shapes.toRawLineArray(Shapes.sphere(0.5)),
+        mode: gl.LINES,
+        children: [
+        ],
+        instanceTransform: {
+            tx:-3,
+            ty:12,
+            tz:-40.0,
+            sx:5,
+            sy:5,
+            sz:5,
+            angle:0,
+            rx:0,
+            ry:1,
+            rz:0,
+            setupRotation:{
+                angle:180,
                 rx:0,
-                ry:1,
-                rz:0,
-                setupRotation:{
-                    angle:180,
-                    rx:0,
-                    ry:0,
-                    rz:1
-                }
-            },
-            rotatable: true,
-            floatable: true,
-            ground: -9,
-            accelerationVector: new Vector(0, 0.1, 0),
-            speedVector: new Vector(0, 0, 0)
-        };
+                ry:0,
+                rz:1
+            }
+        },
+        rotatable: true,
+        floatable: true,
+        ground: -5,
+        accelerationVector: new Vector(0, 0.1, 0),
+        speedVector: new Vector(0, 0, 0)
+    };
 
     objectsToDraw = [
         {
@@ -569,6 +275,434 @@
             speedVector: new Vector(0, 0, 0)
         },
 
+        // Static balloons
+        {
+            name: "purple balloon",
+            color: {r: 0.6, g: 0, b: 1},
+            vertices: Shapes.toRawLineArray(Shapes.sphere(0.5)),
+            mode: gl.LINES,
+            children: [
+                {
+                    // Red
+                    name: "red balloon",
+                    color: {r: 1, g: 0, b: 0},
+                    vertices: Shapes.toRawLineArray(Shapes.sphere(0.5)),
+                    mode: gl.LINES,
+                    children: [
+                        {
+                            name: "red balloon string",
+                            color: {r: 1, g: 1, b: 1},
+                            vertices: Shapes.toRawLineArray(Shapes.string(0,-0.5,0,-0.2,-2.15,0)),
+                            mode: gl.LINES,
+                            instanceTransform: {
+                                tx:1,
+                                ty:15,
+                                tz:-40.0,
+                                sx:5,
+                                sy:5,
+                                sz:5,
+                                angle:0,
+                                rx:0,
+                                ry:1,
+                                rz:0
+                            },
+                            floatable: true,
+                            ground: -2,
+                            accelerationVector: new Vector(0, 0, 0),
+                            speedVector: new Vector(0, 0, 0)
+                        }
+                    ],
+                    instanceTransform: {
+                        tx:1,
+                        ty:15,
+                        tz:-40.0,
+                        sx:5,
+                        sy:5,
+                        sz:5,
+                        angle:0,
+                        rx:0,
+                        ry:1,
+                        rz:0,
+                        setupRotation:{
+                            angle:180,
+                            rx:0,
+                            ry:0,
+                            rz:1
+                        }
+                    },
+                    rotatable: true,
+                    floatable: true,
+                    ground: -2,
+                    accelerationVector: new Vector(0, 0.1, 0),
+                    speedVector: new Vector(0, 0, 0)
+                },
+                {
+                    // Orange
+                    color: {r: 0.99999, g: 0.48, b: 0.01},
+                    vertices: Shapes.toRawLineArray(Shapes.sphere(0.5)),
+                    mode: gl.LINES,
+                    children: [
+                        {
+                            name: "orange balloon string",
+                            color: {r: 1, g: 1, b: 1},
+                            vertices: Shapes.toRawLineArray(Shapes.string(0,-0.5,0,-0.5,-1.7,0)),
+                            mode: gl.LINES,
+                            instanceTransform: {
+                                tx:4,
+                                ty:13,
+                                tz:-40.0,
+                                sx:5,
+                                sy:5,
+                                sz:5,
+                                angle:0,
+                                rx:0,
+                                ry:1,
+                                rz:0
+                            },
+                            floatable: true,
+                            ground: -4,
+                            accelerationVector: new Vector(0, 0, 0),
+                            speedVector: new Vector(0, 0, 0)
+                        }
+                    ],
+                    instanceTransform: {
+                        tx:4,
+                        ty:13,
+                        tz:-40.0,
+                        sx:5,
+                        sy:5,
+                        sz:5,
+                        angle:0,
+                        rx:0,
+                        ry:1,
+                        rz:0,
+                        setupRotation:{
+                            angle:180,
+                            rx:0,
+                            ry:0,
+                            rz:1
+                        }
+                    },
+                    rotatable: true,
+                    floatable: true,
+                    ground: -4,
+                    accelerationVector: new Vector(0, 0.1, 0),
+                    speedVector: new Vector(0, 0, 0)
+                },
+                {
+                    // Yellow
+                    color: {r: 0.9999, g: 0.9999, b: 0.20},
+                    vertices: Shapes.toRawLineArray(Shapes.sphere(0.5)),
+                    mode: gl.LINES,
+                    children: [
+                        {
+                            name: "yellow balloon string",
+                            color: {r: 1, g: 1, b: 1},
+                            vertices: Shapes.toRawLineArray(Shapes.string(0,-0.5,0,0.2,-1.5,0)),
+                            mode: gl.LINES,
+                            instanceTransform: {
+                                tx:-1,
+                                ty:12,
+                                tz:-40.0,
+                                sx:5,
+                                sy:5,
+                                sz:5,
+                                angle:0,
+                                rx:0,
+                                ry:1,
+                                rz:0
+                            },
+                            floatable: true,
+                            ground: -5,
+                            accelerationVector: new Vector(0, 0, 0),
+                            speedVector: new Vector(0, 0, 0)
+                        }
+                    ],
+                    instanceTransform: {
+                        tx:-1,
+                        ty:12,
+                        tz:-40.0,
+                        sx:5,
+                        sy:5,
+                        sz:5,
+                        angle:0,
+                        rx:0,
+                        ry:1,
+                        rz:0,
+                        setupRotation:{
+                            angle:180,
+                            rx:0,
+                            ry:0,
+                            rz:1
+                        }
+                    },
+                    rotatable: true,
+                    floatable: true,
+                    ground: -5,
+                    accelerationVector: new Vector(0, 0.1, 0),
+                    speedVector: new Vector(0, 0, 0)
+                },
+                {
+                    // Green
+                    color: {r: 0.46, g: 0.9999, b: 0.05},
+                    vertices: Shapes.toRawLineArray(Shapes.sphere(0.5)),
+                    mode: gl.LINES,
+                    children: [
+                        {
+                            name: "green balloon string",
+                            color: {r: 1, g: 1, b: 1},
+                            vertices: Shapes.toRawLineArray(Shapes.string(0,-0.5,0,-0.25,-1.35,0)),
+                            mode: gl.LINES,
+                            instanceTransform: {
+                                tx:2,
+                                ty:11,
+                                tz:-40.0,
+                                sx:5,
+                                sy:5,
+                                sz:5,
+                                angle:0,
+                                rx:0,
+                                ry:1,
+                                rz:0
+                            },
+                            floatable: true,
+                            ground: -6,
+                            accelerationVector: new Vector(0, 0, 0),
+                            speedVector: new Vector(0, 0, 0)
+                        }
+                    ],
+                    instanceTransform: {
+                        tx:2,
+                        ty:11,
+                        tz:-40.0,
+                        sx:5,
+                        sy:5,
+                        sz:5,
+                        angle:0,
+                        rx:0,
+                        ry:1,
+                        rz:0,
+                        setupRotation:{
+                            angle:180,
+                            rx:0,
+                            ry:0,
+                            rz:1
+                        }
+                    },
+                    rotatable: true,
+                    floatable: true,
+                    ground: -6,
+                    accelerationVector: new Vector(0, 0.1, 0),
+                    speedVector: new Vector(0, 0, 0)
+                },
+                {
+                    // Light blue
+                    color: {r: 0.33, g: 0.94, b: 0.9999},
+                    vertices: Shapes.toRawLineArray(Shapes.sphere(0.5)),
+                    mode: gl.LINES,
+                    children: [
+                        {
+                            name: "light blue balloon string",
+                            color: {r: 1, g: 1, b: 1},
+                            vertices: Shapes.toRawLineArray(Shapes.string(0,-0.5,0,0.45,-1.95,0)),
+                            mode: gl.LINES,
+                            instanceTransform: {
+                                tx:-2,
+                                ty:14,
+                                tz:-40.0,
+                                sx:5,
+                                sy:5,
+                                sz:5,
+                                angle:0,
+                                rx:0,
+                                ry:1,
+                                rz:0
+                            },
+                            floatable: true,
+                            ground: -3,
+                            accelerationVector: new Vector(0, 0, 0),
+                            speedVector: new Vector(0, 0, 0)
+                        }
+                    ],
+                    instanceTransform: {
+                        tx:-2,
+                        ty:14,
+                        tz:-40.0,
+                        sx:5,
+                        sy:5,
+                        sz:5,
+                        angle:0,
+                        rx:0,
+                        ry:1,
+                        rz:0,
+                        setupRotation:{
+                            angle:180,
+                            rx:0,
+                            ry:0,
+                            rz:1
+                        }
+                    },
+                    rotatable: true,
+                    floatable: true,
+                    ground: -3,
+                    accelerationVector: new Vector(0, 0.1, 0),
+                    speedVector: new Vector(0, 0, 0)
+                },
+                {
+                    // Dark blue
+                    color: {r: 0.2, g: 0.58, b: 0.9999},
+                    vertices: Shapes.toRawLineArray(Shapes.sphere(0.5)),
+                    mode: gl.LINES,
+                    children: [
+                        {
+                            name: "dark blue balloon string",
+                            color: {r: 1, g: 1, b: 1},
+                            vertices: Shapes.toRawLineArray(Shapes.string(0,-0.5,0,0.6,-1.2,0)),
+                            mode: gl.LINES,
+                            instanceTransform: {
+                                tx:-3,
+                                ty:10,
+                                tz:-40.0,
+                                sx:5,
+                                sy:5,
+                                sz:5,
+                                angle:0,
+                                rx:0,
+                                ry:1,
+                                rz:0
+                            },
+                            floatable: true,
+                            ground: -7,
+                            accelerationVector: new Vector(0, 0, 0),
+                            speedVector: new Vector(0, 0, 0)
+                        }
+                    ],
+                    instanceTransform: {
+                        tx:-3,
+                        ty:10,
+                        tz:-40.0,
+                        sx:5,
+                        sy:5,
+                        sz:5,
+                        angle:0,
+                        rx:0,
+                        ry:1,
+                        rz:0,
+                        setupRotation:{
+                            angle:180,
+                            rx:0,
+                            ry:0,
+                            rz:1
+                        }
+                    },
+                    rotatable: true,
+                    floatable: true,
+                    ground: -7,
+                    accelerationVector: new Vector(0, 0.1, 0),
+                    speedVector: new Vector(0, 0, 0)
+                },
+                {
+                    // Magenta
+                    color: {r: 1, g: 0, b: 0.45},
+                    vertices: Shapes.toRawLineArray(Shapes.sphere(0.5)),
+                    mode: gl.LINES,
+                    children: [
+                        {
+                            name: "magenta balloon string",
+                            color: {r: 1, g: 1, b: 1},
+                            vertices: Shapes.toRawLineArray(Shapes.string(0,-0.5,0,-1.1,-1.15,0)),
+                            mode: gl.LINES,
+                            instanceTransform: {
+                                tx:6,
+                                ty:10,
+                                tz:-40.0,
+                                sx:5,
+                                sy:5,
+                                sz:5,
+                                angle:0,
+                                rx:0,
+                                ry:1,
+                                rz:0
+                            },
+                            floatable: true,
+                            ground: -7,
+                            accelerationVector: new Vector(0, 0, 0),
+                            speedVector: new Vector(0, 0, 0)
+                        }
+                    ],
+                    instanceTransform: {
+                        tx:6,
+                        ty:10,
+                        tz:-40.0,
+                        sx:5,
+                        sy:5,
+                        sz:5,
+                        angle:0,
+                        rx:0,
+                        ry:1,
+                        rz:0,
+                        setupRotation:{
+                            angle:180,
+                            rx:0,
+                            ry:0,
+                            rz:1
+                        }
+                    },
+                    rotatable: true,
+                    floatable: true,
+                    ground: -7,
+                    accelerationVector: new Vector(0, 0.1, 0),
+                    speedVector: new Vector(0, 0, 0)
+                },
+                {
+                    name: "purple balloon string",
+                    color: {r: 1, g: 1, b: 1},
+                    vertices: Shapes.toRawLineArray(Shapes.string(0,-0.5,0,-1.0,-0.8,0)),
+                    mode: gl.LINES,
+                    instanceTransform: {
+                        tx:5,
+                        ty:8,
+                        tz:-40.0,
+                        sx:5,
+                        sy:5,
+                        sz:5,
+                        angle:0,
+                        rx:0,
+                        ry:1,
+                        rz:0
+                    },
+                    floatable: true,
+                    ground: -9,
+                    accelerationVector: new Vector(0, 0, 0),
+                    speedVector: new Vector(0, 0, 0)
+                }
+            ],
+            instanceTransform: {
+                tx:5,
+                ty:8,
+                tz:-40.0,
+                sx:5,
+                sy:5,
+                sz:5,
+                angle:0,
+                rx:0,
+                ry:1,
+                rz:0,
+                setupRotation:{
+                    angle:180,
+                    rx:0,
+                    ry:0,
+                    rz:1
+                }
+            },
+            rotatable: true,
+            floatable: true,
+            ground: -9,
+            accelerationVector: new Vector(0, 0.1, 0),
+            speedVector: new Vector(0, 0, 0)
+        },
+
+        // Dynamic balloons
         balloonGroup
     ];
 
@@ -811,7 +945,6 @@
 
     // Set up the event handler for adding or removing a balloon.
     $(document).keydown(function (event) {
-        console.log("event " + event);
         if (event.keyCode === 38) {
             balloonGroup.children.push(createBalloon());
             passVertices(balloonGroup.children);
