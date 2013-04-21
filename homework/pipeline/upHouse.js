@@ -139,7 +139,7 @@
             vertices: Shapes.toRawLineArray(Shapes.sphere(0.5)),
             mode: gl.LINES,
             children: [
-                /*{
+                {
                     // Red
                     name: "red balloon",
                     color: {r: 1, g: 0, b: 0},
@@ -182,7 +182,11 @@
                             }
                         ]
                     },
-                    rotatable: true
+                    rotatable: true,
+                    floatable: true,
+                    ground: -2,
+                    accelerationVector: new Vector(0, 0.1, 0),
+                    speedVector: new Vector(0, 0, 0)
                 },
                 {
                     // Orange
@@ -207,7 +211,11 @@
                             rz:1
                         }
                     },
-                    rotatable: true
+                    rotatable: true,
+                    floatable: true,
+                    ground: -4,
+                    accelerationVector: new Vector(0, 0.1, 0),
+                    speedVector: new Vector(0, 0, 0)
                 },
                 {
                     // Yellow
@@ -232,7 +240,11 @@
                             rz:1
                         }
                     },
-                    rotatable: true
+                    rotatable: true,
+                    floatable: true,
+                    ground: -5,
+                    accelerationVector: new Vector(0, 0.1, 0),
+                    speedVector: new Vector(0, 0, 0)
                 },
                 {
                     // Green
@@ -257,7 +269,11 @@
                             rz:1
                         }
                     },
-                    rotatable: true
+                    rotatable: true,
+                    floatable: true,
+                    ground: -6,
+                    accelerationVector: new Vector(0, 0.1, 0),
+                    speedVector: new Vector(0, 0, 0)
                 },
                 {
                     // Light blue
@@ -282,13 +298,41 @@
                             rz:1
                         }
                     },
-                    rotatable: true
+                    rotatable: true,
+                    floatable: true,
+                    ground: -3,
+                    accelerationVector: new Vector(0, 0.1, 0),
+                    speedVector: new Vector(0, 0, 0)
                 },
                 {
                     // Dark blue
                     color: {r: 0.2, g: 0.58, b: 0.9999},
                     vertices: Shapes.toRawLineArray(Shapes.sphere(0.5)),
                     mode: gl.LINES,
+                    children: [
+                        {
+                            name: "dark blue balloon string",
+                            color: {r: 1, g: 1, b: 1},
+                            vertices: Shapes.toRawLineArray(Shapes.string(0,-0.5,0,0.6,-1.2,0)),
+                            mode: gl.LINES,
+                            instanceTransform: {
+                                tx:-3,
+                                ty:10,
+                                tz:-40.0,
+                                sx:5,
+                                sy:5,
+                                sz:5,
+                                angle:0,
+                                rx:0,
+                                ry:1,
+                                rz:0
+                            },
+                            floatable: true,
+                            ground: -7,
+                            accelerationVector: new Vector(0, 0, 0),
+                            speedVector: new Vector(0, 0, 0)
+                        }
+                    ],
                     instanceTransform: {
                         tx:-3,
                         ty:10,
@@ -307,13 +351,41 @@
                             rz:1
                         }
                     },
-                    rotatable: true
+                    rotatable: true,
+                    floatable: true,
+                    ground: -7,
+                    accelerationVector: new Vector(0, 0.1, 0),
+                    speedVector: new Vector(0, 0, 0)
                 },
                 {
                     // Magenta
                     color: {r: 1, g: 0, b: 0.45},
                     vertices: Shapes.toRawLineArray(Shapes.sphere(0.5)),
                     mode: gl.LINES,
+                    children: [
+                        {
+                            name: "magenta balloon string",
+                            color: {r: 1, g: 1, b: 1},
+                            vertices: Shapes.toRawLineArray(Shapes.string(0,-0.5,0,-1.0,-0.8,0)),
+                            mode: gl.LINES,
+                            instanceTransform: {
+                                tx:6,
+                                ty:10,
+                                tz:-40.0,
+                                sx:5,
+                                sy:5,
+                                sz:5,
+                                angle:0,
+                                rx:0,
+                                ry:1,
+                                rz:0
+                            },
+                            floatable: true,
+                            ground: -7,
+                            accelerationVector: new Vector(0, 0, 0),
+                            speedVector: new Vector(0, 0, 0)
+                        }
+                    ],
                     instanceTransform: {
                         tx:6,
                         ty:10,
@@ -332,8 +404,12 @@
                             rz:1
                         }
                     },
-                    rotatable: true
-                },*/
+                    rotatable: true,
+                    floatable: true,
+                    ground: -7,
+                    accelerationVector: new Vector(0, 0.1, 0),
+                    speedVector: new Vector(0, 0, 0)
+                },
                 {
                     name: "purple balloon string",
                     color: {r: 1, g: 1, b: 1},
@@ -351,8 +427,8 @@
                         ry:1,
                         rz:0
                     },
-                    rotatable: true,
                     floatable: true,
+                    ground: -9,
                     accelerationVector: new Vector(0, 0, 0),
                     speedVector: new Vector(0, 0, 0)
                 }
@@ -377,7 +453,7 @@
             },
             rotatable: true,
             floatable: true,
-            ground: -10,
+            ground: -9,
             accelerationVector: new Vector(0, 0.1, 0),
             speedVector: new Vector(0, 0, 0)
         };
@@ -469,7 +545,7 @@
                     },
                     rotatable: true,
                     floatable: true,
-                    ground: -24,
+                    ground: -23,
                     accelerationVector: new Vector(0, 0, 0),
                     speedVector: new Vector(0, 0, 0)
                 }
@@ -488,7 +564,7 @@
             },
             rotatable: true,
             floatable: true,
-            ground: -18,
+            ground: -17,
             accelerationVector: new Vector(0, 0, 0),
             speedVector: new Vector(0, 0, 0)
         },
@@ -717,35 +793,34 @@
     passVertices(objectsToDraw);
     drawScene();
 
-    // Set up the rotation toggle: clicking on the canvas does it.
-    //$(canvas).click(function () {
-        if (currentInterval) {
-            clearInterval(currentInterval);
-            currentInterval = null;
-        } else {
-            currentInterval = setInterval(function () {
-                netAcceleration = new Vector(0, 0, 0);
-                getNetAcceleration(objectsToDraw);
-                updatePosition(objectsToDraw, 30);
-                if (objectsToDraw[2].ground !== objectsToDraw[2].instanceTransform.ty) {
-                    updateRotation(objectsToDraw);
-                }
-                drawScene();
-            }, 30);
+    // Manage rotation and movement in scene
+    if (currentInterval) {
+        clearInterval(currentInterval);
+        currentInterval = null;
+    } else {
+        currentInterval = setInterval(function () {
+            netAcceleration = new Vector(0, 0, 0);
+            getNetAcceleration(objectsToDraw);
+            updatePosition(objectsToDraw, 30);
+            if (objectsToDraw[2].ground !== objectsToDraw[2].instanceTransform.ty) {
+                updateRotation(objectsToDraw);
+            }
+            drawScene();
+        }, 30);
+    }
+
+    // Set up the event handler for adding or removing a balloon.
+    $(document).keydown(function (event) {
+        console.log("event " + event);
+        if (event.keyCode === 38) {
+            balloonGroup.children.push(createBalloon());
+            passVertices(balloonGroup.children);
+            drawScene();
         }
-   // });
-
-    // Set up the event handler for adding a balloon.
-    $("#add-balloon-button").click(function () {
-        balloonGroup.children.push(createBalloon());
-        passVertices(balloonGroup.children);
-        drawScene();
-    });
-
-    // Set up the event handler for removing a balloon.
-    $("#remove-balloon-button").click(function () {
-        balloonGroup.children.splice(balloonGroup.length*Math.random(), 1);
-        drawScene();
+        if (event.keyCode === 40) {
+            balloonGroup.children.splice(balloonGroup.length*Math.random(), 1);
+            drawScene();
+        }
     });
 
 }(document.getElementById("upHouse")));

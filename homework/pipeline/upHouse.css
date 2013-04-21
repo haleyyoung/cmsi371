@@ -4,3 +4,9 @@ canvas {
     margin-left: auto;
     margin-right: auto;
 }
+
+#directions{
+    font-size: 30px;
+    color: #A30052;
+    text-align: center;
+}
