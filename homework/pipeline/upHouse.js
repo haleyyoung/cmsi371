@@ -69,14 +69,19 @@
     gl.clearColor(0.0, 0.0, 0.0, 0.0);
     gl.viewport(0, 0, canvas.width, canvas.height);
 
+    // Save a balloon mesh to be reused rather than generating a new one
+    // every time we add a balloon
+    var balloonMesh = Shapes.toRawTriangleArray(Shapes.sphere(0.5));
+    var balloonMode = gl.TRIANGLES;
+
     createBalloon = function () {
         // Create balloon in comparison to where the roof currently is
         var randomHeight = Math.random() * 10 + 3;
         var tyInitial = objectsToDraw[3].instanceTransform.ty + randomHeight;
         return {
             color: balloonColors[Math.floor(12*Math.random())],
-            vertices: Shapes.toRawLineArray(Shapes.sphere(0.5)),
-            mode: gl.LINES,
+            vertices: balloonMesh,
+            mode: balloonMode,
             instanceTransform: {
                 tx: 5 - Math.random() * 10,
                 ty: tyInitial,
@@ -135,8 +140,8 @@
     balloonGroup = {
         name: "red balloon",
         color: {r: 1, g: 0, b: 0},
-        vertices: Shapes.toRawLineArray(Shapes.sphere(0.5)),
-        mode: gl.LINES,
+        vertices: balloonMesh,
+        mode: balloonMode,
         children: [
         ],
         instanceTransform: {
@@ -279,15 +284,15 @@
         {
             name: "purple balloon",
             color: {r: 0.6, g: 0, b: 1},
-            vertices: Shapes.toRawLineArray(Shapes.sphere(0.5)),
-            mode: gl.LINES,
+            vertices: balloonMesh,
+            mode: balloonMode,
             children: [
                 {
                     // Red
                     name: "red balloon",
                     color: {r: 1, g: 0, b: 0},
-                    vertices: Shapes.toRawLineArray(Shapes.sphere(0.5)),
-                    mode: gl.LINES,
+                    vertices: balloonMesh,
+                    mode: balloonMode,
                     children: [
                         {
                             name: "red balloon string",
@@ -339,8 +344,8 @@
                 {
                     // Orange
                     color: {r: 0.99999, g: 0.48, b: 0.01},
-                    vertices: Shapes.toRawLineArray(Shapes.sphere(0.5)),
-                    mode: gl.LINES,
+                    vertices: balloonMesh,
+                    mode: balloonMode,
                     children: [
                         {
                             name: "orange balloon string",
@@ -392,8 +397,8 @@
                 {
                     // Yellow
                     color: {r: 0.9999, g: 0.9999, b: 0.20},
-                    vertices: Shapes.toRawLineArray(Shapes.sphere(0.5)),
-                    mode: gl.LINES,
+                    vertices: balloonMesh,
+                    mode: balloonMode,
                     children: [
                         {
                             name: "yellow balloon string",
@@ -445,8 +450,8 @@
                 {
                     // Green
                     color: {r: 0.46, g: 0.9999, b: 0.05},
-                    vertices: Shapes.toRawLineArray(Shapes.sphere(0.5)),
-                    mode: gl.LINES,
+                    vertices: balloonMesh,
+                    mode: balloonMode,
                     children: [
                         {
                             name: "green balloon string",
@@ -498,8 +503,8 @@
                 {
                     // Light blue
                     color: {r: 0.33, g: 0.94, b: 0.9999},
-                    vertices: Shapes.toRawLineArray(Shapes.sphere(0.5)),
-                    mode: gl.LINES,
+                    vertices: balloonMesh,
+                    mode: balloonMode,
                     children: [
                         {
                             name: "light blue balloon string",
@@ -551,8 +556,8 @@
                 {
                     // Dark blue
                     color: {r: 0.2, g: 0.58, b: 0.9999},
-                    vertices: Shapes.toRawLineArray(Shapes.sphere(0.5)),
-                    mode: gl.LINES,
+                    vertices: balloonMesh,
+                    mode: balloonMode,
                     children: [
                         {
                             name: "dark blue balloon string",
@@ -604,8 +609,8 @@
                 {
                     // Magenta
                     color: {r: 1, g: 0, b: 0.45},
-                    vertices: Shapes.toRawLineArray(Shapes.sphere(0.5)),
-                    mode: gl.LINES,
+                    vertices: balloonMesh,
+                    mode: balloonMode,
                     children: [
                         {
                             name: "magenta balloon string",
@@ -805,7 +810,7 @@
         for (var i = 0; i < objects.length; i++) {
 
             if (objects[i].rotatable) {
-                objects[i].instanceTransform.angle += 1.0;
+                objects[i].instanceTransform.angle += 0.5;
 
                 if (objects[i].instanceTransform.angle > 360) {
                     objects[i].instanceTransform.angle -= 360;
@@ -946,11 +951,13 @@
     // Set up the event handler for adding or removing a balloon.
     $(document).keydown(function (event) {
         if (event.keyCode === 38) {
+            event.preventDefault();
             balloonGroup.children.push(createBalloon());
             passVertices(balloonGroup.children);
             drawScene();
         }
         if (event.keyCode === 40) {
+            event.preventDefault();
             balloonGroup.children.splice(balloonGroup.length*Math.random(), 1);
             drawScene();
         }
