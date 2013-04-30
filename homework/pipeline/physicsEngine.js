@@ -4,8 +4,8 @@ var getNewPosition = function (object, netAcceleration, framesPerSecond) {
         var accelerationVector = new Vector();
 
         accelerationVector.elements[0] = netAcceleration.x() / (framesPerSecond * framesPerSecond);
-        // Gravity's effect here is "2.5"
-        accelerationVector.elements[1] = (netAcceleration.y() - 2.5) / (framesPerSecond * framesPerSecond);
+        // Gravity's effect here is "2.0"
+        accelerationVector.elements[1] = (netAcceleration.y() - 2.0) / (framesPerSecond * framesPerSecond);
         accelerationVector.elements[2] = netAcceleration.z() / (framesPerSecond * framesPerSecond);
 
         object.speedVector = object.speedVector.add(accelerationVector);

@@ -39,7 +39,16 @@
         instanceTransformMatrix,
         projectionMatrix,
         vertexPosition,
-        vertexColor,
+        vertexDiffuseColor,
+        vertexSpecularColor,
+        shininess,
+
+        // For emphasis, we separate the variables that involve lighting.
+        normalVector,
+        lightPosition,
+        lightDiffuse,
+        lightSpecular,
+
 
         // Utility functions for managing balloons.
         createBalloon,
@@ -71,8 +80,9 @@
 
     // Save a balloon mesh to be reused rather than generating a new one
     // every time we add a balloon
-    var balloonMesh = Shapes.toRawTriangleArray(Shapes.sphere(0.5));
-    var balloonMode = gl.TRIANGLES;
+    var balloonMesh = Shapes.sphere(0.5),
+        balloonMeshVertices = Shapes.toRawTriangleArray(balloonMesh),
+        balloonMode = gl.TRIANGLES;
 
     createBalloon = function () {
         // Create balloon in comparison to where the roof currently is
@@ -80,7 +90,10 @@
         var tyInitial = objectsToDraw[3].instanceTransform.ty + randomHeight;
         return {
             color: balloonColors[Math.floor(12*Math.random())],
-            vertices: balloonMesh,
+            vertices: balloonMeshVertices,
+            specularColor: { r: 1.0, g: 1.0, b: 1.0 },
+            shininess: 16,
+            normals: Shapes.toNormalArray(balloonMesh),
             mode: balloonMode,
             instanceTransform: {
                 tx: 5 - Math.random() * 10,
@@ -137,10 +150,13 @@
     ];
 
     // Build the objects to display.
-    balloonGroup = {
+    balloonGroup = {/*
         name: "red balloon",
         color: {r: 1, g: 0, b: 0},
-        vertices: balloonMesh,
+        vertices: balloonMeshVertices,
+        specularColor: { r: 1.0, g: 1.0, b: 1.0 },
+        shininess: 16,
+        normals: Shapes.toNormalArray(balloonMesh),
         mode: balloonMode,
         children: [
         ],
@@ -166,7 +182,7 @@
         floatable: true,
         ground: -5,
         accelerationVector: new Vector(0, 0.1, 0),
-        speedVector: new Vector(0, 0, 0)
+        speedVector: new Vector(0, 0, 0)*/
     };
 
     objectsToDraw = [
@@ -174,6 +190,9 @@
             name: "grass",
             color:{r: 0.35, g: 0.85, b: 0.17},
             vertices: Shapes.toRawTriangleArray(Shapes.cube()),
+            specularColor: { r: 1.0, g: 1.0, b: 1.0 },
+            shininess: 16,
+            normals: Shapes.toNormalArray(Shapes.cube()),
             mode: gl.TRIANGLES,
             instanceTransform: {
                 tx:0,
@@ -189,11 +208,14 @@
                     rz:0
                 }
             }
-        },
+        }/*,
         {
             name: "sky",
             color:{r: 0.95, g: 0.6, b: 1},
             vertices: Shapes.toRawTriangleArray(Shapes.cube()),
+            specularColor: { r: 1.0, g: 1.0, b: 1.0 },
+            shininess: 16,
+            normals: Shapes.toNormalArray(Shapes.cube()),
             mode: gl.TRIANGLES,
             instanceTransform: {
                 tx:0,
@@ -208,6 +230,9 @@
                     name: "sun",
                     color: {r: 1, g: 0.5, b: 0.65},
                     vertices: Shapes.toRawTriangleArray(Shapes.sphere()),
+                    specularColor: { r: 1.0, g: 1.0, b: 1.0 },
+                    shininess: 16,
+                    normals: Shapes.toNormalArray(Shapes.sphere()),
                     mode: gl.TRIANGLES,
                     instanceTransform: {
                         tx:20,
@@ -225,12 +250,18 @@
             name: "prism",
             color: {r: 0.5, g: 0.5, b: 0.5},
             vertices: Shapes.toRawTriangleArray(Shapes.triangularPrism()),
+            specularColor: { r: 1.0, g: 1.0, b: 1.0 },
+            shininess: 16,
+            normals: Shapes.toNormalArray(Shapes.triangularPrism()),
             mode: gl.TRIANGLES,
             children: [
                 {
                     name: "cube",
                     color: {r: 1, g: 0.943, b: 0.45},
                     vertices: Shapes.toRawTriangleArray(Shapes.cube()),
+                    specularColor: { r: 1.0, g: 1.0, b: 1.0 },
+                    shininess: 16,
+                    normals: Shapes.toNormalArray(Shapes.cube()),
                     mode: gl.TRIANGLES,
                     instanceTransform: {
                         tx:0,
@@ -284,20 +315,29 @@
         {
             name: "purple balloon",
             color: {r: 0.6, g: 0, b: 1},
-            vertices: balloonMesh,
+            vertices: balloonMeshVertices,
+            specularColor: { r: 1.0, g: 1.0, b: 1.0 },
+            shininess: 16,
+            normals: Shapes.toNormalArray(balloonMesh),
             mode: balloonMode,
             children: [
                 {
                     // Red
                     name: "red balloon",
                     color: {r: 1, g: 0, b: 0},
-                    vertices: balloonMesh,
+                    vertices: balloonMeshVertices,
+                    specularColor: { r: 1.0, g: 1.0, b: 1.0 },
+                    shininess: 16,
+                    normals: Shapes.toNormalArray(balloonMesh),
                     mode: balloonMode,
                     children: [
                         {
                             name: "red balloon string",
                             color: {r: 1, g: 1, b: 1},
                             vertices: Shapes.toRawLineArray(Shapes.string(0,-0.5,0,-0.2,-2.15,0)),
+                            specularColor: { r: 1.0, g: 1.0, b: 1.0 },
+                            shininess: 16,
+                            normals: Shapes.toNormalArray(balloonMesh),
                             mode: gl.LINES,
                             instanceTransform: {
                                 tx:1,
@@ -344,13 +384,19 @@
                 {
                     // Orange
                     color: {r: 0.99999, g: 0.48, b: 0.01},
-                    vertices: balloonMesh,
+                    vertices: balloonMeshVertices,
+                    specularColor: { r: 1.0, g: 1.0, b: 1.0 },
+                    shininess: 16,
+                    normals: Shapes.toNormalArray(balloonMesh),
                     mode: balloonMode,
                     children: [
                         {
                             name: "orange balloon string",
                             color: {r: 1, g: 1, b: 1},
                             vertices: Shapes.toRawLineArray(Shapes.string(0,-0.5,0,-0.5,-1.7,0)),
+                            specularColor: { r: 1.0, g: 1.0, b: 1.0 },
+                            shininess: 16,
+                            normals: Shapes.toNormalArray(balloonMesh),
                             mode: gl.LINES,
                             instanceTransform: {
                                 tx:4,
@@ -397,13 +443,19 @@
                 {
                     // Yellow
                     color: {r: 0.9999, g: 0.9999, b: 0.20},
-                    vertices: balloonMesh,
+                    vertices: balloonMeshVertices,
+                    specularColor: { r: 1.0, g: 1.0, b: 1.0 },
+                    shininess: 16,
+                    normals: Shapes.toNormalArray(balloonMesh),
                     mode: balloonMode,
                     children: [
                         {
                             name: "yellow balloon string",
                             color: {r: 1, g: 1, b: 1},
                             vertices: Shapes.toRawLineArray(Shapes.string(0,-0.5,0,0.2,-1.5,0)),
+                            specularColor: { r: 1.0, g: 1.0, b: 1.0 },
+                            shininess: 16,
+                            normals: Shapes.toNormalArray(balloonMesh),
                             mode: gl.LINES,
                             instanceTransform: {
                                 tx:-1,
@@ -450,13 +502,19 @@
                 {
                     // Green
                     color: {r: 0.46, g: 0.9999, b: 0.05},
-                    vertices: balloonMesh,
+                    vertices: balloonMeshVertices,
+                    specularColor: { r: 1.0, g: 1.0, b: 1.0 },
+                    shininess: 16,
+                    normals: Shapes.toNormalArray(balloonMesh),
                     mode: balloonMode,
                     children: [
                         {
                             name: "green balloon string",
                             color: {r: 1, g: 1, b: 1},
                             vertices: Shapes.toRawLineArray(Shapes.string(0,-0.5,0,-0.25,-1.35,0)),
+                            specularColor: { r: 1.0, g: 1.0, b: 1.0 },
+                            shininess: 16,
+                            normals: Shapes.toNormalArray(balloonMesh),
                             mode: gl.LINES,
                             instanceTransform: {
                                 tx:2,
@@ -503,13 +561,19 @@
                 {
                     // Light blue
                     color: {r: 0.33, g: 0.94, b: 0.9999},
-                    vertices: balloonMesh,
+                    vertices: balloonMeshVertices,
+                    specularColor: { r: 1.0, g: 1.0, b: 1.0 },
+                    shininess: 16,
+                    normals: Shapes.toNormalArray(balloonMesh),
                     mode: balloonMode,
                     children: [
                         {
                             name: "light blue balloon string",
                             color: {r: 1, g: 1, b: 1},
                             vertices: Shapes.toRawLineArray(Shapes.string(0,-0.5,0,0.45,-1.95,0)),
+                            specularColor: { r: 1.0, g: 1.0, b: 1.0 },
+                            shininess: 16,
+                            normals: Shapes.toNormalArray(balloonMesh),
                             mode: gl.LINES,
                             instanceTransform: {
                                 tx:-2,
@@ -556,13 +620,19 @@
                 {
                     // Dark blue
                     color: {r: 0.2, g: 0.58, b: 0.9999},
-                    vertices: balloonMesh,
+                    vertices: balloonMeshVertices,
+                    specularColor: { r: 1.0, g: 1.0, b: 1.0 },
+                    shininess: 16,
+                    normals: Shapes.toNormalArray(balloonMesh),
                     mode: balloonMode,
                     children: [
                         {
                             name: "dark blue balloon string",
                             color: {r: 1, g: 1, b: 1},
                             vertices: Shapes.toRawLineArray(Shapes.string(0,-0.5,0,0.6,-1.2,0)),
+                            specularColor: { r: 1.0, g: 1.0, b: 1.0 },
+                            shininess: 16,
+                            normals: Shapes.toNormalArray(balloonMesh),
                             mode: gl.LINES,
                             instanceTransform: {
                                 tx:-3,
@@ -609,13 +679,19 @@
                 {
                     // Magenta
                     color: {r: 1, g: 0, b: 0.45},
-                    vertices: balloonMesh,
+                    vertices: balloonMeshVertices,
+                    specularColor: { r: 1.0, g: 1.0, b: 1.0 },
+                    shininess: 16,
+                    normals: Shapes.toNormalArray(balloonMesh),
                     mode: balloonMode,
                     children: [
                         {
                             name: "magenta balloon string",
                             color: {r: 1, g: 1, b: 1},
                             vertices: Shapes.toRawLineArray(Shapes.string(0,-0.5,0,-1.1,-1.15,0)),
+                            specularColor: { r: 1.0, g: 1.0, b: 1.0 },
+                            shininess: 16,
+                            normals: Shapes.toNormalArray(balloonMesh),
                             mode: gl.LINES,
                             instanceTransform: {
                                 tx:6,
@@ -663,6 +739,9 @@
                     name: "purple balloon string",
                     color: {r: 1, g: 1, b: 1},
                     vertices: Shapes.toRawLineArray(Shapes.string(0,-0.5,0,-1.0,-0.8,0)),
+                    specularColor: { r: 1.0, g: 1.0, b: 1.0 },
+                    shininess: 16,
+                    normals: Shapes.toNormalArray(balloonMesh),
                     mode: gl.LINES,
                     instanceTransform: {
                         tx:5,
@@ -708,7 +787,7 @@
         },
 
         // Dynamic balloons
-        balloonGroup
+        balloonGroup*/
     ];
 
     // Context save function
@@ -757,6 +836,27 @@
             shapes[i].colorBuffer = GLSLUtilities.initVertexBuffer(gl,
                     shapes[i].colors);
 
+            // Same trick with specular colors.
+            if (!objectsToDraw[i].specularColors) {
+                // Future refactor: helper function to convert a single value or
+                // array into an array of copies of itself.
+                objectsToDraw[i].specularColors = [];
+                for (j = 0, maxj = objectsToDraw[i].vertices.length / 3;
+                        j < maxj; j += 1) {
+                    objectsToDraw[i].specularColors = objectsToDraw[i].specularColors.concat(
+                        objectsToDraw[i].specularColor.r,
+                        objectsToDraw[i].specularColor.g,
+                        objectsToDraw[i].specularColor.b
+                    );
+                }
+            }
+            objectsToDraw[i].specularBuffer = GLSLUtilities.initVertexBuffer(gl,
+                    objectsToDraw[i].specularColors);
+
+        // One more buffer: normals.
+        objectsToDraw[i].normalBuffer = GLSLUtilities.initVertexBuffer(gl,
+                objectsToDraw[i].normals);
+
             // Look for nested shapes' vertices to pass. Also checks to make
             // sure the children array isn't empty
             if (shapes[i].children && shapes[i].children.length !== 0) {
@@ -797,11 +897,19 @@
     // Hold on to the important variables within the shaders.
     vertexPosition = gl.getAttribLocation(shaderProgram, "vertexPosition");
     gl.enableVertexAttribArray(vertexPosition);
-    vertexColor = gl.getAttribLocation(shaderProgram, "vertexColor");
-    gl.enableVertexAttribArray(vertexColor);
+    vertexDiffuseColor = gl.getAttribLocation(shaderProgram, "vertexDiffuseColor");
+    gl.enableVertexAttribArray(vertexDiffuseColor);
+    vertexSpecularColor = gl.getAttribLocation(shaderProgram, "vertexSpecularColor");
+    gl.enableVertexAttribArray(vertexSpecularColor);
+    normalVector = gl.getAttribLocation(shaderProgram, "normalVector");
+    gl.enableVertexAttribArray(normalVector);
     rotationMatrix = gl.getUniformLocation(shaderProgram, "rotationMatrix");
     instanceTransformMatrix = gl.getUniformLocation(shaderProgram, "instanceTransformMatrix");
     projectionMatrix = gl.getUniformLocation(shaderProgram, "projectionMatrix");
+    lightPosition = gl.getUniformLocation(shaderProgram, "lightPosition");
+    lightDiffuse = gl.getUniformLocation(shaderProgram, "lightDiffuse");
+    lightSpecular = gl.getUniformLocation(shaderProgram, "lightSpecular");
+    shininess = gl.getUniformLocation(shaderProgram, "shininess");
 
     /*
      * Updates the rotation matrix of each object.
@@ -847,6 +955,7 @@
      * Displays an individual object.
      */
     drawObject = function (object) {
+        console.log("mode original " + object.mode);
         var i;
 
         // JD: I can see why you're doing restore here, but I have an
@@ -862,11 +971,19 @@
 
         // Set the varying colors.
         gl.bindBuffer(gl.ARRAY_BUFFER, object.colorBuffer);
-        gl.vertexAttribPointer(vertexColor, 3, gl.FLOAT, false, 0, 0);
+        gl.vertexAttribPointer(vertexDiffuseColor, 3, gl.FLOAT, false, 0, 0);
+        gl.bindBuffer(gl.ARRAY_BUFFER, object.specularBuffer);
+        gl.vertexAttribPointer(vertexSpecularColor, 3, gl.FLOAT, false, 0, 0);
+        gl.bindBuffer(gl.ARRAY_BUFFER, object.normalBuffer);
+
+        // Set the shininess.
+        gl.uniform1f(shininess, object.shininess);
 
         // Set the varying vertex coordinates.
         gl.bindBuffer(gl.ARRAY_BUFFER, object.buffer);
         gl.vertexAttribPointer(vertexPosition, 3, gl.FLOAT, false, 0, 0);
+        console.log("mode " + object.mode);
+        console.log("length " + object.vertices.length);
         gl.drawArrays(object.mode, 0, object.vertices.length / 3);
 
         if (object.children) {
@@ -928,6 +1045,11 @@
         )
     );
 
+    // Set up our one light source and its colors.
+    gl.uniform4fv(lightPosition, [500.0, 1000.0, 100.0, 1.0]);
+    gl.uniform3fv(lightDiffuse, [1.0, 1.0, 1.0]);
+    gl.uniform3fv(lightSpecular, [1.0, 1.0, 1.0]);
+
     // Draw the initial scene.
     passVertices(objectsToDraw);
     drawScene();
@@ -941,9 +1063,9 @@
             netAcceleration = new Vector(0, 0, 0);
             getNetAcceleration(objectsToDraw);
             updatePosition(objectsToDraw, 30);
-            if (objectsToDraw[2].ground !== objectsToDraw[2].instanceTransform.ty) {
+            /*if (objectsToDraw[2].ground !== objectsToDraw[2].instanceTransform.ty) {
                 updateRotation(objectsToDraw);
-            }
+            }*/
             drawScene();
         }, 30);
     }
