@@ -186,7 +186,7 @@
     };
 
     objectsToDraw = [
-        {
+        /*{
             name: "grass",
             color:{r: 0.35, g: 0.85, b: 0.17},
             vertices: Shapes.toRawTriangleArray(Shapes.cube()),
@@ -208,7 +208,7 @@
                     rz:0
                 }
             }
-        }/*,
+        },
         {
             name: "sky",
             color:{r: 0.95, g: 0.6, b: 1},
@@ -244,7 +244,7 @@
                     }
                 }
             ]
-        }*/,
+        },
         // Roof with cube child
         {
             name: "prism",
@@ -253,7 +253,7 @@
             specularColor: { r: 1.0, g: 1.0, b: 1.0 },
             shininess: 16,
             normals: Shapes.toNormalArray(Shapes.triangularPrism()),
-            mode: gl.TRIANGLES,/*
+            mode: gl.TRIANGLES,
             children: [
                 {
                     name: "cube",
@@ -291,7 +291,7 @@
                     accelerationVector: new Vector(0, 0, 0),
                     speedVector: new Vector(0, 0, 0)
                 }
-            ],*/
+            ],
             instanceTransform: {
                 tx:0,
                 ty:0,
@@ -309,7 +309,7 @@
             ground: -17,
             accelerationVector: new Vector(0, 0, 0),
             speedVector: new Vector(0, 0, 0)
-        }/*,
+        },*/
 
         // Static balloons
         {
@@ -319,7 +319,7 @@
             specularColor: { r: 1.0, g: 1.0, b: 1.0 },
             shininess: 16,
             normals: Shapes.toNormalArray(balloonMesh),
-            mode: balloonMode,
+            mode: balloonMode,/*
             children: [
                 {
                     // Red
@@ -760,7 +760,7 @@
                     accelerationVector: new Vector(0, 0, 0),
                     speedVector: new Vector(0, 0, 0)
                 }
-            ],
+            ],*/
             instanceTransform: {
                 tx:5,
                 ty:8,
@@ -784,7 +784,7 @@
             ground: -9,
             accelerationVector: new Vector(0, 0.1, 0),
             speedVector: new Vector(0, 0, 0)
-        },
+        }/*,
 
         // Dynamic balloons
         balloonGroup*/
