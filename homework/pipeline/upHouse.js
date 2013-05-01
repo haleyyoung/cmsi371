@@ -84,6 +84,9 @@
         balloonMeshVertices = Shapes.toRawTriangleArray(balloonMesh),
         balloonMode = gl.TRIANGLES;
 
+    // JD: Validity check!
+    Shapes.checkMeshValidity(balloonMesh);
+
     createBalloon = function () {
         // Create balloon in comparison to where the roof currently is
         var randomHeight = Math.random() * 10 + 3;
