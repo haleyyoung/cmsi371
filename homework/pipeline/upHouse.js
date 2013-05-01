@@ -244,7 +244,7 @@
                     }
                 }
             ]
-        },
+        }*/,
         // Roof with cube child
         {
             name: "prism",
@@ -253,7 +253,7 @@
             specularColor: { r: 1.0, g: 1.0, b: 1.0 },
             shininess: 16,
             normals: Shapes.toNormalArray(Shapes.triangularPrism()),
-            mode: gl.TRIANGLES,
+            mode: gl.TRIANGLES,/*
             children: [
                 {
                     name: "cube",
@@ -291,7 +291,7 @@
                     accelerationVector: new Vector(0, 0, 0),
                     speedVector: new Vector(0, 0, 0)
                 }
-            ],
+            ],*/
             instanceTransform: {
                 tx:0,
                 ty:0,
@@ -309,7 +309,7 @@
             ground: -17,
             accelerationVector: new Vector(0, 0, 0),
             speedVector: new Vector(0, 0, 0)
-        },
+        }/*,
 
         // Static balloons
         {
@@ -955,7 +955,7 @@
      * Displays an individual object.
      */
     drawObject = function (object) {
-        console.log("mode original " + object.mode);
+       // console.log("mode original " + object.mode);
         var i;
 
         // JD: I can see why you're doing restore here, but I have an
@@ -975,6 +975,7 @@
         gl.bindBuffer(gl.ARRAY_BUFFER, object.specularBuffer);
         gl.vertexAttribPointer(vertexSpecularColor, 3, gl.FLOAT, false, 0, 0);
         gl.bindBuffer(gl.ARRAY_BUFFER, object.normalBuffer);
+        gl.vertexAttribPointer(normalVector, 3, gl.FLOAT, false, 0, 0);
 
         // Set the shininess.
         gl.uniform1f(shininess, object.shininess);
@@ -982,8 +983,8 @@
         // Set the varying vertex coordinates.
         gl.bindBuffer(gl.ARRAY_BUFFER, object.buffer);
         gl.vertexAttribPointer(vertexPosition, 3, gl.FLOAT, false, 0, 0);
-        console.log("mode " + object.mode);
-        console.log("length " + object.vertices.length);
+        //console.log("mode " + object.mode);
+        //console.log("length " + object.vertices.length);
         gl.drawArrays(object.mode, 0, object.vertices.length / 3);
 
         if (object.children) {
@@ -1046,7 +1047,7 @@
     );
 
     // Set up our one light source and its colors.
-    gl.uniform4fv(lightPosition, [500.0, 1000.0, 100.0, 1.0]);
+    gl.uniform4fv(lightPosition, [500.0, 1000.0, 100.0, 0.0]);
     gl.uniform3fv(lightDiffuse, [1.0, 1.0, 1.0]);
     gl.uniform3fv(lightSpecular, [1.0, 1.0, 1.0]);
 
@@ -1066,6 +1067,7 @@
             /*if (objectsToDraw[2].ground !== objectsToDraw[2].instanceTransform.ty) {
                 updateRotation(objectsToDraw);
             }*/
+            updateRotation(objectsToDraw);
             drawScene();
         }, 30);
     }
