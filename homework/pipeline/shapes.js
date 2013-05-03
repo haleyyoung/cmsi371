@@ -187,12 +187,12 @@ var Shapes = {
         }
 
         // Build indices
-        for (k = 0; k < (latitudeLines + 1); k += 1) {
-            for (l = 0; l < (longitudeLines + 1); l += 1) {
-                currentIndex = 2 * ((latitudeLines + 1) * k + l);
+        for (k = 0; k < (latitudeLines); k += 1) {
+            for (l = 0; l < (longitudeLines); l += 1) {
+                currentIndex = 2 * ((latitudeLines) * k + l);
 
-                indices[2 * ((latitudeLines + 1) * k + l)] = [];
-                indices[2 * ((latitudeLines + 1) * k + l) + 1] = [];
+                indices[2 * ((latitudeLines) * k + l)] = [];
+                indices[2 * ((latitudeLines) * k + l) + 1] = [];
 
                 // First Triangle
                 // Top left of square
@@ -201,6 +201,8 @@ var Shapes = {
                 indices[currentIndex][1] = longitudeLines * k + l + 1;
                 // Bottom left of square
                 indices[currentIndex][2] = longitudeLines * (k + 1) + l;
+
+                console.log("first " + indices[currentIndex][0] + " " +indices[currentIndex][1] + " " +indices[currentIndex][2]);
 
                 // Second Triangle
                 currentIndex += 1;
@@ -211,6 +213,8 @@ var Shapes = {
                 indices[currentIndex][1] = longitudeLines * (k + 1) + l + 1;
                 // Top right of square
                 indices[currentIndex][2] = longitudeLines * k + l + 1;
+
+                console.log("second " + indices[currentIndex][0] + " " +indices[currentIndex][1] + " " +indices[currentIndex][2]);
             }
         }
 
@@ -231,7 +235,9 @@ var Shapes = {
             maxj;
 
         for (i = 0, maxi = indexedVertices.indices.length; i < maxi; i += 1) {
+            console.log ("what is i? " + indexedVertices.indices[i]);
             for (j = 0, maxj = indexedVertices.indices[i].length; j < maxj; j += 1) {
+                console.log("and j? " + j);
                 result = result.concat(
                     indexedVertices.vertices[
                         indexedVertices.indices[i][j]
@@ -341,11 +347,11 @@ var Shapes = {
                 // Is it valid?
                 if (!vertex) {
                     valid = false;
-                    console.log("!!!!!!!! Bad face vertex found!");
-                    console.log("Face index: " + i);
-                    console.log("Index within the face: " + j);
-                    console.log("vertex index: " + vertexIndex);
-                    console.log("vertex value: " + vertex);
+                    //console.log("!!!!!!!! Bad face vertex found!");
+                    //console.log("Face index: " + i);
+                    //console.log("Index within the face: " + j);
+                    //console.log("vertex index: " + vertexIndex);
+                    //console.log("vertex value: " + vertex);
                 }
             }
         }
