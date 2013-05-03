@@ -84,9 +84,6 @@
         balloonMeshVertices = Shapes.toRawTriangleArray(balloonMesh),
         balloonMode = gl.TRIANGLES;
 
-    // JD: Validity check!
-    Shapes.checkMeshValidity(balloonMesh);
-
     createBalloon = function () {
         // Create balloon in comparison to where the roof currently is
         var randomHeight = Math.random() * 10 + 3;
@@ -153,7 +150,7 @@
     ];
 
     // Build the objects to display.
-    balloonGroup = {/*
+    balloonGroup = {
         name: "red balloon",
         color: {r: 1, g: 0, b: 0},
         vertices: balloonMeshVertices,
@@ -185,11 +182,11 @@
         floatable: true,
         ground: -5,
         accelerationVector: new Vector(0, 0.1, 0),
-        speedVector: new Vector(0, 0, 0)*/
+        speedVector: new Vector(0, 0, 0)
     };
 
     objectsToDraw = [
-        /*{
+        {
             name: "grass",
             color:{r: 0.35, g: 0.85, b: 0.17},
             vertices: Shapes.toRawTriangleArray(Shapes.cube()),
@@ -312,7 +309,7 @@
             ground: -17,
             accelerationVector: new Vector(0, 0, 0),
             speedVector: new Vector(0, 0, 0)
-        },*/
+        },
 
         // Static balloons
         {
@@ -322,7 +319,7 @@
             specularColor: { r: 1.0, g: 1.0, b: 1.0 },
             shininess: 16,
             normals: Shapes.toNormalArray(balloonMesh),
-            mode: balloonMode,/*
+            mode: balloonMode,
             children: [
                 {
                     // Red
@@ -763,7 +760,7 @@
                     accelerationVector: new Vector(0, 0, 0),
                     speedVector: new Vector(0, 0, 0)
                 }
-            ],*/
+            ],
             instanceTransform: {
                 tx:5,
                 ty:8,
@@ -787,10 +784,10 @@
             ground: -9,
             accelerationVector: new Vector(0, 0.1, 0),
             speedVector: new Vector(0, 0, 0)
-        }/*,
+        },
 
         // Dynamic balloons
-        balloonGroup*/
+        balloonGroup
     ];
 
     // Context save function
@@ -840,25 +837,26 @@
                     shapes[i].colors);
 
             // Same trick with specular colors.
-            if (!objectsToDraw[i].specularColors) {
+            console.log("name " + shapes[i].name);
+            if (!shapes[i].specularColors) {
                 // Future refactor: helper function to convert a single value or
                 // array into an array of copies of itself.
-                objectsToDraw[i].specularColors = [];
-                for (j = 0, maxj = objectsToDraw[i].vertices.length / 3;
+                shapes[i].specularColors = [];
+                for (j = 0, maxj = shapes[i].vertices.length / 3;
                         j < maxj; j += 1) {
-                    objectsToDraw[i].specularColors = objectsToDraw[i].specularColors.concat(
-                        objectsToDraw[i].specularColor.r,
-                        objectsToDraw[i].specularColor.g,
-                        objectsToDraw[i].specularColor.b
+                    shapes[i].specularColors = shapes[i].specularColors.concat(
+                        shapes[i].specularColor.r,
+                        shapes[i].specularColor.g,
+                        shapes[i].specularColor.b
                     );
                 }
             }
-            objectsToDraw[i].specularBuffer = GLSLUtilities.initVertexBuffer(gl,
-                    objectsToDraw[i].specularColors);
+            shapes[i].specularBuffer = GLSLUtilities.initVertexBuffer(gl,
+                    shapes[i].specularColors);
 
         // One more buffer: normals.
-        objectsToDraw[i].normalBuffer = GLSLUtilities.initVertexBuffer(gl,
-                objectsToDraw[i].normals);
+        shapes[i].normalBuffer = GLSLUtilities.initVertexBuffer(gl,
+                shapes[i].normals);
 
             // Look for nested shapes' vertices to pass. Also checks to make
             // sure the children array isn't empty
