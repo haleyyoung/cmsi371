@@ -88,11 +88,12 @@
         // Create balloon in comparison to where the roof currently is
         var randomHeight = Math.random() * 10 + 3;
         var tyInitial = objectsToDraw[3].instanceTransform.ty + randomHeight;
+        var randomBalloonColor = balloonColors[Math.floor(12*Math.random())];
         return {
-            color: balloonColors[Math.floor(12*Math.random())],
+            color: randomBalloonColor,
             vertices: balloonMeshVertices,
-            specularColor: { r: 1.0, g: 1.0, b: 1.0 },
-            shininess: 16,
+            specularColor: randomBalloonColor,
+            shininess: 2,
             normals: Shapes.toNormalArray(balloonMesh),
             mode: balloonMode,
             instanceTransform: {
@@ -154,8 +155,8 @@
         name: "red balloon",
         color: {r: 1, g: 0, b: 0},
         vertices: balloonMeshVertices,
-        specularColor: { r: 1.0, g: 1.0, b: 1.0 },
-        shininess: 16,
+        specularColor: {r: 1, g: 0, b: 0},
+        shininess: 2,
         normals: Shapes.toNormalArray(balloonMesh),
         mode: balloonMode,
         children: [
@@ -190,8 +191,8 @@
             name: "grass",
             color:{r: 0.35, g: 0.85, b: 0.17},
             vertices: Shapes.toRawTriangleArray(Shapes.cube()),
-            specularColor: { r: 1.0, g: 1.0, b: 1.0 },
-            shininess: 16,
+            specularColor: {r: 0.35, g: 0.85, b: 0.17},
+            shininess: 1,
             normals: Shapes.toNormalArray(Shapes.cube()),
             mode: gl.TRIANGLES,
             instanceTransform: {
@@ -213,8 +214,8 @@
             name: "sky",
             color:{r: 0.95, g: 0.6, b: 1},
             vertices: Shapes.toRawTriangleArray(Shapes.cube()),
-            specularColor: { r: 1.0, g: 1.0, b: 1.0 },
-            shininess: 16,
+            specularColor: {r: 0.95, g: 0.6, b: 1},
+            shininess: 2,
             normals: Shapes.toNormalArray(Shapes.cube()),
             mode: gl.TRIANGLES,
             instanceTransform: {
@@ -230,8 +231,8 @@
                     name: "sun",
                     color: {r: 1, g: 0.5, b: 0.65},
                     vertices: Shapes.toRawTriangleArray(Shapes.sphere()),
-                    specularColor: { r: 1.0, g: 1.0, b: 1.0 },
-                    shininess: 16,
+                    specularColor: {r: 1, g: 0.5, b: 0.65},
+                    shininess: 1,
                     normals: Shapes.toNormalArray(Shapes.sphere()),
                     mode: gl.TRIANGLES,
                     instanceTransform: {
@@ -250,8 +251,8 @@
             name: "prism",
             color: {r: 0.5, g: 0.5, b: 0.5},
             vertices: Shapes.toRawTriangleArray(Shapes.triangularPrism()),
-            specularColor: { r: 1.0, g: 1.0, b: 1.0 },
-            shininess: 16,
+            specularColor: { r: 0.5, g: 0.5, b: 0.5 },
+            shininess: 1,
             normals: Shapes.toNormalArray(Shapes.triangularPrism()),
             mode: gl.TRIANGLES,
             children: [
@@ -259,8 +260,8 @@
                     name: "cube",
                     color: {r: 1, g: 0.943, b: 0.45},
                     vertices: Shapes.toRawTriangleArray(Shapes.cube()),
-                    specularColor: { r: 1.0, g: 1.0, b: 1.0 },
-                    shininess: 16,
+                    specularColor: {r: 1, g: 0.943, b: 0.45},
+                    shininess: 1,
                     normals: Shapes.toNormalArray(Shapes.cube()),
                     mode: gl.TRIANGLES,
                     instanceTransform: {
@@ -316,8 +317,8 @@
             name: "purple balloon",
             color: {r: 0.6, g: 0, b: 1},
             vertices: balloonMeshVertices,
-            specularColor: { r: 1.0, g: 1.0, b: 1.0 },
-            shininess: 16,
+            specularColor: {r: 0.6, g: 0, b: 1},
+            shininess: 2,
             normals: Shapes.toNormalArray(balloonMesh),
             mode: balloonMode,
             children: [
@@ -326,8 +327,8 @@
                     name: "red balloon",
                     color: {r: 1, g: 0, b: 0},
                     vertices: balloonMeshVertices,
-                    specularColor: { r: 1.0, g: 1.0, b: 1.0 },
-                    shininess: 16,
+                    specularColor: {r: 1, g: 0, b: 0},
+                    shininess: 2,
                     normals: Shapes.toNormalArray(balloonMesh),
                     mode: balloonMode,
                     children: [
@@ -336,7 +337,7 @@
                             color: {r: 1, g: 1, b: 1},
                             vertices: Shapes.toRawLineArray(Shapes.string(0,-0.5,0,-0.2,-2.15,0)),
                             specularColor: { r: 1.0, g: 1.0, b: 1.0 },
-                            shininess: 16,
+                            shininess: 2,
                             normals: Shapes.toNormalArray(balloonMesh),
                             mode: gl.LINES,
                             instanceTransform: {
@@ -383,10 +384,10 @@
                 },
                 {
                     // Orange
-                    color: {r: 0.99999, g: 0.48, b: 0.01},
+                    color: {r: 1.0, g: 0.48, b: 0.01},
                     vertices: balloonMeshVertices,
-                    specularColor: { r: 1.0, g: 1.0, b: 1.0 },
-                    shininess: 16,
+                    specularColor: {r: 1.0, g: 0.48, b: 0.01},
+                    shininess: 2,
                     normals: Shapes.toNormalArray(balloonMesh),
                     mode: balloonMode,
                     children: [
@@ -395,7 +396,7 @@
                             color: {r: 1, g: 1, b: 1},
                             vertices: Shapes.toRawLineArray(Shapes.string(0,-0.5,0,-0.5,-1.7,0)),
                             specularColor: { r: 1.0, g: 1.0, b: 1.0 },
-                            shininess: 16,
+                            shininess: 2,
                             normals: Shapes.toNormalArray(balloonMesh),
                             mode: gl.LINES,
                             instanceTransform: {
@@ -442,10 +443,10 @@
                 },
                 {
                     // Yellow
-                    color: {r: 0.9999, g: 0.9999, b: 0.20},
+                    color: {r: 1.0, g: 1.0, b: 0.20},
                     vertices: balloonMeshVertices,
-                    specularColor: { r: 1.0, g: 1.0, b: 1.0 },
-                    shininess: 16,
+                    specularColor: {r: 1.0, g: 1.0, b: 0.20},
+                    shininess: 2,
                     normals: Shapes.toNormalArray(balloonMesh),
                     mode: balloonMode,
                     children: [
@@ -454,7 +455,7 @@
                             color: {r: 1, g: 1, b: 1},
                             vertices: Shapes.toRawLineArray(Shapes.string(0,-0.5,0,0.2,-1.5,0)),
                             specularColor: { r: 1.0, g: 1.0, b: 1.0 },
-                            shininess: 16,
+                            shininess: 2,
                             normals: Shapes.toNormalArray(balloonMesh),
                             mode: gl.LINES,
                             instanceTransform: {
@@ -501,10 +502,10 @@
                 },
                 {
                     // Green
-                    color: {r: 0.46, g: 0.9999, b: 0.05},
+                    color: {r: 0.46, g: 1.0, b: 0.05},
                     vertices: balloonMeshVertices,
-                    specularColor: { r: 1.0, g: 1.0, b: 1.0 },
-                    shininess: 16,
+                    specularColor: {r: 0.46, g: 1.0, b: 0.05},
+                    shininess: 2,
                     normals: Shapes.toNormalArray(balloonMesh),
                     mode: balloonMode,
                     children: [
@@ -513,7 +514,7 @@
                             color: {r: 1, g: 1, b: 1},
                             vertices: Shapes.toRawLineArray(Shapes.string(0,-0.5,0,-0.25,-1.35,0)),
                             specularColor: { r: 1.0, g: 1.0, b: 1.0 },
-                            shininess: 16,
+                            shininess: 2,
                             normals: Shapes.toNormalArray(balloonMesh),
                             mode: gl.LINES,
                             instanceTransform: {
@@ -560,10 +561,10 @@
                 },
                 {
                     // Light blue
-                    color: {r: 0.33, g: 0.94, b: 0.9999},
+                    color: {r: 0.33, g: 0.94, b: 1.0},
                     vertices: balloonMeshVertices,
-                    specularColor: { r: 1.0, g: 1.0, b: 1.0 },
-                    shininess: 16,
+                    specularColor: {r: 0.33, g: 0.94, b: 1.0},
+                    shininess: 2,
                     normals: Shapes.toNormalArray(balloonMesh),
                     mode: balloonMode,
                     children: [
@@ -572,7 +573,7 @@
                             color: {r: 1, g: 1, b: 1},
                             vertices: Shapes.toRawLineArray(Shapes.string(0,-0.5,0,0.45,-1.95,0)),
                             specularColor: { r: 1.0, g: 1.0, b: 1.0 },
-                            shininess: 16,
+                            shininess: 2,
                             normals: Shapes.toNormalArray(balloonMesh),
                             mode: gl.LINES,
                             instanceTransform: {
@@ -619,10 +620,10 @@
                 },
                 {
                     // Dark blue
-                    color: {r: 0.2, g: 0.58, b: 0.9999},
+                    color: {r: 0.2, g: 0.58, b: 1.0},
                     vertices: balloonMeshVertices,
-                    specularColor: { r: 1.0, g: 1.0, b: 1.0 },
-                    shininess: 16,
+                    specularColor: {r: 0.2, g: 0.58, b: 1.0},
+                    shininess: 2,
                     normals: Shapes.toNormalArray(balloonMesh),
                     mode: balloonMode,
                     children: [
@@ -631,7 +632,7 @@
                             color: {r: 1, g: 1, b: 1},
                             vertices: Shapes.toRawLineArray(Shapes.string(0,-0.5,0,0.6,-1.2,0)),
                             specularColor: { r: 1.0, g: 1.0, b: 1.0 },
-                            shininess: 16,
+                            shininess: 2,
                             normals: Shapes.toNormalArray(balloonMesh),
                             mode: gl.LINES,
                             instanceTransform: {
@@ -680,8 +681,8 @@
                     // Magenta
                     color: {r: 1, g: 0, b: 0.45},
                     vertices: balloonMeshVertices,
-                    specularColor: { r: 1.0, g: 1.0, b: 1.0 },
-                    shininess: 16,
+                    specularColor: {r: 1, g: 0, b: 0.45},
+                    shininess: 2,
                     normals: Shapes.toNormalArray(balloonMesh),
                     mode: balloonMode,
                     children: [
@@ -690,7 +691,7 @@
                             color: {r: 1, g: 1, b: 1},
                             vertices: Shapes.toRawLineArray(Shapes.string(0,-0.5,0,-1.1,-1.15,0)),
                             specularColor: { r: 1.0, g: 1.0, b: 1.0 },
-                            shininess: 16,
+                            shininess: 2,
                             normals: Shapes.toNormalArray(balloonMesh),
                             mode: gl.LINES,
                             instanceTransform: {
@@ -740,7 +741,7 @@
                     color: {r: 1, g: 1, b: 1},
                     vertices: Shapes.toRawLineArray(Shapes.string(0,-0.5,0,-1.0,-0.8,0)),
                     specularColor: { r: 1.0, g: 1.0, b: 1.0 },
-                    shininess: 16,
+                    shininess: 2,
                     normals: Shapes.toNormalArray(balloonMesh),
                     mode: gl.LINES,
                     instanceTransform: {
@@ -837,7 +838,6 @@
                     shapes[i].colors);
 
             // Same trick with specular colors.
-            console.log("name " + shapes[i].name);
             if (!shapes[i].specularColors) {
                 // Future refactor: helper function to convert a single value or
                 // array into an array of copies of itself.
@@ -917,7 +917,6 @@
      */
     updateRotation = function (objects) {
         for (var i = 0; i < objects.length; i++) {
-
             if (objects[i].rotatable) {
                 objects[i].instanceTransform.angle += 0.5;
 
@@ -956,7 +955,6 @@
      * Displays an individual object.
      */
     drawObject = function (object) {
-       // console.log("mode original " + object.mode);
         var i;
 
         // JD: I can see why you're doing restore here, but I have an
@@ -984,8 +982,6 @@
         // Set the varying vertex coordinates.
         gl.bindBuffer(gl.ARRAY_BUFFER, object.buffer);
         gl.vertexAttribPointer(vertexPosition, 3, gl.FLOAT, false, 0, 0);
-        //console.log("mode " + object.mode);
-        //console.log("length " + object.vertices.length);
         gl.drawArrays(object.mode, 0, object.vertices.length / 3);
 
         if (object.children) {
@@ -1048,9 +1044,9 @@
     );
 
     // Set up our one light source and its colors.
-    gl.uniform4fv(lightPosition, [500.0, 1000.0, 100.0, 0.0]);
+    gl.uniform4fv(lightPosition, [20,100,160.0, 0.0]);
     gl.uniform3fv(lightDiffuse, [1.0, 1.0, 1.0]);
-    gl.uniform3fv(lightSpecular, [1.0, 1.0, 1.0]);
+    gl.uniform3fv(lightSpecular, [1.0,0.48,0.31]);
 
     // Draw the initial scene.
     passVertices(objectsToDraw);
@@ -1065,10 +1061,9 @@
             netAcceleration = new Vector(0, 0, 0);
             getNetAcceleration(objectsToDraw);
             updatePosition(objectsToDraw, 30);
-            /*if (objectsToDraw[2].ground !== objectsToDraw[2].instanceTransform.ty) {
+            if (objectsToDraw[2].ground !== objectsToDraw[2].instanceTransform.ty) {
                 updateRotation(objectsToDraw);
-            }*/
-            updateRotation(objectsToDraw);
+            }
             drawScene();
         }, 30);
     }

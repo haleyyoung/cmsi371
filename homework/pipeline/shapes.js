@@ -207,10 +207,10 @@ var Shapes = {
 
                 // Bottom left of square
                 indices[currentIndex][0] = longitudeLines * (k + 1) + l;
-                // Bottom right of square
-                indices[currentIndex][1] = longitudeLines * (k + 1) + l + 1;
                 // Top right of square
-                indices[currentIndex][2] = longitudeLines * k + l + 1;
+                indices[currentIndex][1] = longitudeLines * k + l + 1;
+                // Bottom right of square
+                indices[currentIndex][2] = longitudeLines * (k + 1) + l + 1;
             }
         }
 
@@ -318,5 +318,5 @@ var Shapes = {
         }
 
         return result;
-    },
+    }
 };
