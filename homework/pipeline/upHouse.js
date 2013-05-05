@@ -54,6 +54,7 @@
         createBalloon,
 
         // Context save variable
+        // JD: Are you still using this?  If not, clean it out.
         savedContext = instanceTransformMatrix,
 
         // An individual "draw object" function.
@@ -79,7 +80,10 @@
     gl.viewport(0, 0, canvas.width, canvas.height);
 
     // Save a balloon mesh to be reused rather than generating a new one
-    // every time we add a balloon
+    // every time we add a balloon.
+    // JD: You have a good chunk of "balloon-specific" code and variables...
+    //     this makes me think that a separate balloons.js file, containing
+    //     an overall Balloon module and object, may now be called for.
     var balloonMesh = Shapes.sphere(0.5),
         balloonMeshVertices = Shapes.toRawTriangleArray(balloonMesh),
         balloonMode = gl.TRIANGLES;
@@ -100,9 +104,13 @@
                 tx: 5 - Math.random() * 10,
                 ty: tyInitial,
                 tz: -40 - Math.random() * 40,
-                sx:5,
-                sy:5,
-                sz:5,
+                // JD: I think spaces after colons is more readable.
+                //     Compare this...
+                sx: 5,
+                sy: 5,
+                sz: 5,
+                // JD: ...to what is below (and the rest of the
+                //     object declaration code, for that matter).
                 angle:0,
                 rx:0,
                 ry:1,

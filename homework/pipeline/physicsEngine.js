@@ -1,3 +1,9 @@
+// JD: Even though this is only one function, ideally you should still
+//     place it in an object, e.g., PhysicsEngine.  This allows your
+//     code to expand more easily in case additional functions relating
+//     to physics do come up (i.e., you will not need to massively
+//     search-and-replace "bare" getNewPosition calls with
+//     PhysicsEngine.getNewPosition).
 var getNewPosition = function (object, netAcceleration, framesPerSecond) {
 
     if (object.accelerationVector && object.speedVector) {
