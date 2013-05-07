@@ -98,7 +98,7 @@
             vertices: balloonMeshVertices,
             specularColor: randomBalloonColor,
             shininess: 2,
-            normals: Shapes.toNormalArray(balloonMesh),
+            normals: Shapes.toVertexNormalArray(balloonMesh),
             mode: balloonMode,
             instanceTransform: {
                 tx: 5 - Math.random() * 10,
@@ -165,7 +165,7 @@
         vertices: balloonMeshVertices,
         specularColor: {r: 1, g: 0, b: 0},
         shininess: 2,
-        normals: Shapes.toNormalArray(balloonMesh),
+        normals: Shapes.toVertexNormalArray(balloonMesh),
         mode: balloonMode,
         children: [
         ],
@@ -241,7 +241,7 @@
                     vertices: Shapes.toRawTriangleArray(Shapes.sphere()),
                     specularColor: {r: 1, g: 0.5, b: 0.65},
                     shininess: 1,
-                    normals: Shapes.toNormalArray(Shapes.sphere()),
+                    normals: Shapes.toVertexNormalArray(Shapes.sphere()),
                     mode: gl.TRIANGLES,
                     instanceTransform: {
                         tx:20,
@@ -327,7 +327,7 @@
             vertices: balloonMeshVertices,
             specularColor: {r: 0.6, g: 0, b: 1},
             shininess: 2,
-            normals: Shapes.toNormalArray(balloonMesh),
+            normals: Shapes.toVertexNormalArray(balloonMesh),
             mode: balloonMode,
             children: [
                 {
@@ -337,7 +337,7 @@
                     vertices: balloonMeshVertices,
                     specularColor: {r: 1, g: 0, b: 0},
                     shininess: 2,
-                    normals: Shapes.toNormalArray(balloonMesh),
+                    normals: Shapes.toVertexNormalArray(balloonMesh),
                     mode: balloonMode,
                     children: [
                         {
@@ -396,7 +396,7 @@
                     vertices: balloonMeshVertices,
                     specularColor: {r: 1.0, g: 0.48, b: 0.01},
                     shininess: 2,
-                    normals: Shapes.toNormalArray(balloonMesh),
+                    normals: Shapes.toVertexNormalArray(balloonMesh),
                     mode: balloonMode,
                     children: [
                         {
@@ -455,7 +455,7 @@
                     vertices: balloonMeshVertices,
                     specularColor: {r: 1.0, g: 1.0, b: 0.20},
                     shininess: 2,
-                    normals: Shapes.toNormalArray(balloonMesh),
+                    normals: Shapes.toVertexNormalArray(balloonMesh),
                     mode: balloonMode,
                     children: [
                         {
@@ -514,7 +514,7 @@
                     vertices: balloonMeshVertices,
                     specularColor: {r: 0.46, g: 1.0, b: 0.05},
                     shininess: 2,
-                    normals: Shapes.toNormalArray(balloonMesh),
+                    normals: Shapes.toVertexNormalArray(balloonMesh),
                     mode: balloonMode,
                     children: [
                         {
@@ -573,7 +573,7 @@
                     vertices: balloonMeshVertices,
                     specularColor: {r: 0.33, g: 0.94, b: 1.0},
                     shininess: 2,
-                    normals: Shapes.toNormalArray(balloonMesh),
+                    normals: Shapes.toVertexNormalArray(balloonMesh),
                     mode: balloonMode,
                     children: [
                         {
@@ -632,7 +632,7 @@
                     vertices: balloonMeshVertices,
                     specularColor: {r: 0.2, g: 0.58, b: 1.0},
                     shininess: 2,
-                    normals: Shapes.toNormalArray(balloonMesh),
+                    normals: Shapes.toVertexNormalArray(balloonMesh),
                     mode: balloonMode,
                     children: [
                         {
@@ -691,7 +691,7 @@
                     vertices: balloonMeshVertices,
                     specularColor: {r: 1, g: 0, b: 0.45},
                     shininess: 2,
-                    normals: Shapes.toNormalArray(balloonMesh),
+                    normals: Shapes.toVertexNormalArray(balloonMesh),
                     mode: balloonMode,
                     children: [
                         {
